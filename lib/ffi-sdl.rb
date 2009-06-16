@@ -28,4 +28,11 @@
 #++
 
 
-require File.join( File.dirname(__FILE__), "ffi-sdl", "sdl" )
+%w{
+
+  sdl
+  sdl_image
+
+}.each do |f|
+  require File.join( File.dirname(__FILE__), "ffi-sdl", f )
+end

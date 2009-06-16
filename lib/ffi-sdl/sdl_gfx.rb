@@ -28,14 +28,29 @@
 #++
 
 
+require 'ffi'
+
+
+module SDL
+  module Gfx
+    extend FFI::Library
+
+    case FFI::Platform::OS
+    when /linux/
+      ffi_lib "libSDL_gfx.so"
+    else
+      raise( "SDL_gfx is not supported on #{FFI::Platform::OS} yet.\n" +
+             "Please report this and help us support more platforms." )
+    end
+  end
+end
+
 %w{
-
-  sdl
-  sdl_image
-  sdl_ttf
-  sdl_mixer
-  sdl_gfx
-
+  sdl_framerate
+  sdl_gfxblitfunc
+  sdl_gfxprimitives
+  sdl_imagefilter
+  sdl_rotozoom
 }.each do |f|
-  require File.join( File.dirname(__FILE__), "ffi-sdl", f )
+  require File.join( File.dirname(__FILE__), f )
 end

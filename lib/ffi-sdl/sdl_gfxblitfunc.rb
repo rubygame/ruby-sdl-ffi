@@ -28,14 +28,30 @@
 #++
 
 
-%w{
+require 'ffi'
 
-  sdl
-  sdl_image
-  sdl_ttf
-  sdl_mixer
-  sdl_gfx
 
-}.each do |f|
-  require File.join( File.dirname(__FILE__), "ffi-sdl", f )
+module SDL
+  module Gfx
+
+    attach_function :SDL_gfxBlitRGBA, [ :pointer, :pointer, :pointer, :pointer ], :int
+    attach_function :SDL_gfxSetAlpha, [ :pointer, :uint8 ], :int
+
+    class BlitInfo < FFI::Struct
+      layout(
+             :s_pixels, :pointer,
+             :s_width,  :int,
+             :s_height, :int,
+             :s_skip,   :int,
+             :d_pixels, :pointer,
+             :d_width,  :int,
+             :d_height, :int,
+             :d_skip,   :int,
+             :aux_data, :pointer,
+             :src,      :pointer,
+             :table,    :pointer,
+             :dst,      :pointer
+      )
+    end
+  end
 end

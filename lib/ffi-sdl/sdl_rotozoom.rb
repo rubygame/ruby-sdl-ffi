@@ -28,14 +28,38 @@
 #++
 
 
-%w{
+require 'ffi'
 
-  sdl
-  sdl_image
-  sdl_ttf
-  sdl_mixer
-  sdl_gfx
 
-}.each do |f|
-  require File.join( File.dirname(__FILE__), "ffi-sdl", f )
+module SDL
+  module Gfx
+
+    SMOOTHING_OFF = 0
+    SMOOTHING_ON = 1
+
+    class TColorRGBA < FFI::Struct
+      layout(
+             :r, :uint8,
+             :g, :uint8,
+             :b, :uint8,
+             :a, :uint8
+             )
+    end
+
+    class TColorY < FFI::Struct
+      layout(
+             :y, :uint8
+             )
+    end
+
+    attach_function :rotozoomSurface, [ :pointer, :double, :double, :int ], :pointer
+    attach_function :rotozoomSurfaceXY, [ :pointer, :double, :double, :double, :int ], :pointer
+    attach_function :rotozoomSurfaceSize, [ :int, :int, :double, :double, :pointer, :pointer ], :void
+    attach_function :rotozoomSurfaceSizeXY, [ :int, :int, :double, :double, :double, :pointer, :pointer ], :void
+    attach_function :zoomSurface, [ :pointer, :double, :double, :int ], :pointer
+    attach_function :zoomSurfaceSize, [ :int, :int, :double, :double, :pointer, :pointer ], :void
+    attach_function :shrinkSurface, [ :pointer, :int, :int ], :pointer
+    attach_function :rotateSurface90Degrees, [ :pointer, :int ], :pointer
+
+  end
 end

@@ -11,10 +11,11 @@ Copyright::  2009  John Croisant
 
 == Description
 
-FFI-SDL is a low-level binding to SDL [1] using Ruby-FFI [2].
-It provides very basic access to SDL from Ruby [3]
-without the need for a compiled C wrapper. It aims to be
-platform and Ruby implementation independent.
+FFI-SDL is a low-level binding to SDL [1] and related
+libraries using Ruby-FFI [2]. It provides very basic access
+to SDL from Ruby [3] without the need for a compiled C
+wrapper. It aims to be platform and Ruby implementation
+independent.
 
 FFI-SDL does not attempt to provide any high-level
 functionality, only to mirror the standard SDL interface.
@@ -46,6 +47,13 @@ more mature and stable (i.e. version 1.0+).
 
 * SDL       >= 1.2.13
 * Ruby-FFI  >= 0.3.0 (or compatible)
+
+Optional:
+
+* SDL_image >= 1.2.7
+* SDL_gfx   >= 2.0.17
+* SDL_mixer >= 1.2.8
+* SDL_ttf   >= 2.0.9
 
 FFI-SDL may work with older versions, but hasn't been tried on them.
 

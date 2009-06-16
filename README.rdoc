@@ -1,0 +1,81 @@
+
+= FFI-SDL
+
+Version::    0.0 (unreleased alpha)
+Date::       2009-06-15
+
+Homepage::   http://github.com/jacius/ffi-sdl/
+Author::     John Croisant <jacius@gmail.com>
+Copyright::  2009  John Croisant
+
+
+== Description
+
+FFI-SDL is a low-level binding to SDL [1] using Ruby-FFI [2].
+It provides very basic access to SDL from Ruby [3]
+without the need for a compiled C wrapper. It aims to be
+platform and Ruby implementation independent.
+
+FFI-SDL does not attempt to provide any high-level
+functionality, only to mirror the standard SDL interface.
+For higher-level functionality, you should use other
+libraries (Rubygame [4], Gosu [5], etc.).
+
+1. SDL: http://www.libsdl.org/
+2. Ruby-FFI: http://kenai.com/projects/ruby-ffi/
+3. Ruby: http://www.ruby-lang.org/en/
+4. Rubygame: http://rubygame.org/
+5. Gosu: http://code.google.com/p/gosu/
+
+
+== Caveats
+
+FFI-SDL is still in VERY EARLY DEVELOPMENT STAGES. That means:
+
+* It may not work correctly (or at all).
+* It may not be complete.
+* It may change drastically with no advanced notice.
+
+As such, this library is currently FOR THE ADVENTUROUS ONLY.
+If you are not willing to continuously update your code to
+match the new API, then you should wait until FFI-SDL is
+more mature and stable (i.e. version 1.0+).
+
+
+== Requirements
+
+* SDL       >= 1.2.13
+* Ruby-FFI  >= 0.3.0 (or compatible)
+
+FFI-SDL may work with older versions, but hasn't been tried on them.
+
+So far, FFI-SDL has only been tested on 32-bit Linux with
+the standard Ruby implementation (aka MRI) version 1.8.6.
+However, with a few tweaks it should work on any system with
+compatible FFI functionality.
+
+
+== License
+
+FFI-SDL is licensed under the following terms (the "MIT License"):
+
+Copyright (c) 2009 John Croisant
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

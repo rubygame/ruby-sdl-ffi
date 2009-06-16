@@ -33,6 +33,7 @@
   sdl
   sdl_image
   sdl_ttf
+  sdl_mixer
 
 }.each do |f|
   require File.join( File.dirname(__FILE__), "ffi-sdl", f )

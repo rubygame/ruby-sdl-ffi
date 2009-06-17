@@ -42,6 +42,7 @@ module SDL
     JOYBALLMOTION   = 8
     JOYHATMOTION    = 9
 
+
     NOEVENT         = 0
     ACTIVEEVENT     = 1
     JOYBUTTONDOWN   = 10
@@ -92,166 +93,141 @@ module SDL
 
 
     class ActiveEvent < FFI::Struct
-      layout(
-             :type,  :uint8,
-             :gain,  :uint8,
-             :state, :uint8
-      )
+      layout( :type,  :uint8,
+              :gain,  :uint8,
+              :state, :uint8 )
     end
 
 
     class KeyboardEvent < FFI::Struct
-      layout(
-             :type,   :uint8,
-             :which,  :uint8,
-             :state,  :uint8,
-             :keysym, SDL::Raw::Keysym
-      )
+      layout( :type,   :uint8,
+              :which,  :uint8,
+              :state,  :uint8,
+              :keysym, SDL::Raw::Keysym )
     end
 
 
     class MouseMotionEvent < FFI::Struct
-      layout(
-             :type,  :uint8,
-             :which, :uint8,
-             :state, :uint8,
-             :x,     :uint16,
-             :y,     :uint16,
-             :xrel,  :int16,
-             :yrel,  :int16
-      )
+      layout( :type,  :uint8,
+              :which, :uint8,
+              :state, :uint8,
+              :x,     :uint16,
+              :y,     :uint16,
+              :xrel,  :int16,
+              :yrel,  :int16 )
     end
 
 
     class MouseButtonEvent < FFI::Struct
-      layout(
-             :type,   :uint8,
-             :which,  :uint8,
-             :button, :uint8,
-             :state,  :uint8,
-             :x,      :uint16,
-             :y,      :uint16
-      )
+      layout( :type,   :uint8,
+              :which,  :uint8,
+              :button, :uint8,
+              :state,  :uint8,
+              :x,      :uint16,
+              :y,      :uint16 )
     end
 
 
     class JoyAxisEvent < FFI::Struct
-      layout(
-             :type,  :uint8,
-             :which, :uint8,
-             :axis,  :uint8,
-             :value, :int16
-      )
+      layout( :type,  :uint8,
+              :which, :uint8,
+              :axis,  :uint8,
+              :value, :int16 )
     end
 
 
     class JoyBallEvent < FFI::Struct
-      layout(
-             :type,  :uint8,
-             :which, :uint8,
-             :ball,  :uint8,
-             :xrel,  :int16,
-             :yrel,  :int16
-      )
+      layout( :type,  :uint8,
+              :which, :uint8,
+              :ball,  :uint8,
+              :xrel,  :int16,
+              :yrel,  :int16 )
     end
 
 
     class JoyHatEvent < FFI::Struct
-      layout(
-             :type,  :uint8,
-             :which, :uint8,
-             :hat,   :uint8,
-             :value, :uint8
-      )
+      layout( :type,  :uint8,
+              :which, :uint8,
+              :hat,   :uint8,
+              :value, :uint8 )
     end
 
 
     class JoyButtonEvent < FFI::Struct
-      layout(
-             :type, :uint8,
-             :which, :uint8,
-             :button, :uint8,
-             :state, :uint8
-      )
+      layout( :type,   :uint8,
+              :which,  :uint8,
+              :button, :uint8,
+              :state,  :uint8 )
     end
 
 
     class ResizeEvent < FFI::Struct
-      layout(
-             :type, :uint8,
-             :w,    :int,
-             :h,    :int
-      )
+      layout( :type, :uint8,
+              :w,    :int,
+              :h,    :int )
     end
 
 
     class ExposeEvent < FFI::Struct
-      layout(
-             :type, :uint8
-      )
+      layout( :type, :uint8 )
     end
 
 
     class QuitEvent < FFI::Struct
-      layout(
-             :type, :uint8
-      )
+      layout( :type, :uint8 )
     end
 
 
     class UserEvent < FFI::Struct
-      layout(
-             :type,  :uint8,
-             :code,  :int,
-             :data1, :pointer,
-             :data2, :pointer
-      )
+      layout( :type,  :uint8,
+              :code,  :int,
+              :data1, :pointer,
+              :data2, :pointer )
     end
 
 
     class SysWMEvent < FFI::Struct
-      layout(
-             :type, :uint8,
-             :msg,  :pointer
-      )
+      layout( :type, :uint8,
+              :msg,  :pointer )
     end
 
 
     class Event < FFI::Union
-      layout(
-             :type,    :uint8,
-             :active,  SDL::Raw::ActiveEvent,
-             :key,     SDL::Raw::KeyboardEvent,
-             :motion,  SDL::Raw::MouseMotionEvent,
-             :button,  SDL::Raw::MouseButtonEvent,
-             :jaxis,   SDL::Raw::JoyAxisEvent,
-             :jball,   SDL::Raw::JoyBallEvent,
-             :jhat,    SDL::Raw::JoyHatEvent,
-             :jbutton, SDL::Raw::JoyButtonEvent,
-             :resize,  SDL::Raw::ResizeEvent,
-             :expose,  SDL::Raw::ExposeEvent,
-             :quit,    SDL::Raw::QuitEvent,
-             :user,    SDL::Raw::UserEvent,
-             :syswm,   SDL::Raw::SysWMEvent
-      )
+      layout( :type,    :uint8,
+              :active,  SDL::Raw::ActiveEvent,
+              :key,     SDL::Raw::KeyboardEvent,
+              :motion,  SDL::Raw::MouseMotionEvent,
+              :button,  SDL::Raw::MouseButtonEvent,
+              :jaxis,   SDL::Raw::JoyAxisEvent,
+              :jball,   SDL::Raw::JoyBallEvent,
+              :jhat,    SDL::Raw::JoyHatEvent,
+              :jbutton, SDL::Raw::JoyButtonEvent,
+              :resize,  SDL::Raw::ResizeEvent,
+              :expose,  SDL::Raw::ExposeEvent,
+              :quit,    SDL::Raw::QuitEvent,
+              :user,    SDL::Raw::UserEvent,
+              :syswm,   SDL::Raw::SysWMEvent )
     end
 
 
-    attach_function :SDL_PumpEvents, [  ], :void
+    attach_function  :SDL_PumpEvents, [  ], :void
 
     ADDEVENT  = 0
     PEEKEVENT = 1
     GETEVENT  = 2
 
-    attach_function :SDL_PeepEvents, [ :pointer, :int, SDL::Raw::ENUM, :uint32 ], :int
-    attach_function :SDL_PollEvent, [ :pointer ], :int
-    attach_function :SDL_WaitEvent, [ :pointer ], :int
-    attach_function :SDL_PushEvent, [ :pointer ], :int
+    attach_function  :SDL_PeepEvents,
+                     [ :pointer, :int, SDL::Raw::ENUM, :uint32 ], :int
+
+    attach_function  :SDL_PollEvent, [ :pointer ], :int
+    attach_function  :SDL_WaitEvent, [ :pointer ], :int
+    attach_function  :SDL_PushEvent, [ :pointer ], :int
 
 
     callback(:eventfilter_cb, [ :pointer ], :int)
-    attach_function :SDL_SetEventFilter, [ :eventfilter_cb ], :void
-    #attach_function :SDL_GetEventFilter, [ ], :eventfilter_cb
+
+    attach_function  :SDL_SetEventFilter, [ :eventfilter_cb ], :void
+    #attach_function  :SDL_GetEventFilter, [ ], :eventfilter_cb
 
 
     QUERY   = -1
@@ -259,7 +235,7 @@ module SDL
     DISABLE = 0
     ENABLE  = 1
 
-    attach_function :SDL_EventState, [ :uint8, :int ], :uint8
+    attach_function  :SDL_EventState, [ :uint8, :int ], :uint8
 
   end
 end

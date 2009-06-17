@@ -32,25 +32,29 @@ module SDL
   module Raw
 
     class Cursor < FFI::Struct
-      layout(
-             :area,      SDL::Raw::Rect,
-             :hot_x,     :int16,
-             :hot_y,     :int16,
-             :data,      :pointer,
-             :mask,      :pointer,
-             :save,      [:pointer, 2],
-             :wm_cursor, :pointer
-      )
+      layout( :area,      SDL::Raw::Rect,
+              :hot_x,     :int16,
+              :hot_y,     :int16,
+              :data,      :pointer,
+              :mask,      :pointer,
+              :save,      [:pointer, 2],
+              :wm_cursor, :pointer )
     end
 
-    attach_function :SDL_GetMouseState, [ :pointer, :pointer ], :uint8
-    attach_function :SDL_GetRelativeMouseState, [ :pointer, :pointer ], :uint8
-    attach_function :SDL_WarpMouse, [ :uint16, :uint16 ], :void
-    attach_function :SDL_CreateCursor, [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
-    attach_function :SDL_SetCursor, [ :pointer ], :void
-    attach_function :SDL_GetCursor, [  ], :pointer
-    attach_function :SDL_FreeCursor, [ :pointer ], :void
-    attach_function :SDL_ShowCursor, [ :int ], :int
+
+    attach_function  :SDL_GetMouseState, [ :pointer, :pointer ], :uint8
+    attach_function  :SDL_GetRelativeMouseState, [ :pointer, :pointer ], :uint8
+    attach_function  :SDL_WarpMouse, [ :uint16, :uint16   ], :void
+
+
+    attach_function  :SDL_CreateCursor,  
+                     [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
+
+    attach_function  :SDL_SetCursor,  [ :pointer ], :void
+    attach_function  :SDL_GetCursor,  [          ], :pointer
+    attach_function  :SDL_FreeCursor, [ :pointer ], :void
+    attach_function  :SDL_ShowCursor, [ :int     ], :int
+
 
     BUTTON_LEFT      = 1
     BUTTON_MIDDLE    = 2
@@ -60,11 +64,11 @@ module SDL
     BUTTON_X1        = 6
     BUTTON_X2        = 7
 
-    BUTTON_LMASK  = (1 << ((1) -1))
-    BUTTON_MMASK  = (1 << ((2) -1))
-    BUTTON_RMASK  = (1 << ((3) -1))
-    BUTTON_X1MASK = (1 << ((6) -1))
-    BUTTON_X2MASK = (1 << ((7) -1))
+    BUTTON_LMASK     = (1 << ((BUTTON_LEFT) -1))
+    BUTTON_MMASK     = (1 << ((BUTTON_MIDDLE) -1))
+    BUTTON_RMASK     = (1 << ((BUTTON_RIGHT) -1))
+    BUTTON_X1MASK    = (1 << ((BUTTON_X1) -1))
+    BUTTON_X2MASK    = (1 << ((BUTTON_X2) -1))
 
   end
 end

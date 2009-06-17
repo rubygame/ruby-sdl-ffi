@@ -31,14 +31,14 @@
 module SDL
   module Raw
 
-    attach_sdl_function :HasRDTSC,    [  ], SDL::Raw::BOOL
-    attach_sdl_function :HasMMX,      [  ], SDL::Raw::BOOL
-    attach_sdl_function :HasMMXExt,   [  ], SDL::Raw::BOOL
-    attach_sdl_function :Has3DNow,    [  ], SDL::Raw::BOOL
-    attach_sdl_function :Has3DNowExt, [  ], SDL::Raw::BOOL
-    attach_sdl_function :HasSSE,      [  ], SDL::Raw::BOOL
-    attach_sdl_function :HasSSE2,     [  ], SDL::Raw::BOOL
-    attach_sdl_function :HasAltiVec,  [  ], SDL::Raw::BOOL
+    attach_function :SDL_HasRDTSC,    [  ], SDL::Raw::BOOL
+    attach_function :SDL_HasMMX,      [  ], SDL::Raw::BOOL
+    attach_function :SDL_HasMMXExt,   [  ], SDL::Raw::BOOL
+    attach_function :SDL_Has3DNow,    [  ], SDL::Raw::BOOL
+    attach_function :SDL_Has3DNowExt, [  ], SDL::Raw::BOOL
+    attach_function :SDL_HasSSE,      [  ], SDL::Raw::BOOL
+    attach_function :SDL_HasSSE2,     [  ], SDL::Raw::BOOL
+    attach_function :SDL_HasAltiVec,  [  ], SDL::Raw::BOOL
 
   end
 end

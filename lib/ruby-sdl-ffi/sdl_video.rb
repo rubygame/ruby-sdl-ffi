@@ -183,69 +183,69 @@ module SDL
     LOGPAL  = 0x01
     PHYSPAL = 0x02
 
-    attach_sdl_function :VideoInit, [ :string, :uint32 ], :int
-    attach_sdl_function :VideoQuit, [  ], :void
-    attach_sdl_function :VideoDriverName, [ :string, :int ], :string
-    attach_sdl_function :GetVideoSurface, [  ], :pointer
-    attach_sdl_function :GetVideoInfo, [  ], :pointer
-    attach_sdl_function :VideoModeOK, [ :int, :int, :int, :uint32 ], :int
-    attach_sdl_function :ListModes, [ :pointer, :uint32 ], :pointer
-    attach_sdl_function :SetVideoMode, [ :int, :int, :int, :uint32 ], :pointer
-    attach_sdl_function :UpdateRects, [ :pointer, :int, :pointer ], :void
-    attach_sdl_function :UpdateRect, [ :pointer, :int32, :int32, :uint32, :uint32 ], :void
-    attach_sdl_function :Flip, [ :pointer ], :int
-    attach_sdl_function :SetGamma, [ :float, :float, :float ], :int
-    attach_sdl_function :SetGammaRamp, [ :pointer, :pointer, :pointer ], :int
-    attach_sdl_function :GetGammaRamp, [ :pointer, :pointer, :pointer ], :int
-    attach_sdl_function :SetColors, [ :pointer, :pointer, :int, :int ], :int
-    attach_sdl_function :SetPalette, [ :pointer, :int, :pointer, :int, :int ], :int
-    attach_sdl_function :MapRGB, [ :pointer, :uint8, :uint8, :uint8 ], :pointer
-    attach_sdl_function :MapRGBA, [ :pointer, :uint8, :uint8, :uint8, :uint8 ], :pointer
-    attach_sdl_function :GetRGB, [ :uint32, :pointer, :pointer, :pointer, :pointer ], :void
-    attach_sdl_function :GetRGBA, [ :uint32, :pointer, :pointer, :pointer, :pointer, :pointer ], :void
-    attach_sdl_function :CreateRGBSurface, [ :uint32, :int, :int, :int, :uint32, :uint32, :uint32, :uint32 ], :pointer
-    attach_sdl_function :CreateRGBSurfaceFrom, [ :pointer, :int, :int, :int, :int, :uint32, :uint32, :uint32, :uint32 ], :pointer
-    attach_sdl_function :FreeSurface, [ :pointer ], :void
-    attach_sdl_function :LockSurface, [ :pointer ], :int
-    attach_sdl_function :UnlockSurface, [ :pointer ], :void
-    attach_sdl_function :LoadBMP_RW, [ :pointer, :int ], :pointer
-    attach_sdl_function :SaveBMP_RW, [ :pointer, :pointer, :int ], :int
-    attach_sdl_function :SetColorKey, [ :pointer, :uint32, :uint32 ], :int
-    attach_sdl_function :SetAlpha, [ :pointer, :uint32, :uint8 ], :int
-    attach_sdl_function :SetClipRect, [ :pointer, :pointer ], SDL::Raw::BOOL
-    attach_sdl_function :GetClipRect, [ :pointer, :pointer ], :void
-    attach_sdl_function :ConvertSurface, [ :pointer, :pointer, :uint32 ], :pointer
-    attach_sdl_function :UpperBlit, [ :pointer, :pointer, :pointer, :pointer ], :int
-    attach_sdl_function :LowerBlit, [ :pointer, :pointer, :pointer, :pointer ], :int
-    attach_sdl_function :FillRect, [ :pointer, :pointer, :uint32 ], :int
-    attach_sdl_function :DisplayFormat, [ :pointer ], :pointer
-    attach_sdl_function :DisplayFormatAlpha, [ :pointer ], :pointer
-    attach_sdl_function :CreateYUVOverlay, [ :int, :int, :uint32, :pointer ], :pointer
-    attach_sdl_function :LockYUVOverlay, [ :pointer ], :int
-    attach_sdl_function :UnlockYUVOverlay, [ :pointer ], :void
-    attach_sdl_function :DisplayYUVOverlay, [ :pointer, :pointer ], :int
-    attach_sdl_function :FreeYUVOverlay, [ :pointer ], :void
-    attach_sdl_function :GL_LoadLibrary, [ :string ], :int
-    attach_sdl_function :GL_GetProcAddress, [ :string ], :pointer
-    attach_sdl_function :GL_SetAttribute, [ SDL::Raw::GLATTR, :int ], :int
-    attach_sdl_function :GL_GetAttribute, [ SDL::Raw::GLATTR, :pointer ], :int
-    attach_sdl_function :GL_SwapBuffers, [  ], :void
-    attach_sdl_function :GL_UpdateRects, [ :int, :pointer ], :void
-    attach_sdl_function :GL_Lock, [  ], :void
-    attach_sdl_function :GL_Unlock, [  ], :void
-    attach_sdl_function :WM_SetCaption, [ :string, :string ], :void
-    attach_sdl_function :WM_GetCaption, [ :pointer, :pointer ], :void
-    attach_sdl_function :WM_SetIcon, [ :pointer, :pointer ], :void
-    attach_sdl_function :WM_IconifyWindow, [  ], :int
-    attach_sdl_function :WM_ToggleFullScreen, [ :pointer ], :int
+    attach_function :SDL_VideoInit, [ :string, :uint32 ], :int
+    attach_function :SDL_VideoQuit, [  ], :void
+    attach_function :SDL_VideoDriverName, [ :string, :int ], :string
+    attach_function :SDL_GetVideoSurface, [  ], :pointer
+    attach_function :SDL_GetVideoInfo, [  ], :pointer
+    attach_function :SDL_VideoModeOK, [ :int, :int, :int, :uint32 ], :int
+    attach_function :SDL_ListModes, [ :pointer, :uint32 ], :pointer
+    attach_function :SDL_SetVideoMode, [ :int, :int, :int, :uint32 ], :pointer
+    attach_function :SDL_UpdateRects, [ :pointer, :int, :pointer ], :void
+    attach_function :SDL_UpdateRect, [ :pointer, :int32, :int32, :uint32, :uint32 ], :void
+    attach_function :SDL_Flip, [ :pointer ], :int
+    attach_function :SDL_SetGamma, [ :float, :float, :float ], :int
+    attach_function :SDL_SetGammaRamp, [ :pointer, :pointer, :pointer ], :int
+    attach_function :SDL_GetGammaRamp, [ :pointer, :pointer, :pointer ], :int
+    attach_function :SDL_SetColors, [ :pointer, :pointer, :int, :int ], :int
+    attach_function :SDL_SetPalette, [ :pointer, :int, :pointer, :int, :int ], :int
+    attach_function :SDL_MapRGB, [ :pointer, :uint8, :uint8, :uint8 ], :pointer
+    attach_function :SDL_MapRGBA, [ :pointer, :uint8, :uint8, :uint8, :uint8 ], :pointer
+    attach_function :SDL_GetRGB, [ :uint32, :pointer, :pointer, :pointer, :pointer ], :void
+    attach_function :SDL_GetRGBA, [ :uint32, :pointer, :pointer, :pointer, :pointer, :pointer ], :void
+    attach_function :SDL_CreateRGBSurface, [ :uint32, :int, :int, :int, :uint32, :uint32, :uint32, :uint32 ], :pointer
+    attach_function :SDL_CreateRGBSurfaceFrom, [ :pointer, :int, :int, :int, :int, :uint32, :uint32, :uint32, :uint32 ], :pointer
+    attach_function :SDL_FreeSurface, [ :pointer ], :void
+    attach_function :SDL_LockSurface, [ :pointer ], :int
+    attach_function :SDL_UnlockSurface, [ :pointer ], :void
+    attach_function :SDL_LoadBMP_RW, [ :pointer, :int ], :pointer
+    attach_function :SDL_SaveBMP_RW, [ :pointer, :pointer, :int ], :int
+    attach_function :SDL_SetColorKey, [ :pointer, :uint32, :uint32 ], :int
+    attach_function :SDL_SetAlpha, [ :pointer, :uint32, :uint8 ], :int
+    attach_function :SDL_SetClipRect, [ :pointer, :pointer ], SDL::Raw::BOOL
+    attach_function :SDL_GetClipRect, [ :pointer, :pointer ], :void
+    attach_function :SDL_ConvertSurface, [ :pointer, :pointer, :uint32 ], :pointer
+    attach_function :SDL_UpperBlit, [ :pointer, :pointer, :pointer, :pointer ], :int
+    attach_function :SDL_LowerBlit, [ :pointer, :pointer, :pointer, :pointer ], :int
+    attach_function :SDL_FillRect, [ :pointer, :pointer, :uint32 ], :int
+    attach_function :SDL_DisplayFormat, [ :pointer ], :pointer
+    attach_function :SDL_DisplayFormatAlpha, [ :pointer ], :pointer
+    attach_function :SDL_CreateYUVOverlay, [ :int, :int, :uint32, :pointer ], :pointer
+    attach_function :SDL_LockYUVOverlay, [ :pointer ], :int
+    attach_function :SDL_UnlockYUVOverlay, [ :pointer ], :void
+    attach_function :SDL_DisplayYUVOverlay, [ :pointer, :pointer ], :int
+    attach_function :SDL_FreeYUVOverlay, [ :pointer ], :void
+    attach_function :SDL_GL_LoadLibrary, [ :string ], :int
+    attach_function :SDL_GL_GetProcAddress, [ :string ], :pointer
+    attach_function :SDL_GL_SetAttribute, [ SDL::Raw::GLATTR, :int ], :int
+    attach_function :SDL_GL_GetAttribute, [ SDL::Raw::GLATTR, :pointer ], :int
+    attach_function :SDL_GL_SwapBuffers, [  ], :void
+    attach_function :SDL_GL_UpdateRects, [ :int, :pointer ], :void
+    attach_function :SDL_GL_Lock, [  ], :void
+    attach_function :SDL_GL_Unlock, [  ], :void
+    attach_function :SDL_WM_SetCaption, [ :string, :string ], :void
+    attach_function :SDL_WM_GetCaption, [ :pointer, :pointer ], :void
+    attach_function :SDL_WM_SetIcon, [ :pointer, :pointer ], :void
+    attach_function :SDL_WM_IconifyWindow, [  ], :int
+    attach_function :SDL_WM_ToggleFullScreen, [ :pointer ], :int
 
     GRAB_QUERY      = -1
     GRAB_OFF        = 0
     GRAB_ON         = 1
     GRAB_FULLSCREEN = 2
 
-    attach_sdl_function :WM_GrabInput, [ SDL::Raw::ENUM ], SDL::Raw::ENUM
-    attach_sdl_function :SoftStretch, [ :pointer, :pointer, :pointer, :pointer ], :int
+    attach_function :SDL_WM_GrabInput, [ SDL::Raw::ENUM ], SDL::Raw::ENUM
+    attach_function :SDL_SoftStretch, [ :pointer, :pointer, :pointer, :pointer ], :int
 
   end
 end

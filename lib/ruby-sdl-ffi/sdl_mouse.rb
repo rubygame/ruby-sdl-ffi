@@ -43,14 +43,14 @@ module SDL
       )
     end
 
-    attach_sdl_function :GetMouseState, [ :pointer, :pointer ], :uint8
-    attach_sdl_function :GetRelativeMouseState, [ :pointer, :pointer ], :uint8
-    attach_sdl_function :WarpMouse, [ :uint16, :uint16 ], :void
-    attach_sdl_function :CreateCursor, [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
-    attach_sdl_function :SetCursor, [ :pointer ], :void
-    attach_sdl_function :GetCursor, [  ], :pointer
-    attach_sdl_function :FreeCursor, [ :pointer ], :void
-    attach_sdl_function :ShowCursor, [ :int ], :int
+    attach_function :SDL_GetMouseState, [ :pointer, :pointer ], :uint8
+    attach_function :SDL_GetRelativeMouseState, [ :pointer, :pointer ], :uint8
+    attach_function :SDL_WarpMouse, [ :uint16, :uint16 ], :void
+    attach_function :SDL_CreateCursor, [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
+    attach_function :SDL_SetCursor, [ :pointer ], :void
+    attach_function :SDL_GetCursor, [  ], :pointer
+    attach_function :SDL_FreeCursor, [ :pointer ], :void
+    attach_function :SDL_ShowCursor, [ :int ], :int
 
     BUTTON_LEFT      = 1
     BUTTON_MIDDLE    = 2

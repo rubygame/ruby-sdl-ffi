@@ -87,76 +87,76 @@ module SDL
       MUS_MP3     = 6
       MUS_MP3_MAD = 7
 
-      mix_function :OpenAudio, [ :int, :uint16, :int, :int ], :int
-      mix_function :AllocateChannels, [ :int ], :int
-      mix_function :QuerySpec, [ :pointer, :pointer, :pointer ], :int
-      mix_function :LoadWAV_RW, [ :pointer, :int ], :pointer
-      mix_function :LoadMUS, [ :string ], :pointer
-      mix_function :LoadMUS_RW, [ :pointer ], :pointer
-      mix_function :QuickLoad_WAV, [ :pointer ], :pointer
-      mix_function :QuickLoad_RAW, [ :pointer, :uint32 ], :pointer
-      mix_function :FreeChunk, [ :pointer ], :void
-      mix_function :FreeMusic, [ :pointer ], :void
-      mix_function :GetMusicType, [ :pointer ], :int
-      mix_function :SetPostMix, [ callback( :setpostfix_cb, [ :pointer, :pointer, :int ], :void), :pointer ], :void
-      mix_function :HookMusic, [ callback(:hookmusic_cb, [ :pointer, :pointer, :int ], :void), :pointer ], :void
-      mix_function :HookMusicFinished, [ callback(:hookmusicfinished_cb, [  ], :void) ], :void
-      mix_function :GetMusicHookData, [  ], :pointer
-      mix_function :ChannelFinished, [ callback( :channelfinished_cb, [ :int ], :void) ], :void
+      attach_function :Mix_OpenAudio, [ :int, :uint16, :int, :int ], :int
+      attach_function :Mix_AllocateChannels, [ :int ], :int
+      attach_function :Mix_QuerySpec, [ :pointer, :pointer, :pointer ], :int
+      attach_function :Mix_LoadWAV_RW, [ :pointer, :int ], :pointer
+      attach_function :Mix_LoadMUS, [ :string ], :pointer
+      attach_function :Mix_LoadMUS_RW, [ :pointer ], :pointer
+      attach_function :Mix_QuickLoad_WAV, [ :pointer ], :pointer
+      attach_function :Mix_QuickLoad_RAW, [ :pointer, :uint32 ], :pointer
+      attach_function :Mix_FreeChunk, [ :pointer ], :void
+      attach_function :Mix_FreeMusic, [ :pointer ], :void
+      attach_function :Mix_GetMusicType, [ :pointer ], :int
+      attach_function :Mix_SetPostMix, [ callback( :setpostfix_cb, [ :pointer, :pointer, :int ], :void), :pointer ], :void
+      attach_function :Mix_HookMusic, [ callback(:hookmusic_cb, [ :pointer, :pointer, :int ], :void), :pointer ], :void
+      attach_function :Mix_HookMusicFinished, [ callback(:hookmusicfinished_cb, [  ], :void) ], :void
+      attach_function :Mix_GetMusicHookData, [  ], :pointer
+      attach_function :Mix_ChannelFinished, [ callback( :channelfinished_cb, [ :int ], :void) ], :void
 
       CHANNEL_POST = -2
 
       callback(:mix_effectfunc_cb, [ :int, :pointer, :int, :pointer ], :void)
       callback(:mix_effectdone_cb, [ :int, :pointer ], :void)
-      mix_function :RegisterEffect, [ :int, :mix_effectfunc_cb, :mix_effectdone_cb, :pointer ], :int
-      mix_function :UnregisterEffect, [ :int, :mix_effectfunc_cb ], :int
-      mix_function :UnregisterAllEffects, [ :int ], :int
+      attach_function :Mix_RegisterEffect, [ :int, :mix_effectfunc_cb, :mix_effectdone_cb, :pointer ], :int
+      attach_function :Mix_UnregisterEffect, [ :int, :mix_effectfunc_cb ], :int
+      attach_function :Mix_UnregisterAllEffects, [ :int ], :int
 
       EFFECTSMAXSPEED = "MIX_EFFECTSMAXSPEED"
 
-      mix_function :SetPanning, [ :int, :uint8, :uint8 ], :int
-      mix_function :SetPosition, [ :int, :int16, :uint8 ], :int
-      mix_function :SetDistance, [ :int, :uint8 ], :int
-      mix_function :SetReverseStereo, [ :int, :int ], :int
-      mix_function :ReserveChannels, [ :int ], :int
-      mix_function :GroupChannel, [ :int, :int ], :int
-      mix_function :GroupChannels, [ :int, :int, :int ], :int
-      mix_function :GroupAvailable, [ :int ], :int
-      mix_function :GroupCount, [ :int ], :int
-      mix_function :GroupOldest, [ :int ], :int
-      mix_function :GroupNewer, [ :int ], :int
-      mix_function :PlayChannelTimed, [ :int, :pointer, :int, :int ], :int
-      mix_function :PlayMusic, [ :pointer, :int ], :int
-      mix_function :FadeInMusic, [ :pointer, :int, :int ], :int
-      mix_function :FadeInMusicPos, [ :pointer, :int, :int, :double ], :int
-      mix_function :FadeInChannelTimed, [ :int, :pointer, :int, :int, :int ], :int
-      mix_function :Volume, [ :int, :int ], :int
-      mix_function :VolumeChunk, [ :pointer, :int ], :int
-      mix_function :VolumeMusic, [ :int ], :int
-      mix_function :HaltChannel, [ :int ], :int
-      mix_function :HaltGroup, [ :int ], :int
-      mix_function :HaltMusic, [  ], :int
-      mix_function :ExpireChannel, [ :int, :int ], :int
-      mix_function :FadeOutChannel, [ :int, :int ], :int
-      mix_function :FadeOutGroup, [ :int, :int ], :int
-      mix_function :FadeOutMusic, [ :int ], :int
-      mix_function :FadingMusic, [  ], :int
-      mix_function :FadingChannel, [ :int ], :int
-      mix_function :Pause, [ :int ], :void
-      mix_function :Resume, [ :int ], :void
-      mix_function :Paused, [ :int ], :int
-      mix_function :PauseMusic, [  ], :void
-      mix_function :ResumeMusic, [  ], :void
-      mix_function :RewindMusic, [  ], :void
-      mix_function :PausedMusic, [  ], :int
-      mix_function :SetMusicPosition, [ :double ], :int
-      mix_function :Playing, [ :int ], :int
-      mix_function :PlayingMusic, [  ], :int
-      mix_function :SetMusicCMD, [ :string ], :int
-      mix_function :SetSynchroValue, [ :int ], :int
-      mix_function :GetSynchroValue, [  ], :int
-      mix_function :GetChunk, [ :int ], :pointer
-      mix_function :CloseAudio, [  ], :void
+      attach_function :Mix_SetPanning, [ :int, :uint8, :uint8 ], :int
+      attach_function :Mix_SetPosition, [ :int, :int16, :uint8 ], :int
+      attach_function :Mix_SetDistance, [ :int, :uint8 ], :int
+      attach_function :Mix_SetReverseStereo, [ :int, :int ], :int
+      attach_function :Mix_ReserveChannels, [ :int ], :int
+      attach_function :Mix_GroupChannel, [ :int, :int ], :int
+      attach_function :Mix_GroupChannels, [ :int, :int, :int ], :int
+      attach_function :Mix_GroupAvailable, [ :int ], :int
+      attach_function :Mix_GroupCount, [ :int ], :int
+      attach_function :Mix_GroupOldest, [ :int ], :int
+      attach_function :Mix_GroupNewer, [ :int ], :int
+      attach_function :Mix_PlayChannelTimed, [ :int, :pointer, :int, :int ], :int
+      attach_function :Mix_PlayMusic, [ :pointer, :int ], :int
+      attach_function :Mix_FadeInMusic, [ :pointer, :int, :int ], :int
+      attach_function :Mix_FadeInMusicPos, [ :pointer, :int, :int, :double ], :int
+      attach_function :Mix_FadeInChannelTimed, [ :int, :pointer, :int, :int, :int ], :int
+      attach_function :Mix_Volume, [ :int, :int ], :int
+      attach_function :Mix_VolumeChunk, [ :pointer, :int ], :int
+      attach_function :Mix_VolumeMusic, [ :int ], :int
+      attach_function :Mix_HaltChannel, [ :int ], :int
+      attach_function :Mix_HaltGroup, [ :int ], :int
+      attach_function :Mix_HaltMusic, [  ], :int
+      attach_function :Mix_ExpireChannel, [ :int, :int ], :int
+      attach_function :Mix_FadeOutChannel, [ :int, :int ], :int
+      attach_function :Mix_FadeOutGroup, [ :int, :int ], :int
+      attach_function :Mix_FadeOutMusic, [ :int ], :int
+      attach_function :Mix_FadingMusic, [  ], :int
+      attach_function :Mix_FadingChannel, [ :int ], :int
+      attach_function :Mix_Pause, [ :int ], :void
+      attach_function :Mix_Resume, [ :int ], :void
+      attach_function :Mix_Paused, [ :int ], :int
+      attach_function :Mix_PauseMusic, [  ], :void
+      attach_function :Mix_ResumeMusic, [  ], :void
+      attach_function :Mix_RewindMusic, [  ], :void
+      attach_function :Mix_PausedMusic, [  ], :int
+      attach_function :Mix_SetMusicPosition, [ :double ], :int
+      attach_function :Mix_Playing, [ :int ], :int
+      attach_function :Mix_PlayingMusic, [  ], :int
+      attach_function :Mix_SetMusicCMD, [ :string ], :int
+      attach_function :Mix_SetSynchroValue, [ :int ], :int
+      attach_function :Mix_GetSynchroValue, [  ], :int
+      attach_function :Mix_GetChunk, [ :int ], :pointer
+      attach_function :Mix_CloseAudio, [  ], :void
 
     end
   end

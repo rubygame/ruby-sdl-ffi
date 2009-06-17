@@ -35,7 +35,7 @@ module SDL
     APPINPUTFOCUS = 0x02
     APPACTIVE     = 0x04
 
-    attach_sdl_function :GetAppState, [  ], :uint8
+    attach_function :SDL_GetAppState, [  ], :uint8
 
   end
 end

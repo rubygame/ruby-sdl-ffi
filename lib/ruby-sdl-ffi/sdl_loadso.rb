@@ -31,9 +31,9 @@
 module SDL
   module Raw
 
-    attach_sdl_function :LoadObject, [ :string ], :pointer
-    attach_sdl_function :LoadFunction, [ :pointer, :string ], :pointer
-    attach_sdl_function :UnloadObject, [ :pointer ], :void
+    attach_function :SDL_LoadObject, [ :string ], :pointer
+    attach_function :SDL_LoadFunction, [ :pointer, :string ], :pointer
+    attach_function :SDL_UnloadObject, [ :pointer ], :void
 
   end
 end

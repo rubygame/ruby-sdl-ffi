@@ -42,7 +42,7 @@ module SDL
       )
     end
 
-    attach_sdl_function :Linked_Version, [  ], :pointer
+    attach_function :SDL_Linked_Version, [  ], :pointer
 
     INIT_TIMER       = 0x00000001
     INIT_AUDIO       = 0x00000010
@@ -53,11 +53,11 @@ module SDL
     INIT_EVENTTHREAD = 0x01000000
     INIT_EVERYTHING  = 0x0000FFFF
 
-    attach_sdl_function :Init, [ :uint32 ], :int
-    attach_sdl_function :InitSubSystem, [ :uint32 ], :int
-    attach_sdl_function :QuitSubSystem, [ :uint32 ], :void
-    attach_sdl_function :WasInit, [ :uint32 ], :uint32
-    attach_sdl_function :Quit, [  ], :void
+    attach_function :SDL_Init, [ :uint32 ], :int
+    attach_function :SDL_InitSubSystem, [ :uint32 ], :int
+    attach_function :SDL_QuitSubSystem, [ :uint32 ], :void
+    attach_function :SDL_WasInit, [ :uint32 ], :uint32
+    attach_function :SDL_Quit, [  ], :void
 
   end
 end

@@ -31,9 +31,9 @@
 module SDL
   module Raw
 
-    attach_sdl_function :SetError, [ :string, :varargs ], :void
-    attach_sdl_function :GetError, [  ], :string
-    attach_sdl_function :ClearError, [  ], :void
+    attach_function :SDL_SetError, [ :string, :varargs ], :void
+    attach_function :SDL_GetError, [  ], :string
+    attach_function :SDL_ClearError, [  ], :void
 
     ENOMEM      = 0
     EFREAD      = 1
@@ -42,7 +42,7 @@ module SDL
     UNSUPPORTED = 4
     LASTERROR   = 5
 
-    attach_sdl_function :Error, [ SDL::Raw::ENUM ], :void
+    attach_function :SDL_Error, [ SDL::Raw::ENUM ], :void
 
   end
 end

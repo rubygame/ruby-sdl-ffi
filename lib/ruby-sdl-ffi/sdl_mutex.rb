@@ -33,23 +33,23 @@ module SDL
 
     MUTEX_TIMEDOUT = 1
 
-    attach_sdl_function :CreateMutex, [  ], :pointer
-    attach_sdl_function :mutexP, [ :pointer ], :int
-    attach_sdl_function :mutexV, [ :pointer ], :int
-    attach_sdl_function :DestroyMutex, [ :pointer ], :void
-    attach_sdl_function :CreateSemaphore, [ :uint32 ], :pointer
-    attach_sdl_function :DestroySemaphore, [ :pointer ], :void
-    attach_sdl_function :SemWait, [ :pointer ], :int
-    attach_sdl_function :SemTryWait, [ :pointer ], :int
-    attach_sdl_function :SemWaitTimeout, [ :pointer, :uint32 ], :int
-    attach_sdl_function :SemPost, [ :pointer ], :int
-    attach_sdl_function :SemValue, [ :pointer ], :uint32
-    attach_sdl_function :CreateCond, [  ], :pointer
-    attach_sdl_function :DestroyCond, [ :pointer ], :void
-    attach_sdl_function :CondSignal, [ :pointer ], :int
-    attach_sdl_function :CondBroadcast, [ :pointer ], :int
-    attach_sdl_function :CondWait, [ :pointer, :pointer ], :int
-    attach_sdl_function :CondWaitTimeout, [ :pointer, :pointer, :uint32 ], :int
+    attach_function :SDL_CreateMutex, [  ], :pointer
+    attach_function :SDL_mutexP, [ :pointer ], :int
+    attach_function :SDL_mutexV, [ :pointer ], :int
+    attach_function :SDL_DestroyMutex, [ :pointer ], :void
+    attach_function :SDL_CreateSemaphore, [ :uint32 ], :pointer
+    attach_function :SDL_DestroySemaphore, [ :pointer ], :void
+    attach_function :SDL_SemWait, [ :pointer ], :int
+    attach_function :SDL_SemTryWait, [ :pointer ], :int
+    attach_function :SDL_SemWaitTimeout, [ :pointer, :uint32 ], :int
+    attach_function :SDL_SemPost, [ :pointer ], :int
+    attach_function :SDL_SemValue, [ :pointer ], :uint32
+    attach_function :SDL_CreateCond, [  ], :pointer
+    attach_function :SDL_DestroyCond, [ :pointer ], :void
+    attach_function :SDL_CondSignal, [ :pointer ], :int
+    attach_function :SDL_CondBroadcast, [ :pointer ], :int
+    attach_function :SDL_CondWait, [ :pointer, :pointer ], :int
+    attach_function :SDL_CondWaitTimeout, [ :pointer, :pointer, :uint32 ], :int
 
   end
 end

@@ -81,26 +81,26 @@ module SDL
              :filter_index, :int
       )
     end
-    attach_sdl_function :AudioInit, [ :string ], :int
-    attach_sdl_function :AudioQuit, [  ], :void
-    attach_sdl_function :AudioDriverName, [ :string, :int ], :string
-    attach_sdl_function :OpenAudio, [ :pointer, :pointer ], :int
+    attach_function :SDL_AudioInit, [ :string ], :int
+    attach_function :SDL_AudioQuit, [  ], :void
+    attach_function :SDL_AudioDriverName, [ :string, :int ], :string
+    attach_function :SDL_OpenAudio, [ :pointer, :pointer ], :int
 
     AUDIO_STOPPED = 0
     AUDIO_PLAYING = 1
     AUDIO_PAUSED  = 2
 
-    attach_sdl_function :GetAudioStatus, [  ], SDL::Raw::ENUM
-    attach_sdl_function :PauseAudio, [ :int ], :void
-    attach_sdl_function :LoadWAV_RW, [ :pointer, :int, :pointer, :pointer, :pointer ], :pointer
-    attach_sdl_function :FreeWAV, [ :pointer ], :void
-    attach_sdl_function :BuildAudioCVT, [ :pointer, :uint16, :uint8, :int, :uint16, :uint8, :int ], :int
-    attach_sdl_function :ConvertAudio, [ :pointer ], :int
+    attach_function :SDL_GetAudioStatus, [  ], SDL::Raw::ENUM
+    attach_function :SDL_PauseAudio, [ :int ], :void
+    attach_function :SDL_LoadWAV_RW, [ :pointer, :int, :pointer, :pointer, :pointer ], :pointer
+    attach_function :SDL_FreeWAV, [ :pointer ], :void
+    attach_function :SDL_BuildAudioCVT, [ :pointer, :uint16, :uint8, :int, :uint16, :uint8, :int ], :int
+    attach_function :SDL_ConvertAudio, [ :pointer ], :int
     MIX_MAXVOLUME = 128
-    attach_sdl_function :MixAudio, [ :pointer, :pointer, :uint32, :int ], :void
-    attach_sdl_function :LockAudio, [  ], :void
-    attach_sdl_function :UnlockAudio, [  ], :void
-    attach_sdl_function :CloseAudio, [  ], :void
+    attach_function :SDL_MixAudio, [ :pointer, :pointer, :uint32, :int ], :void
+    attach_function :SDL_LockAudio, [  ], :void
+    attach_function :SDL_UnlockAudio, [  ], :void
+    attach_function :SDL_CloseAudio, [  ], :void
 
   end
 end

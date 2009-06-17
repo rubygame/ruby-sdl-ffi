@@ -237,21 +237,21 @@ module SDL
     end
 
 
-    attach_sdl_function :PumpEvents, [  ], :void
+    attach_function :SDL_PumpEvents, [  ], :void
 
     ADDEVENT  = 0
     PEEKEVENT = 1
     GETEVENT  = 2
 
-    attach_sdl_function :PeepEvents, [ :pointer, :int, SDL::Raw::ENUM, :uint32 ], :int
-    attach_sdl_function :PollEvent, [ :pointer ], :int
-    attach_sdl_function :WaitEvent, [ :pointer ], :int
-    attach_sdl_function :PushEvent, [ :pointer ], :int
+    attach_function :SDL_PeepEvents, [ :pointer, :int, SDL::Raw::ENUM, :uint32 ], :int
+    attach_function :SDL_PollEvent, [ :pointer ], :int
+    attach_function :SDL_WaitEvent, [ :pointer ], :int
+    attach_function :SDL_PushEvent, [ :pointer ], :int
 
 
     callback(:eventfilter_cb, [ :pointer ], :int)
-    attach_sdl_function :SetEventFilter, [ :eventfilter_cb ], :void
-    #attach_sdl_function :GetEventFilter, [ ], :eventfilter_cb
+    attach_function :SDL_SetEventFilter, [ :eventfilter_cb ], :void
+    #attach_function :SDL_GetEventFilter, [ ], :eventfilter_cb
 
 
     QUERY   = -1
@@ -259,7 +259,7 @@ module SDL
     DISABLE = 0
     ENABLE  = 1
 
-    attach_sdl_function :EventState, [ :uint8, :int ], :uint8
+    attach_function :SDL_EventState, [ :uint8, :int ], :uint8
 
   end
 end

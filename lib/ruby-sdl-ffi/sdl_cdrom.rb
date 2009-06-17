@@ -64,17 +64,17 @@ module SDL
 
     CD_FPS = 75
 
-    attach_sdl_function :CDNumDrives, [  ], :int
-    attach_sdl_function :CDName, [ :int ], :string
-    attach_sdl_function :CDOpen, [ :int ], :pointer
-    attach_sdl_function :CDStatus, [ :pointer ], SDL::Raw::ENUM
-    attach_sdl_function :CDPlayTracks, [ :pointer, :int, :int, :int, :int ], :int
-    attach_sdl_function :CDPlay, [ :pointer, :int, :int ], :int
-    attach_sdl_function :CDPause, [ :pointer ], :int
-    attach_sdl_function :CDResume, [ :pointer ], :int
-    attach_sdl_function :CDStop, [ :pointer ], :int
-    attach_sdl_function :CDEject, [ :pointer ], :int
-    attach_sdl_function :CDClose, [ :pointer ], :void
+    attach_function :SDL_CDNumDrives, [  ], :int
+    attach_function :SDL_CDName, [ :int ], :string
+    attach_function :SDL_CDOpen, [ :int ], :pointer
+    attach_function :SDL_CDStatus, [ :pointer ], SDL::Raw::ENUM
+    attach_function :SDL_CDPlayTracks, [ :pointer, :int, :int, :int, :int ], :int
+    attach_function :SDL_CDPlay, [ :pointer, :int, :int ], :int
+    attach_function :SDL_CDPause, [ :pointer ], :int
+    attach_function :SDL_CDResume, [ :pointer ], :int
+    attach_function :SDL_CDStop, [ :pointer ], :int
+    attach_function :SDL_CDEject, [ :pointer ], :int
+    attach_function :SDL_CDClose, [ :pointer ], :void
 
   end
 end

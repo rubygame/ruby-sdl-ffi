@@ -2,7 +2,7 @@
 #
 # This file is one part of:
 #
-# FFI-SDL - Ruby-FFI bindings to SDL
+# Ruby-SDL-FFI - Ruby-FFI bindings to SDL
 #
 # Copyright (c) 2009 John Croisant
 #
@@ -37,5 +37,5 @@
   sdl_gfx
 
 }.each do |f|
-  require File.join( File.dirname(__FILE__), "ffi-sdl", f )
+  require File.join( File.dirname(__FILE__), "ruby-sdl-ffi", f )
 end

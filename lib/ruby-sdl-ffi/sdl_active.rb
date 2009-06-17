@@ -2,7 +2,7 @@
 #
 # This file is one part of:
 #
-# FFI-SDL - Ruby-FFI bindings to SDL
+# Ruby-SDL-FFI - Ruby-FFI bindings to SDL
 #
 # Copyright (c) 2009 John Croisant
 #

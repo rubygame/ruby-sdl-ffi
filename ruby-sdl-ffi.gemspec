@@ -2,7 +2,7 @@
 #
 # This file is one part of:
 #
-# FFI-SDL - Ruby-FFI bindings to SDL
+# Ruby-SDL-FFI - Ruby-FFI bindings to SDL
 #
 # Copyright (c) 2009 John Croisant
 #
@@ -30,14 +30,14 @@
 
 $gemspec = Gem::Specification.new do |s|
 
-  s.name     = "ffi-sdl"
+  s.name     = "ruby-sdl-ffi"
   s.version  = "0.0"
   s.authors  = ["John Croisant"]
   s.email    = "jacius@gmail.com"
-  s.homepage = "http://github.com/jacius/ffi-sdl/"
+  s.homepage = "http://github.com/jacius/ruby-sdl-ffi/"
   s.summary  = "Ruby-FFI bindings to SDL"
   s.description = <<EOF
-FFI-SDL is a low-level binding to SDL and related libraries
+Ruby-SDL-FFI is a low-level binding to SDL and related libraries
 using Ruby-FFI. It provides very basic access to SDL from
 Ruby without the need for a compiled C wrapper. It aims to
 be platform and Ruby implementation independent.

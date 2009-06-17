@@ -1,5 +1,5 @@
 
-= FFI-SDL
+= Ruby-SDL-FFI
 
 Version::    0.0 (unreleased alpha)
 Date::       2009-06-15
@@ -11,13 +11,13 @@ Copyright::  2009  John Croisant
 
 == Description
 
-FFI-SDL is a low-level binding to SDL [1] and related
+Ruby-SDL-FFI is a low-level binding to SDL [1] and related
 libraries using Ruby-FFI [2]. It provides very basic access
 to SDL from Ruby [3] without the need for a compiled C
 wrapper. It aims to be platform and Ruby implementation
 independent.
 
-FFI-SDL does not attempt to provide any high-level
+Ruby-SDL-FFI does not attempt to provide any high-level
 functionality, only to mirror the standard SDL interface.
 For higher-level functionality, you should use other
 libraries (Rubygame [4], Gosu [5], etc.).
@@ -31,7 +31,7 @@ libraries (Rubygame [4], Gosu [5], etc.).
 
 == Caveats
 
-FFI-SDL is still in VERY EARLY DEVELOPMENT STAGES. That means:
+Ruby-SDL-FFI is still in VERY EARLY DEVELOPMENT STAGES. That means:
 
 * It may not work correctly (or at all).
 * It may not be complete.
@@ -39,7 +39,7 @@ FFI-SDL is still in VERY EARLY DEVELOPMENT STAGES. That means:
 
 As such, this library is currently FOR THE ADVENTUROUS ONLY.
 If you are not willing to continuously update your code to
-match the new API, then you should wait until FFI-SDL is
+match the new API, then you should wait until Ruby-SDL-FFI is
 more mature and stable (i.e. version 1.0+).
 
 
@@ -55,9 +55,9 @@ Optional:
 * SDL_mixer >= 1.2.8
 * SDL_ttf   >= 2.0.9
 
-FFI-SDL may work with older versions, but hasn't been tried on them.
+Ruby-SDL-FFI may work with older versions, but hasn't been tried on them.
 
-So far, FFI-SDL has only been tested on 32-bit Linux with
+So far, Ruby-SDL-FFI has only been tested on 32-bit Linux with
 the standard Ruby implementation (aka MRI) version 1.8.6.
 However, with a few tweaks it should work on any system with
 compatible FFI functionality.
@@ -65,7 +65,7 @@ compatible FFI functionality.
 
 == License
 
-FFI-SDL is licensed under the following terms (the "MIT License"):
+Ruby-SDL-FFI is licensed under the following terms (the "MIT License"):
 
 Copyright (c) 2009 John Croisant
 

@@ -26,7 +26,7 @@ libraries (Rubygame [4], Gosu [5], etc.).
 2. Ruby-FFI: http://kenai.com/projects/ruby-ffi/
 3. Ruby: http://www.ruby-lang.org/en/
 4. Rubygame: http://rubygame.org/
-5. Gosu: http://code.google.com/p/gosu/
+5. Gosu: http://www.libgosu.org/
 
 
 == Caveats

@@ -37,10 +37,10 @@ $gemspec = Gem::Specification.new do |s|
   s.homepage = "http://github.com/jacius/ffi-sdl/"
   s.summary  = "Ruby-FFI bindings to SDL"
   s.description = <<EOF
-FFI-SDL is a low-level binding to SDL using Ruby-FFI.
-It provides very basic access to SDL from Ruby
-without the need for a compiled C wrapper. It aims to be
-platform and Ruby implementation independent.
+FFI-SDL is a low-level binding to SDL and related libraries
+using Ruby-FFI. It provides very basic access to SDL from
+Ruby without the need for a compiled C wrapper. It aims to
+be platform and Ruby implementation independent.
 EOF
 
   s.has_rdoc = false
@@ -49,6 +49,10 @@ EOF
 
   s.required_ruby_version = ">= 1.8"
   s.add_dependency( "ffi", ">=0.3.0" )
-  s.requirements = ["SDL >= 1.2.13"]
+  s.requirements = ["SDL       >= 1.2.13",
+                    "SDL_image >= 1.2.7 (optional)",
+                    "SDL_gfx   >= 2.0.17 (optional)",
+                    "SDL_mixer >= 1.2.8 (optional)",
+                    "SDL_ttf   >= 2.0.9 (optional)"]
 
 end

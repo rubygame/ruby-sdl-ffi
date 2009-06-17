@@ -29,40 +29,42 @@
 
 
 module SDL
+  module Raw
 
-  class Cursor < FFI::Struct
-    layout(
-           :area,      SDL::Rect,
-           :hot_x,     :int16,
-           :hot_y,     :int16,
-           :data,      :pointer,
-           :mask,      :pointer,
-           :save,      [:pointer, 2],
-           :wm_cursor, :pointer
-    )
+    class Cursor < FFI::Struct
+      layout(
+             :area,      SDL::Raw::Rect,
+             :hot_x,     :int16,
+             :hot_y,     :int16,
+             :data,      :pointer,
+             :mask,      :pointer,
+             :save,      [:pointer, 2],
+             :wm_cursor, :pointer
+      )
+    end
+
+    attach_sdl_function :GetMouseState, [ :pointer, :pointer ], :uint8
+    attach_sdl_function :GetRelativeMouseState, [ :pointer, :pointer ], :uint8
+    attach_sdl_function :WarpMouse, [ :uint16, :uint16 ], :void
+    attach_sdl_function :CreateCursor, [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
+    attach_sdl_function :SetCursor, [ :pointer ], :void
+    attach_sdl_function :GetCursor, [  ], :pointer
+    attach_sdl_function :FreeCursor, [ :pointer ], :void
+    attach_sdl_function :ShowCursor, [ :int ], :int
+
+    BUTTON_LEFT      = 1
+    BUTTON_MIDDLE    = 2
+    BUTTON_RIGHT     = 3
+    BUTTON_WHEELUP   = 4
+    BUTTON_WHEELDOWN = 5
+    BUTTON_X1        = 6
+    BUTTON_X2        = 7
+
+    BUTTON_LMASK  = (1 << ((1) -1))
+    BUTTON_MMASK  = (1 << ((2) -1))
+    BUTTON_RMASK  = (1 << ((3) -1))
+    BUTTON_X1MASK = (1 << ((6) -1))
+    BUTTON_X2MASK = (1 << ((7) -1))
+
   end
-
-  attach_sdl_function :GetMouseState, [ :pointer, :pointer ], :uint8
-  attach_sdl_function :GetRelativeMouseState, [ :pointer, :pointer ], :uint8
-  attach_sdl_function :WarpMouse, [ :uint16, :uint16 ], :void
-  attach_sdl_function :CreateCursor, [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
-  attach_sdl_function :SetCursor, [ :pointer ], :void
-  attach_sdl_function :GetCursor, [  ], :pointer
-  attach_sdl_function :FreeCursor, [ :pointer ], :void
-  attach_sdl_function :ShowCursor, [ :int ], :int
-
-  BUTTON_LEFT      = 1
-  BUTTON_MIDDLE    = 2
-  BUTTON_RIGHT     = 3
-  BUTTON_WHEELUP   = 4
-  BUTTON_WHEELDOWN = 5
-  BUTTON_X1        = 6
-  BUTTON_X2        = 7
-
-  BUTTON_LMASK  = (1 << ((1) -1))
-  BUTTON_MMASK  = (1 << ((2) -1))
-  BUTTON_RMASK  = (1 << ((3) -1))
-  BUTTON_X1MASK = (1 << ((6) -1))
-  BUTTON_X2MASK = (1 << ((7) -1))
-
 end

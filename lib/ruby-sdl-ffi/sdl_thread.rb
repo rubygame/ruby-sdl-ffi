@@ -29,11 +29,13 @@
 
 
 module SDL
+  module Raw
 
-  attach_sdl_function :CreateThread, [ callback( :createthread_cb, [:pointer], :int ), :pointer ], :pointer
-  attach_sdl_function :ThreadID, [  ], :uint32
-  attach_sdl_function :GetThreadID, [ :pointer ], :uint32
-  attach_sdl_function :WaitThread, [ :pointer, :pointer ], :void
-  attach_sdl_function :KillThread, [ :pointer ], :void
+    attach_sdl_function :CreateThread, [ callback( :createthread_cb, [:pointer], :int ), :pointer ], :pointer
+    attach_sdl_function :ThreadID, [  ], :uint32
+    attach_sdl_function :GetThreadID, [ :pointer ], :uint32
+    attach_sdl_function :WaitThread, [ :pointer, :pointer ], :void
+    attach_sdl_function :KillThread, [ :pointer ], :void
 
+  end
 end

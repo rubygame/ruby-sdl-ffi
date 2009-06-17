@@ -29,28 +29,30 @@
 
 
 module SDL
+  module Raw
 
-  class Keysym < FFI::Struct
-    layout(
-           :scancode, :uint8,
-           :sym,      SDL::ENUM,
-           :mod,      SDL::ENUM,
-           :unicode,  :uint16
-    )
+    class Keysym < FFI::Struct
+      layout(
+             :scancode, :uint8,
+             :sym,      SDL::Raw::ENUM,
+             :mod,      SDL::Raw::ENUM,
+             :unicode,  :uint16
+      )
+    end
+
+    ALL_HOTKEYS = 0xFFFFFFFF
+
+    attach_sdl_function :EnableUNICODE, [ :int ], :int
+
+    DEFAULT_REPEAT_DELAY = 500
+    DEFAULT_REPEAT_INTERVAL = 30
+
+    attach_sdl_function :EnableKeyRepeat, [ :int, :int ], :int
+    attach_sdl_function :GetKeyRepeat, [ :pointer, :pointer ], :void
+    attach_sdl_function :GetKeyState, [ :pointer ], :pointer
+    attach_sdl_function :GetModState, [  ], SDL::Raw::ENUM
+    attach_sdl_function :SetModState, [ SDL::Raw::ENUM ], :void
+    attach_sdl_function :GetKeyName, [ SDL::Raw::ENUM ], :string
+
   end
-
-  ALL_HOTKEYS = 0xFFFFFFFF
-
-  attach_sdl_function :EnableUNICODE, [ :int ], :int
-
-  DEFAULT_REPEAT_DELAY = 500
-  DEFAULT_REPEAT_INTERVAL = 30
-
-  attach_sdl_function :EnableKeyRepeat, [ :int, :int ], :int
-  attach_sdl_function :GetKeyRepeat, [ :pointer, :pointer ], :void
-  attach_sdl_function :GetKeyState, [ :pointer ], :pointer
-  attach_sdl_function :GetModState, [  ], SDL::ENUM
-  attach_sdl_function :SetModState, [ SDL::ENUM ], :void
-  attach_sdl_function :GetKeyName, [ SDL::ENUM ], :string
-
 end

@@ -29,11 +29,13 @@
 
 
 module SDL
+  module Raw
 
-  APPMOUSEFOCUS = 0x01
-  APPINPUTFOCUS = 0x02
-  APPACTIVE     = 0x04
+    APPMOUSEFOCUS = 0x01
+    APPINPUTFOCUS = 0x02
+    APPACTIVE     = 0x04
 
-  attach_sdl_function :GetAppState, [  ], :uint8
+    attach_sdl_function :GetAppState, [  ], :uint8
 
+  end
 end

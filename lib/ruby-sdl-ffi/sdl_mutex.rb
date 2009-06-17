@@ -29,25 +29,27 @@
 
 
 module SDL
+  module Raw
 
-  MUTEX_TIMEDOUT = 1
+    MUTEX_TIMEDOUT = 1
 
-  attach_sdl_function :CreateMutex, [  ], :pointer
-  attach_sdl_function :mutexP, [ :pointer ], :int
-  attach_sdl_function :mutexV, [ :pointer ], :int
-  attach_sdl_function :DestroyMutex, [ :pointer ], :void
-  attach_sdl_function :CreateSemaphore, [ :uint32 ], :pointer
-  attach_sdl_function :DestroySemaphore, [ :pointer ], :void
-  attach_sdl_function :SemWait, [ :pointer ], :int
-  attach_sdl_function :SemTryWait, [ :pointer ], :int
-  attach_sdl_function :SemWaitTimeout, [ :pointer, :uint32 ], :int
-  attach_sdl_function :SemPost, [ :pointer ], :int
-  attach_sdl_function :SemValue, [ :pointer ], :uint32
-  attach_sdl_function :CreateCond, [  ], :pointer
-  attach_sdl_function :DestroyCond, [ :pointer ], :void
-  attach_sdl_function :CondSignal, [ :pointer ], :int
-  attach_sdl_function :CondBroadcast, [ :pointer ], :int
-  attach_sdl_function :CondWait, [ :pointer, :pointer ], :int
-  attach_sdl_function :CondWaitTimeout, [ :pointer, :pointer, :uint32 ], :int
+    attach_sdl_function :CreateMutex, [  ], :pointer
+    attach_sdl_function :mutexP, [ :pointer ], :int
+    attach_sdl_function :mutexV, [ :pointer ], :int
+    attach_sdl_function :DestroyMutex, [ :pointer ], :void
+    attach_sdl_function :CreateSemaphore, [ :uint32 ], :pointer
+    attach_sdl_function :DestroySemaphore, [ :pointer ], :void
+    attach_sdl_function :SemWait, [ :pointer ], :int
+    attach_sdl_function :SemTryWait, [ :pointer ], :int
+    attach_sdl_function :SemWaitTimeout, [ :pointer, :uint32 ], :int
+    attach_sdl_function :SemPost, [ :pointer ], :int
+    attach_sdl_function :SemValue, [ :pointer ], :uint32
+    attach_sdl_function :CreateCond, [  ], :pointer
+    attach_sdl_function :DestroyCond, [ :pointer ], :void
+    attach_sdl_function :CondSignal, [ :pointer ], :int
+    attach_sdl_function :CondBroadcast, [ :pointer ], :int
+    attach_sdl_function :CondWait, [ :pointer, :pointer ], :int
+    attach_sdl_function :CondWaitTimeout, [ :pointer, :pointer, :uint32 ], :int
 
+  end
 end

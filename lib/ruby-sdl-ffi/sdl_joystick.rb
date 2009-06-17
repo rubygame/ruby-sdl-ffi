@@ -29,33 +29,35 @@
 
 
 module SDL
+  module Raw
 
-  attach_sdl_function :NumJoysticks, [  ], :int
-  attach_sdl_function :JoystickName, [ :int ], :string
-  attach_sdl_function :JoystickOpen, [ :int ], :pointer
-  attach_sdl_function :JoystickOpened, [ :int ], :int
-  attach_sdl_function :JoystickIndex, [ :pointer ], :int
-  attach_sdl_function :JoystickNumAxes, [ :pointer ], :int
-  attach_sdl_function :JoystickNumBalls, [ :pointer ], :int
-  attach_sdl_function :JoystickNumHats, [ :pointer ], :int
-  attach_sdl_function :JoystickNumButtons, [ :pointer ], :int
-  attach_sdl_function :JoystickUpdate, [  ], :void
-  attach_sdl_function :JoystickEventState, [ :int ], :int
-  attach_sdl_function :JoystickGetAxis, [ :pointer, :int ], :int16
+    attach_sdl_function :NumJoysticks, [  ], :int
+    attach_sdl_function :JoystickName, [ :int ], :string
+    attach_sdl_function :JoystickOpen, [ :int ], :pointer
+    attach_sdl_function :JoystickOpened, [ :int ], :int
+    attach_sdl_function :JoystickIndex, [ :pointer ], :int
+    attach_sdl_function :JoystickNumAxes, [ :pointer ], :int
+    attach_sdl_function :JoystickNumBalls, [ :pointer ], :int
+    attach_sdl_function :JoystickNumHats, [ :pointer ], :int
+    attach_sdl_function :JoystickNumButtons, [ :pointer ], :int
+    attach_sdl_function :JoystickUpdate, [  ], :void
+    attach_sdl_function :JoystickEventState, [ :int ], :int
+    attach_sdl_function :JoystickGetAxis, [ :pointer, :int ], :int16
 
-  HAT_CENTERED  = 0x00
-  HAT_UP        = 0x01
-  HAT_RIGHT     = 0x02
-  HAT_DOWN      = 0x04
-  HAT_LEFT      = 0x08
-  HAT_RIGHTUP   = (0x02|0x01)
-  HAT_RIGHTDOWN = (0x02|0x04)
-  HAT_LEFTUP    = (0x08|0x01)
-  HAT_LEFTDOWN  = (0x08|0x04)
+    HAT_CENTERED  = 0x00
+    HAT_UP        = 0x01
+    HAT_RIGHT     = 0x02
+    HAT_DOWN      = 0x04
+    HAT_LEFT      = 0x08
+    HAT_RIGHTUP   = (0x02|0x01)
+    HAT_RIGHTDOWN = (0x02|0x04)
+    HAT_LEFTUP    = (0x08|0x01)
+    HAT_LEFTDOWN  = (0x08|0x04)
 
-  attach_sdl_function :JoystickGetHat, [ :pointer, :int ], :uint8
-  attach_sdl_function :JoystickGetBall, [ :pointer, :int, :pointer, :pointer ], :int
-  attach_sdl_function :JoystickGetButton, [ :pointer, :int ], :uint8
-  attach_sdl_function :JoystickClose, [ :pointer ], :void
+    attach_sdl_function :JoystickGetHat, [ :pointer, :int ], :uint8
+    attach_sdl_function :JoystickGetBall, [ :pointer, :int, :pointer, :pointer ], :int
+    attach_sdl_function :JoystickGetButton, [ :pointer, :int ], :uint8
+    attach_sdl_function :JoystickClose, [ :pointer ], :void
 
+  end
 end

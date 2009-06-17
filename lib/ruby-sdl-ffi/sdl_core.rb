@@ -29,33 +29,35 @@
 
 
 module SDL
+  module Raw
 
-  LIL_ENDIAN = 1234
-  BIG_ENDIAN = 4321
+    LIL_ENDIAN = 1234
+    BIG_ENDIAN = 4321
 
-  class Version < FFI::Struct
-    layout(
-           :major, :uint8,
-           :minor, :uint8,
-           :patch, :uint8
-    )
+    class Version < FFI::Struct
+      layout(
+             :major, :uint8,
+             :minor, :uint8,
+             :patch, :uint8
+      )
+    end
+
+    attach_sdl_function :Linked_Version, [  ], :pointer
+
+    INIT_TIMER       = 0x00000001
+    INIT_AUDIO       = 0x00000010
+    INIT_VIDEO       = 0x00000020
+    INIT_CDROM       = 0x00000100
+    INIT_JOYSTICK    = 0x00000200
+    INIT_NOPARACHUTE = 0x00100000
+    INIT_EVENTTHREAD = 0x01000000
+    INIT_EVERYTHING  = 0x0000FFFF
+
+    attach_sdl_function :Init, [ :uint32 ], :int
+    attach_sdl_function :InitSubSystem, [ :uint32 ], :int
+    attach_sdl_function :QuitSubSystem, [ :uint32 ], :void
+    attach_sdl_function :WasInit, [ :uint32 ], :uint32
+    attach_sdl_function :Quit, [  ], :void
+
   end
-
-  attach_sdl_function :Linked_Version, [  ], :pointer
-
-  INIT_TIMER       = 0x00000001
-  INIT_AUDIO       = 0x00000010
-  INIT_VIDEO       = 0x00000020
-  INIT_CDROM       = 0x00000100
-  INIT_JOYSTICK    = 0x00000200
-  INIT_NOPARACHUTE = 0x00100000
-  INIT_EVENTTHREAD = 0x01000000
-  INIT_EVERYTHING  = 0x0000FFFF
-
-  attach_sdl_function :Init, [ :uint32 ], :int
-  attach_sdl_function :InitSubSystem, [ :uint32 ], :int
-  attach_sdl_function :QuitSubSystem, [ :uint32 ], :void
-  attach_sdl_function :WasInit, [ :uint32 ], :uint32
-  attach_sdl_function :Quit, [  ], :void
-
 end

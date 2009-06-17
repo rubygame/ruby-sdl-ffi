@@ -29,76 +29,78 @@
 
 
 module SDL
+  module Raw
 
-  class AudioSpec < FFI::Struct
-    layout(
-           :freq,     :int,
-           :format,   :uint16,
-           :channels, :uint8,
-           :silence,  :uint8,
-           :samples,  :uint16,
-           :padding,  :uint16,
-           :size,     :uint32,
-           :callback, SDL::callback(:audiospec_cb, [ :pointer, :pointer, :int ], :void),
-           :userdata, :pointer
-    )
-    def callback=(cb)
-      @callback = cb
-      self[:callback] = @callback
+    class AudioSpec < FFI::Struct
+      layout(
+             :freq,     :int,
+             :format,   :uint16,
+             :channels, :uint8,
+             :silence,  :uint8,
+             :samples,  :uint16,
+             :padding,  :uint16,
+             :size,     :uint32,
+             :callback, SDL::Raw::callback(:audiospec_cb, [ :pointer, :pointer, :int ], :void),
+             :userdata, :pointer
+      )
+      def callback=(cb)
+        @callback = cb
+        self[:callback] = @callback
+      end
+      def callback
+        @callback
+      end
+
     end
-    def callback
-      @callback
+
+    AUDIO_U8     = 0x0008
+    AUDIO_S8     = 0x8008
+    AUDIO_U16LSB = 0x0010
+    AUDIO_S16LSB = 0x8010
+    AUDIO_U16MSB = 0x1010
+    AUDIO_S16MSB = 0x9010
+    AUDIO_U16    = 0x0010
+    AUDIO_S16    = 0x8010
+    AUDIO_U16SYS = 0x0010
+    AUDIO_S16SYS = 0x8010
+
+    callback( :filters_cb, [ :pointer, :uint16 ], :void)
+
+    class AudioCVT < FFI::Struct
+      layout(
+             :needed,       :int,
+             :src_format,   :uint16,
+             :dst_format,   :uint16,
+             :rate_incr,    :double,
+             :buf,          :pointer,
+             :len,          :int,
+             :len_cvt,      :int,
+             :len_mult,     :int,
+             :len_ratio,    :double,
+             # :filters,    [:filters_callback, 10],
+             :filter_index, :int
+      )
     end
+    attach_sdl_function :AudioInit, [ :string ], :int
+    attach_sdl_function :AudioQuit, [  ], :void
+    attach_sdl_function :AudioDriverName, [ :string, :int ], :string
+    attach_sdl_function :OpenAudio, [ :pointer, :pointer ], :int
+
+    AUDIO_STOPPED = 0
+    AUDIO_PLAYING = 1
+    AUDIO_PAUSED  = 2
+
+    attach_sdl_function :GetAudioStatus, [  ], SDL::Raw::ENUM
+    attach_sdl_function :PauseAudio, [ :int ], :void
+    attach_sdl_function :LoadWAV_RW, [ :pointer, :int, :pointer, :pointer, :pointer ], :pointer
+    attach_sdl_function :FreeWAV, [ :pointer ], :void
+    attach_sdl_function :BuildAudioCVT, [ :pointer, :uint16, :uint8, :int, :uint16, :uint8, :int ], :int
+    attach_sdl_function :ConvertAudio, [ :pointer ], :int
+    MIX_MAXVOLUME = 128
+    attach_sdl_function :MixAudio, [ :pointer, :pointer, :uint32, :int ], :void
+    attach_sdl_function :LockAudio, [  ], :void
+    attach_sdl_function :UnlockAudio, [  ], :void
+    attach_sdl_function :CloseAudio, [  ], :void
 
   end
-
-  AUDIO_U8     = 0x0008
-  AUDIO_S8     = 0x8008
-  AUDIO_U16LSB = 0x0010
-  AUDIO_S16LSB = 0x8010
-  AUDIO_U16MSB = 0x1010
-  AUDIO_S16MSB = 0x9010
-  AUDIO_U16    = 0x0010
-  AUDIO_S16    = 0x8010
-  AUDIO_U16SYS = 0x0010
-  AUDIO_S16SYS = 0x8010
-
-  callback( :filters_cb, [ :pointer, :uint16 ], :void)
-
-  class AudioCVT < FFI::Struct
-    layout(
-           :needed,       :int,
-           :src_format,   :uint16,
-           :dst_format,   :uint16,
-           :rate_incr,    :double,
-           :buf,          :pointer,
-           :len,          :int,
-           :len_cvt,      :int,
-           :len_mult,     :int,
-           :len_ratio,    :double,
-           # :filters,    [:filters_callback, 10],
-           :filter_index, :int
-    )
-  end
-  attach_sdl_function :AudioInit, [ :string ], :int
-  attach_sdl_function :AudioQuit, [  ], :void
-  attach_sdl_function :AudioDriverName, [ :string, :int ], :string
-  attach_sdl_function :OpenAudio, [ :pointer, :pointer ], :int
-
-  AUDIO_STOPPED = 0
-  AUDIO_PLAYING = 1
-  AUDIO_PAUSED  = 2
-
-  attach_sdl_function :GetAudioStatus, [  ], SDL::ENUM
-  attach_sdl_function :PauseAudio, [ :int ], :void
-  attach_sdl_function :LoadWAV_RW, [ :pointer, :int, :pointer, :pointer, :pointer ], :pointer
-  attach_sdl_function :FreeWAV, [ :pointer ], :void
-  attach_sdl_function :BuildAudioCVT, [ :pointer, :uint16, :uint8, :int, :uint16, :uint8, :int ], :int
-  attach_sdl_function :ConvertAudio, [ :pointer ], :int
-  MIX_MAXVOLUME = 128
-  attach_sdl_function :MixAudio, [ :pointer, :pointer, :uint32, :int ], :void
-  attach_sdl_function :LockAudio, [  ], :void
-  attach_sdl_function :UnlockAudio, [  ], :void
-  attach_sdl_function :CloseAudio, [  ], :void
-
 end

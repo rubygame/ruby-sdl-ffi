@@ -31,60 +31,62 @@
 require "ffi"
 
 module SDL
-  module IMG
-    extend FFI::Library
+  module Raw
+    module IMG
+      extend FFI::Library
 
-    case FFI::Platform::OS
-    when /linux/
-      ffi_lib "libSDL_image.so"
-    else
-      raise( "SDL_image is not supported on #{FFI::Platform::OS} yet.\n" +
-             "Please report this and help us support more platforms." )
-    end
-
-    class << self
-      private 
-
-      # A convenience method to create a method :Whatever which
-      # attaches to the C function "IMG_Whatever".
-      # 
-      # This is so the final result is IMG::Whatever(), instead of
-      # IMG::IMG_Whatever().
-      # 
-      def img_function( sym, *rest )
-        self.attach_function( sym, "IMG_#{sym}", *rest )
+      case FFI::Platform::OS
+      when /linux/
+        ffi_lib "libSDL_image.so"
+      else
+        raise( "SDL_image is not supported on #{FFI::Platform::OS} yet.\n" +
+               "Please report this and help us support more platforms." )
       end
+
+      class << self
+        private 
+
+        # A convenience method to create a method :Whatever which
+        # attaches to the C function "IMG_Whatever".
+        # 
+        # This is so the final result is IMG::Whatever(), instead of
+        # IMG::IMG_Whatever().
+        # 
+        def img_function( sym, *rest )
+          self.attach_function( sym, "IMG_#{sym}", *rest )
+        end
+      end
+
+      img_function  :Linked_Version,   [                         ], :pointer
+      img_function  :LoadTyped_RW,     [ :pointer, :int, :string ], :pointer
+      img_function  :Load,             [ :string                 ], :pointer
+      img_function  :Load_RW,          [ :pointer, :int          ], :pointer
+      img_function  :InvertAlpha,      [ :int                    ], :int
+      img_function  :isBMP,            [ :pointer                ], :int
+      img_function  :isGIF,            [ :pointer                ], :int
+      img_function  :isJPG,            [ :pointer                ], :int
+      img_function  :isLBM,            [ :pointer                ], :int
+      img_function  :isPCX,            [ :pointer                ], :int
+      img_function  :isPNG,            [ :pointer                ], :int
+      img_function  :isPNM,            [ :pointer                ], :int
+      img_function  :isTIF,            [ :pointer                ], :int
+      img_function  :isXCF,            [ :pointer                ], :int
+      img_function  :isXPM,            [ :pointer                ], :int
+      img_function  :isXV,             [ :pointer                ], :int
+      img_function  :LoadBMP_RW,       [ :pointer                ], :pointer
+      img_function  :LoadGIF_RW,       [ :pointer                ], :pointer
+      img_function  :LoadJPG_RW,       [ :pointer                ], :pointer
+      img_function  :LoadLBM_RW,       [ :pointer                ], :pointer
+      img_function  :LoadPCX_RW,       [ :pointer                ], :pointer
+      img_function  :LoadPNG_RW,       [ :pointer                ], :pointer
+      img_function  :LoadPNM_RW,       [ :pointer                ], :pointer
+      img_function  :LoadTGA_RW,       [ :pointer                ], :pointer
+      img_function  :LoadTIF_RW,       [ :pointer                ], :pointer
+      img_function  :LoadXCF_RW,       [ :pointer                ], :pointer
+      img_function  :LoadXPM_RW,       [ :pointer                ], :pointer
+      img_function  :LoadXV_RW,        [ :pointer                ], :pointer
+      img_function  :ReadXPMFromArray, [ :pointer                ], :pointer
+
     end
-
-    img_function  :Linked_Version,   [                         ], :pointer
-    img_function  :LoadTyped_RW,     [ :pointer, :int, :string ], :pointer
-    img_function  :Load,             [ :string                 ], :pointer
-    img_function  :Load_RW,          [ :pointer, :int          ], :pointer
-    img_function  :InvertAlpha,      [ :int                    ], :int
-    img_function  :isBMP,            [ :pointer                ], :int
-    img_function  :isGIF,            [ :pointer                ], :int
-    img_function  :isJPG,            [ :pointer                ], :int
-    img_function  :isLBM,            [ :pointer                ], :int
-    img_function  :isPCX,            [ :pointer                ], :int
-    img_function  :isPNG,            [ :pointer                ], :int
-    img_function  :isPNM,            [ :pointer                ], :int
-    img_function  :isTIF,            [ :pointer                ], :int
-    img_function  :isXCF,            [ :pointer                ], :int
-    img_function  :isXPM,            [ :pointer                ], :int
-    img_function  :isXV,             [ :pointer                ], :int
-    img_function  :LoadBMP_RW,       [ :pointer                ], :pointer
-    img_function  :LoadGIF_RW,       [ :pointer                ], :pointer
-    img_function  :LoadJPG_RW,       [ :pointer                ], :pointer
-    img_function  :LoadLBM_RW,       [ :pointer                ], :pointer
-    img_function  :LoadPCX_RW,       [ :pointer                ], :pointer
-    img_function  :LoadPNG_RW,       [ :pointer                ], :pointer
-    img_function  :LoadPNM_RW,       [ :pointer                ], :pointer
-    img_function  :LoadTGA_RW,       [ :pointer                ], :pointer
-    img_function  :LoadTIF_RW,       [ :pointer                ], :pointer
-    img_function  :LoadXCF_RW,       [ :pointer                ], :pointer
-    img_function  :LoadXPM_RW,       [ :pointer                ], :pointer
-    img_function  :LoadXV_RW,        [ :pointer                ], :pointer
-    img_function  :ReadXPMFromArray, [ :pointer                ], :pointer
-
   end
 end

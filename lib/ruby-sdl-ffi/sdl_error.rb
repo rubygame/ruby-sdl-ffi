@@ -29,18 +29,20 @@
 
 
 module SDL
+  module Raw
 
-  attach_sdl_function :SetError, [ :string, :varargs ], :void
-  attach_sdl_function :GetError, [  ], :string
-  attach_sdl_function :ClearError, [  ], :void
+    attach_sdl_function :SetError, [ :string, :varargs ], :void
+    attach_sdl_function :GetError, [  ], :string
+    attach_sdl_function :ClearError, [  ], :void
 
-  ENOMEM      = 0
-  EFREAD      = 1
-  EFWRITE     = 2
-  EFSEEK      = 3
-  UNSUPPORTED = 4
-  LASTERROR   = 5
+    ENOMEM      = 0
+    EFREAD      = 1
+    EFWRITE     = 2
+    EFSEEK      = 3
+    UNSUPPORTED = 4
+    LASTERROR   = 5
 
-  attach_sdl_function :Error, [ SDL::ENUM ], :void
+    attach_sdl_function :Error, [ SDL::Raw::ENUM ], :void
 
+  end
 end

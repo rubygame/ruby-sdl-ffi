@@ -29,50 +29,52 @@
 
 
 module SDL
+  module Raw
 
-  CD_ERROR     = -1
-  CD_TRAYEMPTY = 0
-  CD_STOPPED   = 1
-  CD_PLAYING   = 2
-  CD_PAUSED    = 3
+    CD_ERROR     = -1
+    CD_TRAYEMPTY = 0
+    CD_STOPPED   = 1
+    CD_PLAYING   = 2
+    CD_PAUSED    = 3
 
-  AUDIO_TRACK  = 0x00
-  DATA_TRACK   = 0x04
-  MAX_TRACKS   = 99
+    AUDIO_TRACK  = 0x00
+    DATA_TRACK   = 0x04
+    MAX_TRACKS   = 99
 
-  class CDtrack < FFI::Struct
-    layout(
-           :id,     :uint8,
-           :type,   :uint8,
-           :unused, :uint16,
-           :length, :uint32,
-           :offset, :uint32
-           )
+    class CDtrack < FFI::Struct
+      layout(
+             :id,     :uint8,
+             :type,   :uint8,
+             :unused, :uint16,
+             :length, :uint32,
+             :offset, :uint32
+             )
+    end
+
+    class CD < FFI::Struct
+      layout(
+             :id,        :int,
+             :status,    SDL::Raw::ENUM,
+             :numtracks, :int,
+             :cur_track, :int,
+             :cur_frame, :int,
+             :track,     [SDL::Raw::CDtrack, SDL::Raw::MAX_TRACKS+1]
+             )
+    end
+
+    CD_FPS = 75
+
+    attach_sdl_function :CDNumDrives, [  ], :int
+    attach_sdl_function :CDName, [ :int ], :string
+    attach_sdl_function :CDOpen, [ :int ], :pointer
+    attach_sdl_function :CDStatus, [ :pointer ], SDL::Raw::ENUM
+    attach_sdl_function :CDPlayTracks, [ :pointer, :int, :int, :int, :int ], :int
+    attach_sdl_function :CDPlay, [ :pointer, :int, :int ], :int
+    attach_sdl_function :CDPause, [ :pointer ], :int
+    attach_sdl_function :CDResume, [ :pointer ], :int
+    attach_sdl_function :CDStop, [ :pointer ], :int
+    attach_sdl_function :CDEject, [ :pointer ], :int
+    attach_sdl_function :CDClose, [ :pointer ], :void
+
   end
-
-  class CD < FFI::Struct
-    layout(
-           :id,        :int,
-           :status,    SDL::ENUM,
-           :numtracks, :int,
-           :cur_track, :int,
-           :cur_frame, :int,
-           :track,     [CDtrack, SDL::MAX_TRACKS+1]
-           )
-  end
-
-  CD_FPS = 75
-
-  attach_sdl_function :CDNumDrives, [  ], :int
-  attach_sdl_function :CDName, [ :int ], :string
-  attach_sdl_function :CDOpen, [ :int ], :pointer
-  attach_sdl_function :CDStatus, [ :pointer ], SDL::ENUM
-  attach_sdl_function :CDPlayTracks, [ :pointer, :int, :int, :int, :int ], :int
-  attach_sdl_function :CDPlay, [ :pointer, :int, :int ], :int
-  attach_sdl_function :CDPause, [ :pointer ], :int
-  attach_sdl_function :CDResume, [ :pointer ], :int
-  attach_sdl_function :CDStop, [ :pointer ], :int
-  attach_sdl_function :CDEject, [ :pointer ], :int
-  attach_sdl_function :CDClose, [ :pointer ], :void
-
 end

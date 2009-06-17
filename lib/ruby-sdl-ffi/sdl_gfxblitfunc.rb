@@ -32,26 +32,29 @@ require 'ffi'
 
 
 module SDL
-  module Gfx
+  module Raw
+    module Gfx
 
-    attach_function :SDL_gfxBlitRGBA, [ :pointer, :pointer, :pointer, :pointer ], :int
-    attach_function :SDL_gfxSetAlpha, [ :pointer, :uint8 ], :int
+      attach_function :SDL_gfxBlitRGBA, [ :pointer, :pointer, :pointer, :pointer ], :int
+      attach_function :SDL_gfxSetAlpha, [ :pointer, :uint8 ], :int
 
-    class BlitInfo < FFI::Struct
-      layout(
-             :s_pixels, :pointer,
-             :s_width,  :int,
-             :s_height, :int,
-             :s_skip,   :int,
-             :d_pixels, :pointer,
-             :d_width,  :int,
-             :d_height, :int,
-             :d_skip,   :int,
-             :aux_data, :pointer,
-             :src,      :pointer,
-             :table,    :pointer,
-             :dst,      :pointer
-      )
+      class BlitInfo < FFI::Struct
+        layout(
+               :s_pixels, :pointer,
+               :s_width,  :int,
+               :s_height, :int,
+               :s_skip,   :int,
+               :d_pixels, :pointer,
+               :d_width,  :int,
+               :d_height, :int,
+               :d_skip,   :int,
+               :aux_data, :pointer,
+               :src,      :pointer,
+               :table,    :pointer,
+               :dst,      :pointer
+        )
+      end
+
     end
   end
 end

@@ -31,22 +31,6 @@
 module SDL
   module Raw
 
-    class << self
-
-      private
-
-      # A convenience method to create a method :Whatever which
-      # attaches to the C function "SDL_Whatever".
-      # 
-      # This is so the final result is SDL::Whatever(), instead of
-      # SDL::SDL_Whatever().
-      # 
-      def attach_sdl_function( sym, *rest ) # :nodoc:
-        attach_function( sym, "SDL_#{sym}", *rest )
-      end
-
-    end
-
     # Aliases for integer-like types
     ENUM        = :int            # :nodoc:
     BOOL        = :int            # :nodoc:

@@ -43,19 +43,6 @@ module SDL
                "Please report this and help us support more platforms." )
       end
 
-      class << self
-        private 
-
-        # A convenience method to create a method :Whatever which
-        # attaches to the C function "IMG_Whatever".
-        # 
-        # This is so the final result is IMG::Whatever(), instead of
-        # IMG::IMG_Whatever().
-        # 
-        def img_function( sym, *rest )
-          self.attach_function( sym, "IMG_#{sym}", *rest )
-        end
-      end
 
       attach_function :IMG_Linked_Version, [  ], :pointer
       attach_function :IMG_LoadTyped_RW, [ :pointer, :int, :string ], :pointer

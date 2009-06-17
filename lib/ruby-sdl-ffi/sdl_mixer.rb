@@ -43,20 +43,6 @@ module SDL
                "Please report this and help us support more platforms." )
       end
 
-      class << self
-        private 
-
-        # A convenience method to create a method :Whatever which
-        # attaches to the C function "Mix_Whatever".
-        # 
-        # This is so the final result is Mix::Whatever(), instead of
-        # Mix::Mix_Whatever().
-        # 
-        def mix_function( sym, *rest )
-          self.attach_function( sym, "Mix_#{sym}", *rest )
-        end
-      end
-
 
       attach_function :Mix_Linked_Version, [  ], :pointer
 

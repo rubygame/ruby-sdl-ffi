@@ -39,42 +39,44 @@ module SDL
 
     AUDIO_TRACK  = 0x00
     DATA_TRACK   = 0x04
+
     MAX_TRACKS   = 99
 
     class CDtrack < FFI::Struct
-      layout(
-             :id,     :uint8,
-             :type,   :uint8,
-             :unused, :uint16,
-             :length, :uint32,
-             :offset, :uint32
-             )
+      layout( :id,     :uint8,
+              :type,   :uint8,
+              :unused, :uint16,
+              :length, :uint32,
+              :offset, :uint32 )
     end
 
     class CD < FFI::Struct
-      layout(
-             :id,        :int,
-             :status,    SDL::Raw::ENUM,
-             :numtracks, :int,
-             :cur_track, :int,
-             :cur_frame, :int,
-             :track,     [SDL::Raw::CDtrack, SDL::Raw::MAX_TRACKS+1]
-             )
+      layout( :id,        :int,
+              :status,    SDL::Raw::ENUM,
+              :numtracks, :int,
+              :cur_track, :int,
+              :cur_frame, :int,
+              :track,     [SDL::Raw::CDtrack,
+                           SDL::Raw::MAX_TRACKS+1] )
     end
+
 
     CD_FPS = 75
 
-    attach_function :SDL_CDNumDrives, [  ], :int
-    attach_function :SDL_CDName, [ :int ], :string
-    attach_function :SDL_CDOpen, [ :int ], :pointer
-    attach_function :SDL_CDStatus, [ :pointer ], SDL::Raw::ENUM
-    attach_function :SDL_CDPlayTracks, [ :pointer, :int, :int, :int, :int ], :int
-    attach_function :SDL_CDPlay, [ :pointer, :int, :int ], :int
-    attach_function :SDL_CDPause, [ :pointer ], :int
-    attach_function :SDL_CDResume, [ :pointer ], :int
-    attach_function :SDL_CDStop, [ :pointer ], :int
-    attach_function :SDL_CDEject, [ :pointer ], :int
-    attach_function :SDL_CDClose, [ :pointer ], :void
+    attach_function  :SDL_CDNumDrives, [          ], :int
+    attach_function  :SDL_CDName,      [ :int     ], :string
+    attach_function  :SDL_CDOpen,      [ :int     ], :pointer
+    attach_function  :SDL_CDStatus,    [ :pointer ], SDL::Raw::ENUM
+
+    attach_function  :SDL_CDPlayTracks,
+                     [ :pointer, :int, :int, :int, :int ], :int
+
+    attach_function  :SDL_CDPlay,   [ :pointer, :int, :int ], :int
+    attach_function  :SDL_CDPause,  [ :pointer ], :int
+    attach_function  :SDL_CDResume, [ :pointer ], :int
+    attach_function  :SDL_CDStop,   [ :pointer ], :int
+    attach_function  :SDL_CDEject,  [ :pointer ], :int
+    attach_function  :SDL_CDClose,  [ :pointer ], :void
 
   end
 end

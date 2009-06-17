@@ -50,23 +50,17 @@ end
 # because sdl_event and sdl_mouse depend on them, respectively.
 
 %w{
-  sdl_shared
+  sdl_core
   sdl_keyboard
   sdl_video
-  sdl_core
-  sdl_active
   sdl_audio
   sdl_cdrom
-  sdl_cpuinfo
-  sdl_error
   sdl_event
   sdl_joystick
   sdl_keysyms
-  sdl_loadso
   sdl_mouse
   sdl_mutex
   sdl_rwops
-  sdl_thread
   sdl_timer
 }.each do |f|
   require File.join( File.dirname(__FILE__), f )

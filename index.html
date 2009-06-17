@@ -1,12 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
+<head>
   <title>jacius/ruby-sdl-ffi @ GitHub</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
 <body>
@@ -20,63 +19,132 @@
     </div>
     
     <h1>
-      <a href="http://github.com/jacius/ruby-sdl-ffi">ruby-sdl-ffi</a> 
-      <span class="small">by <a href="http://github.com/jacius">jacius</a></span>
+      <a href="http://github.com/jacius/ruby-sdl-ffi">Ruby-SDL-FFI</a> 
+      <span class="small">
+        by <a href="http://github.com/jacius">jacius</a>
+      </span>
     </h1>
 
-    <div class="description">Ruby-FFI binding to SDL</div>
 
-    <p>
-      Ruby-SDL-FFI is a low-level binding to SDL and related
-      libraries using Ruby-FFI. It provides very basic access
-      to SDL from Ruby without the need for a compiled C
-      wrapper. It aims to be platform and Ruby implementation
-      independent.
-    </p>
+    <div class="section">
+      <span class="description">Ruby-FFI binding to SDL</span>
 
-    <p>
-      Ruby-SDL-FFI does not attempt to provide any high-level
-      functionality, only to mirror the standard SDL interface.
-      For higher-level functionality, you should use other
-      libraries (Rubygame, Gosu, etc.).
-    </p>
+      <p>
+        Ruby-SDL-FFI is a low-level binding to 
+        <a href="http://www.libsdl.org">SDL</a> and related
+        libraries using
+        <a href="http://kenai.com/projects/ruby-ffi/">Ruby-FFI</a>.
+        It provides very basic access to SDL from
+        <a href="http://www.ruby-lang.org/en/">Ruby</a> without the
+        need for a compiled C wrapper. It aims to be platform and
+        Ruby implementation independent.
+      </p>
 
-    <h2>Dependencies</h2>
-    <ul>
-      <li>SDL       >= 1.2.13</li>
-      <li>Ruby-FFI  >= 0.3.0 (or compatible)</li>
-    </ul>
+      <p>
+        Ruby-SDL-FFI does not attempt to provide any high-level
+        functionality, only to mirror the standard SDL interface.
+        For higher-level functionality, you should use other
+        libraries (<a href="http://rubygame.org/">Rubygame</a>,
+        <a href="http://www.libgosu.org/">Gosu</a>, etc.).
+      </p>
+    </div>
 
-    <p>Optional:</p>
+    <div class="section">
+      <h2>Caveats</h2>
+      <p>
+        Ruby-SDL-FFI is still in
+        <strong>very early development stages</strong>. That means:
+      </p>
 
-    <ul>
-      <li>SDL_image >= 1.2.7</li>
-      <li>SDL_gfx   >= 2.0.17</li>
-      <li>SDL_mixer >= 1.2.8</li>
-      <li>SDL_ttf   >= 2.0.9</li>
-    </ul>
+      <ul>
+        <li>It may not work correctly (or at all).</li>
+        <li>It may not be complete.</li>
+        <li>It may change drastically with no advanced notice.</li>
+      </ul>
 
-    <h2>License</h2>
-    <p>MIT License</p>
+      <p>
+        As such, this library is currently
+        <strong>for the adventurous only</strong>.
+        If you are not willing to continuously update your code to
+        match the new API, then you should wait until Ruby-SDL-FFI is
+        more mature and stable (i.e. version 1.0+).
+      </p>
+    </div>
 
-    <h2>Authors</h2>
-    <p>John Croisant (jacius@gmail.com)</p>
+    <div class="section">
+      <h2>Dependencies</h2>
+      <ul>
+        <li><a href="http://www.libsdl.org/">SDL</a>
+          &gt;= 1.2.13</li>
+        <li><a href="http://kenai.com/projects/ruby-ffi/">Ruby-FFI</a>
+          &gt;= 0.3.0 (or compatible)</li>
+      </ul>
 
-    <h2>Contact</h2>
-    <p>John Croisant (jacius@gmail.com)</p>
+      <p>Optional:</p>
 
+      <ul>
+        <li><a href="http://www.libsdl.org/projects/SDL_image/">SDL_image</a>
+          &gt;= 1.2.7</li>
+        <li><a href="http://www.ferzkopp.net/joomla/content/view/19/14/">
+            SDL_gfx</a> &gt;= 2.0.17</li>
+        <li><a href="http://www.libsdl.org/projects/SDL_mixer/">SDL_mixer</a>
+          &gt;= 1.2.8</li>
+        <li><a href="http://www.libsdl.org/projects/SDL_ttf/">SDL_ttf</a>
+          &gt;= 2.0.9</li>
+      </ul>
+    </div>
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/jacius/ruby-sdl-ffi/zipball/master">zip</a> or
-      <a href="http://github.com/jacius/ruby-sdl-ffi/tarball/master">tar</a> formats.
-    </p>
-    <p>
-      You can also clone the project with
-      <a href="http://git-scm.com">Git</a> by running:
-      <pre>$ git clone git://github.com/jacius/ruby-sdl-ffi</pre>
-    </p>
+    <div class="section">
+      <h2>License</h2>
+      <p>
+        Ruby-SDL-FFI is licensed under the following terms (the "MIT License"):
+      </p>
+
+      <blockquote class="license">
+        <p>
+          Copyright &copy; 2009 John Croisant
+        </p>
+
+        <p>
+          Permission is hereby granted, free of charge, to any person obtaining
+          a copy of this software and associated documentation files (the
+          "Software"), to deal in the Software without restriction, including
+          without limitation the rights to use, copy, modify, merge, publish,
+          distribute, sublicense, and/or sell copies of the Software, and to
+          permit persons to whom the Software is furnished to do so, subject to
+          the following conditions:
+        </p>
+
+        <p>
+          The above copyright notice and this permission notice shall be
+          included in all copies or substantial portions of the Software.
+        </p>
+
+        <p>
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+          EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+          MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+          IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+          CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+          TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+          SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        </p>
+      </blockquote>
+    </div>
+
+    <div class="section">
+      <h2>Download</h2>
+      <p>
+        You can download this project in either
+        <a href="http://github.com/jacius/ruby-sdl-ffi/zipball/master">zip</a> or
+        <a href="http://github.com/jacius/ruby-sdl-ffi/tarball/master">tar</a> formats.
+      </p>
+      <p>
+        You can also clone the project with
+        <a href="http://git-scm.com">Git</a> by running:
+        <pre>$ git clone git://github.com/jacius/ruby-sdl-ffi</pre>
+      </p>
+    </div>
     
     <div class="footer">
       get the source code on GitHub:

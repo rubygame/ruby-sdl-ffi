@@ -32,101 +32,105 @@ module SDL
   module Raw
 
     class RWopsHiddenStdio < FFI::Struct
-       layout(
-              :autoclose, :int,
-              :fp, :pointer
-      )
+       layout( :autoclose, :int,
+               :fp,        :pointer )
     end
 
 
     class RWopsHiddenMem < FFI::Struct
-      layout(
-             :base, :pointer,
-             :here, :pointer,
-             :stop, :pointer
-      )
+      layout( :base, :pointer,
+              :here, :pointer,
+              :stop, :pointer )
     end
 
 
     class RWopsHiddenUnknown < FFI::Struct
-      layout(
-             :data1, :pointer
-      )
+      layout( :data1, :pointer )
     end
 
 
     class RWopsHidden < FFI::Union
-      layout(
-             :stdio, SDL::Raw::RWopsHiddenStdio,
-             :mem, SDL::Raw::RWopsHiddenMem,
-             :unknown, SDL::Raw::RWopsHiddenUnknown
-      )
+      layout( :stdio,   SDL::Raw::RWopsHiddenStdio,
+              :mem,     SDL::Raw::RWopsHiddenMem,
+              :unknown, SDL::Raw::RWopsHiddenUnknown )
     end
 
 
+    SDL::Raw::callback(:rwops_seek_cb, [:pointer, :int, :int], :int)
+    SDL::Raw::callback(:rwops_read_cb, [:pointer, :pointer, :int, :int], :int)
+    SDL::Raw::callback(:rwops_write_cb,[:pointer, :pointer, :int, :int], :int)
+    SDL::Raw::callback(:rwops_close_cb,[:pointer], :int)
+
     class RWops < FFI::Struct
-      layout(
-             :seek, SDL::Raw::callback(:rwops_seek_cb, [ :pointer, :int, :int ], :int),
-             :read, SDL::Raw::callback(:rwops_read_cb, [ :pointer, :pointer, :int, :int ], :int),
-             :write, SDL::Raw::callback(:rwops_write_cb, [ :pointer, :pointer, :int, :int ], :int),
-             :close, SDL::Raw::callback(:rwops_close_cb, [ :pointer ], :int),
-             :type, :uint32,
-             :hidden, SDL::Raw::RWopsHidden
-      )
+      layout( :seek,   :rwops_seek_cb,
+              :read,   :rwops_read_cb,
+              :write,  :rwops_write_cb,
+              :close,  :rwops_close_cb,
+              :type,   :uint32,
+              :hidden, SDL::Raw::RWopsHidden )
+
       def seek=(cb)
         @seek = cb
         self[:seek] = @seek
       end
+
       def seek
         @seek
       end
+
       def read=(cb)
         @read = cb
         self[:read] = @read
       end
+
       def read
         @read
       end
+
       def write=(cb)
         @write = cb
         self[:write] = @write
       end
+
       def write
         @write
       end
+
       def close=(cb)
         @close = cb
         self[:close] = @close
       end
+
       def close
         @close
       end
 
     end
 
-    attach_function :SDL_RWFromFile, [ :string, :string ], :pointer
-    attach_function :SDL_RWFromFP, [ :pointer, :int ], :pointer
-    attach_function :SDL_RWFromMem, [ :pointer, :int ], :pointer
-    attach_function :SDL_RWFromConstMem, [ :pointer, :int ], :pointer
-    attach_function :SDL_AllocRW, [  ], :pointer
-    attach_function :SDL_FreeRW, [ :pointer ], :void
+
+    attach_function  :SDL_RWFromFile,     [ :string, :string ], :pointer
+    attach_function  :SDL_RWFromFP,       [ :pointer, :int   ], :pointer
+    attach_function  :SDL_RWFromMem,      [ :pointer, :int   ], :pointer
+    attach_function  :SDL_RWFromConstMem, [ :pointer, :int   ], :pointer
+    attach_function  :SDL_AllocRW,        [                  ], :pointer
+    attach_function  :SDL_FreeRW,         [ :pointer         ], :void
 
     RW_SEEK_SET = 0
     RW_SEEK_CUR = 1
     RW_SEEK_END = 2
 
-    attach_function :SDL_ReadLE16, [ :pointer ], :uint16
-    attach_function :SDL_ReadBE16, [ :pointer ], :uint16
-    attach_function :SDL_ReadLE32, [ :pointer ], :uint32
-    attach_function :SDL_ReadBE32, [ :pointer ], :uint32
-    attach_function :SDL_ReadLE64, [ :pointer ], :uint64
-    attach_function :SDL_ReadBE64, [ :pointer ], :uint64
-    attach_function :SDL_WriteLE16, [ :pointer, :uint16 ], :int
-    attach_function :SDL_WriteBE16, [ :pointer, :uint16 ], :int
-    attach_function :SDL_WriteLE32, [ :pointer, :uint32 ], :int
-    attach_function :SDL_WriteBE32, [ :pointer, :uint32 ], :int
-    attach_function :SDL_WriteLE64, [ :pointer, :uint64 ], :int
-    attach_function :SDL_WriteBE64, [ :pointer, :uint64 ], :int
+    attach_function  :SDL_ReadLE16,  [ :pointer          ], :uint16
+    attach_function  :SDL_ReadBE16,  [ :pointer          ], :uint16
+    attach_function  :SDL_ReadLE32,  [ :pointer          ], :uint32
+    attach_function  :SDL_ReadBE32,  [ :pointer          ], :uint32
+    attach_function  :SDL_ReadLE64,  [ :pointer          ], :uint64
+    attach_function  :SDL_ReadBE64,  [ :pointer          ], :uint64
+    attach_function  :SDL_WriteLE16, [ :pointer, :uint16 ], :int
+    attach_function  :SDL_WriteBE16, [ :pointer, :uint16 ], :int
+    attach_function  :SDL_WriteLE32, [ :pointer, :uint32 ], :int
+    attach_function  :SDL_WriteBE32, [ :pointer, :uint32 ], :int
+    attach_function  :SDL_WriteLE64, [ :pointer, :uint64 ], :int
+    attach_function  :SDL_WriteBE64, [ :pointer, :uint64 ], :int
 
   end
 end

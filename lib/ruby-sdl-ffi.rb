@@ -28,14 +28,26 @@
 #++
 
 
+# sdl.rb is absolutely required. If it fails, don't catch the error.
+require File.join( File.dirname(__FILE__), "ruby-sdl-ffi", "sdl" )
+
+
+# The others are "optional", so just give a warning if they fail.
+# Users who really need them should load them directly, with
+# e.g. 'require "ruby-sdl-ffi/sdl_gfx"'.
 %w{
 
-  sdl
   sdl_image
   sdl_ttf
   sdl_mixer
   sdl_gfx
 
 }.each do |f|
-  require File.join( File.dirname(__FILE__), "ruby-sdl-ffi", f )
+
+  begin
+    require File.join( File.dirname(__FILE__), "ruby-sdl-ffi", f )
+  rescue LoadError => e
+    warn "Warning: " + e.message
+  end
+
 end

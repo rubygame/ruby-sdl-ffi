@@ -44,7 +44,7 @@ module SDL
 
     # SDL.h
 
-    class Version < FFI::Struct
+    class SDL_Version < FFI::Struct
       layout( :major, :uint8,
               :minor, :uint8,
               :patch, :uint8 )

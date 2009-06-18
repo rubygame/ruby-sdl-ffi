@@ -31,7 +31,7 @@
 module SDL
   module Raw
 
-    class AudioSpec < FFI::Struct
+    class SDL_AudioSpec < FFI::Struct
 
       SDL::Raw::callback(:audiospec_cb, [ :pointer, :pointer, :int ], :void)
 
@@ -71,7 +71,7 @@ module SDL
 
     callback( :filters_cb, [ :pointer, :uint16 ], :void)
 
-    class AudioCVT < FFI::Struct
+    class SDL_AudioCVT < FFI::Struct
       layout( :needed,       :int,
               :src_format,   :uint16,
               :dst_format,   :uint16,

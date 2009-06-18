@@ -92,14 +92,14 @@ module SDL
 
 
 
-    class ActiveEvent < FFI::Struct
+    class SDL_ActiveEvent < FFI::Struct
       layout( :type,  :uint8,
               :gain,  :uint8,
               :state, :uint8 )
     end
 
 
-    class KeyboardEvent < FFI::Struct
+    class SDL_KeyboardEvent < FFI::Struct
       layout( :type,   :uint8,
               :which,  :uint8,
               :state,  :uint8,
@@ -107,7 +107,7 @@ module SDL
     end
 
 
-    class MouseMotionEvent < FFI::Struct
+    class SDL_MouseMotionEvent < FFI::Struct
       layout( :type,  :uint8,
               :which, :uint8,
               :state, :uint8,
@@ -118,7 +118,7 @@ module SDL
     end
 
 
-    class MouseButtonEvent < FFI::Struct
+    class SDL_MouseButtonEvent < FFI::Struct
       layout( :type,   :uint8,
               :which,  :uint8,
               :button, :uint8,
@@ -128,7 +128,7 @@ module SDL
     end
 
 
-    class JoyAxisEvent < FFI::Struct
+    class SDL_JoyAxisEvent < FFI::Struct
       layout( :type,  :uint8,
               :which, :uint8,
               :axis,  :uint8,
@@ -136,7 +136,7 @@ module SDL
     end
 
 
-    class JoyBallEvent < FFI::Struct
+    class SDL_JoyBallEvent < FFI::Struct
       layout( :type,  :uint8,
               :which, :uint8,
               :ball,  :uint8,
@@ -145,7 +145,7 @@ module SDL
     end
 
 
-    class JoyHatEvent < FFI::Struct
+    class SDL_JoyHatEvent < FFI::Struct
       layout( :type,  :uint8,
               :which, :uint8,
               :hat,   :uint8,
@@ -153,7 +153,7 @@ module SDL
     end
 
 
-    class JoyButtonEvent < FFI::Struct
+    class SDL_JoyButtonEvent < FFI::Struct
       layout( :type,   :uint8,
               :which,  :uint8,
               :button, :uint8,
@@ -161,24 +161,24 @@ module SDL
     end
 
 
-    class ResizeEvent < FFI::Struct
+    class SDL_ResizeEvent < FFI::Struct
       layout( :type, :uint8,
               :w,    :int,
               :h,    :int )
     end
 
 
-    class ExposeEvent < FFI::Struct
+    class SDL_ExposeEvent < FFI::Struct
       layout( :type, :uint8 )
     end
 
 
-    class QuitEvent < FFI::Struct
+    class SDL_QuitEvent < FFI::Struct
       layout( :type, :uint8 )
     end
 
 
-    class UserEvent < FFI::Struct
+    class SDL_UserEvent < FFI::Struct
       layout( :type,  :uint8,
               :code,  :int,
               :data1, :pointer,
@@ -186,27 +186,27 @@ module SDL
     end
 
 
-    class SysWMEvent < FFI::Struct
+    class SDL_SysWMEvent < FFI::Struct
       layout( :type, :uint8,
               :msg,  :pointer )
     end
 
 
-    class Event < FFI::Union
+    class SDL_Event < FFI::Union
       layout( :type,    :uint8,
-              :active,  SDL::Raw::ActiveEvent,
-              :key,     SDL::Raw::KeyboardEvent,
-              :motion,  SDL::Raw::MouseMotionEvent,
-              :button,  SDL::Raw::MouseButtonEvent,
-              :jaxis,   SDL::Raw::JoyAxisEvent,
-              :jball,   SDL::Raw::JoyBallEvent,
-              :jhat,    SDL::Raw::JoyHatEvent,
-              :jbutton, SDL::Raw::JoyButtonEvent,
-              :resize,  SDL::Raw::ResizeEvent,
-              :expose,  SDL::Raw::ExposeEvent,
-              :quit,    SDL::Raw::QuitEvent,
-              :user,    SDL::Raw::UserEvent,
-              :syswm,   SDL::Raw::SysWMEvent )
+              :active,  SDL::Raw::SDL_ActiveEvent,
+              :key,     SDL::Raw::SDL_KeyboardEvent,
+              :motion,  SDL::Raw::SDL_MouseMotionEvent,
+              :button,  SDL::Raw::SDL_MouseButtonEvent,
+              :jaxis,   SDL::Raw::SDL_JoyAxisEvent,
+              :jball,   SDL::Raw::SDL_JoyBallEvent,
+              :jhat,    SDL::Raw::SDL_JoyHatEvent,
+              :jbutton, SDL::Raw::SDL_JoyButtonEvent,
+              :resize,  SDL::Raw::SDL_ResizeEvent,
+              :expose,  SDL::Raw::SDL_ExposeEvent,
+              :quit,    SDL::Raw::SDL_QuitEvent,
+              :user,    SDL::Raw::SDL_UserEvent,
+              :syswm,   SDL::Raw::SDL_SysWMEvent )
     end
 
 

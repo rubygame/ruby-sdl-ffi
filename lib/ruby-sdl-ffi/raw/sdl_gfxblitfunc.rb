@@ -38,7 +38,7 @@ module SDL
       attach_function :SDL_gfxBlitRGBA, [ :pointer, :pointer, :pointer, :pointer ], :int
       attach_function :SDL_gfxSetAlpha, [ :pointer, :uint8 ], :int
 
-      class BlitInfo < FFI::Struct
+      class SDL_gfxBlitInfo < FFI::Struct
         layout(
                :s_pixels, :pointer,
                :s_width,  :int,

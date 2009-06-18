@@ -31,8 +31,8 @@
 module SDL
   module Raw
 
-    class Cursor < FFI::Struct
-      layout( :area,      SDL::Raw::Rect,
+    class SDL_Cursor < FFI::Struct
+      layout( :area,      SDL::Raw::SDL_Rect,
               :hot_x,     :int16,
               :hot_y,     :int16,
               :data,      :pointer,

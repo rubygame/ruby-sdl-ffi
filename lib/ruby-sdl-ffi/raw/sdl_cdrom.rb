@@ -42,7 +42,7 @@ module SDL
 
     MAX_TRACKS   = 99
 
-    class CDtrack < FFI::Struct
+    class SDL_CDtrack < FFI::Struct
       layout( :id,     :uint8,
               :type,   :uint8,
               :unused, :uint16,
@@ -50,13 +50,13 @@ module SDL
               :offset, :uint32 )
     end
 
-    class CD < FFI::Struct
+    class SDL_CD < FFI::Struct
       layout( :id,        :int,
               :status,    SDL::Raw::ENUM,
               :numtracks, :int,
               :cur_track, :int,
               :cur_frame, :int,
-              :track,     [SDL::Raw::CDtrack,
+              :track,     [SDL::Raw::SDL_CDtrack,
                            SDL::Raw::MAX_TRACKS+1] )
     end
 

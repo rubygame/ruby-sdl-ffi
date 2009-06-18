@@ -47,7 +47,7 @@ module SDL
       DEFAULT_CHANNELS  = 2
       MAX_VOLUME        = 128
 
-      class MixChunk < FFI::Struct
+      class Mix_Chunk < FFI::Struct
         layout(
                :allocated, :int,
                :abuf,      :pointer,

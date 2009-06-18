@@ -31,28 +31,28 @@
 module SDL
   module Raw
 
-    class RWopsHiddenStdio < FFI::Struct
+    class SDL_RWopsHiddenStdio < FFI::Struct
        layout( :autoclose, :int,
                :fp,        :pointer )
     end
 
 
-    class RWopsHiddenMem < FFI::Struct
+    class SDL_RWopsHiddenMem < FFI::Struct
       layout( :base, :pointer,
               :here, :pointer,
               :stop, :pointer )
     end
 
 
-    class RWopsHiddenUnknown < FFI::Struct
+    class SDL_RWopsHiddenUnknown < FFI::Struct
       layout( :data1, :pointer )
     end
 
 
-    class RWopsHidden < FFI::Union
-      layout( :stdio,   SDL::Raw::RWopsHiddenStdio,
-              :mem,     SDL::Raw::RWopsHiddenMem,
-              :unknown, SDL::Raw::RWopsHiddenUnknown )
+    class SDL_RWopsHidden < FFI::Union
+      layout( :stdio,   SDL::Raw::SDL_RWopsHiddenStdio,
+              :mem,     SDL::Raw::SDL_RWopsHiddenMem,
+              :unknown, SDL::Raw::SDL_RWopsHiddenUnknown )
     end
 
 
@@ -61,13 +61,13 @@ module SDL
     SDL::Raw::callback(:rwops_write_cb,[:pointer, :pointer, :int, :int], :int)
     SDL::Raw::callback(:rwops_close_cb,[:pointer], :int)
 
-    class RWops < FFI::Struct
+    class SDL_RWops < FFI::Struct
       layout( :seek,   :rwops_seek_cb,
               :read,   :rwops_read_cb,
               :write,  :rwops_write_cb,
               :close,  :rwops_close_cb,
               :type,   :uint32,
-              :hidden, SDL::Raw::RWopsHidden )
+              :hidden, SDL::Raw::SDL_RWopsHidden )
 
       def seek=(cb)
         @seek = cb

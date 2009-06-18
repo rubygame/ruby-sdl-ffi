@@ -30,18 +30,13 @@
 
 require 'ffi'
 
+require File.join( File.dirname(__FILE__), "platforms" )
+
 
 module SDL
   module Raw
     extend FFI::Library
-
-    case FFI::Platform::OS
-    when /linux/
-      ffi_lib "libSDL.so"
-    else
-      raise( "Your platform (#{FFI::Platform::OS}) is not supported yet.\n" +
-             "Please report this and help us support more platforms." )
-    end
+    load_library("SDL", self)
   end
 end
 

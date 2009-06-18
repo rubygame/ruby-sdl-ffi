@@ -30,6 +30,8 @@
 
 require "ffi"
 
+require File.join( File.dirname(__FILE__), "platforms" )
+
 # For SDL::Raw::Color
 require File.join( File.dirname(__FILE__), "sdl_video" )
 
@@ -37,14 +39,7 @@ module SDL
   module Raw
     module TTF
       extend FFI::Library
-
-      case FFI::Platform::OS
-      when /linux/
-        ffi_lib "libSDL_ttf.so"
-      else
-        raise( "SDL_ttf is not supported on #{FFI::Platform::OS} yet.\n" +
-               "Please report this and help us support more platforms." )
-      end
+      SDL::Raw.load_library("SDL_ttf", self)
 
 
       attach_function :TTF_Linked_Version, [  ], :pointer

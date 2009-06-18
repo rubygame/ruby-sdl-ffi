@@ -30,19 +30,14 @@
 
 require 'ffi'
 
+require File.join( File.dirname(__FILE__), "platforms" )
+
 
 module SDL
   module Raw
     module Gfx
       extend FFI::Library
-
-      case FFI::Platform::OS
-      when /linux/
-        ffi_lib "libSDL_gfx.so"
-      else
-        raise( "SDL_gfx is not supported on #{FFI::Platform::OS} yet.\n" +
-               "Please report this and help us support more platforms." )
-      end
+      SDL::Raw.load_library("SDL_gfx", self)
     end
   end
 end

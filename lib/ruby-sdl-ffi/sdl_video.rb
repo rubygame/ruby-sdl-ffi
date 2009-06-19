@@ -33,26 +33,26 @@ module SDL
   ALPHA_OPAQUE      = 255
   ALPHA_TRANSPARENT = 0
 
-  class SDL_Rect < FFI::Struct
+  class Rect < FFI::Struct
     layout( :x, :int16,
             :y, :int16,
             :w, :uint16,
             :h, :uint16 )
   end
 
-  class SDL_Color < FFI::Struct
+  class Color < FFI::Struct
     layout( :r,      :uint8,
             :g,      :uint8,
             :b,      :uint8,
             :unused, :uint8 )
   end
 
-  class SDL_Palette < FFI::Struct
+  class Palette < FFI::Struct
     layout( :ncolors, :int,
             :colors,  :pointer )
   end
 
-  class SDL_PixelFormat < FFI::Struct
+  class PixelFormat < FFI::Struct
     layout( :palette,       :pointer,
             :BitsPerPixel,  :uint8,
             :BytesPerPixel, :uint8,
@@ -72,7 +72,7 @@ module SDL
             :alpha,         :uint8 )
   end
 
-  class SDL_Surface < FFI::Struct
+  class Surface < FFI::Struct
     layout( :flags,          :uint32,
             :format,         :pointer,
             :w,              :int,
@@ -81,7 +81,7 @@ module SDL
             :pixels,         :pointer,
             :offset,         :int,
             :hwdata,         :pointer,
-            :clip_rect,      SDL::SDL_Rect,
+            :clip_rect,      SDL::Rect,
             :unused1,        :uint32,
             :locked,         :uint32,
             :map,            :pointer,
@@ -110,7 +110,7 @@ module SDL
 
   callback(:blit_cb, [ :pointer, :pointer, :pointer, :pointer ], :int)
 
-  class SDL_VideoInfo < FFI::Struct
+  class VideoInfo < FFI::Struct
     layout( :hw_available,  :uint32,
             :wm_available,  :uint32,
             :UnusedBits1,   :uint32,
@@ -136,7 +136,7 @@ module SDL
   UYVY_OVERLAY = 0x59565955
   YVYU_OVERLAY = 0x55595659
 
-  class SDL_Overlay < FFI::Struct
+  class Overlay < FFI::Struct
     layout( :format,     :uint32,
             :w,          :int,
             :h,          :int,

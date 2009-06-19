@@ -30,28 +30,28 @@
 
 module SDL
 
-  class SDL_RWopsHiddenStdio < FFI::Struct
+  class RWopsHiddenStdio < FFI::Struct
      layout( :autoclose, :int,
              :fp,        :pointer )
   end
 
 
-  class SDL_RWopsHiddenMem < FFI::Struct
+  class RWopsHiddenMem < FFI::Struct
     layout( :base, :pointer,
             :here, :pointer,
             :stop, :pointer )
   end
 
 
-  class SDL_RWopsHiddenUnknown < FFI::Struct
+  class RWopsHiddenUnknown < FFI::Struct
     layout( :data1, :pointer )
   end
 
 
-  class SDL_RWopsHidden < FFI::Union
-    layout( :stdio,   SDL::SDL_RWopsHiddenStdio,
-            :mem,     SDL::SDL_RWopsHiddenMem,
-            :unknown, SDL::SDL_RWopsHiddenUnknown )
+  class RWopsHidden < FFI::Union
+    layout( :stdio,   SDL::RWopsHiddenStdio,
+            :mem,     SDL::RWopsHiddenMem,
+            :unknown, SDL::RWopsHiddenUnknown )
   end
 
 
@@ -60,13 +60,13 @@ module SDL
   SDL::callback(:rwops_write_cb,[:pointer, :pointer, :int, :int], :int)
   SDL::callback(:rwops_close_cb,[:pointer], :int)
 
-  class SDL_RWops < FFI::Struct
+  class RWops < FFI::Struct
     layout( :seek,   :rwops_seek_cb,
             :read,   :rwops_read_cb,
             :write,  :rwops_write_cb,
             :close,  :rwops_close_cb,
             :type,   :uint32,
-            :hidden, SDL::SDL_RWopsHidden )
+            :hidden, SDL::RWopsHidden )
 
     def seek=(cb)
       @seek = cb

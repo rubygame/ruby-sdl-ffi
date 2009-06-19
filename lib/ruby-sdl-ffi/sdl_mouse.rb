@@ -30,8 +30,8 @@
 
 module SDL
 
-  class SDL_Cursor < FFI::Struct
-    layout( :area,      SDL::SDL_Rect,
+  class Cursor < FFI::Struct
+    layout( :area,      SDL::Rect,
             :hot_x,     :int16,
             :hot_y,     :int16,
             :data,      :pointer,

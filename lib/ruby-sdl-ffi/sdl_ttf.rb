@@ -32,7 +32,7 @@ require "ffi"
 
 require File.join( File.dirname(__FILE__), "platforms" )
 
-# For SDL::SDL_Color
+# For SDL::Color
 require File.join( File.dirname(__FILE__), "sdl_video" )
 
 module SDL
@@ -72,18 +72,18 @@ module SDL
     attach_function :TTF_SizeText, [ :pointer, :string, :pointer, :pointer ], :int
     attach_function :TTF_SizeUTF8, [ :pointer, :string, :pointer, :pointer ], :int
     attach_function :TTF_SizeUNICODE, [ :pointer, :pointer, :pointer, :pointer ], :int
-    attach_function :TTF_RenderText_Solid, [ :pointer, :string, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderUTF8_Solid, [ :pointer, :string, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderUNICODE_Solid, [ :pointer, :pointer, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderGlyph_Solid, [ :pointer, :uint16, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderText_Shaded, [ :pointer, :string, SDL::SDL_Color, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderUTF8_Shaded, [ :pointer, :string, SDL::SDL_Color, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderUNICODE_Shaded, [ :pointer, :pointer, SDL::SDL_Color, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderGlyph_Shaded, [ :pointer, :uint16, SDL::SDL_Color, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderText_Blended, [ :pointer, :string, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderUTF8_Blended, [ :pointer, :string, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderUNICODE_Blended, [ :pointer, :pointer, SDL::SDL_Color ], :pointer
-    attach_function :TTF_RenderGlyph_Blended, [ :pointer, :uint16, SDL::SDL_Color ], :pointer
+    attach_function :TTF_RenderText_Solid, [ :pointer, :string, SDL::Color ], :pointer
+    attach_function :TTF_RenderUTF8_Solid, [ :pointer, :string, SDL::Color ], :pointer
+    attach_function :TTF_RenderUNICODE_Solid, [ :pointer, :pointer, SDL::Color ], :pointer
+    attach_function :TTF_RenderGlyph_Solid, [ :pointer, :uint16, SDL::Color ], :pointer
+    attach_function :TTF_RenderText_Shaded, [ :pointer, :string, SDL::Color, SDL::Color ], :pointer
+    attach_function :TTF_RenderUTF8_Shaded, [ :pointer, :string, SDL::Color, SDL::Color ], :pointer
+    attach_function :TTF_RenderUNICODE_Shaded, [ :pointer, :pointer, SDL::Color, SDL::Color ], :pointer
+    attach_function :TTF_RenderGlyph_Shaded, [ :pointer, :uint16, SDL::Color, SDL::Color ], :pointer
+    attach_function :TTF_RenderText_Blended, [ :pointer, :string, SDL::Color ], :pointer
+    attach_function :TTF_RenderUTF8_Blended, [ :pointer, :string, SDL::Color ], :pointer
+    attach_function :TTF_RenderUNICODE_Blended, [ :pointer, :pointer, SDL::Color ], :pointer
+    attach_function :TTF_RenderGlyph_Blended, [ :pointer, :uint16, SDL::Color ], :pointer
     attach_function :TTF_CloseFont, [ :pointer ], :void
     attach_function :TTF_Quit, [  ], :void
     attach_function :TTF_WasInit, [  ], :int

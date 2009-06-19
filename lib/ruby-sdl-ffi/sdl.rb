@@ -34,10 +34,8 @@ require File.join( File.dirname(__FILE__), "platforms" )
 
 
 module SDL
-  module Raw
-    extend FFI::Library
-    load_library("SDL", self)
-  end
+  extend FFI::Library
+  load_library("SDL", self)
 end
 
 

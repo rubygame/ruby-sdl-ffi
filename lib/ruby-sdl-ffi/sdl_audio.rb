@@ -29,44 +29,43 @@
 
 
 module SDL
-  module Raw
 
-    class SDL_AudioSpec < FFI::Struct
+  class SDL_AudioSpec < FFI::Struct
 
-      SDL::Raw::callback(:audiospec_cb, [ :pointer, :pointer, :int ], :void)
+    SDL::callback(:audiospec_cb, [ :pointer, :pointer, :int ], :void)
 
-      layout( :freq,     :int,
-              :format,   :uint16,
-              :channels, :uint8,
-              :silence,  :uint8,
-              :samples,  :uint16,
-              :padding,  :uint16,
-              :size,     :uint32,
-              :callback, :audiospec_cb,
-              :userdata, :pointer )
+    layout( :freq,     :int,
+            :format,   :uint16,
+            :channels, :uint8,
+            :silence,  :uint8,
+            :samples,  :uint16,
+            :padding,  :uint16,
+            :size,     :uint32,
+            :callback, :audiospec_cb,
+            :userdata, :pointer )
 
-      def callback=(cb)
-        @callback = cb
-        self[:callback] = @callback
-      end
-
-      def callback
-        @callback
-      end
-
+    def callback=(cb)
+      @callback = cb
+      self[:callback] = @callback
     end
 
+    def callback
+      @callback
+    end
 
-    AUDIO_U8     = 0x0008
-    AUDIO_S8     = 0x8008
-    AUDIO_U16LSB = 0x0010
-    AUDIO_S16LSB = 0x8010
-    AUDIO_U16MSB = 0x1010
-    AUDIO_S16MSB = 0x9010
-    AUDIO_U16    = 0x0010
-    AUDIO_S16    = 0x8010
-    AUDIO_U16SYS = 0x0010
-    AUDIO_S16SYS = 0x8010
+  end
+
+
+  AUDIO_U8     = 0x0008
+  AUDIO_S8     = 0x8008
+  AUDIO_U16LSB = 0x0010
+  AUDIO_S16LSB = 0x8010
+  AUDIO_U16MSB = 0x1010
+  AUDIO_S16MSB = 0x9010
+  AUDIO_U16    = 0x0010
+  AUDIO_S16    = 0x8010
+  AUDIO_U16SYS = 0x0010
+  AUDIO_S16SYS = 0x8010
 
 
 #     callback( :filters_cb, [ :pointer, :uint16 ], :void)
@@ -86,43 +85,42 @@ module SDL
 #     end
 
 
-    attach_function  :SDL_AudioInit,       [ :string            ], :int
-    attach_function  :SDL_AudioQuit,       [                    ], :void
-    attach_function  :SDL_AudioDriverName, [ :string, :int      ], :string
-    attach_function  :SDL_OpenAudio,       [ :pointer, :pointer ], :int
+  attach_function  :SDL_AudioInit,       [ :string            ], :int
+  attach_function  :SDL_AudioQuit,       [                    ], :void
+  attach_function  :SDL_AudioDriverName, [ :string, :int      ], :string
+  attach_function  :SDL_OpenAudio,       [ :pointer, :pointer ], :int
 
 
-    AUDIO_STOPPED = 0
-    AUDIO_PLAYING = 1
-    AUDIO_PAUSED  = 2
+  AUDIO_STOPPED = 0
+  AUDIO_PLAYING = 1
+  AUDIO_PAUSED  = 2
 
-    attach_function  :SDL_GetAudioStatus, [      ], SDL::Raw::ENUM
-    attach_function  :SDL_PauseAudio,     [ :int ], :void
-
-
-    attach_function  :SDL_LoadWAV_RW,
-                     [ :pointer, :int, :pointer, 
-                       :pointer, :pointer ], :pointer
-
-    attach_function  :SDL_FreeWAV, [ :pointer ], :void
+  attach_function  :SDL_GetAudioStatus, [      ], SDL::ENUM
+  attach_function  :SDL_PauseAudio,     [ :int ], :void
 
 
-    attach_function  :SDL_BuildAudioCVT,
-                     [ :pointer, :uint16, :uint8,
-                       :int, :uint16, :uint8, :int ], :int
+  attach_function  :SDL_LoadWAV_RW,
+                   [ :pointer, :int, :pointer, 
+                     :pointer, :pointer ], :pointer
 
-    attach_function  :SDL_ConvertAudio, [ :pointer ], :int
-
-
-    MIX_MAXVOLUME = 128
-
-    attach_function  :SDL_MixAudio,
-                     [ :pointer, :pointer, :uint32, :int ], :void
+  attach_function  :SDL_FreeWAV, [ :pointer ], :void
 
 
-    attach_function  :SDL_LockAudio,   [  ], :void
-    attach_function  :SDL_UnlockAudio, [  ], :void
-    attach_function  :SDL_CloseAudio,  [  ], :void
+  attach_function  :SDL_BuildAudioCVT,
+                   [ :pointer, :uint16, :uint8,
+                     :int, :uint16, :uint8, :int ], :int
 
-  end
+  attach_function  :SDL_ConvertAudio, [ :pointer ], :int
+
+
+  MIX_MAXVOLUME = 128
+
+  attach_function  :SDL_MixAudio,
+                   [ :pointer, :pointer, :uint32, :int ], :void
+
+
+  attach_function  :SDL_LockAudio,   [  ], :void
+  attach_function  :SDL_UnlockAudio, [  ], :void
+  attach_function  :SDL_CloseAudio,  [  ], :void
+
 end

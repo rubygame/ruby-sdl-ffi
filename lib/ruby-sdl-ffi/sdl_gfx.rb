@@ -34,11 +34,9 @@ require File.join( File.dirname(__FILE__), "platforms" )
 
 
 module SDL
-  module Raw
-    module Gfx
-      extend FFI::Library
-      SDL::Raw.load_library("SDL_gfx", self)
-    end
+  module Gfx
+    extend FFI::Library
+    SDL.load_library("SDL_gfx", self)
   end
 end
 

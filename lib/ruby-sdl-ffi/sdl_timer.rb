@@ -29,24 +29,22 @@
 
 
 module SDL
-  module Raw
 
-    TIMESLICE        = 10
-    TIMER_RESOLUTION = 10
-
-
-    attach_function  :SDL_GetTicks, [  ], :uint32
-    attach_function  :SDL_Delay,    [ :uint32 ], :void
+  TIMESLICE        = 10
+  TIMER_RESOLUTION = 10
 
 
-    callback(:timer_cb, [ :uint32 ], :uint32)
-    attach_function  :SDL_SetTimer, [ :uint32, :timer_cb ], :int
+  attach_function  :SDL_GetTicks, [  ], :uint32
+  attach_function  :SDL_Delay,    [ :uint32 ], :void
 
-    callback(:newtimer_cb, [ :uint32, :pointer ], :uint32)
-    attach_function  :SDL_AddTimer,
-                     [:uint32, :newtimer_cb, :pointer], :pointer
 
-    attach_function  :SDL_RemoveTimer, [ :pointer ], SDL::Raw::BOOL
+  callback(:timer_cb, [ :uint32 ], :uint32)
+  attach_function  :SDL_SetTimer, [ :uint32, :timer_cb ], :int
 
-  end
+  callback(:newtimer_cb, [ :uint32, :pointer ], :uint32)
+  attach_function  :SDL_AddTimer,
+                   [:uint32, :newtimer_cb, :pointer], :pointer
+
+  attach_function  :SDL_RemoveTimer, [ :pointer ], SDL::BOOL
+
 end

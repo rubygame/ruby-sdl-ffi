@@ -32,27 +32,25 @@ require 'ffi'
 
 
 module SDL
-  module Raw
-    module Gfx
+  module Gfx
 
-      FPS_UPPER_LIMIT = 200
-      FPS_LOWER_LIMIT = 1
-      FPS_DEFAULT     = 30
+    FPS_UPPER_LIMIT = 200
+    FPS_LOWER_LIMIT = 1
+    FPS_DEFAULT     = 30
 
-      class FPSmanager < FFI::Struct
-        layout(
-               :framecount, :uint32,
-               :rateticks,  :float,
-               :lastticks,  :uint32,
-               :rate,       :uint32
-               )
-      end
-
-      attach_function :SDL_initFramerate,  [ :pointer       ], :void
-      attach_function :SDL_setFramerate,   [ :pointer, :int ], :int
-      attach_function :SDL_getFramerate,   [ :pointer       ], :int
-      attach_function :SDL_framerateDelay, [ :pointer       ], :void
-
+    class FPSmanager < FFI::Struct
+      layout(
+             :framecount, :uint32,
+             :rateticks,  :float,
+             :lastticks,  :uint32,
+             :rate,       :uint32
+             )
     end
+
+    attach_function :SDL_initFramerate,  [ :pointer       ], :void
+    attach_function :SDL_setFramerate,   [ :pointer, :int ], :int
+    attach_function :SDL_getFramerate,   [ :pointer       ], :int
+    attach_function :SDL_framerateDelay, [ :pointer       ], :void
+
   end
 end

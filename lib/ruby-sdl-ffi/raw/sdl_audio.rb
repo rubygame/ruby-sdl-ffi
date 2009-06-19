@@ -69,21 +69,21 @@ module SDL
     AUDIO_S16SYS = 0x8010
 
 
-    callback( :filters_cb, [ :pointer, :uint16 ], :void)
+#     callback( :filters_cb, [ :pointer, :uint16 ], :void)
 
-    class SDL_AudioCVT < FFI::Struct
-      layout( :needed,       :int,
-              :src_format,   :uint16,
-              :dst_format,   :uint16,
-              :rate_incr,    :double,
-              :buf,          :pointer,
-              :len,          :int,
-              :len_cvt,      :int,
-              :len_mult,     :int,
-              :len_ratio,    :double,
-              # :filters,    [:filters_callback, 10],
-              :filter_index, :int )
-    end
+#     class SDL_AudioCVT < FFI::Struct
+#       layout( :needed,       :int,
+#               :src_format,   :uint16,
+#               :dst_format,   :uint16,
+#               :rate_incr,    :double,
+#               :buf,          :pointer,
+#               :len,          :int,
+#               :len_cvt,      :int,
+#               :len_mult,     :int,
+#               :len_ratio,    :double,
+#               :filters,      [:filters_cb, 10],
+#               :filter_index, :int )
+#     end
 
 
     attach_function  :SDL_AudioInit,       [ :string            ], :int

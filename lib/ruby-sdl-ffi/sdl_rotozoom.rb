@@ -30,6 +30,8 @@
 
 require 'ffi'
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
 
 module SDL
   module Gfx
@@ -38,7 +40,7 @@ module SDL
     SMOOTHING_ON  = 1
 
 
-    class TColorRGBA < FFI::Struct
+    class TColorRGBA < NiceStruct
       layout( :r, :uint8,
               :g, :uint8,
               :b, :uint8,
@@ -46,7 +48,7 @@ module SDL
     end
 
 
-    class TColorY < FFI::Struct
+    class TColorY < NiceStruct
       layout( :y, :uint8 )
     end
 

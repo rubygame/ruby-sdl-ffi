@@ -28,9 +28,12 @@
 #++
 
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
+
 module SDL
 
-  class AudioSpec < FFI::Struct
+  class AudioSpec < NiceStruct
 
     SDL::callback(:audiospec_cb, [ :pointer, :pointer, :int ], :void)
 
@@ -70,7 +73,7 @@ module SDL
 
 #     callback( :filters_cb, [ :pointer, :uint16 ], :void)
 
-#     class AudioCVT < FFI::Struct
+#     class AudioCVT < NiceStruct
 #       layout( :needed,       :int,
 #               :src_format,   :uint16,
 #               :dst_format,   :uint16,

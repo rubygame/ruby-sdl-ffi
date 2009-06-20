@@ -28,9 +28,12 @@
 #++
 
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
+
 module SDL
 
-  class Keysym < FFI::Struct
+  class Keysym < NiceStruct
     layout( :scancode, :uint8,
             :sym,      SDL::ENUM,
             :mod,      SDL::ENUM,

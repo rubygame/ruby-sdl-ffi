@@ -30,6 +30,8 @@
 
 require 'ffi'
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
 
 module SDL
   module Gfx
@@ -37,7 +39,7 @@ module SDL
     attach_function :SDL_gfxBlitRGBA, [ :pointer, :pointer, :pointer, :pointer ], :int
     attach_function :SDL_gfxSetAlpha, [ :pointer, :uint8 ], :int
 
-    class BlitInfo < FFI::Struct
+    class BlitInfo < NiceStruct
       layout(
              :s_pixels, :pointer,
              :s_width,  :int,

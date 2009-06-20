@@ -28,9 +28,12 @@
 #++
 
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
+
 module SDL
 
-  class Cursor < FFI::Struct
+  class Cursor < NiceStruct
     layout( :area,      SDL::Rect,
             :hot_x,     :int16,
             :hot_y,     :int16,

@@ -28,31 +28,34 @@
 #++
 
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
+
 module SDL
 
   ALPHA_OPAQUE      = 255
   ALPHA_TRANSPARENT = 0
 
-  class Rect < FFI::Struct
+  class Rect < NiceStruct
     layout( :x, :int16,
             :y, :int16,
             :w, :uint16,
             :h, :uint16 )
   end
 
-  class Color < FFI::Struct
+  class Color < NiceStruct
     layout( :r,      :uint8,
             :g,      :uint8,
             :b,      :uint8,
             :unused, :uint8 )
   end
 
-  class Palette < FFI::Struct
+  class Palette < NiceStruct
     layout( :ncolors, :int,
             :colors,  :pointer )
   end
 
-  class PixelFormat < FFI::Struct
+  class PixelFormat < NiceStruct
     layout( :palette,       :pointer,
             :BitsPerPixel,  :uint8,
             :BytesPerPixel, :uint8,
@@ -72,7 +75,7 @@ module SDL
             :alpha,         :uint8 )
   end
 
-  class Surface < FFI::Struct
+  class Surface < NiceStruct
     layout( :flags,          :uint32,
             :format,         :pointer,
             :w,              :int,
@@ -110,7 +113,7 @@ module SDL
 
   callback(:blit_cb, [ :pointer, :pointer, :pointer, :pointer ], :int)
 
-  class VideoInfo < FFI::Struct
+  class VideoInfo < NiceStruct
     layout( :hw_available,  :uint32,
             :wm_available,  :uint32,
             :UnusedBits1,   :uint32,
@@ -136,7 +139,7 @@ module SDL
   UYVY_OVERLAY = 0x59565955
   YVYU_OVERLAY = 0x55595659
 
-  class Overlay < FFI::Struct
+  class Overlay < NiceStruct
     layout( :format,     :uint32,
             :w,          :int,
             :h,          :int,

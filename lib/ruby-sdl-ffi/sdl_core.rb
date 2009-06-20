@@ -28,6 +28,9 @@
 #++
 
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
+
 module SDL
 
   # Aliases for integer-like types
@@ -43,7 +46,7 @@ module SDL
 
   # SDL.h
 
-  class Version < FFI::Struct
+  class Version < NiceStruct
     layout( :major, :uint8,
             :minor, :uint8,
             :patch, :uint8 )

@@ -32,6 +32,8 @@ require "ffi"
 
 require File.join( File.dirname(__FILE__), "platforms" )
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
 
 module SDL
   module Mix
@@ -46,7 +48,7 @@ module SDL
     DEFAULT_CHANNELS  = 2
     MAX_VOLUME        = 128
 
-    class Chunk < FFI::Struct
+    class Chunk < NiceStruct
       layout(
              :allocated, :int,
              :abuf,      :pointer,

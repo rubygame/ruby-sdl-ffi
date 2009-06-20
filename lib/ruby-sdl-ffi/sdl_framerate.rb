@@ -30,6 +30,8 @@
 
 require 'ffi'
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
 
 module SDL
   module Gfx
@@ -38,7 +40,7 @@ module SDL
     FPS_LOWER_LIMIT = 1
     FPS_DEFAULT     = 30
 
-    class FPSmanager < FFI::Struct
+    class FPSmanager < NiceStruct
       layout(
              :framecount, :uint32,
              :rateticks,  :float,

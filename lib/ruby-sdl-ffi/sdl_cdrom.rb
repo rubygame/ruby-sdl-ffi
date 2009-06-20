@@ -28,6 +28,9 @@
 #++
 
 
+require File.join( File.dirname(__FILE__), "nicestruct" )
+
+
 module SDL
 
   CD_ERROR     = -1
@@ -41,7 +44,7 @@ module SDL
 
   MAX_TRACKS   = 99
 
-  class CDtrack < FFI::Struct
+  class CDtrack < NiceStruct
     layout( :id,     :uint8,
             :type,   :uint8,
             :unused, :uint16,
@@ -49,7 +52,7 @@ module SDL
             :offset, :uint32 )
   end
 
-  class CD < FFI::Struct
+  class CD < NiceStruct
     layout( :id,        :int,
             :status,    SDL::ENUM,
             :numtracks, :int,

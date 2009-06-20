@@ -41,12 +41,10 @@ module SDL
     FPS_DEFAULT     = 30
 
     class FPSmanager < NiceStruct
-      layout(
-             :framecount, :uint32,
-             :rateticks,  :float,
-             :lastticks,  :uint32,
-             :rate,       :uint32
-             )
+      layout( :framecount, :uint32,
+              :rateticks,  :float,
+              :lastticks,  :uint32,
+              :rate,       :uint32 )
     end
 
     attach_function :SDL_initFramerate,  [ :pointer       ], :void

@@ -47,6 +47,7 @@ more mature and stable (i.e. version 1.0+).
 
 * SDL       >= 1.2.13
 * Ruby-FFI  >= 0.3.0 (or compatible)
+* need      >= 1.1.0
 
 Optional:
 

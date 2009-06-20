@@ -34,7 +34,7 @@ require File.join( File.dirname(__FILE__), "platforms" )
 
 
 module SDL
-  module IMG
+  module Image
     extend FFI::Library
     SDL.load_library("SDL_image", self)
 

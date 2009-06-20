@@ -50,6 +50,9 @@ module SDL
             :unused, :uint16,
             :length, :uint32,
             :offset, :uint32 )
+
+    hidden( :unused )
+
   end
 
   class CD < NiceStruct

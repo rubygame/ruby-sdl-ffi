@@ -48,6 +48,9 @@ module SDL
             :g,      :uint8,
             :b,      :uint8,
             :unused, :uint8 )
+
+    hidden( :unused )
+
   end
 
   class Palette < NiceStruct
@@ -90,6 +93,13 @@ module SDL
             :map,            :pointer,
             :format_version, :uint,
             :refcount,       :int )
+
+    read_only( :flags, :format, :w, :h,
+               :pitch, :clip_rect, :refcount )
+
+    hidden( :offset, :hwdata, :unused1,
+            :locked, :map, :format_version )
+
   end
 
 
@@ -130,6 +140,9 @@ module SDL
             :vfmt,          :pointer,
             :current_w,     :int,
             :current_h,     :int )
+
+    hidden( :UnusedBits1, :UnusedBits2, :UnusedBits3 )
+
   end
 
 
@@ -150,6 +163,12 @@ module SDL
             :hwdata,     :pointer,
             :hw_overlay, :uint32,
             :UnusedBits, :uint32 )
+
+    read_only( :format, :w, :h, :planes,
+               :pitches, :hw_overlay )
+
+    hidden( :hwfuncs, :hwdata, :UnusedBits )
+
   end
 
 

@@ -71,6 +71,8 @@ module SDL
             :type,   :uint32,
             :hidden, SDL::RWopsHidden )
 
+    hidden( :hidden )
+
     def seek=(cb)
       @seek = cb
       self[:seek] = @seek

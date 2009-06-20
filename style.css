@@ -36,6 +36,11 @@ body
   float: right;
 }
 
+.download .icon
+{
+  width: 72px;
+  border: 0px;
+}
 
 h1
 {

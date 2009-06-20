@@ -29,8 +29,8 @@
 
 
 require 'ffi'
-
-require File.join( File.dirname(__FILE__), "platforms" )
+require 'need'
+need { 'platforms' }
 
 
 module SDL
@@ -47,5 +47,5 @@ end
   sdl_imagefilter
   sdl_rotozoom
 }.each do |f|
-  require File.join( File.dirname(__FILE__), f )
+  need { f }
 end

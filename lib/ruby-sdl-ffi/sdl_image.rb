@@ -28,9 +28,9 @@
 #++
 
 
-require "ffi"
-
-require File.join( File.dirname(__FILE__), "platforms" )
+require 'ffi'
+require 'need'
+need { 'platforms' }
 
 
 module SDL

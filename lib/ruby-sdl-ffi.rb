@@ -28,8 +28,10 @@
 #++
 
 
+require 'need'
+
 # sdl.rb is absolutely required. If it fails, don't catch the error.
-require File.join( File.dirname(__FILE__), "ruby-sdl-ffi", "sdl" )
+need { File.join( 'ruby-sdl-ffi', 'sdl' ) }
 
 
 # The others are "optional", so just give a warning if they fail.
@@ -45,7 +47,7 @@ require File.join( File.dirname(__FILE__), "ruby-sdl-ffi", "sdl" )
 }.each do |f|
 
   begin
-    require File.join( File.dirname(__FILE__), "ruby-sdl-ffi", f )
+    need { File.join( 'ruby-sdl-ffi', f ) }
   rescue LoadError => e
     warn "Warning: " + e.message
   end

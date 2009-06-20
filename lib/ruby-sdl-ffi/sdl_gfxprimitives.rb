@@ -28,9 +28,6 @@
 #++
 
 
-require 'ffi'
-
-
 module SDL
   module Gfx
 

@@ -29,10 +29,9 @@
 
 
 require "ffi"
-
-require File.join( File.dirname(__FILE__), "platforms" )
-
-require File.join( File.dirname(__FILE__), "nicestruct" )
+require 'need'
+need { 'nicestruct' }
+need { 'platforms' }
 
 
 module SDL

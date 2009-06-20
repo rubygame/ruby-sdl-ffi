@@ -28,9 +28,7 @@
 #++
 
 
-require 'ffi'
-
-require File.join( File.dirname(__FILE__), "nicestruct" )
+need { 'nicestruct' }
 
 
 module SDL

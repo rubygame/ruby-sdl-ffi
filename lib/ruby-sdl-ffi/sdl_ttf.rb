@@ -28,12 +28,12 @@
 #++
 
 
-require "ffi"
-
-require File.join( File.dirname(__FILE__), "platforms" )
+require 'ffi'
+require 'need'
+need { 'nicestruct' }
 
 # For SDL::Color
-require File.join( File.dirname(__FILE__), "sdl_video" )
+need { 'sdl_video' }
 
 
 module SDL

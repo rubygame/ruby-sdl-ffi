@@ -29,8 +29,8 @@
 
 
 require 'ffi'
-
-require File.join( File.dirname(__FILE__), "platforms" )
+require 'need'
+need { 'platforms' }
 
 
 module SDL
@@ -56,5 +56,5 @@ end
   sdl_rwops
   sdl_timer
 }.each do |f|
-  require File.join( File.dirname(__FILE__), f )
+  need { f }
 end

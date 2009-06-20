@@ -36,24 +36,25 @@ require File.join( File.dirname(__FILE__), "nicestruct" )
 module SDL
   module Gfx
 
-    attach_function :SDL_gfxBlitRGBA, [ :pointer, :pointer, :pointer, :pointer ], :int
+    attach_function :SDL_gfxBlitRGBA,
+                    [ :pointer, :pointer, :pointer, :pointer ], :int
+
     attach_function :SDL_gfxSetAlpha, [ :pointer, :uint8 ], :int
 
+
     class BlitInfo < NiceStruct
-      layout(
-             :s_pixels, :pointer,
-             :s_width,  :int,
-             :s_height, :int,
-             :s_skip,   :int,
-             :d_pixels, :pointer,
-             :d_width,  :int,
-             :d_height, :int,
-             :d_skip,   :int,
-             :aux_data, :pointer,
-             :src,      :pointer,
-             :table,    :pointer,
-             :dst,      :pointer
-      )
+      layout( :s_pixels, :pointer,
+              :s_width,  :int,
+              :s_height, :int,
+              :s_skip,   :int,
+              :d_pixels, :pointer,
+              :d_width,  :int,
+              :d_height, :int,
+              :d_skip,   :int,
+              :aux_data, :pointer,
+              :src,      :pointer,
+              :table,    :pointer,
+              :dst,      :pointer )
     end
 
   end

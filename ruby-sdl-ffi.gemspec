@@ -48,7 +48,8 @@ EOF
   s.require_paths = ["lib"]
 
   s.required_ruby_version = ">= 1.8"
-  s.add_dependency( "ffi", ">=0.3.0" )
+  s.add_dependency( "ffi",  ">=0.3.0",
+                    "need", ">=1.1.0" )
   s.requirements = ["SDL       >= 1.2.13",
                     "SDL_image >= 1.2.7 (optional)",
                     "SDL_gfx   >= 2.0.17 (optional)",

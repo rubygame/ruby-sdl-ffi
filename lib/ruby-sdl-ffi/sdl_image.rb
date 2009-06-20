@@ -40,10 +40,16 @@ module SDL
 
 
     attach_function :IMG_Linked_Version, [  ], :pointer
+
+
     attach_function :IMG_LoadTyped_RW, [ :pointer, :int, :string ], :pointer
-    attach_function :IMG_Load,           [ :string        ], :pointer
-    attach_function :IMG_Load_RW,        [ :pointer, :int ], :pointer
+    attach_function :IMG_Load,         [ :string                 ], :pointer
+    attach_function :IMG_Load_RW,      [ :pointer, :int          ], :pointer
+
+
     attach_function :IMG_InvertAlpha,    [ :int     ], :int
+
+
     attach_function :IMG_isBMP,          [ :pointer ], :int
     attach_function :IMG_isGIF,          [ :pointer ], :int
     attach_function :IMG_isJPG,          [ :pointer ], :int
@@ -55,6 +61,8 @@ module SDL
     attach_function :IMG_isXCF,          [ :pointer ], :int
     attach_function :IMG_isXPM,          [ :pointer ], :int
     attach_function :IMG_isXV,           [ :pointer ], :int
+
+
     attach_function :IMG_LoadBMP_RW,     [ :pointer ], :pointer
     attach_function :IMG_LoadGIF_RW,     [ :pointer ], :pointer
     attach_function :IMG_LoadJPG_RW,     [ :pointer ], :pointer
@@ -67,6 +75,8 @@ module SDL
     attach_function :IMG_LoadXCF_RW,     [ :pointer ], :pointer
     attach_function :IMG_LoadXPM_RW,     [ :pointer ], :pointer
     attach_function :IMG_LoadXV_RW,      [ :pointer ], :pointer
+
+
     attach_function :IMG_ReadXPMFromArray, [ :pointer ], :pointer
 
   end

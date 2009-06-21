@@ -267,7 +267,9 @@ module SDL
 
   attach_function  :SDL_UpperBlit, [ :pointer, :pointer,
                                      :pointer, :pointer ], :int
-  alias :SDL_BlitSurface :SDL_UpperBlit
+  class << self
+    alias :SDL_BlitSurface :SDL_UpperBlit
+  end
 
   attach_function  :SDL_LowerBlit, [ :pointer, :pointer,
                                      :pointer, :pointer ], :int

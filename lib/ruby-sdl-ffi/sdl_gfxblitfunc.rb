@@ -30,6 +30,9 @@
 
 need { 'nicestruct' }
 
+# For SDL::PixelFormat
+need { 'sdl' }
+
 
 module SDL
   module Gfx
@@ -50,9 +53,9 @@ module SDL
               :d_height, :int,
               :d_skip,   :int,
               :aux_data, :pointer,
-              :src,      :pointer,
+              :src,      TypedPointer( SDL::PixelFormat ),
               :table,    :pointer,
-              :dst,      :pointer )
+              :dst,      TypedPointer( SDL::PixelFormat ) )
     end
 
   end

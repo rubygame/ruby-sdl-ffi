@@ -59,7 +59,7 @@ module SDL
   end
 
   class PixelFormat < NiceStruct
-    layout( :palette,       :pointer,
+    layout( :palette,       TypedPointer( Palette ),
             :BitsPerPixel,  :uint8,
             :BytesPerPixel, :uint8,
             :Rloss,         :uint8,
@@ -80,7 +80,7 @@ module SDL
 
   class Surface < NiceStruct
     layout( :flags,          :uint32,
-            :format,         :pointer,
+            :format,         TypedPointer( PixelFormat ),
             :w,              :int,
             :h,              :int,
             :pitch,          :uint16,
@@ -137,7 +137,7 @@ module SDL
             :blit_fill,     :uint32,
             :UnusedBits3,   :uint32,
             :video_mem,     :uint32,
-            :vfmt,          :pointer,
+            :vfmt,          TypedPointer( PixelFormat ),
             :current_w,     :int,
             :current_h,     :int )
 

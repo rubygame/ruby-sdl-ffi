@@ -28,10 +28,8 @@
 #++
 
 
-require 'ffi'
 require 'need'
-need { 'platforms' }
-need { 'nicelibrary' }
+need { 'sdl' }
 
 
 module SDL

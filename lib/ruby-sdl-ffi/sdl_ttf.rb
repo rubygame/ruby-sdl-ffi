@@ -29,13 +29,7 @@
 
 
 require 'need'
-need { 'platforms' }
-need { 'nicestruct' }
-need { 'nicelibrary' }
-
-
-# For SDL::Color
-need { 'sdl_video' }
+need { 'sdl' }
 
 
 module SDL

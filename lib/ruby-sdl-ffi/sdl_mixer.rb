@@ -29,9 +29,7 @@
 
 
 require 'need'
-need { 'platforms' }
-need { 'nicestruct' }
-need { 'nicelibrary' }
+need { 'sdl' }
 
 
 module SDL

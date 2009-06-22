@@ -30,8 +30,6 @@
 
 require 'need'
 need { 'sdl' }
-need { 'platforms' }
-need { 'nicelibrary' }
 
 
 module SDL

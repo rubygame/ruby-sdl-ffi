@@ -224,10 +224,10 @@ module SDL
                    [ :pointer, :int, :pointer, :int, :int ], :int
 
   attach_function  :SDL_MapRGB,
-                   [ :pointer, :uint8, :uint8, :uint8 ], :pointer
+                   [ :pointer, :uint8, :uint8, :uint8 ], :uint32
 
   attach_function  :SDL_MapRGBA,
-                   [ :pointer, :uint8, :uint8, :uint8, :uint8 ], :pointer
+                   [ :pointer, :uint8, :uint8, :uint8, :uint8 ], :uint32
 
   attach_function  :SDL_GetRGB,
                    [ :uint32, :pointer, :pointer,

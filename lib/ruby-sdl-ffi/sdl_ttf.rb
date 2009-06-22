@@ -28,9 +28,11 @@
 #++
 
 
-require 'ffi'
 require 'need'
+need { 'platforms' }
 need { 'nicestruct' }
+need { 'nicelibrary' }
+
 
 # For SDL::Color
 need { 'sdl_video' }
@@ -38,7 +40,7 @@ need { 'sdl_video' }
 
 module SDL
   module TTF
-    extend FFI::Library
+    extend NiceLibrary
     SDL.load_library("SDL_ttf", self)
 
 

@@ -31,10 +31,11 @@
 require 'ffi'
 require 'need'
 need { 'platforms' }
+need { 'nicelibrary' }
 
 
 module SDL
-  extend FFI::Library
+  extend NiceLibrary
   load_library("SDL", self)
 end
 

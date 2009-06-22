@@ -28,15 +28,15 @@
 #++
 
 
-require "ffi"
 require 'need'
-need { 'nicestruct' }
 need { 'platforms' }
+need { 'nicestruct' }
+need { 'nicelibrary' }
 
 
 module SDL
   module Mix
-    extend FFI::Library
+    extend NiceLibrary
     SDL.load_library("SDL_mixer", self)
 
 

@@ -28,8 +28,8 @@
 #++
 
 
-require 'ffi'
 require 'need'
+need { 'sdl' }
 need { 'platforms' }
 need { 'nicelibrary' }
 
@@ -40,12 +40,16 @@ module SDL
     SDL.load_library("SDL_image", self)
 
 
-    attach_function :IMG_Linked_Version, [  ], :pointer
+    attach_function :IMG_Linked_Version, [  ], TypedPointer( SDL::Version )
 
 
-    attach_function :IMG_LoadTyped_RW, [ :pointer, :int, :string ], :pointer
-    attach_function :IMG_Load,         [ :string                 ], :pointer
-    attach_function :IMG_Load_RW,      [ :pointer, :int          ], :pointer
+    attach_function :IMG_LoadTyped_RW, [ :pointer, :int, :string ],
+                    TypedPointer( SDL::Surface )
+
+    attach_function :IMG_Load, [ :string ], TypedPointer( SDL::Surface )
+
+    attach_function :IMG_Load_RW, [ :pointer, :int ],
+                    TypedPointer( SDL::Surface )
 
 
     attach_function :IMG_InvertAlpha,    [ :int     ], :int
@@ -64,21 +68,22 @@ module SDL
     attach_function :IMG_isXV,           [ :pointer ], :int
 
 
-    attach_function :IMG_LoadBMP_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadGIF_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadJPG_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadLBM_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadPCX_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadPNG_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadPNM_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadTGA_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadTIF_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadXCF_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadXPM_RW,     [ :pointer ], :pointer
-    attach_function :IMG_LoadXV_RW,      [ :pointer ], :pointer
+    attach_function :IMG_LoadBMP_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadGIF_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadJPG_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadLBM_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadPCX_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadPNG_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadPNM_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadTGA_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadTIF_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadXCF_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadXPM_RW, [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadXV_RW,  [ :pointer ], TypedPointer(SDL::Surface)
 
 
-    attach_function :IMG_ReadXPMFromArray, [ :pointer ], :pointer
+    attach_function :IMG_ReadXPMFromArray, [ :pointer ],
+                    TypedPointer(SDL::Surface)
 
   end
 end

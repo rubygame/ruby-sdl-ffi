@@ -322,8 +322,4 @@ module SDL
 
   attach_function  :SDL_WM_GrabInput, [ SDL::ENUM ], SDL::ENUM
 
-
-  attach_function  :SDL_SoftStretch,
-                   [ :pointer, :pointer, :pointer, :pointer ], :int
-
 end

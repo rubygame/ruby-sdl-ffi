@@ -271,14 +271,8 @@ module SDL
   attach_function  :SDL_ConvertSurface, [ :pointer, :pointer, :uint32 ],
                    TypedPointer( SDL::Surface )
 
-  attach_function  :SDL_UpperBlit, [ :pointer, :pointer,
-                                     :pointer, :pointer ], :int
-  class << self
-    alias :SDL_BlitSurface :SDL_UpperBlit
-  end
-
-  attach_function  :SDL_LowerBlit, [ :pointer, :pointer,
-                                     :pointer, :pointer ], :int
+  attach_function  :SDL_BlitSurface, "SDL_UpperBlit",
+                   [ :pointer, :pointer, :pointer, :pointer ], :int
 
   attach_function  :SDL_FillRect, [ :pointer, :pointer, :uint32 ], :int
 

@@ -197,11 +197,13 @@ module SDL
   attach_function  :SDL_VideoInit,       [ :string, :uint32 ], :int
   attach_function  :SDL_VideoQuit,       [  ], :void
   attach_function  :SDL_VideoDriverName, [ :string, :int ], :string
-  attach_function  :SDL_GetVideoSurface, [  ], :pointer
-  attach_function  :SDL_GetVideoInfo,    [  ], :pointer
+  attach_function  :SDL_GetVideoSurface, [  ], TypedPointer( SDL::Surface )
+  attach_function  :SDL_GetVideoInfo,    [  ], TypedPointer( SDL::VideoInfo )
   attach_function  :SDL_VideoModeOK,     [ :int, :int, :int, :uint32 ], :int
   attach_function  :SDL_ListModes,       [ :pointer, :uint32 ], :pointer
-  attach_function  :SDL_SetVideoMode, [ :int, :int, :int, :uint32 ], :pointer
+
+  attach_function  :SDL_SetVideoMode, [ :int, :int, :int, :uint32 ],
+                   TypedPointer( SDL::Surface )
 
 
   attach_function  :SDL_UpdateRects, [ :pointer, :int, :pointer ], :void
@@ -238,11 +240,13 @@ module SDL
 
   attach_function  :SDL_CreateRGBSurface,
                    [ :uint32, :int, :int, :int,
-                     :uint32, :uint32, :uint32, :uint32 ], :pointer
+                     :uint32, :uint32, :uint32, :uint32 ],
+                   TypedPointer( SDL::Surface )
 
   attach_function  :SDL_CreateRGBSurfaceFrom,
                    [ :pointer, :int, :int, :int, :int,
-                     :uint32, :uint32, :uint32, :uint32 ], :pointer
+                     :uint32, :uint32, :uint32, :uint32 ],
+                   TypedPointer( SDL::Surface )
 
 
   attach_function  :SDL_FreeSurface,   [ :pointer ], :void
@@ -250,7 +254,9 @@ module SDL
   attach_function  :SDL_UnlockSurface, [ :pointer ], :void
 
 
-  attach_function  :SDL_LoadBMP_RW,    [ :pointer, :int ], :pointer
+  attach_function  :SDL_LoadBMP_RW,    [ :pointer, :int ],
+                   TypedPointer( SDL::Surface )
+
   attach_function  :SDL_SaveBMP_RW,    [ :pointer, :pointer, :int   ], :int
 
 
@@ -262,8 +268,8 @@ module SDL
   attach_function  :SDL_GetClipRect,   [ :pointer, :pointer ], :void
 
 
-  attach_function  :SDL_ConvertSurface,
-                   [ :pointer, :pointer, :uint32 ], :pointer
+  attach_function  :SDL_ConvertSurface, [ :pointer, :pointer, :uint32 ],
+                   TypedPointer( SDL::Surface )
 
   attach_function  :SDL_UpperBlit, [ :pointer, :pointer,
                                      :pointer, :pointer ], :int
@@ -277,12 +283,15 @@ module SDL
   attach_function  :SDL_FillRect, [ :pointer, :pointer, :uint32 ], :int
 
 
-  attach_function  :SDL_DisplayFormat,      [ :pointer ], :pointer
-  attach_function  :SDL_DisplayFormatAlpha, [ :pointer ], :pointer
+  attach_function  :SDL_DisplayFormat,      [ :pointer ],
+                   TypedPointer( SDL::Surface )
+
+  attach_function  :SDL_DisplayFormatAlpha, [ :pointer ],
+                   TypedPointer( SDL::Surface )
 
 
-  attach_function  :SDL_CreateYUVOverlay,
-                   [ :int, :int, :uint32, :pointer ], :pointer
+  attach_function  :SDL_CreateYUVOverlay, [ :int, :int, :uint32, :pointer ],
+                   TypedPointer( SDL::Overlay )
 
   attach_function  :SDL_LockYUVOverlay,    [ :pointer ], :int
   attach_function  :SDL_UnlockYUVOverlay,  [ :pointer ], :void

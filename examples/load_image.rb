@@ -28,10 +28,10 @@ end
 path = File.expand_path(path)
 
 # Load the image file.
-image = SDL::Surface.new( SDL::Image::IMG_Load( path ) )
+image = SDL::Image::IMG_Load( path )
 
 # Create a new window the same size as the image.
-screen = SDL::Surface.new( SDL::SDL_SetVideoMode(image.w, image.h, 0, 0) )
+screen = SDL::SDL_SetVideoMode(image.w, image.h, 0, 0)
 
 # Blit the image onto the screen surface.
 SDL::SDL_BlitSurface( image, nil, screen, nil )

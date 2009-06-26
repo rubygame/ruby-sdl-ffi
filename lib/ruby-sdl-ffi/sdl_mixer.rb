@@ -38,7 +38,7 @@ module SDL
     SDL.load_library("SDL_mixer", self)
 
 
-    attach_function :Mix_Linked_Version, [  ], :pointer
+    attach_function :Mix_Linked_Version, [  ], TypedPointer(SDL::Version)
 
     CHANNELS          = 8
     DEFAULT_FREQUENCY = 22050
@@ -73,13 +73,16 @@ module SDL
     attach_function :Mix_QuerySpec,     [ :pointer, :pointer, :pointer ], :int
 
 
-    attach_function :Mix_LoadWAV_RW,    [ :pointer, :int    ], :pointer
-    attach_function :Mix_LoadMUS,       [ :string           ], :pointer
-    attach_function :Mix_LoadMUS_RW,    [ :pointer          ], :pointer
-    attach_function :Mix_QuickLoad_WAV, [ :pointer          ], :pointer
-    attach_function :Mix_QuickLoad_RAW, [ :pointer, :uint32 ], :pointer
-    attach_function :Mix_FreeChunk,     [ :pointer          ], :void
-    attach_function :Mix_FreeMusic,     [ :pointer          ], :void
+    attach_function :Mix_LoadWAV_RW,    [ :pointer, :int ], TypedPointer(Chunk)
+    attach_function :Mix_LoadMUS,       [ :string        ], :pointer
+    attach_function :Mix_LoadMUS_RW,    [ :pointer       ], :pointer
+    attach_function :Mix_QuickLoad_WAV, [ :pointer       ], TypedPointer(Chunk)
+
+    attach_function :Mix_QuickLoad_RAW, [ :pointer, :uint32 ],
+                    TypedPointer(Chunk)
+
+    attach_function :Mix_FreeChunk,     [ :pointer ], :void
+    attach_function :Mix_FreeMusic,     [ :pointer ], :void
 
 
     attach_function :Mix_GetMusicType,  [ :pointer ], :int
@@ -179,11 +182,11 @@ module SDL
     attach_function :Mix_SetSynchroValue,  [ :int           ], :int
 
 
-    attach_function :Mix_GetSynchroValue,  [                ], :int
-    attach_function :Mix_GetChunk,         [ :int           ], :pointer
+    attach_function :Mix_GetSynchroValue,  [      ], :int
+    attach_function :Mix_GetChunk,         [ :int ], TypedPointer(Chunk)
 
 
-    attach_function :Mix_CloseAudio,       [                ], :void
+    attach_function :Mix_CloseAudio,       [ ], :void
 
   end
 end

@@ -229,13 +229,35 @@ module SDL
   attach_function  :SDL_MapRGBA,
                    [ :pointer, :uint8, :uint8, :uint8, :uint8 ], :uint32
 
-  attach_function  :SDL_GetRGB,
+
+
+  attach_function  :__SDL_GetRGB, "SDL_GetRGB",
                    [ :uint32, :pointer, :pointer,
                      :pointer, :pointer ], :void
 
-  attach_function  :SDL_GetRGBA,
+  def self.SDL_GetRGB( uint32, format )
+    r = FFI::MemoryPointer.new( :uint8 )
+    g = FFI::MemoryPointer.new( :uint8 )
+    b = FFI::MemoryPointer.new( :uint8 )
+    __SDL_GetRGB( uint32, format, r, g, b )
+    return [r.get_uint8(0), g.get_uint8(0), b.get_uint8(0)]
+  end
+
+
+
+  attach_function  :__SDL_GetRGBA, "SDL_GetRGBA",
                    [ :uint32, :pointer, :pointer, :pointer,
                      :pointer, :pointer ], :void
+
+  def self.SDL_GetRGBA( uint32, format )
+    r = FFI::MemoryPointer.new( :uint8 )
+    g = FFI::MemoryPointer.new( :uint8 )
+    b = FFI::MemoryPointer.new( :uint8 )
+    a = FFI::MemoryPointer.new( :uint8 )
+    __SDL_GetRGBA( uint32, format, r, g, b, a )
+    return [r.get_uint8(0), g.get_uint8(0), b.get_uint8(0), a.get_uint8(0)]
+  end
+
 
 
   attach_function  :SDL_CreateRGBSurface,

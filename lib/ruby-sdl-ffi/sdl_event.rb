@@ -233,7 +233,19 @@ module SDL
   end
 
 
-  attach_function  :SDL_WaitEvent, [ :pointer ], :int
+  attach_function  :__SDL_WaitEvent, "SDL_WaitEvent", [ :pointer ], :int
+
+  def self.SDL_WaitEvent()
+    mp = FFI::MemoryPointer.new( SDL::Event, 1 )
+    n = __SDL_WaitEvent( mp )
+    if n == 0
+      nil
+    else
+      _extract_event( Event.new(mp) )
+    end
+  end
+
+
   attach_function  :SDL_PushEvent, [ :pointer ], :int
 
 

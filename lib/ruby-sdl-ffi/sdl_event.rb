@@ -35,6 +35,9 @@ module SDL
 
   RELEASED        = 0
   PRESSED         = 1
+
+  NOEVENT         = 0
+  ACTIVEEVENT     = 1
   KEYDOWN         = 2
   KEYUP           = 3
   MOUSEMOTION     = 4
@@ -43,10 +46,6 @@ module SDL
   JOYAXISMOTION   = 7
   JOYBALLMOTION   = 8
   JOYHATMOTION    = 9
-
-
-  NOEVENT         = 0
-  ACTIVEEVENT     = 1
   JOYBUTTONDOWN   = 10
   JOYBUTTONUP     = 11
   QUIT            = 12
@@ -63,7 +62,6 @@ module SDL
   EVENT_RESERVED7 = 23
   USEREVENT       = 24
   NUMEVENTS       = 32
-  ALLEVENTS       = 0xFFFFFFFF
 
 
   ACTIVEEVENTMASK     = (1 << (ACTIVEEVENT))
@@ -90,7 +88,7 @@ module SDL
   SYSWMEVENTMASK      = (1 << (SYSWMEVENT))
   VIDEOEXPOSEMASK     = (1 << (VIDEOEXPOSE))
   VIDEORESIZEMASK     = (1 << (VIDEORESIZE))
-
+  ALLEVENTS           = 0xFFFFFFFF
 
 
 

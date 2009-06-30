@@ -200,7 +200,9 @@ module SDL
   attach_function  :SDL_GetVideoSurface, [  ], TypedPointer( SDL::Surface )
   attach_function  :SDL_GetVideoInfo,    [  ], TypedPointer( SDL::VideoInfo )
   attach_function  :SDL_VideoModeOK,     [ :int, :int, :int, :uint32 ], :int
-  attach_function  :SDL_ListModes,       [ :pointer, :uint32 ], :pointer
+
+  ## Don't know how to implement this one. :-\
+  # attach_function  :SDL_ListModes,       [ :pointer, :uint32 ], :pointer
 
   attach_function  :SDL_SetVideoMode, [ :int, :int, :int, :uint32 ],
                    TypedPointer( SDL::Surface )

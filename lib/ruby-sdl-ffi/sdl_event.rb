@@ -237,4 +237,29 @@ module SDL
 
   attach_function  :SDL_EventState, [ :uint8, :int ], :uint8
 
+
+  private
+
+  # Extracts a specific event class from a generic Event.
+  def self._extract_event( event ) # :nodoc:
+    case event[:type]
+    when ACTIVEEVENT;                    event[:active]
+    when KEYDOWN, KEYUP;                 event[:key]
+    when MOUSEMOTION;                    event[:motion]
+    when MOUSEBUTTONDOWN, MOUSEBUTTONUP; event[:button]
+    when JOYAXISMOTION;                  event[:jaxis]
+    when JOYBALLMOTION;                  event[:jball]
+    when JOYHATMOTION;                   event[:jhat]
+    when JOYBUTTONDOWN, JOYBUTTONUP;     event[:jbutton]
+    when QUIT;                           event[:quit]
+    when SYSWMEVENT;                     event[:syswm]
+    when VIDEORESIZE;                    event[:resize]
+    when VIDEOEXPOSE;                    event[:expose]
+    when USEREVENT;                      event[:user]
+    else; raise TypeError, "Invalid event #{event.inspect}"
+    end
+  end
+
+
+
 end

@@ -35,7 +35,7 @@ need { 'sdl' }
 module SDL
   module Mix
     extend NiceLibrary
-    SDL.load_library("SDL_mixer", self)
+    load_library("SDL_mixer", self)
 
 
     attach_function :Mix_Linked_Version, [  ], TypedPointer(SDL::Version)

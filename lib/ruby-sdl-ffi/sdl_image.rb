@@ -35,7 +35,7 @@ need { 'sdl' }
 module SDL
   module Image
     extend NiceLibrary
-    SDL.load_library("SDL_image", self)
+    load_library("SDL_image", self)
 
 
     attach_function :IMG_Linked_Version, [  ], TypedPointer( SDL::Version )

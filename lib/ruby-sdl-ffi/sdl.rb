@@ -30,7 +30,6 @@
 
 require 'ffi'
 require 'need'
-need { 'platforms' }
 need { 'nicelibrary' }
 
 

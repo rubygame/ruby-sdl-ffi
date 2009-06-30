@@ -35,7 +35,7 @@ need { 'sdl' }
 module SDL
   module TTF
     extend NiceLibrary
-    SDL.load_library("SDL_ttf", self)
+    load_library("SDL_ttf", self)
 
 
     attach_function :TTF_Linked_Version, [  ], :pointer

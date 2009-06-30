@@ -54,6 +54,42 @@ module SDL
     end
 
 
+
+    class Music < NiceStruct
+      #--
+      # Mix_Music struct (in C) has a hidden layout, which changes
+      # depending on which sound format libraries were available
+      # at compile time. Since we don't know the layout, we have to
+      # jump through some hoops.
+      #++
+
+      def initialize( val )
+        case val
+        when FFI::Pointer
+          send(:pointer=, val)
+        when self.class
+          send(:pointer=, val.pointer)
+        else
+          raise TypeError, 
+                "cannot create new #{self.class} from #{val.inspect}"
+        end
+      end
+
+      def []( key )
+        raise ArgumentError, "No such field '#{key}'"
+      end
+
+      def []=( key, value )
+        raise ArgumentError, "No such field '#{key}'"
+      end
+
+      def members
+        []
+      end
+
+    end
+
+
     NO_FADING   = 0
     FADING_OUT  = 1
     FADING_IN   = 2
@@ -74,8 +110,8 @@ module SDL
 
 
     attach_function :Mix_LoadWAV_RW,    [ :pointer, :int ], TypedPointer(Chunk)
-    attach_function :Mix_LoadMUS,       [ :string        ], :pointer
-    attach_function :Mix_LoadMUS_RW,    [ :pointer       ], :pointer
+    attach_function :Mix_LoadMUS,       [ :string        ], TypedPointer(Music)
+    attach_function :Mix_LoadMUS_RW,    [ :pointer       ], TypedPointer(Music)
     attach_function :Mix_QuickLoad_WAV, [ :pointer       ], TypedPointer(Chunk)
 
     attach_function :Mix_QuickLoad_RAW, [ :pointer, :uint32 ],

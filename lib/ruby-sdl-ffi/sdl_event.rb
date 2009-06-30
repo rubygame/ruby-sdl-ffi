@@ -219,7 +219,20 @@ module SDL
   attach_function  :SDL_PeepEvents,
                    [ :pointer, :int, SDL::ENUM, :uint32 ], :int
 
-  attach_function  :SDL_PollEvent, [ :pointer ], :int
+
+  attach_function  :__SDL_PollEvent, "SDL_PollEvent", [ :pointer ], :int
+
+  def self.SDL_PollEvent()
+    mp = FFI::MemoryPointer.new( SDL::Event, 1 )
+    n = __SDL_PollEvent( mp )
+    if n == 0
+      nil
+    else
+      _extract_event( Event.new(mp) )
+    end
+  end
+
+
   attach_function  :SDL_WaitEvent, [ :pointer ], :int
   attach_function  :SDL_PushEvent, [ :pointer ], :int
 

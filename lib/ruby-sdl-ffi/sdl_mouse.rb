@@ -94,10 +94,10 @@ module SDL
   BUTTON_X1        = 6
   BUTTON_X2        = 7
 
-  BUTTON_LMASK     = (1 << ((BUTTON_LEFT) -1))
-  BUTTON_MMASK     = (1 << ((BUTTON_MIDDLE) -1))
-  BUTTON_RMASK     = (1 << ((BUTTON_RIGHT) -1))
-  BUTTON_X1MASK    = (1 << ((BUTTON_X1) -1))
-  BUTTON_X2MASK    = (1 << ((BUTTON_X2) -1))
+  BUTTON_LMASK     = 1 << (BUTTON_LEFT   - 1)
+  BUTTON_MMASK     = 1 << (BUTTON_MIDDLE - 1)
+  BUTTON_RMASK     = 1 << (BUTTON_RIGHT  - 1)
+  BUTTON_X1MASK    = 1 << (BUTTON_X1     - 1)
+  BUTTON_X2MASK    = 1 << (BUTTON_X2     - 1)
 
 end

@@ -216,7 +216,26 @@ module SDL
 
   attach_function  :SDL_SetGamma,     [ :float, :float, :float       ], :int
   attach_function  :SDL_SetGammaRamp, [ :pointer, :pointer, :pointer ], :int
-  attach_function  :SDL_GetGammaRamp, [ :pointer, :pointer, :pointer ], :int
+
+
+  attach_function  :__SDL_GetGammaRamp, "SDL_GetGammaRamp",
+                   [ :pointer, :pointer, :pointer ], :int
+
+  def self.SDL_GetGammaRamp()
+    rtable = FFI::Buffer.new( :uint16, 256 )
+    gtable = FFI::Buffer.new( :uint16, 256 )
+    btable = FFI::Buffer.new( :uint16, 256 )
+
+    n = __SDL_GetGammaRamp( rtable, gtable, btable )
+
+    if( n == -1 )
+      return nil
+    else
+      return [ rtable.get_array_of_uint16(0, 256),
+               gtable.get_array_of_uint16(0, 256),
+               btable.get_array_of_uint16(0, 256) ]
+    end
+  end
 
 
   attach_function  :SDL_SetColors,

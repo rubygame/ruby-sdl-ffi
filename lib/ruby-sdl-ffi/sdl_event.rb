@@ -208,6 +208,16 @@ module SDL
             :user,    SDL::UserEvent,
             :syswm,   SDL::SysWMEvent )
 
+
+    # Creates a generic Event containing a specific event.
+    # You usually don't need to do this, because you can pass
+    # specific events directly to SDL::SDL_PushEvent.
+    # 
+    def self.wrap( event )
+      self.new( event.pointer )
+    end
+
+
     # Extracts a specific event class from a generic Event.
     def unwrap
       case self[:type]

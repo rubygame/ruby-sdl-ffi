@@ -49,8 +49,19 @@ module SDL
 
   attach_function  :SDL_EnableKeyRepeat, [ :int, :int         ], :int
   attach_function  :SDL_GetKeyRepeat,    [ :pointer, :pointer ], :void
-  attach_function  :SDL_GetKeyState,     [ :pointer           ], :pointer
-  attach_function  :SDL_GetModState,     [              ], SDL::ENUM
+
+
+  attach_function  :__SDL_GetKeyState, "SDL_GetKeyState",
+                   [ :pointer ], :pointer
+
+  def self.SDL_GetKeyState()
+    numkeys = FFI::MemoryPointer.new( :int )
+    keys = __SDL_GetKeyState( numkeys )
+    return keys.get_array_of_uint8( 0, numkeys.get_int(0) )
+  end
+
+
+  attach_function  :SDL_GetModState,     [               ], SDL::ENUM
   attach_function  :SDL_SetModState,     [ SDL::ENUM     ], :void
   attach_function  :SDL_GetKeyName,      [ SDL::ENUM     ], :string
 

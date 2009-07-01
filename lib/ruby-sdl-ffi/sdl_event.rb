@@ -286,5 +286,40 @@ module SDL
   end
 
 
+  # Creates a generic Event containing a specific event.
+  def self._wrap_event( event ) # :nodoc:
+    args =
+      case event[:type]
+      when ActiveEvent;       [:type, ACTIVEEVENT,     :active,  event]
+      when KeyboardEvent
+        case event[:state]
+        when PRESSED;         [:type, KEYDOWN,         :key,     event]
+        when RELEASED;        [:type, KEYUP,           :key,     event]
+        end
+      when MouseMotionEvent;  [:type, MOUSEMOTION,     :motion,  event]
+      when MouseButtonEvent
+        case event[:state]
+        when PRESSED;         [:type, MOUSEBUTTONDOWN, :button,  event]
+        when RELEASED;        [:type, MOUSEBUTTONUP,   :button,  event]
+        end
+      when JoyAxisEvent;      [:type, JOYAXISMOTION,   :jaxis,   event]
+      when JoyBallEvent;      [:type, JOYBALLMOTION,   :jball,   event]
+      when JoyHatEvent;       [:type, JOYHATMOTION,    :jhat,    event]
+      when JoyButtonEvent
+        case event[:state]
+        when PRESSED;         [:type, JOYBUTTONDOWN,   :jbutton, event]
+        when RELEASED;        [:type, JOYBUTTONUP,     :jbutton, event]
+        end
+      when QuitEvent;         [:type, QUIT,            :quit,    event]
+      when SysWMEvent;        [:type, SYSWMEVENT,      :syswm,   event]
+      when ResizeEvent;       [:type, VIDEORESIZE,     :resize,  event]
+      when ExposeEvent;       [:type, VIDEOEXPOSE,     :expose,  event]
+      when UserEvent;         [:type, USEREVENT,       :user,    event]
+      else
+        raise TypeError, "Invalid event #{event.inspect}"
+      end
+
+    return Event.new( args )
+  end
 
 end

@@ -58,7 +58,20 @@ module SDL
   end
 
 
-  attach_function  :SDL_GetRelativeMouseState, [ :pointer, :pointer ], :uint8
+  attach_function  :__SDL_GetRelativeMouseState, "SDL_GetRelativeMouseState",
+                   [ :pointer, :pointer ], :uint8
+
+  # Returns [buttons, x, y].
+  #  buttons: buttons currently pressed (bitmask of BUTTON_*MASK constants).
+  #  x, y: movement of the mouse cursor since last call of this method.
+  # 
+  def self.SDL_GetRelativeMouseState()
+    xmp = FFI::MemoryPointer.new( :int )
+    ymp = FFI::MemoryPointer.new( :int )
+    buttons = __SDL_GetRelativeMouseState( xmp, ymp )
+    return [buttons, xmp.get_int(0), ymp.get_int(0)]
+  end
+
 
 
   attach_function  :SDL_WarpMouse, [ :uint16, :uint16   ], :void

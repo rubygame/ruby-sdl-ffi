@@ -356,7 +356,20 @@ module SDL
 
 
   attach_function  :SDL_WM_SetCaption, [ :string, :string ], :void
-  attach_function  :SDL_WM_GetCaption, [ :pointer, :pointer ], :void
+
+
+  attach_function  :__SDL_WM_GetCaption, "SDL_WM_GetCaption",
+                   [ :pointer, :pointer ], :void
+
+  def self.SDL_WM_GetCaption()
+    title = FFI::MemoryPointer.new( :pointer )
+    icont = FFI::MemoryPointer.new( :pointer )
+    __SDL_WM_GetCaption( title, icont )
+    return [ title.get_pointer(0).get_string(0),
+             icont.get_pointer(0).get_string(0) ]
+  end
+
+
   attach_function  :SDL_WM_SetIcon,    [ :pointer, :pointer ], :void
   attach_function  :SDL_WM_IconifyWindow,    [  ], :int
   attach_function  :SDL_WM_ToggleFullScreen, [ :pointer ], :int

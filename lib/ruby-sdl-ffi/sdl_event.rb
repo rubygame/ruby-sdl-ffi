@@ -207,6 +207,27 @@ module SDL
             :quit,    SDL::QuitEvent,
             :user,    SDL::UserEvent,
             :syswm,   SDL::SysWMEvent )
+
+    # Extracts a specific event class from a generic Event.
+    def unwrap
+      case self[:type]
+      when ACTIVEEVENT;                    self[:active]
+      when KEYDOWN, KEYUP;                 self[:key]
+      when MOUSEMOTION;                    self[:motion]
+      when MOUSEBUTTONDOWN, MOUSEBUTTONUP; self[:button]
+      when JOYAXISMOTION;                  self[:jaxis]
+      when JOYBALLMOTION;                  self[:jball]
+      when JOYHATMOTION;                   self[:jhat]
+      when JOYBUTTONDOWN, JOYBUTTONUP;     self[:jbutton]
+      when QUIT;                           self[:quit]
+      when SYSWMEVENT;                     self[:syswm]
+      when VIDEORESIZE;                    self[:resize]
+      when VIDEOEXPOSE;                    self[:expose]
+      when USEREVENT;                      self[:user]
+      else; raise TypeError, "Invalid event #{self.inspect}"
+      end
+    end
+
   end
 
 
@@ -228,7 +249,7 @@ module SDL
     if n == 0
       nil
     else
-      _extract_event( Event.new(mp) )
+      Event.new(mp).unwrap
     end
   end
 
@@ -261,30 +282,5 @@ module SDL
   ENABLE  = 1
 
   attach_function  :SDL_EventState, [ :uint8, :int ], :uint8
-
-
-  private
-
-  # Extracts a specific event class from a generic Event.
-  def self._extract_event( event ) # :nodoc:
-    case event[:type]
-    when ACTIVEEVENT;                    event[:active]
-    when KEYDOWN, KEYUP;                 event[:key]
-    when MOUSEMOTION;                    event[:motion]
-    when MOUSEBUTTONDOWN, MOUSEBUTTONUP; event[:button]
-    when JOYAXISMOTION;                  event[:jaxis]
-    when JOYBALLMOTION;                  event[:jball]
-    when JOYHATMOTION;                   event[:jhat]
-    when JOYBUTTONDOWN, JOYBUTTONUP;     event[:jbutton]
-    when QUIT;                           event[:quit]
-    when SYSWMEVENT;                     event[:syswm]
-    when VIDEORESIZE;                    event[:resize]
-    when VIDEOEXPOSE;                    event[:expose]
-    when USEREVENT;                      event[:user]
-    else; raise TypeError, "Invalid event #{event.inspect}"
-    end
-  end
-
-
 
 end

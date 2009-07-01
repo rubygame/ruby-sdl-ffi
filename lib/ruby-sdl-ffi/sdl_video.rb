@@ -308,7 +308,16 @@ module SDL
 
 
   attach_function  :SDL_SetClipRect,   [ :pointer, :pointer ], SDL::BOOL
-  attach_function  :SDL_GetClipRect,   [ :pointer, :pointer ], :void
+
+
+  attach_function  :__SDL_GetClipRect, "SDL_GetClipRect",
+                   [ :pointer, :pointer ], :void
+
+  def self.SDL_GetClipRect( surface )
+    mp = FFI::MemoryPointer.new( Rect )
+    __SDL_GetClipRect( surface, mp )
+    return Rect.new( mp )
+  end
 
 
   attach_function  :SDL_ConvertSurface, [ :pointer, :pointer, :uint32 ],

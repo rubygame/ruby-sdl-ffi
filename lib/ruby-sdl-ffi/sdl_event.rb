@@ -255,20 +255,53 @@ module SDL
   attach_function  :__SDL_PeepEvents, "SDL_PeepEvents",
                    [ :pointer, :int, SDL::ENUM, :uint32 ], :int
 
-  # Returns an array of Events, or nil if there was an error.
-  def self.SDL_PeepEvents( numevents, action, mask )
-    mp = FFI::MemoryPointer.new( SDL::Event, numevents )
-    n = __SDL_PeepEvents( mp, numevents, action, mask )
+  # Behavior varies depending on action.
+  # 
+  # PEEKEVENT or GETEVENT:
+  #   events is the max number of events to retrieve.
+  #   Returns an array of Events, or nil if there was an error.
+  #   GETEVENT removes them from the queue, PEEKEVENT leaves them.
+  # 
+  # ADDEVENT:
+  #   events is an array of Events (or specific event instances)
+  #   to append to the queue.
+  #   Returns the number of events added, or -1 if there was an error.
+  # 
+  def self.SDL_PeepEvents( events, action, mask )
+    # PeepEvents is very versatile, so we break it up into
+    # different actions...
 
-    # Something went wrong
-    return nil if( n == -1 )
+    case action
 
-    events = []
-    n.times do |i|
-      events << Event.new( mp[i] ).unwrap
+    # Append the given events to the queue, return number added.
+    when ADDEVENT
+      numevents = events.size
+      mp = FFI::Buffer.new( SDL::Event, numevents )
+
+      # Dump the events into the Buffer as raw, hardcore bytes
+      events.each_with_index do |ev, i|
+        mp[i].put_bytes( 0, ev.pointer.get_bytes(0, ev.size) )
+      end
+
+      return __SDL_PeepEvents( mp, numevents, action, mask )
+      
+    # Peek or Get the first N events and return them in an array.
+    # Peek does not remove them from the queue, but Get does.
+    when PEEKEVENT, GETEVENT
+      numevents = events.to_i
+      mp = FFI::Buffer.new( SDL::Event, numevents )
+      n = __SDL_PeepEvents( mp, numevents, action, mask )
+
+      # Something went wrong
+      return nil if( n == -1 )
+
+      events = []
+      n.times do |i|
+        events << Event.new( mp[i] ).unwrap
+      end
+
+      return events
     end
-
-    return events
   end
 
 

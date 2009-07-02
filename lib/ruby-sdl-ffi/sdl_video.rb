@@ -123,27 +123,29 @@ module SDL
 
   callback(:blit_cb, [ :pointer, :pointer, :pointer, :pointer ], :int)
 
-  class VideoInfo < NiceStruct
-    layout( :hw_available,  :uint32,
-            :wm_available,  :uint32,
-            :UnusedBits1,   :uint32,
-            :UnusedBits2,   :uint32,
-            :blit_hw,       :uint32,
-            :blit_hw_CC,    :uint32,
-            :blit_hw_A,     :uint32,
-            :blit_sw,       :uint32,
-            :blit_sw_CC,    :uint32,
-            :blit_sw_A,     :uint32,
-            :blit_fill,     :uint32,
-            :UnusedBits3,   :uint32,
-            :video_mem,     :uint32,
-            :vfmt,          TypedPointer( PixelFormat ),
-            :current_w,     :int,
-            :current_h,     :int )
-
-    hidden( :UnusedBits1, :UnusedBits2, :UnusedBits3 )
-
-  end
+## Don't know how to implement this.
+#
+#   class VideoInfo < NiceStruct
+#     layout( :hw_available,  :uint32,  #bitfield: 1
+#             :wm_available,  :uint32,  #bitfield: 1
+#             :UnusedBits1,   :uint32,  #bitfield: 6
+#             :UnusedBits2,   :uint32,  #bitfield: 1
+#             :blit_hw,       :uint32,  #bitfield: 1
+#             :blit_hw_CC,    :uint32,  #bitfield: 1
+#             :blit_hw_A,     :uint32,  #bitfield: 1
+#             :blit_sw,       :uint32,  #bitfield: 1
+#             :blit_sw_CC,    :uint32,  #bitfield: 1
+#             :blit_sw_A,     :uint32,  #bitfield: 1
+#             :blit_fill,     :uint32,  #bitfield: 1
+#             :UnusedBits3,   :uint32,  #bitfield: 16
+#             :video_mem,     :uint32,
+#             :vfmt,          TypedPointer( PixelFormat ),
+#             :current_w,     :int,
+#             :current_h,     :int )
+#
+#     hidden( :UnusedBits1, :UnusedBits2, :UnusedBits3 )
+#
+#   end
 
 
   YV12_OVERLAY = 0x32315659
@@ -198,7 +200,10 @@ module SDL
   attach_function  :SDL_VideoQuit,       [  ], :void
   attach_function  :SDL_VideoDriverName, [ :string, :int ], :string
   attach_function  :SDL_GetVideoSurface, [  ], TypedPointer( SDL::Surface )
-  attach_function  :SDL_GetVideoInfo,    [  ], TypedPointer( SDL::VideoInfo )
+
+  ## Depends on SDL::VideoInfo, which I don't know how to implement.
+  #attach_function  :SDL_GetVideoInfo,    [  ], TypedPointer( SDL::VideoInfo )
+
   attach_function  :SDL_VideoModeOK,     [ :int, :int, :int, :uint32 ], :int
 
   ## Don't know how to implement this one. :-\

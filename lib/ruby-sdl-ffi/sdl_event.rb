@@ -247,8 +247,25 @@ module SDL
   PEEKEVENT = 1
   GETEVENT  = 2
 
-  attach_function  :SDL_PeepEvents,
+
+  attach_function  :__SDL_PeepEvents, "SDL_PeepEvents",
                    [ :pointer, :int, SDL::ENUM, :uint32 ], :int
+
+  # Returns an array of Events, or nil if there was an error.
+  def self.SDL_PeepEvents( numevents, action, mask )
+    mp = FFI::MemoryPointer.new( SDL::Event, numevents )
+    n = __SDL_PeepEvents( mp, numevents, action, mask )
+
+    # Something went wrong
+    return nil if( n == -1 )
+
+    events = []
+    n.times do |i|
+      events << Event.new( mp[i] ).unwrap
+    end
+
+    return events
+  end
 
 
   attach_function  :__SDL_PollEvent, "SDL_PollEvent", [ :pointer ], :int

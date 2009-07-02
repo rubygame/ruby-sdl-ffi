@@ -238,6 +238,10 @@ module SDL
       end
     end
 
+    def inspect
+      super.gsub(">", " :type=#{self[:type]}>")
+    end
+
   end
 
 

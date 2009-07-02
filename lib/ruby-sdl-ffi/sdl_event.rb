@@ -299,7 +299,26 @@ module SDL
 
   callback(:eventfilter_cb, [ :pointer ], :int)
 
-  attach_function  :SDL_SetEventFilter, [ :eventfilter_cb ], :void
+  attach_function  :__SDL_SetEventFilter, "SDL_SetEventFilter",
+                   [ :eventfilter_cb ], :void
+
+  def self.SDL_SetEventFilter( &block )
+    if( block_given? )
+      proc = Proc.new { |ev| 
+        result = block.call( Event.new(ev).unwrap )
+        case result
+        when true;        1
+        when false, nil;  0
+        else;             result
+        end
+      }
+      __SDL_SetEventFilter( proc )
+    else
+      __SDL_SetEventFilter( nil )
+    end
+  end
+
+
   #attach_function  :SDL_GetEventFilter, [ ], :eventfilter_cb
 
 

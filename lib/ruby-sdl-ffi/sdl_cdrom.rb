@@ -28,7 +28,7 @@
 #++
 
 
-need { 'nicestruct' }
+require 'nice-ffi'
 
 
 module SDL

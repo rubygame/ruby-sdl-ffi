@@ -28,9 +28,8 @@
 #++
 
 
-require 'ffi'
 require 'need'
-need { 'nicelibrary' }
+require 'nice-ffi'
 
 
 module SDL

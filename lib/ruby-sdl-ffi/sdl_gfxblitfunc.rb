@@ -28,7 +28,7 @@
 #++
 
 
-need { 'nicestruct' }
+require 'nice-ffi'
 
 # For SDL::PixelFormat
 need { 'sdl' }

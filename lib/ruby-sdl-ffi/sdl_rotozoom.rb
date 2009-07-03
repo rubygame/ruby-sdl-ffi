@@ -38,7 +38,7 @@ module SDL
     SMOOTHING_ON  = 1
 
 
-    class TColorRGBA < NiceStruct
+    class TColorRGBA < NiceFFI::Struct
       layout( :r, :uint8,
               :g, :uint8,
               :b, :uint8,
@@ -46,7 +46,7 @@ module SDL
     end
 
 
-    class TColorY < NiceStruct
+    class TColorY < NiceFFI::Struct
       layout( :y, :uint8 )
     end
 

@@ -92,14 +92,14 @@ module SDL
 
 
 
-  class ActiveEvent < NiceStruct
+  class ActiveEvent < NiceFFI::Struct
     layout( :type,  :uint8,
             :gain,  :uint8,
             :state, :uint8 )
   end
 
 
-  class KeyboardEvent < NiceStruct
+  class KeyboardEvent < NiceFFI::Struct
     layout( :type,   :uint8,
             :which,  :uint8,
             :state,  :uint8,
@@ -107,7 +107,7 @@ module SDL
   end
 
 
-  class MouseMotionEvent < NiceStruct
+  class MouseMotionEvent < NiceFFI::Struct
     layout( :type,  :uint8,
             :which, :uint8,
             :state, :uint8,
@@ -118,7 +118,7 @@ module SDL
   end
 
 
-  class MouseButtonEvent < NiceStruct
+  class MouseButtonEvent < NiceFFI::Struct
     layout( :type,   :uint8,
             :which,  :uint8,
             :button, :uint8,
@@ -128,7 +128,7 @@ module SDL
   end
 
 
-  class JoyAxisEvent < NiceStruct
+  class JoyAxisEvent < NiceFFI::Struct
     layout( :type,  :uint8,
             :which, :uint8,
             :axis,  :uint8,
@@ -136,7 +136,7 @@ module SDL
   end
 
 
-  class JoyBallEvent < NiceStruct
+  class JoyBallEvent < NiceFFI::Struct
     layout( :type,  :uint8,
             :which, :uint8,
             :ball,  :uint8,
@@ -145,7 +145,7 @@ module SDL
   end
 
 
-  class JoyHatEvent < NiceStruct
+  class JoyHatEvent < NiceFFI::Struct
     layout( :type,  :uint8,
             :which, :uint8,
             :hat,   :uint8,
@@ -153,7 +153,7 @@ module SDL
   end
 
 
-  class JoyButtonEvent < NiceStruct
+  class JoyButtonEvent < NiceFFI::Struct
     layout( :type,   :uint8,
             :which,  :uint8,
             :button, :uint8,
@@ -161,24 +161,24 @@ module SDL
   end
 
 
-  class ResizeEvent < NiceStruct
+  class ResizeEvent < NiceFFI::Struct
     layout( :type, :uint8,
             :w,    :int,
             :h,    :int )
   end
 
 
-  class ExposeEvent < NiceStruct
+  class ExposeEvent < NiceFFI::Struct
     layout( :type, :uint8 )
   end
 
 
-  class QuitEvent < NiceStruct
+  class QuitEvent < NiceFFI::Struct
     layout( :type, :uint8 )
   end
 
 
-  class UserEvent < NiceStruct
+  class UserEvent < NiceFFI::Struct
     layout( :type,  :uint8,
             :code,  :int,
             :data1, :pointer,
@@ -186,7 +186,7 @@ module SDL
   end
 
 
-  class SysWMEvent < NiceStruct
+  class SysWMEvent < NiceFFI::Struct
     layout( :type, :uint8,
             :msg,  :pointer )
   end

@@ -46,7 +46,7 @@ module SDL
 
   # SDL.h
 
-  class Version < NiceStruct
+  class Version < NiceFFI::Struct
     layout( :major, :uint8,
             :minor, :uint8,
             :patch, :uint8 )

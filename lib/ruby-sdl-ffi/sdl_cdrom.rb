@@ -44,7 +44,7 @@ module SDL
 
   MAX_TRACKS   = 99
 
-  class CDtrack < NiceStruct
+  class CDtrack < NiceFFI::Struct
     layout( :id,     :uint8,
             :type,   :uint8,
             :unused, :uint16,
@@ -55,7 +55,7 @@ module SDL
 
   end
 
-  class CD < NiceStruct
+  class CD < NiceFFI::Struct
     layout( :id,        :int,
             :status,    SDL::ENUM,
             :numtracks, :int,

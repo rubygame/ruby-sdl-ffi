@@ -34,7 +34,7 @@ need { 'sdl' }
 
 module SDL
   module TTF
-    extend NiceLibrary
+    extend NiceFFI::Library
     load_library("SDL_ttf", self)
 
 

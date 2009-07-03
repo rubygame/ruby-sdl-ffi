@@ -38,7 +38,7 @@ module SDL
     FPS_LOWER_LIMIT = 1
     FPS_DEFAULT     = 30
 
-    class FPSmanager < NiceStruct
+    class FPSmanager < NiceFFI::Struct
       layout( :framecount, :uint32,
               :rateticks,  :float,
               :lastticks,  :uint32,

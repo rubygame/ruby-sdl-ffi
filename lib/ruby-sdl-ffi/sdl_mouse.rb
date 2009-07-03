@@ -33,7 +33,7 @@ require 'nice-ffi'
 
 module SDL
 
-  class Cursor < NiceStruct
+  class Cursor < NiceFFI::Struct
     layout( :area,      SDL::Rect,
             :hot_x,     :int16,
             :hot_y,     :int16,

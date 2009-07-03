@@ -43,7 +43,7 @@ module SDL
     attach_function :SDL_gfxSetAlpha, [ :pointer, :uint8 ], :int
 
 
-    class BlitInfo < NiceStruct
+    class BlitInfo < NiceFFI::Struct
       layout( :s_pixels, :pointer,
               :s_width,  :int,
               :s_height, :int,
@@ -53,9 +53,9 @@ module SDL
               :d_height, :int,
               :d_skip,   :int,
               :aux_data, :pointer,
-              :src,      TypedPointer( SDL::PixelFormat ),
+              :src,      NiceFFI::TypedPointer( SDL::PixelFormat ),
               :table,    :pointer,
-              :dst,      TypedPointer( SDL::PixelFormat ) )
+              :dst,      NiceFFI::TypedPointer( SDL::PixelFormat ) )
     end
 
   end

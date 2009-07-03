@@ -34,20 +34,20 @@ need { 'sdl' }
 
 module SDL
   module Image
-    extend NiceLibrary
+    extend NiceFFI::Library
     load_library("SDL_image", self)
 
 
-    attach_function :IMG_Linked_Version, [  ], TypedPointer( SDL::Version )
+    attach_function :IMG_Linked_Version, [  ], NiceFFI::TypedPointer( SDL::Version )
 
 
     attach_function :IMG_LoadTyped_RW, [ :pointer, :int, :string ],
-                    TypedPointer( SDL::Surface )
+                    NiceFFI::TypedPointer( SDL::Surface )
 
-    attach_function :IMG_Load, [ :string ], TypedPointer( SDL::Surface )
+    attach_function :IMG_Load, [ :string ], NiceFFI::TypedPointer( SDL::Surface )
 
     attach_function :IMG_Load_RW, [ :pointer, :int ],
-                    TypedPointer( SDL::Surface )
+                    NiceFFI::TypedPointer( SDL::Surface )
 
 
     attach_function :IMG_InvertAlpha,    [ :int     ], :int
@@ -66,22 +66,22 @@ module SDL
     attach_function :IMG_isXV,           [ :pointer ], :int
 
 
-    attach_function :IMG_LoadBMP_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadGIF_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadJPG_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadLBM_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadPCX_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadPNG_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadPNM_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadTGA_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadTIF_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadXCF_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadXPM_RW, [ :pointer ], TypedPointer(SDL::Surface)
-    attach_function :IMG_LoadXV_RW,  [ :pointer ], TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadBMP_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadGIF_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadJPG_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadLBM_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadPCX_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadPNG_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadPNM_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadTGA_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadTIF_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadXCF_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadXPM_RW, [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+    attach_function :IMG_LoadXV_RW,  [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
 
 
     attach_function :IMG_ReadXPMFromArray, [ :pointer ],
-                    TypedPointer(SDL::Surface)
+                    NiceFFI::TypedPointer(SDL::Surface)
 
   end
 end

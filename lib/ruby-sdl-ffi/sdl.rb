@@ -33,7 +33,7 @@ require 'nice-ffi'
 
 
 module SDL
-  extend NiceLibrary
+  extend NiceFFI::Library
   load_library("SDL", self)
 end
 

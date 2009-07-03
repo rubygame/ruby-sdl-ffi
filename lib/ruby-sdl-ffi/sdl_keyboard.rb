@@ -33,7 +33,7 @@ require 'nice-ffi'
 
 module SDL
 
-  class Keysym < NiceStruct
+  class Keysym < NiceFFI::Struct
     layout( :scancode, :uint8,
             :sym,      SDL::ENUM,
             :mod,      SDL::ENUM,

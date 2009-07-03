@@ -34,11 +34,11 @@ need { 'sdl' }
 
 module SDL
   module Mix
-    extend NiceLibrary
+    extend NiceFFI::Library
     load_library("SDL_mixer", self)
 
 
-    attach_function :Mix_Linked_Version, [  ], TypedPointer(SDL::Version)
+    attach_function :Mix_Linked_Version, [  ], NiceFFI::TypedPointer(SDL::Version)
 
     CHANNELS          = 8
     DEFAULT_FREQUENCY = 22050
@@ -46,7 +46,7 @@ module SDL
     MAX_VOLUME        = 128
 
 
-    class Chunk < NiceStruct
+    class Chunk < NiceFFI::Struct
       layout( :allocated, :int,
               :abuf,      :pointer,
               :alen,      :uint32,
@@ -55,7 +55,7 @@ module SDL
 
 
 
-    class Music < NiceStruct
+    class Music < NiceFFI::Struct
       #--
       # Mix_Music struct (in C) has a hidden layout, which changes
       # depending on which sound format libraries were available
@@ -109,13 +109,13 @@ module SDL
     attach_function :Mix_QuerySpec,     [ :pointer, :pointer, :pointer ], :int
 
 
-    attach_function :Mix_LoadWAV_RW,    [ :pointer, :int ], TypedPointer(Chunk)
-    attach_function :Mix_LoadMUS,       [ :string        ], TypedPointer(Music)
-    attach_function :Mix_LoadMUS_RW,    [ :pointer       ], TypedPointer(Music)
-    attach_function :Mix_QuickLoad_WAV, [ :pointer       ], TypedPointer(Chunk)
+    attach_function :Mix_LoadWAV_RW,    [ :pointer, :int ], NiceFFI::TypedPointer(Chunk)
+    attach_function :Mix_LoadMUS,       [ :string        ], NiceFFI::TypedPointer(Music)
+    attach_function :Mix_LoadMUS_RW,    [ :pointer       ], NiceFFI::TypedPointer(Music)
+    attach_function :Mix_QuickLoad_WAV, [ :pointer       ], NiceFFI::TypedPointer(Chunk)
 
     attach_function :Mix_QuickLoad_RAW, [ :pointer, :uint32 ],
-                    TypedPointer(Chunk)
+                    NiceFFI::TypedPointer(Chunk)
 
     attach_function :Mix_FreeChunk,     [ :pointer ], :void
     attach_function :Mix_FreeMusic,     [ :pointer ], :void
@@ -219,7 +219,7 @@ module SDL
 
 
     attach_function :Mix_GetSynchroValue,  [      ], :int
-    attach_function :Mix_GetChunk,         [ :int ], TypedPointer(Chunk)
+    attach_function :Mix_GetChunk,         [ :int ], NiceFFI::TypedPointer(Chunk)
 
 
     attach_function :Mix_CloseAudio,       [ ], :void

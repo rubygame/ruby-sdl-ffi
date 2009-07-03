@@ -36,14 +36,14 @@ module SDL
   ALPHA_OPAQUE      = 255
   ALPHA_TRANSPARENT = 0
 
-  class Rect < NiceStruct
+  class Rect < NiceFFI::Struct
     layout( :x, :int16,
             :y, :int16,
             :w, :uint16,
             :h, :uint16 )
   end
 
-  class Color < NiceStruct
+  class Color < NiceFFI::Struct
     layout( :r,      :uint8,
             :g,      :uint8,
             :b,      :uint8,
@@ -53,13 +53,13 @@ module SDL
 
   end
 
-  class Palette < NiceStruct
+  class Palette < NiceFFI::Struct
     layout( :ncolors, :int,
             :colors,  :pointer )
   end
 
-  class PixelFormat < NiceStruct
-    layout( :palette,       TypedPointer( Palette ),
+  class PixelFormat < NiceFFI::Struct
+    layout( :palette,       NiceFFI::TypedPointer( Palette ),
             :BitsPerPixel,  :uint8,
             :BytesPerPixel, :uint8,
             :Rloss,         :uint8,
@@ -78,9 +78,9 @@ module SDL
             :alpha,         :uint8 )
   end
 
-  class Surface < NiceStruct
+  class Surface < NiceFFI::Struct
     layout( :flags,          :uint32,
-            :format,         TypedPointer( PixelFormat ),
+            :format,         NiceFFI::TypedPointer( PixelFormat ),
             :w,              :int,
             :h,              :int,
             :pitch,          :uint16,
@@ -125,7 +125,7 @@ module SDL
 
 ## Don't know how to implement this.
 #
-#   class VideoInfo < NiceStruct
+#   class VideoInfo < NiceFFI::Struct
 #     layout( :hw_available,  :uint32,  #bitfield: 1
 #             :wm_available,  :uint32,  #bitfield: 1
 #             :UnusedBits1,   :uint32,  #bitfield: 6
@@ -139,7 +139,7 @@ module SDL
 #             :blit_fill,     :uint32,  #bitfield: 1
 #             :UnusedBits3,   :uint32,  #bitfield: 16
 #             :video_mem,     :uint32,
-#             :vfmt,          TypedPointer( PixelFormat ),
+#             :vfmt,          NiceFFI::TypedPointer( PixelFormat ),
 #             :current_w,     :int,
 #             :current_h,     :int )
 #
@@ -154,7 +154,7 @@ module SDL
   UYVY_OVERLAY = 0x59565955
   YVYU_OVERLAY = 0x55595659
 
-  class Overlay < NiceStruct
+  class Overlay < NiceFFI::Struct
     layout( :format,     :uint32,
             :w,          :int,
             :h,          :int,
@@ -199,10 +199,10 @@ module SDL
   attach_function  :SDL_VideoInit,       [ :string, :uint32 ], :int
   attach_function  :SDL_VideoQuit,       [  ], :void
   attach_function  :SDL_VideoDriverName, [ :string, :int ], :string
-  attach_function  :SDL_GetVideoSurface, [  ], TypedPointer( SDL::Surface )
+  attach_function  :SDL_GetVideoSurface, [  ], NiceFFI::TypedPointer( SDL::Surface )
 
   ## Depends on SDL::VideoInfo, which I don't know how to implement.
-  #attach_function  :SDL_GetVideoInfo,    [  ], TypedPointer( SDL::VideoInfo )
+  #attach_function  :SDL_GetVideoInfo,    [  ], NiceFFI::TypedPointer( SDL::VideoInfo )
 
   attach_function  :SDL_VideoModeOK,     [ :int, :int, :int, :uint32 ], :int
 
@@ -210,7 +210,7 @@ module SDL
   # attach_function  :SDL_ListModes,       [ :pointer, :uint32 ], :pointer
 
   attach_function  :SDL_SetVideoMode, [ :int, :int, :int, :uint32 ],
-                   TypedPointer( SDL::Surface )
+                   NiceFFI::TypedPointer( SDL::Surface )
 
 
   attach_function  :SDL_UpdateRects, [ :pointer, :int, :pointer ], :void
@@ -289,12 +289,12 @@ module SDL
   attach_function  :SDL_CreateRGBSurface,
                    [ :uint32, :int, :int, :int,
                      :uint32, :uint32, :uint32, :uint32 ],
-                   TypedPointer( SDL::Surface )
+                   NiceFFI::TypedPointer( SDL::Surface )
 
   attach_function  :SDL_CreateRGBSurfaceFrom,
                    [ :pointer, :int, :int, :int, :int,
                      :uint32, :uint32, :uint32, :uint32 ],
-                   TypedPointer( SDL::Surface )
+                   NiceFFI::TypedPointer( SDL::Surface )
 
 
   attach_function  :SDL_FreeSurface,   [ :pointer ], :void
@@ -303,7 +303,7 @@ module SDL
 
 
   attach_function  :SDL_LoadBMP_RW,    [ :pointer, :int ],
-                   TypedPointer( SDL::Surface )
+                   NiceFFI::TypedPointer( SDL::Surface )
 
   attach_function  :SDL_SaveBMP_RW,    [ :pointer, :pointer, :int   ], :int
 
@@ -326,7 +326,7 @@ module SDL
 
 
   attach_function  :SDL_ConvertSurface, [ :pointer, :pointer, :uint32 ],
-                   TypedPointer( SDL::Surface )
+                   NiceFFI::TypedPointer( SDL::Surface )
 
   attach_function  :SDL_BlitSurface, "SDL_UpperBlit",
                    [ :pointer, :pointer, :pointer, :pointer ], :int
@@ -335,14 +335,14 @@ module SDL
 
 
   attach_function  :SDL_DisplayFormat,      [ :pointer ],
-                   TypedPointer( SDL::Surface )
+                   NiceFFI::TypedPointer( SDL::Surface )
 
   attach_function  :SDL_DisplayFormatAlpha, [ :pointer ],
-                   TypedPointer( SDL::Surface )
+                   NiceFFI::TypedPointer( SDL::Surface )
 
 
   attach_function  :SDL_CreateYUVOverlay, [ :int, :int, :uint32, :pointer ],
-                   TypedPointer( SDL::Overlay )
+                   NiceFFI::TypedPointer( SDL::Overlay )
 
   attach_function  :SDL_LockYUVOverlay,    [ :pointer ], :int
   attach_function  :SDL_UnlockYUVOverlay,  [ :pointer ], :void

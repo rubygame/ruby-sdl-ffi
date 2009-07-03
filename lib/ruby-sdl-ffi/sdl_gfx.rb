@@ -34,7 +34,7 @@ need { 'sdl' }
 
 module SDL
   module Gfx
-    extend NiceLibrary
+    extend NiceFFI::Library
     load_library("SDL_gfx", self)
   end
 end

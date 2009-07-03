@@ -33,7 +33,7 @@ require 'nice-ffi'
 
 module SDL
 
-  class AudioSpec < NiceStruct
+  class AudioSpec < NiceFFI::Struct
 
     SDL::callback(:audiospec_cb, [ :pointer, :pointer, :int ], :void)
 
@@ -73,7 +73,7 @@ module SDL
 
 #     callback( :filters_cb, [ :pointer, :uint16 ], :void)
 
-#     class AudioCVT < NiceStruct
+#     class AudioCVT < NiceFFI::Struct
 #       layout( :needed,       :int,
 #               :src_format,   :uint16,
 #               :dst_format,   :uint16,

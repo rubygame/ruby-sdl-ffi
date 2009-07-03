@@ -33,20 +33,20 @@ require 'nice-ffi'
 
 module SDL
 
-  class RWopsHiddenStdio < NiceStruct
+  class RWopsHiddenStdio < NiceFFI::Struct
      layout( :autoclose, :int,
              :fp,        :pointer )
   end
 
 
-  class RWopsHiddenMem < NiceStruct
+  class RWopsHiddenMem < NiceFFI::Struct
     layout( :base, :pointer,
             :here, :pointer,
             :stop, :pointer )
   end
 
 
-  class RWopsHiddenUnknown < NiceStruct
+  class RWopsHiddenUnknown < NiceFFI::Struct
     layout( :data1, :pointer )
   end
 
@@ -63,7 +63,7 @@ module SDL
   SDL::callback(:rwops_write_cb,[:pointer, :pointer, :int, :int], :int)
   SDL::callback(:rwops_close_cb,[:pointer], :int)
 
-  class RWops < NiceStruct
+  class RWops < NiceFFI::Struct
     layout( :seek,   :rwops_seek_cb,
             :read,   :rwops_read_cb,
             :write,  :rwops_write_cb,

@@ -28,8 +28,11 @@
 #++
 
 
+require 'rubygems'
+
 require 'need'
-need { 'sdl' }
+require 'nice-ffi'
+require 'ruby-sdl-ffi/sdl'
 
 
 module SDL
@@ -40,11 +43,11 @@ module SDL
 end
 
 %w{
-  sdl_framerate
-  sdl_gfxblitfunc
-  sdl_gfxprimitives
-  sdl_imagefilter
-  sdl_rotozoom
+  framerate
+  blitfunc
+  primitives
+  imagefilter
+  rotozoom
 }.each do |f|
-  need { f }
+  need { File.join("gfx", f) }
 end

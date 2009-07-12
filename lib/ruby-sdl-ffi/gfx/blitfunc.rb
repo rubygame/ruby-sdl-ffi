@@ -28,12 +28,6 @@
 #++
 
 
-require 'nice-ffi'
-
-# For SDL::PixelFormat
-need { 'sdl' }
-
-
 module SDL
   module Gfx
 

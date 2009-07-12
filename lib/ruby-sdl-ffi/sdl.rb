@@ -28,7 +28,6 @@
 #++
 
 
-require 'need'
 require 'nice-ffi'
 
 
@@ -42,18 +41,18 @@ end
 # because sdl_event and sdl_mouse depend on them, respectively.
 
 %w{
-  sdl_core
-  sdl_keyboard
-  sdl_video
-  sdl_audio
-  sdl_cdrom
-  sdl_event
-  sdl_joystick
-  sdl_keysyms
-  sdl_mouse
-  sdl_mutex
-  sdl_rwops
-  sdl_timer
+  core
+  keyboard
+  video
+  audio
+  cdrom
+  event
+  joystick
+  keysyms
+  mouse
+  mutex
+  rwops
+  timer
 }.each do |f|
-  need { f }
+  need { File.join("sdl", f) }
 end

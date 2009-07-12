@@ -33,7 +33,7 @@ require 'ruby-sdl-ffi/sdl'
 
 
 module SDL
-  module Mix
+  module Mixer
     extend NiceFFI::Library
     load_library "SDL_mixer"
 

@@ -28,6 +28,7 @@
 #++
 
 
+require 'rubygems'
 require 'need'
 
 # sdl.rb is absolutely required. If it fails, don't catch the error.
@@ -36,13 +37,13 @@ need { File.join( 'ruby-sdl-ffi', 'sdl' ) }
 
 # The others are "optional", so just give a warning if they fail.
 # Users who really need them should load them directly, with
-# e.g. 'require "ruby-sdl-ffi/sdl_gfx"'.
+# e.g. 'require "ruby-sdl-ffi/gfx"'.
 %w{
 
-  sdl_image
-  sdl_ttf
-  sdl_mixer
-  sdl_gfx
+  image
+  ttf
+  mixer
+  gfx
 
 }.each do |f|
 

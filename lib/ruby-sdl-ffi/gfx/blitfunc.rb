@@ -31,10 +31,10 @@
 module SDL
   module Gfx
 
-    attach_function :SDL_gfxBlitRGBA,
+    attach_function :BlitRGBA, "SDL_gfxBlitRGBA",
                     [ :pointer, :pointer, :pointer, :pointer ], :int
 
-    attach_function :SDL_gfxSetAlpha, [ :pointer, :uint8 ], :int
+    attach_function :SetAlpha, "SDL_gfxSetAlpha", [ :pointer, :uint8 ], :int
 
 
     class BlitInfo < NiceFFI::Struct

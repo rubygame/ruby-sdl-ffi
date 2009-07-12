@@ -28,8 +28,8 @@
 #++
 
 
-require 'need'
-need { 'sdl' }
+require 'rubygems'
+require 'ruby-sdl-ffi/sdl'
 
 
 module SDL

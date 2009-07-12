@@ -34,17 +34,21 @@ module SDL
   TIMER_RESOLUTION = 10
 
 
-  attach_function  :SDL_GetTicks, [  ], :uint32
-  attach_function  :SDL_Delay,    [ :uint32 ], :void
+  attach_function  :GetTicks, "SDL_GetTicks", [         ], :uint32
+  attach_function  :Delay,    "SDL_Delay",    [ :uint32 ], :void
 
 
   callback(:timer_cb, [ :uint32 ], :uint32)
-  attach_function  :SDL_SetTimer, [ :uint32, :timer_cb ], :int
+
+  attach_function  :SetTimer, "SDL_SetTimer", [ :uint32, :timer_cb ], :int
+
 
   callback(:newtimer_cb, [ :uint32, :pointer ], :uint32)
-  attach_function  :SDL_AddTimer,
+
+  attach_function  :AddTimer, "SDL_AddTimer",
                    [:uint32, :newtimer_cb, :pointer], :pointer
 
-  attach_function  :SDL_RemoveTimer, [ :pointer ], SDL::BOOL
+
+  attach_function  :RemoveTimer, "SDL_RemoveTimer", [ :pointer ], SDL::BOOL
 
 end

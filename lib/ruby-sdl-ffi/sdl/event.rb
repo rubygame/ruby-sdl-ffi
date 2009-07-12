@@ -245,15 +245,16 @@ module SDL
   end
 
 
-  attach_function  :SDL_PumpEvents, [  ], :void
+  attach_function  :PumpEvents, "SDL_PumpEvents", [  ], :void
+
 
   ADDEVENT  = 0
   PEEKEVENT = 1
   GETEVENT  = 2
 
-
   attach_function  :__SDL_PeepEvents, "SDL_PeepEvents",
                    [ :pointer, :int, SDL::ENUM, :uint32 ], :int
+
 
   # Behavior varies depending on action.
   # 
@@ -267,7 +268,7 @@ module SDL
   #   to append to the queue.
   #   Returns the number of events added, or -1 if there was an error.
   # 
-  def self.SDL_PeepEvents( events, action, mask )
+  def self.PeepEvents( events, action, mask )
     # PeepEvents is very versatile, so we break it up into
     # different actions...
 
@@ -307,7 +308,7 @@ module SDL
 
   attach_function  :__SDL_PollEvent, "SDL_PollEvent", [ :pointer ], :int
 
-  def self.SDL_PollEvent()
+  def self.PollEvent()
     mp = FFI::MemoryPointer.new( SDL::Event, 1 )
     n = __SDL_PollEvent( mp )
     if n == 0
@@ -320,7 +321,7 @@ module SDL
 
   attach_function  :__SDL_WaitEvent, "SDL_WaitEvent", [ :pointer ], :int
 
-  def self.SDL_WaitEvent()
+  def self.WaitEvent()
     mp = FFI::MemoryPointer.new( SDL::Event, 1 )
     n = __SDL_WaitEvent( mp )
     if n == 0
@@ -331,7 +332,8 @@ module SDL
   end
 
 
-  attach_function  :SDL_PushEvent, [ :pointer ], :int
+  attach_function  :PushEvent, "SDL_PushEvent", [ :pointer ], :int
+
 
 
   callback(:eventfilter_cb, [ :pointer ], :int)
@@ -339,7 +341,7 @@ module SDL
   attach_function  :__SDL_SetEventFilter, "SDL_SetEventFilter",
                    [ :eventfilter_cb ], :void
 
-  def self.SDL_SetEventFilter( &block )
+  def self.SetEventFilter( &block )
     if( block_given? )
       proc = Proc.new { |ev| 
         result = block.call( Event.new(ev).unwrap )
@@ -356,7 +358,8 @@ module SDL
   end
 
 
-  #attach_function  :SDL_GetEventFilter, [ ], :eventfilter_cb
+  #attach_function  :GetEventFilter, "SDL_GetEventFilter",
+  #                 [ ], :eventfilter_cb
 
 
   QUERY   = -1
@@ -364,6 +367,6 @@ module SDL
   DISABLE = 0
   ENABLE  = 1
 
-  attach_function  :SDL_EventState, [ :uint8, :int ], :uint8
+  attach_function  :EventState, "SDL_EventState", [ :uint8, :int ], :uint8
 
 end

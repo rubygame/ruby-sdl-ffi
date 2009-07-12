@@ -196,37 +196,53 @@ module SDL
   PHYSPAL = 0x02
 
 
-  attach_function  :SDL_VideoInit,       [ :string, :uint32 ], :int
-  attach_function  :SDL_VideoQuit,       [  ], :void
-  attach_function  :SDL_VideoDriverName, [ :string, :int ], :string
-  attach_function  :SDL_GetVideoSurface, [  ], NiceFFI::TypedPointer( SDL::Surface )
+  attach_function  :VideoInit, "SDL_VideoInit", [ :string, :uint32 ], :int
+  attach_function  :VideoQuit, "SDL_VideoQuit", [  ], :void
+
+  attach_function  :VideoDriverName, "SDL_VideoDriverName",
+                   [ :string, :int ], :string
+
+  attach_function  :GetVideoSurface, "SDL_GetVideoSurface",
+                   [  ], NiceFFI::TypedPointer( SDL::Surface )
 
   ## Depends on SDL::VideoInfo, which I don't know how to implement.
-  #attach_function  :SDL_GetVideoInfo,    [  ], NiceFFI::TypedPointer( SDL::VideoInfo )
+  #attach_function  :GetVideoInfo, "SDL_GetVideoInfo",
+  #                 [  ], NiceFFI::TypedPointer( SDL::VideoInfo )
 
-  attach_function  :SDL_VideoModeOK,     [ :int, :int, :int, :uint32 ], :int
+  attach_function  :VideoModeOK, "SDL_VideoModeOK",
+                   [ :int, :int, :int, :uint32 ], :int
 
   ## Don't know how to implement this one. :-\
-  # attach_function  :SDL_ListModes,       [ :pointer, :uint32 ], :pointer
+  # attach_function  :ListModes, "SDL_ListModes",
+  #                  [ :pointer, :uint32 ], :pointer
 
-  attach_function  :SDL_SetVideoMode, [ :int, :int, :int, :uint32 ],
+  attach_function  :SetVideoMode, "SDL_SetVideoMode",
+                   [ :int, :int, :int, :uint32 ],
                    NiceFFI::TypedPointer( SDL::Surface )
 
 
-  attach_function  :SDL_UpdateRects, [ :pointer, :int, :pointer ], :void
-  attach_function  :SDL_UpdateRect,  [ :pointer, :int32, :int32,
-                                       :uint32, :uint32 ], :void
-  attach_function  :SDL_Flip,        [ :pointer ], :int
+
+  attach_function  :UpdateRects, "SDL_UpdateRects",
+                   [ :pointer, :int, :pointer ], :void
+
+  attach_function  :UpdateRect,  "SDL_UpdateRect",
+                   [ :pointer, :int32, :int32, :uint32, :uint32 ], :void
+
+  attach_function  :Flip,        "SDL_Flip",
+                   [ :pointer ], :int
 
 
-  attach_function  :SDL_SetGamma,     [ :float, :float, :float       ], :int
-  attach_function  :SDL_SetGammaRamp, [ :pointer, :pointer, :pointer ], :int
+
+  attach_function  :SetGamma, "SDL_SetGamma", [ :float, :float, :float ], :int
+
+  attach_function  :SetGammaRamp, "SDL_SetGammaRamp",
+                   [ :pointer, :pointer, :pointer ], :int
 
 
   attach_function  :__SDL_GetGammaRamp, "SDL_GetGammaRamp",
                    [ :pointer, :pointer, :pointer ], :int
 
-  def self.SDL_GetGammaRamp()
+  def self.GetGammaRamp()
     rtable = FFI::Buffer.new( :uint16, 256 )
     gtable = FFI::Buffer.new( :uint16, 256 )
     btable = FFI::Buffer.new( :uint16, 256 )
@@ -243,25 +259,25 @@ module SDL
   end
 
 
-  attach_function  :SDL_SetColors,
+
+  attach_function  :SetColors,  "SDL_SetColors",
                    [ :pointer, :pointer, :int, :int ], :int
 
-  attach_function  :SDL_SetPalette,
+  attach_function  :SetPalette, "SDL_SetPalette",
                    [ :pointer, :int, :pointer, :int, :int ], :int
 
-  attach_function  :SDL_MapRGB,
+  attach_function  :MapRGB,     "SDL_MapRGB",
                    [ :pointer, :uint8, :uint8, :uint8 ], :uint32
 
-  attach_function  :SDL_MapRGBA,
+  attach_function  :MapRGBA,    "SDL_MapRGBA",
                    [ :pointer, :uint8, :uint8, :uint8, :uint8 ], :uint32
 
 
 
   attach_function  :__SDL_GetRGB, "SDL_GetRGB",
-                   [ :uint32, :pointer, :pointer,
-                     :pointer, :pointer ], :void
+                   [ :uint32, :pointer, :pointer, :pointer, :pointer ], :void
 
-  def self.SDL_GetRGB( uint32, format )
+  def self.GetRGB( uint32, format )
     r = FFI::MemoryPointer.new( :uint8 )
     g = FFI::MemoryPointer.new( :uint8 )
     b = FFI::MemoryPointer.new( :uint8 )
@@ -275,7 +291,7 @@ module SDL
                    [ :uint32, :pointer, :pointer, :pointer,
                      :pointer, :pointer ], :void
 
-  def self.SDL_GetRGBA( uint32, format )
+  def self.GetRGBA( uint32, format )
     r = FFI::MemoryPointer.new( :uint8 )
     g = FFI::MemoryPointer.new( :uint8 )
     b = FFI::MemoryPointer.new( :uint8 )
@@ -286,87 +302,129 @@ module SDL
 
 
 
-  attach_function  :SDL_CreateRGBSurface,
+  attach_function  :CreateRGBSurface,     "SDL_CreateRGBSurface",
                    [ :uint32, :int, :int, :int,
                      :uint32, :uint32, :uint32, :uint32 ],
                    NiceFFI::TypedPointer( SDL::Surface )
 
-  attach_function  :SDL_CreateRGBSurfaceFrom,
+  attach_function  :CreateRGBSurfaceFrom, "SDL_CreateRGBSurfaceFrom",
                    [ :pointer, :int, :int, :int, :int,
                      :uint32, :uint32, :uint32, :uint32 ],
                    NiceFFI::TypedPointer( SDL::Surface )
 
 
-  attach_function  :SDL_FreeSurface,   [ :pointer ], :void
-  attach_function  :SDL_LockSurface,   [ :pointer ], :int
-  attach_function  :SDL_UnlockSurface, [ :pointer ], :void
+
+  attach_function  :FreeSurface,   "SDL_FreeSurface",
+                   [ :pointer ], :void
+
+  attach_function  :LockSurface,   "SDL_LockSurface",
+                   [ :pointer ], :int
+
+  attach_function  :UnlockSurface, "SDL_UnlockSurface",
+                   [ :pointer ], :void
 
 
-  attach_function  :SDL_LoadBMP_RW,    [ :pointer, :int ],
-                   NiceFFI::TypedPointer( SDL::Surface )
 
-  attach_function  :SDL_SaveBMP_RW,    [ :pointer, :pointer, :int   ], :int
+  attach_function  :LoadBMP_RW, "SDL_LoadBMP_RW",
+                   [ :pointer, :int ], NiceFFI::TypedPointer( SDL::Surface )
 
-
-  attach_function  :SDL_SetColorKey,   [ :pointer, :uint32, :uint32 ], :int
-  attach_function  :SDL_SetAlpha,      [ :pointer, :uint32, :uint8  ], :int
+  attach_function  :SaveBMP_RW, "SDL_SaveBMP_RW",
+                   [ :pointer, :pointer, :int   ], :int
 
 
-  attach_function  :SDL_SetClipRect,   [ :pointer, :pointer ], SDL::BOOL
+
+  attach_function  :SetColorKey, "SDL_SetColorKey",
+                   [ :pointer, :uint32, :uint32 ], :int
+
+  attach_function  :SetAlpha,    "SDL_SetAlpha",
+                   [ :pointer, :uint32, :uint8  ], :int
+
+
+
+  attach_function  :SetClipRect, "SDL_SetClipRect",
+                   [ :pointer, :pointer ], SDL::BOOL
 
 
   attach_function  :__SDL_GetClipRect, "SDL_GetClipRect",
                    [ :pointer, :pointer ], :void
 
-  def self.SDL_GetClipRect( surface )
+  def self.GetClipRect( surface )
     mp = FFI::MemoryPointer.new( Rect )
     __SDL_GetClipRect( surface, mp )
     return Rect.new( mp )
   end
 
 
-  attach_function  :SDL_ConvertSurface, [ :pointer, :pointer, :uint32 ],
+
+  attach_function  :ConvertSurface, "SDL_ConvertSurface",
+                   [ :pointer, :pointer, :uint32 ],
                    NiceFFI::TypedPointer( SDL::Surface )
 
-  attach_function  :SDL_BlitSurface, "SDL_UpperBlit",
+  attach_function  :BlitSurface,    "SDL_UpperBlit",
                    [ :pointer, :pointer, :pointer, :pointer ], :int
 
-  attach_function  :SDL_FillRect, [ :pointer, :pointer, :uint32 ], :int
+  attach_function  :FillRect,       "SDL_FillRect",
+                   [ :pointer, :pointer, :uint32 ], :int
 
 
-  attach_function  :SDL_DisplayFormat,      [ :pointer ],
-                   NiceFFI::TypedPointer( SDL::Surface )
 
-  attach_function  :SDL_DisplayFormatAlpha, [ :pointer ],
-                   NiceFFI::TypedPointer( SDL::Surface )
+  attach_function  :DisplayFormat,      "SDL_DisplayFormat",
+                   [ :pointer ], NiceFFI::TypedPointer( SDL::Surface )
+
+  attach_function  :DisplayFormatAlpha, "SDL_DisplayFormatAlpha",
+                   [ :pointer ], NiceFFI::TypedPointer( SDL::Surface )
 
 
-  attach_function  :SDL_CreateYUVOverlay, [ :int, :int, :uint32, :pointer ],
+
+  attach_function  :CreateYUVOverlay,  "SDL_CreateYUVOverlay",
+                   [ :int, :int, :uint32, :pointer ],
                    NiceFFI::TypedPointer( SDL::Overlay )
 
-  attach_function  :SDL_LockYUVOverlay,    [ :pointer ], :int
-  attach_function  :SDL_UnlockYUVOverlay,  [ :pointer ], :void
-  attach_function  :SDL_DisplayYUVOverlay, [ :pointer, :pointer ], :int
-  attach_function  :SDL_FreeYUVOverlay,    [ :pointer ], :void
+  attach_function  :LockYUVOverlay,    "SDL_LockYUVOverlay",
+                   [ :pointer ], :int
+
+  attach_function  :UnlockYUVOverlay,  "SDL_UnlockYUVOverlay",
+                   [ :pointer ], :void
+
+  attach_function  :DisplayYUVOverlay, "SDL_DisplayYUVOverlay",
+                   [ :pointer, :pointer ], :int
+
+  attach_function  :FreeYUVOverlay,    "SDL_FreeYUVOverlay",
+                   [ :pointer ], :void
 
 
-  attach_function  :SDL_GL_LoadLibrary, [ :string ], :int
-  attach_function  :SDL_GL_GetProcAddress, [ :string ], :pointer
-  attach_function  :SDL_GL_SetAttribute, [ SDL::GLATTR, :int ], :int
-  attach_function  :SDL_GL_GetAttribute, [ SDL::GLATTR, :pointer ], :int
-  attach_function  :SDL_GL_SwapBuffers, [  ], :void
-  attach_function  :SDL_GL_UpdateRects, [ :int, :pointer ], :void
-  attach_function  :SDL_GL_Lock,        [  ], :void
-  attach_function  :SDL_GL_Unlock,      [  ], :void
+
+  attach_function  :GL_LoadLibrary,    "SDL_GL_LoadLibrary",
+                   [ :string ], :int
+
+  attach_function  :GL_GetProcAddress, "SDL_GL_GetProcAddress",
+                   [ :string ], :pointer
+
+  attach_function  :GL_SetAttribute,   "SDL_GL_SetAttribute",
+                   [ SDL::GLATTR, :int ], :int
+
+  attach_function  :GL_GetAttribute,   "SDL_GL_GetAttribute",
+                   [ SDL::GLATTR, :pointer ], :int
+
+  attach_function  :GL_SwapBuffers,    "SDL_GL_SwapBuffers",
+                   [ ], :void
+
+  attach_function  :GL_UpdateRects,    "SDL_GL_UpdateRects",
+                   [ :int, :pointer ], :void
+
+  attach_function  :GL_Lock,   "SDL_GL_Lock",   [ ], :void
+  attach_function  :GL_Unlock, "SDL_GL_Unlock", [ ], :void
 
 
-  attach_function  :SDL_WM_SetCaption, [ :string, :string ], :void
+
+  attach_function  :WM_SetCaption, "SDL_WM_SetCaption",
+                   [ :string, :string ], :void
 
 
   attach_function  :__SDL_WM_GetCaption, "SDL_WM_GetCaption",
                    [ :pointer, :pointer ], :void
 
-  def self.SDL_WM_GetCaption()
+  def self.WM_GetCaption()
     title = FFI::MemoryPointer.new( :pointer )
     icont = FFI::MemoryPointer.new( :pointer )
     __SDL_WM_GetCaption( title, icont )
@@ -375,15 +433,22 @@ module SDL
   end
 
 
-  attach_function  :SDL_WM_SetIcon,    [ :pointer, :pointer ], :void
-  attach_function  :SDL_WM_IconifyWindow,    [  ], :int
-  attach_function  :SDL_WM_ToggleFullScreen, [ :pointer ], :int
+  attach_function  :WM_SetIcon, "SDL_WM_SetIcon",
+                   [ :pointer, :pointer ], :void
+
+  attach_function  :WM_IconifyWindow, "SDL_WM_IconifyWindow",
+                   [  ], :int
+
+  attach_function  :WM_ToggleFullScreen, "SDL_WM_ToggleFullScreen",
+                   [ :pointer ], :int
+
+
 
   GRAB_QUERY      = -1
   GRAB_OFF        = 0
   GRAB_ON         = 1
   GRAB_FULLSCREEN = 2
 
-  attach_function  :SDL_WM_GrabInput, [ SDL::ENUM ], SDL::ENUM
+  attach_function  :WM_GrabInput, "SDL_WM_GrabInput", [ SDL::ENUM ], SDL::ENUM
 
 end

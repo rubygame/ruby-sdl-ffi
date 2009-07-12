@@ -50,7 +50,7 @@ module SDL
   # Returns [buttons, x, y].
   #  buttons: buttons currently pressed (bitmask of BUTTON_*MASK constants).
   #  x, y: current position of the mouse cursor.
-  def self.SDL_GetMouseState()
+  def self.GetMouseState()
     xmp = FFI::MemoryPointer.new( :int )
     ymp = FFI::MemoryPointer.new( :int )
     buttons = __SDL_GetMouseState( xmp, ymp )
@@ -65,7 +65,7 @@ module SDL
   #  buttons: buttons currently pressed (bitmask of BUTTON_*MASK constants).
   #  x, y: movement of the mouse cursor since last call of this method.
   # 
-  def self.SDL_GetRelativeMouseState()
+  def self.GetRelativeMouseState()
     xmp = FFI::MemoryPointer.new( :int )
     ymp = FFI::MemoryPointer.new( :int )
     buttons = __SDL_GetRelativeMouseState( xmp, ymp )
@@ -74,16 +74,16 @@ module SDL
 
 
 
-  attach_function  :SDL_WarpMouse, [ :uint16, :uint16   ], :void
+  attach_function  :WarpMouse, "SDL_WarpMouse", [ :uint16, :uint16 ], :void
 
 
-  attach_function  :SDL_CreateCursor,  
+  attach_function  :CreateCursor, "SDL_CreateCursor",
                    [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
 
-  attach_function  :SDL_SetCursor,  [ :pointer ], :void
-  attach_function  :SDL_GetCursor,  [          ], :pointer
-  attach_function  :SDL_FreeCursor, [ :pointer ], :void
-  attach_function  :SDL_ShowCursor, [ :int     ], :int
+  attach_function  :SetCursor,  "SDL_SetCursor",  [ :pointer ], :void
+  attach_function  :GetCursor,  "SDL_GetCursor",  [          ], :pointer
+  attach_function  :FreeCursor, "SDL_FreeCursor", [ :pointer ], :void
+  attach_function  :ShowCursor, "SDL_ShowCursor", [ :int     ], :int
 
 
   BUTTON_LEFT      = 1

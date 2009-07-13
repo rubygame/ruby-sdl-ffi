@@ -28,6 +28,13 @@
 #++
 
 
+# Force create ChangeLog.txt if running from gem (build).
+# This is done in Rakefile when running from rake.
+if /gem/i =~ $0
+  `ruby scripts/mkchangelog.rb ChangeLog.txt`
+end
+
+
 $gemspec = Gem::Specification.new do |s|
 
   s.name     = "ruby-sdl-ffi"

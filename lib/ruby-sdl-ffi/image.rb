@@ -38,19 +38,16 @@ module SDL
     load_library "SDL_image"
 
 
-    func  :Linked_Version, "IMG_Linked_Version",
-          [ ], NiceFFI::TypedPointer( SDL::Version )
+    func  :Linked_Version, "IMG_Linked_Version", [], SDL::Version.typed_pointer
 
 
     func  :LoadTyped_RW, "IMG_LoadTyped_RW",
-          [ :pointer, :int, :string ],
-          NiceFFI::TypedPointer( SDL::Surface )
+          [ :pointer, :int, :string ], SDL::Surface.typed_pointer
 
-    func  :Load, "IMG_Load",
-          [ :string ], NiceFFI::TypedPointer( SDL::Surface )
+    func  :Load, "IMG_Load", [ :string ], SDL::Surface.typed_pointer
 
     func  :Load_RW, "IMG_Load_RW", [ :pointer, :int ],
-          NiceFFI::TypedPointer( SDL::Surface )
+          SDL::Surface.typed_pointer
 
 
     func  :InvertAlpha, "IMG_InvertAlpha", [ :int     ], :int
@@ -70,44 +67,44 @@ module SDL
 
 
     func  :LoadBMP_RW, "IMG_LoadBMP_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadGIF_RW, "IMG_LoadGIF_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadJPG_RW, "IMG_LoadJPG_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadLBM_RW, "IMG_LoadLBM_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadPCX_RW, "IMG_LoadPCX_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadPNG_RW, "IMG_LoadPNG_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadPNM_RW, "IMG_LoadPNM_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadTGA_RW, "IMG_LoadTGA_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadTIF_RW, "IMG_LoadTIF_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadXCF_RW, "IMG_LoadXCF_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadXPM_RW, "IMG_LoadXPM_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
     func  :LoadXV_RW,  "IMG_LoadXV_RW",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
 
     func  :ReadXPMFromArray, "IMG_ReadXPMFromArray",
-          [ :pointer ], NiceFFI::TypedPointer(SDL::Surface)
+          [ :pointer ], SDL::Surface.typed_pointer
 
   end
 end

@@ -47,9 +47,9 @@ module SDL
               :d_height, :int,
               :d_skip,   :int,
               :aux_data, :pointer,
-              :src,      NiceFFI::TypedPointer( SDL::PixelFormat ),
+              :src,      SDL::PixelFormat.typed_pointer,
               :table,    :pointer,
-              :dst,      NiceFFI::TypedPointer( SDL::PixelFormat ) )
+              :dst,      SDL::PixelFormat.typed_pointer )
     end
 
   end

@@ -59,7 +59,7 @@ module SDL
   end
 
   class PixelFormat < NiceFFI::Struct
-    layout( :palette,       NiceFFI::TypedPointer( Palette ),
+    layout( :palette,       Palette.typed_pointer,
             :BitsPerPixel,  :uint8,
             :BytesPerPixel, :uint8,
             :Rloss,         :uint8,
@@ -80,7 +80,7 @@ module SDL
 
   class Surface < NiceFFI::Struct
     layout( :flags,          :uint32,
-            :format,         NiceFFI::TypedPointer( PixelFormat ),
+            :format,         PixelFormat.typed_pointer,
             :w,              :int,
             :h,              :int,
             :pitch,          :uint16,
@@ -139,7 +139,7 @@ module SDL
 #             :blit_fill,     :uint32,  #bitfield: 1
 #             :UnusedBits3,   :uint32,  #bitfield: 16
 #             :video_mem,     :uint32,
-#             :vfmt,          NiceFFI::TypedPointer( PixelFormat ),
+#             :vfmt,          PixelFormat.typed_pointer,
 #             :current_w,     :int,
 #             :current_h,     :int )
 #
@@ -201,12 +201,10 @@ module SDL
 
   func  :VideoDriverName, "SDL_VideoDriverName", [ :string, :int ], :string
 
-  func  :GetVideoSurface, "SDL_GetVideoSurface",
-        [ ], NiceFFI::TypedPointer( SDL::Surface )
+  func  :GetVideoSurface, "SDL_GetVideoSurface", [], SDL::Surface.typed_pointer
 
   ## Depends on SDL::VideoInfo, which I don't know how to implement.
-  #func  :GetVideoInfo, "SDL_GetVideoInfo",
-  #      [ ], NiceFFI::TypedPointer( SDL::VideoInfo )
+  #func  :GetVideoInfo, "SDL_GetVideoInfo", [ ], SDL::VideoInfo.typed_pointer
 
   func  :VideoModeOK, "SDL_VideoModeOK", [ :int, :int, :int, :uint32 ], :int
 
@@ -214,7 +212,7 @@ module SDL
   # func  :ListModes, "SDL_ListModes", [ :pointer, :uint32 ], :pointer
 
   func  :SetVideoMode, "SDL_SetVideoMode", [ :int, :int, :int, :uint32 ],
-        NiceFFI::TypedPointer( SDL::Surface )
+        SDL::Surface.typed_pointer
 
 
 
@@ -297,12 +295,12 @@ module SDL
 
   func  :CreateRGBSurface,     "SDL_CreateRGBSurface",
         [ :uint32, :int, :int, :int, :uint32, :uint32, :uint32, :uint32 ],
-        NiceFFI::TypedPointer( SDL::Surface )
+        SDL::Surface.typed_pointer
 
   func  :CreateRGBSurfaceFrom, "SDL_CreateRGBSurfaceFrom",
         [ :pointer, :int, :int, :int, :int,
           :uint32, :uint32, :uint32, :uint32 ],
-        NiceFFI::TypedPointer( SDL::Surface )
+        SDL::Surface.typed_pointer
 
 
   func  :FreeSurface,   "SDL_FreeSurface",   [ :pointer ], :void
@@ -311,7 +309,7 @@ module SDL
 
 
   func  :LoadBMP_RW, "SDL_LoadBMP_RW",
-        [ :pointer, :int ], NiceFFI::TypedPointer( SDL::Surface )
+        [ :pointer, :int ], SDL::Surface.typed_pointer
 
   func  :SaveBMP_RW, "SDL_SaveBMP_RW", [ :pointer, :pointer, :int   ], :int
 
@@ -334,8 +332,7 @@ module SDL
 
 
   func  :ConvertSurface, "SDL_ConvertSurface",
-        [ :pointer, :pointer, :uint32 ],
-        NiceFFI::TypedPointer( SDL::Surface )
+        [ :pointer, :pointer, :uint32 ], SDL::Surface.typed_pointer
 
   func  :BlitSurface,    "SDL_UpperBlit",
         [ :pointer, :pointer, :pointer, :pointer ], :int
@@ -345,16 +342,15 @@ module SDL
 
 
   func  :DisplayFormat,      "SDL_DisplayFormat",
-        [ :pointer ], NiceFFI::TypedPointer( SDL::Surface )
+        [ :pointer ], SDL::Surface.typed_pointer
 
   func  :DisplayFormatAlpha, "SDL_DisplayFormatAlpha",
-        [ :pointer ], NiceFFI::TypedPointer( SDL::Surface )
+        [ :pointer ], SDL::Surface.typed_pointer
 
 
 
   func  :CreateYUVOverlay,  "SDL_CreateYUVOverlay",
-        [ :int, :int, :uint32, :pointer ],
-        NiceFFI::TypedPointer( SDL::Overlay )
+        [ :int, :int, :uint32, :pointer ], SDL::Overlay.typed_pointer
 
   func  :LockYUVOverlay,    "SDL_LockYUVOverlay", [ :pointer ], :int
   func  :UnlockYUVOverlay,  "SDL_UnlockYUVOverlay", [ :pointer ], :void

@@ -52,7 +52,7 @@ module SDL
             :patch, :uint8 )
   end
 
-  func  :Linked_Version, "SDL_Linked_Version", [  ], :pointer
+  func  :Linked_Version, "SDL_Linked_Version", [], Version.typed_pointer
 
 
   INIT_TIMER       = 0x00000001

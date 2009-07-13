@@ -38,8 +38,7 @@ module SDL
     load_library "SDL_mixer"
 
 
-    func  :Linked_Version, "Mix_Linked_Version",
-         [ ], NiceFFI::TypedPointer(SDL::Version)
+    func  :Linked_Version, "Mix_Linked_Version", [], SDL::Version.typed_pointer
 
     CHANNELS          = 8
     DEFAULT_FREQUENCY = 22050
@@ -113,20 +112,15 @@ module SDL
     func  :QuerySpec, "Mix_QuerySpec", [ :pointer, :pointer, :pointer ], :int
 
 
-    func  :LoadWAV_RW,    "Mix_LoadWAV_RW",
-          [ :pointer, :int ], NiceFFI::TypedPointer(Chunk)
-
-    func  :LoadMUS,       "Mix_LoadMUS",
-          [ :string ], NiceFFI::TypedPointer(Music)
-
-    func  :LoadMUS_RW,    "Mix_LoadMUS_RW",
-          [ :pointer ], NiceFFI::TypedPointer(Music)
+    func  :LoadWAV_RW, "Mix_LoadWAV_RW", [:pointer, :int], Chunk.typed_pointer
+    func  :LoadMUS,    "Mix_LoadMUS",    [:string       ], Music.typed_pointer
+    func  :LoadMUS_RW, "Mix_LoadMUS_RW", [:pointer      ], Music.typed_pointer
 
     func  :QuickLoad_WAV, "Mix_QuickLoad_WAV",
-          [ :pointer ], NiceFFI::TypedPointer(Chunk)
+          [ :pointer ], Chunk.typed_pointer
 
     func  :QuickLoad_RAW, "Mix_QuickLoad_RAW",
-          [ :pointer, :uint32 ], NiceFFI::TypedPointer(Chunk)
+          [ :pointer, :uint32 ], Chunk.typed_pointer
 
 
     func  :FreeChunk, "Mix_FreeChunk", [ :pointer ], :void
@@ -236,7 +230,7 @@ module SDL
     func  :GetSynchroValue, "Mix_GetSynchroValue", [      ], :int
 
 
-    func  :GetChunk, "Mix_GetChunk", [ :int ], NiceFFI::TypedPointer(Chunk)
+    func  :GetChunk, "Mix_GetChunk", [ :int ], Chunk.typed_pointer
 
 
     func  :CloseAudio, "Mix_CloseAudio", [ ], :void

@@ -28,19 +28,19 @@ end
 path = File.expand_path(path)
 
 # Load the image file.
-image = SDL::Image::IMG_Load( path )
+image = SDL::Image::Load( path )
 
 # Create a new window the same size as the image.
-screen = SDL::SDL_SetVideoMode(image.w, image.h, 0, 0)
+screen = SDL::SetVideoMode(image.w, image.h, 0, 0)
 
 # Blit the image onto the screen surface.
-SDL::SDL_BlitSurface( image, nil, screen, nil )
+SDL::BlitSurface( image, nil, screen, nil )
 
 # Update the screen.
-SDL::SDL_UpdateRect( screen, 0, 0, 0, 0 )
+SDL::UpdateRect( screen, 0, 0, 0, 0 )
 
 # Set the screen title to the filename of the image.
-SDL::SDL_WM_SetCaption( File.basename(path), File.basename(path) )
+SDL::WM_SetCaption( File.basename(path), File.basename(path) )
 
 # Pause while the user admires the image.
 sleep 5

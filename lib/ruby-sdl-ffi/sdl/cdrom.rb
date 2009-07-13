@@ -68,19 +68,19 @@ module SDL
 
   CD_FPS = 75
 
-  attach_function  :CDNumDrives,  "SDL_CDNumDrives", [          ], :int
-  attach_function  :CDName,       "SDL_CDName",      [ :int     ], :string
-  attach_function  :CDOpen,       "SDL_CDOpen",      [ :int     ], :pointer
-  attach_function  :CDStatus,     "SDL_CDStatus",    [ :pointer ], SDL::ENUM
+  func  :CDNumDrives,  "SDL_CDNumDrives", [          ], :int
+  func  :CDName,       "SDL_CDName",      [ :int     ], :string
+  func  :CDOpen,       "SDL_CDOpen",      [ :int     ], :pointer
+  func  :CDStatus,     "SDL_CDStatus",    [ :pointer ], SDL::ENUM
 
-  attach_function  :CDPlayTracks, "SDL_CDPlayTracks",
-                   [ :pointer, :int, :int, :int, :int ], :int
+  func  :CDPlayTracks, "SDL_CDPlayTracks",
+       [ :pointer, :int, :int, :int, :int ], :int
 
-  attach_function  :CDPlay,   "SDL_CDPlay",   [ :pointer, :int, :int ], :int
-  attach_function  :CDPause,  "SDL_CDPause",  [ :pointer ], :int
-  attach_function  :CDResume, "SDL_CDResume", [ :pointer ], :int
-  attach_function  :CDStop,   "SDL_CDStop",   [ :pointer ], :int
-  attach_function  :CDEject,  "SDL_CDEject",  [ :pointer ], :int
-  attach_function  :CDClose,  "SDL_CDClose",  [ :pointer ], :void
+  func  :CDPlay,   "SDL_CDPlay",   [ :pointer, :int, :int ], :int
+  func  :CDPause,  "SDL_CDPause",  [ :pointer ], :int
+  func  :CDResume, "SDL_CDResume", [ :pointer ], :int
+  func  :CDStop,   "SDL_CDStop",   [ :pointer ], :int
+  func  :CDEject,  "SDL_CDEject",  [ :pointer ], :int
+  func  :CDClose,  "SDL_CDClose",  [ :pointer ], :void
 
 end

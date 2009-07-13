@@ -31,176 +31,165 @@
 module SDL
   module Gfx
 
-    attach_function :imageFilterMMXdetect, "SDL_imageFilterMMXdetect", 
-                    [ ], :int
+    func  :imageFilterMMXdetect, "SDL_imageFilterMMXdetect", [ ], :int
 
-    attach_function :imageFilterMMXoff, "SDL_imageFilterMMXoff", [ ], :void
-    attach_function :imageFilterMMXon,  "SDL_imageFilterMMXon",  [ ], :void
+    func  :imageFilterMMXoff, "SDL_imageFilterMMXoff", [ ], :void
+    func  :imageFilterMMXon,  "SDL_imageFilterMMXon",  [ ], :void
 
 
 
-    attach_function :imageFilterAdd,         "SDL_imageFilterAdd", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterAdd,         "SDL_imageFilterAdd", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterMean,        "SDL_imageFilterMean", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterMean,        "SDL_imageFilterMean", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterSub,         "SDL_imageFilterSub", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterSub,         "SDL_imageFilterSub", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterAbsDiff,     "SDL_imageFilterAbsDiff", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterAbsDiff,     "SDL_imageFilterAbsDiff", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterMult,        "SDL_imageFilterMult", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterMult,        "SDL_imageFilterMult", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterMultNor,     "SDL_imageFilterMultNor", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterMultNor,     "SDL_imageFilterMultNor", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterMultDivby2,  "SDL_imageFilterMultDivby2", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterMultDivby2,  "SDL_imageFilterMultDivby2", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterMultDivby4,  "SDL_imageFilterMultDivby4", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterMultDivby4,  "SDL_imageFilterMultDivby4", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterBitAnd,      "SDL_imageFilterBitAnd", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterBitAnd,      "SDL_imageFilterBitAnd", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterBitOr,       "SDL_imageFilterBitOr", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterBitOr,       "SDL_imageFilterBitOr", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterDiv,         "SDL_imageFilterDiv", 
-                    [ :pointer, :pointer, :pointer, :int ], :int
+    func  :imageFilterDiv,         "SDL_imageFilterDiv", 
+          [ :pointer, :pointer, :pointer, :int ], :int
 
-    attach_function :imageFilterBitNegation, "SDL_imageFilterBitNegation", 
-                    [ :pointer, :pointer, :int ], :int
+    func  :imageFilterBitNegation, "SDL_imageFilterBitNegation", 
+          [ :pointer, :pointer, :int ], :int
 
 
 
-    attach_function :imageFilterAddByte, "SDL_imageFilterAddByte", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterAddByte, "SDL_imageFilterAddByte", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
-    attach_function :imageFilterAddUint, "SDL_imageFilterAddUint", 
-                    [ :pointer, :pointer, :int, :uint ], :int
+    func  :imageFilterAddUint, "SDL_imageFilterAddUint", 
+          [ :pointer, :pointer, :int, :uint ], :int
 
-    attach_function :imageFilterAddByteToHalf,
-                    "SDL_imageFilterAddByteToHalf",
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterAddByteToHalf,
+          "SDL_imageFilterAddByteToHalf",
+          [ :pointer, :pointer, :int, :uchar ], :int
 
 
-    attach_function :imageFilterSubByte, "SDL_imageFilterSubByte", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterSubByte, "SDL_imageFilterSubByte", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
-    attach_function :imageFilterSubUint, "SDL_imageFilterSubUint", 
-                    [ :pointer, :pointer, :int, :uint ], :int
+    func  :imageFilterSubUint, "SDL_imageFilterSubUint", 
+          [ :pointer, :pointer, :int, :uint ], :int
 
 
 
-    attach_function :imageFilterShiftRight,
-                    "SDL_imageFilterShiftRight", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterShiftRight, "SDL_imageFilterShiftRight", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
-    attach_function :imageFilterShiftRightUint,
-                    "SDL_imageFilterShiftRightUint", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterShiftRightUint, "SDL_imageFilterShiftRightUint", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
 
 
-    attach_function :imageFilterMultByByte,
-                    "SDL_imageFilterMultByByte", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterMultByByte, "SDL_imageFilterMultByByte", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
-    attach_function :imageFilterShiftRightAndMultByByte,
-                    "SDL_imageFilterShiftRightAndMultByByte", 
-                    [ :pointer, :pointer, :int, :uchar, :uchar ], :int
+    func  :imageFilterShiftRightAndMultByByte,
+          "SDL_imageFilterShiftRightAndMultByByte", 
+          [ :pointer, :pointer, :int, :uchar, :uchar ], :int
 
 
 
-    attach_function :imageFilterShiftLeftByte,
-                    "SDL_imageFilterShiftLeftByte", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterShiftLeftByte,
+          "SDL_imageFilterShiftLeftByte", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
-    attach_function :imageFilterShiftLeftUint,
-                    "SDL_imageFilterShiftLeftUint", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterShiftLeftUint,
+          "SDL_imageFilterShiftLeftUint", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
-    attach_function :imageFilterShiftLeft,
-                    "SDL_imageFilterShiftLeft", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterShiftLeft,
+          "SDL_imageFilterShiftLeft", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
 
 
-    attach_function :imageFilterBinarizeUsingThreshold,
-                    "SDL_imageFilterBinarizeUsingThreshold", 
-                    [ :pointer, :pointer, :int, :uchar ], :int
+    func  :imageFilterBinarizeUsingThreshold,
+          "SDL_imageFilterBinarizeUsingThreshold", 
+          [ :pointer, :pointer, :int, :uchar ], :int
 
 
 
-    attach_function :imageFilterClipToRange,
-                    "SDL_imageFilterClipToRange", 
-                    [ :pointer, :pointer, :int, :uchar, :uchar ], :int
+    func  :imageFilterClipToRange,
+          "SDL_imageFilterClipToRange", 
+          [ :pointer, :pointer, :int, :uchar, :uchar ], :int
 
 
 
-    attach_function :imageFilterNormalizeLinear,
-                    "SDL_imageFilterNormalizeLinear", 
-                    [ :pointer, :pointer, :int, :int, :int, :int, :int ], :int
+    func  :imageFilterNormalizeLinear,
+          "SDL_imageFilterNormalizeLinear", 
+          [ :pointer, :pointer, :int, :int, :int, :int, :int ], :int
 
 
 
-    attach_function :imageFilterConvolveKernel3x3Divide,
-                    "SDL_imageFilterConvolveKernel3x3Divide", 
-                    [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
+    func  :imageFilterConvolveKernel3x3Divide,
+          "SDL_imageFilterConvolveKernel3x3Divide", 
+          [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
 
-    attach_function :imageFilterConvolveKernel5x5Divide,
-                    "SDL_imageFilterConvolveKernel5x5Divide", 
-                    [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
+    func  :imageFilterConvolveKernel5x5Divide,
+          "SDL_imageFilterConvolveKernel5x5Divide", 
+          [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
 
-    attach_function :imageFilterConvolveKernel7x7Divide,
-                    "SDL_imageFilterConvolveKernel7x7Divide", 
-                    [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
+    func  :imageFilterConvolveKernel7x7Divide,
+          "SDL_imageFilterConvolveKernel7x7Divide", 
+          [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
 
-    attach_function :imageFilterConvolveKernel9x9Divide,
-                    "SDL_imageFilterConvolveKernel9x9Divide", 
-                    [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
+    func  :imageFilterConvolveKernel9x9Divide,
+          "SDL_imageFilterConvolveKernel9x9Divide", 
+          [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
 
 
 
-    attach_function :imageFilterConvolveKernel3x3ShiftRight,
-                    "SDL_imageFilterConvolveKernel3x3ShiftRight", 
-                    [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
+    func  :imageFilterConvolveKernel3x3ShiftRight,
+          "SDL_imageFilterConvolveKernel3x3ShiftRight", 
+          [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
 
-    attach_function :imageFilterConvolveKernel5x5ShiftRight,
-                    "SDL_imageFilterConvolveKernel5x5ShiftRight", 
-                    [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
+    func  :imageFilterConvolveKernel5x5ShiftRight,
+          "SDL_imageFilterConvolveKernel5x5ShiftRight", 
+          [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
 
-    attach_function :imageFilterConvolveKernel7x7ShiftRight,
-                    "SDL_imageFilterConvolveKernel7x7ShiftRight", 
-                    [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
+    func  :imageFilterConvolveKernel7x7ShiftRight,
+          "SDL_imageFilterConvolveKernel7x7ShiftRight", 
+          [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
 
-    attach_function :imageFilterConvolveKernel9x9ShiftRight,
-                    "SDL_imageFilterConvolveKernel9x9ShiftRight", 
-                    [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
+    func  :imageFilterConvolveKernel9x9ShiftRight,
+          "SDL_imageFilterConvolveKernel9x9ShiftRight", 
+          [ :pointer, :pointer, :int, :int, :pointer, :uchar ], :int
 
 
 
-    attach_function :imageFilterSobelX,
-                    "SDL_imageFilterSobelX", 
-                    [ :pointer, :pointer, :int, :int ], :int
+    func  :imageFilterSobelX, "SDL_imageFilterSobelX", 
+          [ :pointer, :pointer, :int, :int ], :int
 
-    attach_function :imageFilterSobelXShiftRight,
-                    "SDL_imageFilterSobelXShiftRight", 
-                    [ :pointer, :pointer, :int, :int, :uchar ], :int
+    func  :imageFilterSobelXShiftRight, "SDL_imageFilterSobelXShiftRight", 
+          [ :pointer, :pointer, :int, :int, :uchar ], :int
 
 
 
-    attach_function :imageFilterAlignStack,
-                    "SDL_imageFilterAlignStack", 
-                    [ ], :void
-
-    attach_function :imageFilterRestoreStack,
-                    "SDL_imageFilterRestoreStack", 
-                    [ ], :void
+    func  :imageFilterAlignStack,   "SDL_imageFilterAlignStack", [ ], :void
+    func  :imageFilterRestoreStack, "SDL_imageFilterRestoreStack", [ ], :void
 
 
   end

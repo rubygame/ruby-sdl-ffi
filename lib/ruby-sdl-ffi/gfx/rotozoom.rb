@@ -48,32 +48,27 @@ module SDL
     end
 
 
-    attach_function :rotozoomSurface,
-                    [ :pointer, :double, :double, :int ], :pointer
+    func  :rotozoomSurface,
+          [ :pointer, :double, :double, :int ], :pointer
 
-    attach_function :rotozoomSurfaceXY,
-                    [ :pointer, :double, :double, :double, :int ], :pointer
+    func  :rotozoomSurfaceXY,
+          [ :pointer, :double, :double, :double, :int ], :pointer
 
-    attach_function :rotozoomSurfaceSize,
-                    [ :int, :int, :double,
-                      :double, :pointer, :pointer ], :void
+    func  :rotozoomSurfaceSize,
+          [ :int, :int, :double, :double, :pointer, :pointer ], :void
 
-    attach_function :rotozoomSurfaceSizeXY,
-                    [ :int, :int, :double, :double,
-                      :double, :pointer, :pointer ], :void
+    func  :rotozoomSurfaceSizeXY,
+          [ :int, :int, :double, :double, :double, :pointer, :pointer ], :void
 
 
-    attach_function :zoomSurface,
-                    [ :pointer, :double, :double, :int ], :pointer
+    func  :zoomSurface, [ :pointer, :double, :double, :int ], :pointer
 
-    attach_function :zoomSurfaceSize,
-                    [ :int, :int, :double, 
-                      :double, :pointer, :pointer ], :void
+    func  :zoomSurfaceSize,
+          [ :int, :int, :double, :double, :pointer, :pointer ], :void
 
-    attach_function :shrinkSurface, [ :pointer, :int, :int ], :pointer
+    func  :shrinkSurface, [ :pointer, :int, :int ], :pointer
 
-
-    attach_function :rotateSurface90Degrees, [ :pointer, :int ], :pointer
+    func  :rotateSurface90Degrees, [ :pointer, :int ], :pointer
 
   end
 end

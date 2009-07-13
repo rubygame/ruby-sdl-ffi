@@ -245,15 +245,15 @@ module SDL
   end
 
 
-  attach_function  :PumpEvents, "SDL_PumpEvents", [  ], :void
+  func  :PumpEvents, "SDL_PumpEvents", [  ], :void
 
 
   ADDEVENT  = 0
   PEEKEVENT = 1
   GETEVENT  = 2
 
-  attach_function  :__SDL_PeepEvents, "SDL_PeepEvents",
-                   [ :pointer, :int, SDL::ENUM, :uint32 ], :int
+  func  :__SDL_PeepEvents, "SDL_PeepEvents",
+        [ :pointer, :int, SDL::ENUM, :uint32 ], :int
 
 
   # Behavior varies depending on action.
@@ -306,7 +306,7 @@ module SDL
   end
 
 
-  attach_function  :__SDL_PollEvent, "SDL_PollEvent", [ :pointer ], :int
+  func  :__SDL_PollEvent, "SDL_PollEvent", [ :pointer ], :int
 
   def self.PollEvent()
     mp = FFI::MemoryPointer.new( SDL::Event, 1 )
@@ -319,7 +319,7 @@ module SDL
   end
 
 
-  attach_function  :__SDL_WaitEvent, "SDL_WaitEvent", [ :pointer ], :int
+  func  :__SDL_WaitEvent, "SDL_WaitEvent", [ :pointer ], :int
 
   def self.WaitEvent()
     mp = FFI::MemoryPointer.new( SDL::Event, 1 )
@@ -332,14 +332,14 @@ module SDL
   end
 
 
-  attach_function  :PushEvent, "SDL_PushEvent", [ :pointer ], :int
+  func  :PushEvent, "SDL_PushEvent", [ :pointer ], :int
 
 
 
   callback(:eventfilter_cb, [ :pointer ], :int)
 
-  attach_function  :__SDL_SetEventFilter, "SDL_SetEventFilter",
-                   [ :eventfilter_cb ], :void
+  func  :__SDL_SetEventFilter, "SDL_SetEventFilter",
+        [ :eventfilter_cb ], :void
 
   def self.SetEventFilter( &block )
     if( block_given? )
@@ -358,8 +358,7 @@ module SDL
   end
 
 
-  #attach_function  :GetEventFilter, "SDL_GetEventFilter",
-  #                 [ ], :eventfilter_cb
+  #func  :GetEventFilter, "SDL_GetEventFilter", [ ], :eventfilter_cb
 
 
   QUERY   = -1
@@ -367,6 +366,6 @@ module SDL
   DISABLE = 0
   ENABLE  = 1
 
-  attach_function  :EventState, "SDL_EventState", [ :uint8, :int ], :uint8
+  func  :EventState, "SDL_EventState", [ :uint8, :int ], :uint8
 
 end

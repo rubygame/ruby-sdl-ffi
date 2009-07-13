@@ -34,231 +34,217 @@ module SDL
     M_PI = 3.141592654
 
 
-    attach_function :pixelColor,
-                    [ :pointer, :int16, :int16, :uint32 ], :int
+    func  :pixelColor, [ :pointer, :int16, :int16, :uint32 ], :int
 
-    attach_function :pixelRGBA,
-                    [ :pointer, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :pixelRGBA,
+          [ :pointer, :int16, :int16, :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 
-    attach_function :hlineColor,
-                    [ :pointer, :int16, :int16, :int16, :uint32 ], :int
+    func  :hlineColor, [ :pointer, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :hlineRGBA,
-                    [ :pointer, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :hlineRGBA,
+          [ :pointer, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :vlineColor,
-                    [ :pointer, :int16, :int16, :int16, :uint32 ], :int
+    func  :vlineColor, [ :pointer, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :vlineRGBA,
-                    [ :pointer, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :vlineRGBA,
+          [ :pointer, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 
-    attach_function :rectangleColor,
-                    [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
+    func  :rectangleColor,
+          [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :rectangleRGBA,
-                    [ :pointer, :int16, :int16,
-                      :int16, :int16, :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :rectangleRGBA,
+          [ :pointer, :int16, :int16,
+            :int16, :int16, :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :boxColor,
-                    [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
+    func  :boxColor,
+          [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :boxRGBA,
-                    [ :pointer, :int16, :int16, :int16,
-                      :int16, :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :boxRGBA,
+          [ :pointer, :int16, :int16, :int16,
+            :int16, :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 
-    attach_function :lineColor,
-                    [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
+    func  :lineColor,
+          [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :lineRGBA,
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :lineRGBA,
+          [ :pointer, :int16, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :aalineColor,
-                    [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
+    func  :aalineColor,
+          [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :aalineRGBA,
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :aalineRGBA,
+          [ :pointer, :int16, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 
-    attach_function :circleColor,
-                    [ :pointer, :int16, :int16, :int16, :uint32 ], :int
+    func  :circleColor,
+          [ :pointer, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :circleRGBA,
-                    [ :pointer, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :circleRGBA,
+          [ :pointer, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 
-    attach_function :arcColor, 
-                    [ :pointer, :int16, :int16,
-                      :int16, :int16, :int16, :uint32 ], :int
+    func  :arcColor, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :arcRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :arcRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 
-    attach_function :aacircleColor, 
-                    [ :pointer, :int16, :int16, :int16, :uint32 ], :int
+    func  :aacircleColor, 
+          [ :pointer, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :aacircleRGBA, 
-                    [ :pointer, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :aacircleRGBA, 
+          [ :pointer, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :filledCircleColor, 
-                    [ :pointer, :int16, :int16, :int16, :uint32 ], :int
+    func  :filledCircleColor, 
+          [ :pointer, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :filledCircleRGBA, 
-                    [ :pointer, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :filledCircleRGBA, 
+          [ :pointer, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 
-    attach_function :ellipseColor, 
-                    [ :pointer, :int16, :int16,
-                      :int16, :int16, :uint32 ], :int
+    func  :ellipseColor, 
+          [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :ellipseRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :ellipseRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :aaellipseColor, 
-                    [ :pointer, :int16, :int16,
-                      :int16, :int16, :uint32 ], :int
+    func  :aaellipseColor, 
+          [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :aaellipseRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :aaellipseRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :filledEllipseColor, 
-                    [ :pointer, :int16, :int16,
-                      :int16, :int16, :uint32 ], :int
+    func  :filledEllipseColor, 
+          [ :pointer, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :filledEllipseRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :filledEllipseRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 
-    attach_function :pieColor, 
-                    [ :pointer, :int16, :int16, :int16,
-                      :int16, :int16, :uint32 ], :int
-    attach_function :pieRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :pieColor, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16, :uint32 ], :int
 
-    attach_function :filledPieColor, 
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :int16, :uint32 ], :int
-    attach_function :filledPieRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16, :int16,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :pieRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
+    func  :filledPieColor, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16, :uint32 ], :int
 
+    func  :filledPieRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :trigonColor, 
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :int16, :int16, :uint32 ], :int
 
-    attach_function :trigonRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16, :int16,
-                      :int16, :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :aatrigonColor, 
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :int16, :int16, :uint32 ], :int
+    func  :trigonColor, 
+          [ :pointer, :int16, :int16, :int16, :int16,
+            :int16, :int16, :uint32 ], :int
 
-    attach_function :aatrigonRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16, :int16,
-                      :int16, :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :trigonRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16,
+            :int16, :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :filledTrigonColor, 
-                    [ :pointer, :int16, :int16, :int16, :int16,
-                      :int16, :int16, :uint32 ], :int
+    func  :aatrigonColor, 
+          [ :pointer, :int16, :int16, :int16, :int16,
+            :int16, :int16, :uint32 ], :int
 
-    attach_function :filledTrigonRGBA, 
-                    [ :pointer, :int16, :int16, :int16, :int16, :int16,
-                      :int16, :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :aatrigonRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16,
+            :int16, :uint8, :uint8, :uint8, :uint8 ], :int
 
+    func  :filledTrigonColor, 
+          [ :pointer, :int16, :int16, :int16, :int16,
+            :int16, :int16, :uint32 ], :int
 
+    func  :filledTrigonRGBA, 
+          [ :pointer, :int16, :int16, :int16, :int16, :int16,
+            :int16, :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :polygonColor, 
-                    [ :pointer, :pointer, :pointer, :int, :uint32 ], :int
 
-    attach_function :polygonRGBA, 
-                    [ :pointer, :pointer, :pointer, :int,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :aapolygonColor, 
-                    [ :pointer, :pointer, :pointer, :int, :uint32 ], :int
+    func  :polygonColor, [ :pointer, :pointer, :pointer, :int, :uint32 ], :int
 
-    attach_function :aapolygonRGBA, 
-                    [ :pointer, :pointer, :pointer, :int,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :polygonRGBA, 
+          [ :pointer, :pointer, :pointer, :int,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :filledPolygonColor, 
-                    [ :pointer, :pointer, :pointer, :int, :uint32 ], :int
+    func  :aapolygonColor, 
+          [ :pointer, :pointer, :pointer, :int, :uint32 ], :int
 
-    attach_function :filledPolygonRGBA, 
-                    [ :pointer, :pointer, :pointer, :int,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :aapolygonRGBA, 
+          [ :pointer, :pointer, :pointer, :int,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :texturedPolygon, 
-                    [ :pointer, :pointer, :pointer, :int,
-                      :pointer, :int, :int ], :int
+    func  :filledPolygonColor, 
+          [ :pointer, :pointer, :pointer, :int, :uint32 ], :int
 
-    attach_function :filledPolygonColorMT, 
-                    [ :pointer, :pointer, :pointer, :int,
-                      :uint32, :pointer, :pointer ], :int
+    func  :filledPolygonRGBA, 
+          [ :pointer, :pointer, :pointer, :int,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :filledPolygonRGBAMT, 
-                    [ :pointer, :pointer, :pointer, :int, :uint8,
-                      :uint8, :uint8, :uint8, :pointer, :pointer ], :int
+    func  :texturedPolygon, 
+          [ :pointer, :pointer, :pointer, :int, :pointer, :int, :int ], :int
 
-    attach_function :texturedPolygonMT, 
-                    [ :pointer, :pointer, :pointer, :int,
-                      :pointer, :int, :int, :pointer, :pointer ], :int
+    func  :filledPolygonColorMT, 
+          [ :pointer, :pointer, :pointer, :int,
+            :uint32, :pointer, :pointer ], :int
 
+    func  :filledPolygonRGBAMT, 
+          [ :pointer, :pointer, :pointer, :int, :uint8,
+            :uint8, :uint8, :uint8, :pointer, :pointer ], :int
 
+    func  :texturedPolygonMT, 
+          [ :pointer, :pointer, :pointer, :int,
+            :pointer, :int, :int, :pointer, :pointer ], :int
 
-    attach_function :bezierColor, 
-                    [ :pointer, :pointer, :pointer,
-                      :int, :int, :uint32 ], :int
 
-    attach_function :bezierRGBA, 
-                    [ :pointer, :pointer, :pointer, :int, :int,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
 
+    func  :bezierColor, 
+          [ :pointer, :pointer, :pointer, :int, :int, :uint32 ], :int
 
+    func  :bezierRGBA, 
+          [ :pointer, :pointer, :pointer, :int, :int,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :characterColor, 
-                    [ :pointer, :int16, :int16, :char, :uint32 ], :int
 
-    attach_function :characterRGBA, 
-                    [ :pointer, :int16, :int16, :char,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :stringColor, 
-                    [ :pointer, :int16, :int16, :string, :uint32 ], :int
+    func  :characterColor, [ :pointer, :int16, :int16, :char, :uint32 ], :int
 
-    attach_function :stringRGBA, 
-                    [ :pointer, :int16, :int16, :string,
-                      :uint8, :uint8, :uint8, :uint8 ], :int
+    func  :characterRGBA, 
+          [ :pointer, :int16, :int16, :char,
+            :uint8, :uint8, :uint8, :uint8 ], :int
 
-    attach_function :gfxPrimitivesSetFont, 
-                    [ :pointer, :int, :int ], :void
+    func  :stringColor, [ :pointer, :int16, :int16, :string, :uint32 ], :int
+
+    func  :stringRGBA, 
+          [ :pointer, :int16, :int16, :string,
+            :uint8, :uint8, :uint8, :uint8 ], :int
+
+    func  :gfxPrimitivesSetFont, [ :pointer, :int, :int ], :void
 
   end
 end

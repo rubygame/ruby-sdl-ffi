@@ -43,18 +43,17 @@ module SDL
   ALL_HOTKEYS = 0xFFFFFFFF
 
 
-  func  :EnableUNICODE, "SDL_EnableUNICODE", [ :int ], :int
+  sdl_func  :EnableUNICODE, [ :int ], :int
 
 
   DEFAULT_REPEAT_DELAY    = 500
   DEFAULT_REPEAT_INTERVAL = 30
 
-  func  :EnableKeyRepeat, "SDL_EnableKeyRepeat", [ :int, :int ], :int
-  func  :GetKeyRepeat,    "SDL_GetKeyRepeat",    [ :pointer, :pointer ], :void
+  sdl_func  :EnableKeyRepeat, [ :int, :int ], :int
+  sdl_func  :GetKeyRepeat,    [ :pointer, :pointer ], :void
 
 
-  func  :__SDL_GetKeyState, "SDL_GetKeyState",
-                   [ :pointer ], :pointer
+  func  :__SDL_GetKeyState, "SDL_GetKeyState", [ :pointer ], :pointer
 
   def self.GetKeyState()
     numkeys = FFI::MemoryPointer.new( :int )
@@ -63,8 +62,8 @@ module SDL
   end
 
 
-  func  :GetModState, "SDL_GetModState", [ ], SDL::ENUM
-  func  :SetModState, "SDL_SetModState", [ SDL::ENUM ], :void
-  func  :GetKeyName,  "SDL_GetKeyName",  [ SDL::ENUM ], :string
+  sdl_func  :GetModState, [           ], SDL::ENUM
+  sdl_func  :SetModState, [ SDL::ENUM ], :void
+  sdl_func  :GetKeyName,  [ SDL::ENUM ], :string
 
 end

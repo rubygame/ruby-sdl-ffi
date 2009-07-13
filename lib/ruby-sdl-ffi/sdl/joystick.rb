@@ -30,20 +30,20 @@
 
 module SDL
 
-  func  :NumJoysticks,       "SDL_NumJoysticks",       [          ], :int
-  func  :JoystickName,       "SDL_JoystickName",       [ :int     ], :string
-  func  :JoystickOpen,       "SDL_JoystickOpen",       [ :int     ], :pointer
-  func  :JoystickOpened,     "SDL_JoystickOpened",     [ :int     ], :int
-  func  :JoystickIndex,      "SDL_JoystickIndex",      [ :pointer ], :int
+  sdl_func  :NumJoysticks,       [                ], :int
+  sdl_func  :JoystickName,       [ :int           ], :string
+  sdl_func  :JoystickOpen,       [ :int           ], :pointer
+  sdl_func  :JoystickOpened,     [ :int           ], :int
+  sdl_func  :JoystickIndex,      [ :pointer       ], :int
 
-  func  :JoystickNumAxes,    "SDL_JoystickNumAxes",    [ :pointer ], :int
-  func  :JoystickNumBalls,   "SDL_JoystickNumBalls",   [ :pointer ], :int
-  func  :JoystickNumHats,    "SDL_JoystickNumHats",    [ :pointer ], :int
-  func  :JoystickNumButtons, "SDL_JoystickNumButtons", [ :pointer ], :int
+  sdl_func  :JoystickNumAxes,    [ :pointer       ], :int
+  sdl_func  :JoystickNumBalls,   [ :pointer       ], :int
+  sdl_func  :JoystickNumHats,    [ :pointer       ], :int
+  sdl_func  :JoystickNumButtons, [ :pointer       ], :int
 
-  func  :JoystickUpdate,     "SDL_JoystickUpdate",     [          ], :void
-  func  :JoystickEventState, "SDL_JoystickEventState", [ :int     ], :int
-  func  :JoystickGetAxis,    "SDL_JoystickGetAxis", [ :pointer, :int ], :int16
+  sdl_func  :JoystickUpdate,     [                ], :void
+  sdl_func  :JoystickEventState, [ :int           ], :int
+  sdl_func  :JoystickGetAxis,    [ :pointer, :int ], :int16
 
 
   HAT_CENTERED  = 0x00
@@ -57,14 +57,10 @@ module SDL
   HAT_LEFTDOWN  = (HAT_LEFT |HAT_DOWN)
 
 
-  func  :JoystickGetHat,    "SDL_JoystickGetHat", [ :pointer, :int ], :uint8
+  sdl_func  :JoystickGetHat,    [ :pointer, :int                     ], :uint8
+  sdl_func  :JoystickGetBall,   [ :pointer, :int, :pointer, :pointer ], :int
+  sdl_func  :JoystickGetButton, [ :pointer, :int                     ], :uint8
 
-  func  :JoystickGetBall,   "SDL_JoystickGetBall",
-        [ :pointer, :int, :pointer, :pointer ], :int
-
-  func  :JoystickGetButton, "SDL_JoystickGetButton", [ :pointer, :int ], :uint8
-
-
-  func  :JoystickClose, "SDL_JoystickClose", [ :pointer ], :void
+  sdl_func  :JoystickClose, [ :pointer ], :void
 
 end

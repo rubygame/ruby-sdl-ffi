@@ -42,10 +42,10 @@ module SDL
               :rate,       :uint32 )
     end
 
-    func  :initFramerate,  "SDL_initFramerate",  [ :pointer       ], :void
-    func  :setFramerate,   "SDL_setFramerate",   [ :pointer, :int ], :int
-    func  :getFramerate,   "SDL_getFramerate",   [ :pointer       ], :int
-    func  :framerateDelay, "SDL_framerateDelay", [ :pointer       ], :void
+    sdl_func  :initFramerate,  [ :pointer       ], :void
+    sdl_func  :setFramerate,   [ :pointer, :int ], :int
+    sdl_func  :getFramerate,   [ :pointer       ], :int
+    sdl_func  :framerateDelay, [ :pointer       ], :void
 
   end
 end

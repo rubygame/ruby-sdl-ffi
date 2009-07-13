@@ -68,19 +68,16 @@ module SDL
 
   CD_FPS = 75
 
-  func  :CDNumDrives,  "SDL_CDNumDrives", [          ], :int
-  func  :CDName,       "SDL_CDName",      [ :int     ], :string
-  func  :CDOpen,       "SDL_CDOpen",      [ :int     ], :pointer
-  func  :CDStatus,     "SDL_CDStatus",    [ :pointer ], SDL::ENUM
-
-  func  :CDPlayTracks, "SDL_CDPlayTracks",
-       [ :pointer, :int, :int, :int, :int ], :int
-
-  func  :CDPlay,   "SDL_CDPlay",   [ :pointer, :int, :int ], :int
-  func  :CDPause,  "SDL_CDPause",  [ :pointer ], :int
-  func  :CDResume, "SDL_CDResume", [ :pointer ], :int
-  func  :CDStop,   "SDL_CDStop",   [ :pointer ], :int
-  func  :CDEject,  "SDL_CDEject",  [ :pointer ], :int
-  func  :CDClose,  "SDL_CDClose",  [ :pointer ], :void
+  sdl_func  :CDNumDrives,  [                                  ], :int
+  sdl_func  :CDName,       [ :int                             ], :string
+  sdl_func  :CDOpen,       [ :int                             ], :pointer
+  sdl_func  :CDStatus,     [ :pointer                         ], SDL::ENUM
+  sdl_func  :CDPlayTracks, [ :pointer, :int, :int, :int, :int ], :int
+  sdl_func  :CDPlay,       [ :pointer, :int, :int             ], :int
+  sdl_func  :CDPause,      [ :pointer                         ], :int
+  sdl_func  :CDResume,     [ :pointer                         ], :int
+  sdl_func  :CDStop,       [ :pointer                         ], :int
+  sdl_func  :CDEject,      [ :pointer                         ], :int
+  sdl_func  :CDClose,      [ :pointer                         ], :void
 
 end

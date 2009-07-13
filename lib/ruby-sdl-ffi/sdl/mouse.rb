@@ -45,7 +45,7 @@ module SDL
 
 
   func  :__SDL_GetMouseState, "SDL_GetMouseState",
-       [ :pointer, :pointer ], :uint8
+        [ :pointer, :pointer ], :uint8
 
   # Returns [buttons, x, y].
   #  buttons: buttons currently pressed (bitmask of BUTTON_*MASK constants).
@@ -59,7 +59,7 @@ module SDL
 
 
   func  :__SDL_GetRelativeMouseState, "SDL_GetRelativeMouseState",
-       [ :pointer, :pointer ], :uint8
+        [ :pointer, :pointer ], :uint8
 
   # Returns [buttons, x, y].
   #  buttons: buttons currently pressed (bitmask of BUTTON_*MASK constants).
@@ -73,17 +73,16 @@ module SDL
   end
 
 
+  sdl_func  :WarpMouse, [ :uint16, :uint16 ], :void
 
-  func  :WarpMouse, "SDL_WarpMouse", [ :uint16, :uint16 ], :void
 
+  sdl_func  :CreateCursor,
+            [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
 
-  func  :CreateCursor, "SDL_CreateCursor",
-        [ :pointer, :pointer, :int, :int, :int, :int ], :pointer
-
-  func  :SetCursor,  "SDL_SetCursor",  [ :pointer ], :void
-  func  :GetCursor,  "SDL_GetCursor",  [          ], :pointer
-  func  :FreeCursor, "SDL_FreeCursor", [ :pointer ], :void
-  func  :ShowCursor, "SDL_ShowCursor", [ :int     ], :int
+  sdl_func  :SetCursor,  [ :pointer ], :void
+  sdl_func  :GetCursor,  [          ], :pointer
+  sdl_func  :FreeCursor, [ :pointer ], :void
+  sdl_func  :ShowCursor, [ :int     ], :int
 
 
   BUTTON_LEFT      = 1

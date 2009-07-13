@@ -196,39 +196,34 @@ module SDL
   PHYSPAL = 0x02
 
 
-  func  :VideoInit, "SDL_VideoInit", [ :string, :uint32 ], :int
-  func  :VideoQuit, "SDL_VideoQuit", [  ], :void
+  sdl_func  :VideoInit, [ :string, :uint32 ], :int
+  sdl_func  :VideoQuit, [  ], :void
 
-  func  :VideoDriverName, "SDL_VideoDriverName", [ :string, :int ], :string
+  sdl_func  :VideoDriverName, [ :string, :int ], :string
 
-  func  :GetVideoSurface, "SDL_GetVideoSurface", [], SDL::Surface.typed_pointer
+  sdl_func  :GetVideoSurface, [], SDL::Surface.typed_pointer
 
   ## Depends on SDL::VideoInfo, which I don't know how to implement.
-  #func  :GetVideoInfo, "SDL_GetVideoInfo", [ ], SDL::VideoInfo.typed_pointer
+  #sdl_func  :GetVideoInfo, [ ], SDL::VideoInfo.typed_pointer
 
-  func  :VideoModeOK, "SDL_VideoModeOK", [ :int, :int, :int, :uint32 ], :int
+  sdl_func  :VideoModeOK, [ :int, :int, :int, :uint32 ], :int
 
   ## Don't know how to implement this one. :-\
-  # func  :ListModes, "SDL_ListModes", [ :pointer, :uint32 ], :pointer
+  # sdl_func  :ListModes, [ :pointer, :uint32 ], :pointer
 
-  func  :SetVideoMode, "SDL_SetVideoMode", [ :int, :int, :int, :uint32 ],
+  sdl_func  :SetVideoMode, [ :int, :int, :int, :uint32 ],
         SDL::Surface.typed_pointer
 
 
 
-  func  :UpdateRects, "SDL_UpdateRects", [ :pointer, :int, :pointer ], :void
-
-  func  :UpdateRect,  "SDL_UpdateRect",
-        [ :pointer, :int32, :int32, :uint32, :uint32 ], :void
-
-  func  :Flip, "SDL_Flip", [ :pointer ], :int
+  sdl_func  :UpdateRects, [ :pointer, :int, :pointer                   ], :void
+  sdl_func  :UpdateRect,  [ :pointer, :int32, :int32, :uint32, :uint32 ], :void
+  sdl_func  :Flip,        [ :pointer                                   ], :int
 
 
 
-  func  :SetGamma, "SDL_SetGamma", [ :float, :float, :float ], :int
-
-  func  :SetGammaRamp, "SDL_SetGammaRamp",
-        [ :pointer, :pointer, :pointer ], :int
+  sdl_func  :SetGamma,     [ :float, :float, :float       ], :int
+  sdl_func  :SetGammaRamp, [ :pointer, :pointer, :pointer ], :int
 
 
   func  :__SDL_GetGammaRamp, "SDL_GetGammaRamp",
@@ -251,19 +246,10 @@ module SDL
   end
 
 
-
-  func  :SetColors,  "SDL_SetColors",
-        [ :pointer, :pointer, :int, :int ], :int
-
-  func  :SetPalette, "SDL_SetPalette",
-        [ :pointer, :int, :pointer, :int, :int ], :int
-
-  func  :MapRGB,     "SDL_MapRGB",
-        [ :pointer, :uint8, :uint8, :uint8 ], :uint32
-
-  func  :MapRGBA,    "SDL_MapRGBA",
-        [ :pointer, :uint8, :uint8, :uint8, :uint8 ], :uint32
-
+  sdl_func  :SetColors,  [ :pointer, :pointer, :int, :int           ], :int
+  sdl_func  :SetPalette, [ :pointer, :int, :pointer, :int, :int     ], :int
+  sdl_func  :MapRGB,     [ :pointer, :uint8, :uint8, :uint8         ], :uint32
+  sdl_func  :MapRGBA,    [ :pointer, :uint8, :uint8, :uint8, :uint8 ], :uint32
 
 
   func  :__SDL_GetRGB, "SDL_GetRGB",
@@ -293,33 +279,31 @@ module SDL
 
 
 
-  func  :CreateRGBSurface,     "SDL_CreateRGBSurface",
+  sdl_func  :CreateRGBSurface,
         [ :uint32, :int, :int, :int, :uint32, :uint32, :uint32, :uint32 ],
         SDL::Surface.typed_pointer
 
-  func  :CreateRGBSurfaceFrom, "SDL_CreateRGBSurfaceFrom",
+  sdl_func  :CreateRGBSurfaceFrom,
         [ :pointer, :int, :int, :int, :int,
           :uint32, :uint32, :uint32, :uint32 ],
         SDL::Surface.typed_pointer
 
 
-  func  :FreeSurface,   "SDL_FreeSurface",   [ :pointer ], :void
-  func  :LockSurface,   "SDL_LockSurface",   [ :pointer ], :int
-  func  :UnlockSurface, "SDL_UnlockSurface", [ :pointer ], :void
+  sdl_func  :FreeSurface,   [ :pointer ], :void
+  sdl_func  :LockSurface,   [ :pointer ], :int
+  sdl_func  :UnlockSurface, [ :pointer ], :void
 
 
-  func  :LoadBMP_RW, "SDL_LoadBMP_RW",
-        [ :pointer, :int ], SDL::Surface.typed_pointer
-
-  func  :SaveBMP_RW, "SDL_SaveBMP_RW", [ :pointer, :pointer, :int   ], :int
+  sdl_func  :LoadBMP_RW, [ :pointer, :int ], SDL::Surface.typed_pointer
+  sdl_func  :SaveBMP_RW, [ :pointer, :pointer, :int   ], :int
 
 
-  func  :SetColorKey, "SDL_SetColorKey", [ :pointer, :uint32, :uint32 ], :int
-  func  :SetAlpha,    "SDL_SetAlpha",    [ :pointer, :uint32, :uint8  ], :int
+  sdl_func  :SetColorKey, [ :pointer, :uint32, :uint32 ], :int
+  sdl_func  :SetAlpha,    [ :pointer, :uint32, :uint8  ], :int
 
 
 
-  func  :SetClipRect, "SDL_SetClipRect", [ :pointer, :pointer ], SDL::BOOL
+  sdl_func  :SetClipRect, [ :pointer, :pointer ], SDL::BOOL
 
   func  :__SDL_GetClipRect, "SDL_GetClipRect", [ :pointer, :pointer ], :void
 
@@ -330,53 +314,42 @@ module SDL
   end
 
 
+  sdl_func  :ConvertSurface,
+            [ :pointer, :pointer, :uint32 ], SDL::Surface.typed_pointer
 
-  func  :ConvertSurface, "SDL_ConvertSurface",
-        [ :pointer, :pointer, :uint32 ], SDL::Surface.typed_pointer
 
-  func  :BlitSurface,    "SDL_UpperBlit",
+  func  :BlitSurface, "SDL_UpperBlit",
         [ :pointer, :pointer, :pointer, :pointer ], :int
 
-  func  :FillRect, "SDL_FillRect", [ :pointer, :pointer, :uint32 ], :int
+
+  sdl_func  :FillRect, [ :pointer, :pointer, :uint32 ], :int
+
+
+  sdl_func  :DisplayFormat,      [ :pointer ], SDL::Surface.typed_pointer
+  sdl_func  :DisplayFormatAlpha, [ :pointer ], SDL::Surface.typed_pointer
+
+
+  sdl_func  :CreateYUVOverlay,  [ :int, :int, :uint32, :pointer ],
+            SDL::Overlay.typed_pointer
+
+  sdl_func  :LockYUVOverlay,    [ :pointer           ], :int
+  sdl_func  :UnlockYUVOverlay,  [ :pointer           ], :void
+  sdl_func  :DisplayYUVOverlay, [ :pointer, :pointer ], :int
+  sdl_func  :FreeYUVOverlay,    [ :pointer           ], :void
+
+
+  sdl_func  :GL_LoadLibrary,    [ :string               ], :int
+  sdl_func  :GL_GetProcAddress, [ :string               ], :pointer
+  sdl_func  :GL_SetAttribute,   [ SDL::GLATTR, :int     ], :int
+  sdl_func  :GL_GetAttribute,   [ SDL::GLATTR, :pointer ], :int
+  sdl_func  :GL_SwapBuffers,    [                       ], :void
+  sdl_func  :GL_UpdateRects,    [ :int, :pointer        ], :void
+  sdl_func  :GL_Lock,           [                       ], :void
+  sdl_func  :GL_Unlock,         [                       ], :void
 
 
 
-  func  :DisplayFormat,      "SDL_DisplayFormat",
-        [ :pointer ], SDL::Surface.typed_pointer
-
-  func  :DisplayFormatAlpha, "SDL_DisplayFormatAlpha",
-        [ :pointer ], SDL::Surface.typed_pointer
-
-
-
-  func  :CreateYUVOverlay,  "SDL_CreateYUVOverlay",
-        [ :int, :int, :uint32, :pointer ], SDL::Overlay.typed_pointer
-
-  func  :LockYUVOverlay,    "SDL_LockYUVOverlay", [ :pointer ], :int
-  func  :UnlockYUVOverlay,  "SDL_UnlockYUVOverlay", [ :pointer ], :void
-
-  func  :DisplayYUVOverlay, "SDL_DisplayYUVOverlay",
-        [ :pointer, :pointer ], :int
-
-  func  :FreeYUVOverlay,    "SDL_FreeYUVOverlay", [ :pointer ], :void
-
-
-
-  func  :GL_LoadLibrary,    "SDL_GL_LoadLibrary",    [ :string ], :int
-  func  :GL_GetProcAddress, "SDL_GL_GetProcAddress", [ :string ], :pointer
-  func  :GL_SetAttribute,   "SDL_GL_SetAttribute",   [ SDL::GLATTR, :int ], :int
-
-  func  :GL_GetAttribute,   "SDL_GL_GetAttribute",
-        [ SDL::GLATTR, :pointer ], :int
-
-  func  :GL_SwapBuffers,    "SDL_GL_SwapBuffers",    [ ], :void
-  func  :GL_UpdateRects,    "SDL_GL_UpdateRects",    [ :int, :pointer ], :void
-  func  :GL_Lock,           "SDL_GL_Lock",           [ ], :void
-  func  :GL_Unlock,         "SDL_GL_Unlock",         [ ], :void
-
-
-
-  func  :WM_SetCaption, "SDL_WM_SetCaption", [ :string, :string ], :void
+  sdl_func  :WM_SetCaption, [ :string, :string ], :void
 
   func  :__SDL_WM_GetCaption, "SDL_WM_GetCaption",
         [ :pointer, :pointer ], :void
@@ -391,9 +364,9 @@ module SDL
 
 
 
-  func  :WM_SetIcon, "SDL_WM_SetIcon", [ :pointer, :pointer ], :void
-  func  :WM_IconifyWindow, "SDL_WM_IconifyWindow", [  ], :int
-  func  :WM_ToggleFullScreen, "SDL_WM_ToggleFullScreen", [ :pointer ], :int
+  sdl_func  :WM_SetIcon,          [ :pointer, :pointer ], :void
+  sdl_func  :WM_IconifyWindow,    [                    ], :int
+  sdl_func  :WM_ToggleFullScreen, [ :pointer           ], :int
 
 
   GRAB_QUERY      = -1
@@ -401,6 +374,6 @@ module SDL
   GRAB_ON         = 1
   GRAB_FULLSCREEN = 2
 
-  func  :WM_GrabInput, "SDL_WM_GrabInput", [ SDL::ENUM ], SDL::ENUM
+  sdl_func  :WM_GrabInput, [ SDL::ENUM ], SDL::ENUM
 
 end

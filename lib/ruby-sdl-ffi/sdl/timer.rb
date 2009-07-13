@@ -33,15 +33,15 @@ module SDL
   TIMESLICE        = 10
   TIMER_RESOLUTION = 10
 
-  func  :GetTicks, "SDL_GetTicks", [         ], :uint32
-  func  :Delay,    "SDL_Delay",    [ :uint32 ], :void
+  sdl_func  :GetTicks, [         ], :uint32
+  sdl_func  :Delay,    [ :uint32 ], :void
 
   callback(:timer_cb, [ :uint32 ], :uint32)
-  func  :SetTimer, "SDL_SetTimer", [ :uint32, :timer_cb ], :int
+  sdl_func  :SetTimer, [ :uint32, :timer_cb ], :int
 
   callback(:newtimer_cb, [ :uint32, :pointer ], :uint32)
-  func  :AddTimer, "SDL_AddTimer", [:uint32, :newtimer_cb, :pointer], :pointer
+  sdl_func  :AddTimer, [:uint32, :newtimer_cb, :pointer], :pointer
 
-  func  :RemoveTimer, "SDL_RemoveTimer", [ :pointer ], SDL::BOOL
+  sdl_func  :RemoveTimer, [ :pointer ], SDL::BOOL
 
 end

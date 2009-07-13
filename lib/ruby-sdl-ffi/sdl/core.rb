@@ -52,7 +52,7 @@ module SDL
             :patch, :uint8 )
   end
 
-  func  :Linked_Version, "SDL_Linked_Version", [], Version.typed_pointer
+  sdl_func  :Linked_Version, [], Version.typed_pointer
 
 
   INIT_TIMER       = 0x00000001
@@ -64,11 +64,11 @@ module SDL
   INIT_EVENTTHREAD = 0x01000000
   INIT_EVERYTHING  = 0x0000FFFF
 
-  func  :Init,          "SDL_Init",          [ :uint32 ], :int
-  func  :InitSubSystem, "SDL_InitSubSystem", [ :uint32 ], :int
-  func  :QuitSubSystem, "SDL_QuitSubSystem", [ :uint32 ], :void
-  func  :WasInit,       "SDL_WasInit",       [ :uint32 ], :uint32
-  func  :Quit,          "SDL_Quit",          [         ], :void
+  sdl_func  :Init,          [ :uint32 ], :int
+  sdl_func  :InitSubSystem, [ :uint32 ], :int
+  sdl_func  :QuitSubSystem, [ :uint32 ], :void
+  sdl_func  :WasInit,       [ :uint32 ], :uint32
+  sdl_func  :Quit,          [         ], :void
 
 
 
@@ -78,28 +78,28 @@ module SDL
   APPINPUTFOCUS = 0x02
   APPACTIVE     = 0x04
 
-  func  :GetAppState, "SDL_GetAppState", [  ], :uint8
+  sdl_func  :GetAppState, [  ], :uint8
 
 
 
   # SDL_cpuinfo.h
 
-  func  :HasRDTSC,    "SDL_HasRDTSC",    [  ], SDL::BOOL
-  func  :HasMMX,      "SDL_HasMMX",      [  ], SDL::BOOL
-  func  :HasMMXExt,   "SDL_HasMMXExt",   [  ], SDL::BOOL
-  func  :Has3DNow,    "SDL_Has3DNow",    [  ], SDL::BOOL
-  func  :Has3DNowExt, "SDL_Has3DNowExt", [  ], SDL::BOOL
-  func  :HasSSE,      "SDL_HasSSE",      [  ], SDL::BOOL
-  func  :HasSSE2,     "SDL_HasSSE2",     [  ], SDL::BOOL
-  func  :HasAltiVec,  "SDL_HasAltiVec",  [  ], SDL::BOOL
+  sdl_func  :HasRDTSC,    [  ], SDL::BOOL
+  sdl_func  :HasMMX,      [  ], SDL::BOOL
+  sdl_func  :HasMMXExt,   [  ], SDL::BOOL
+  sdl_func  :Has3DNow,    [  ], SDL::BOOL
+  sdl_func  :Has3DNowExt, [  ], SDL::BOOL
+  sdl_func  :HasSSE,      [  ], SDL::BOOL
+  sdl_func  :HasSSE2,     [  ], SDL::BOOL
+  sdl_func  :HasAltiVec,  [  ], SDL::BOOL
 
 
 
   # SDL_error.h
 
-  func  :SetError,   "SDL_SetError",   [ :string, :varargs  ], :void
-  func  :GetError,   "SDL_GetError",   [ ], :string
-  func  :ClearError, "SDL_ClearError", [ ], :void
+  sdl_func  :SetError,   [ :string, :varargs  ], :void
+  sdl_func  :GetError,   [ ], :string
+  sdl_func  :ClearError, [ ], :void
 
   ENOMEM      = 0
   EFREAD      = 1
@@ -108,26 +108,25 @@ module SDL
   UNSUPPORTED = 4
   LASTERROR   = 5
 
-  func  :Error, "SDL_Error", [ SDL::ENUM ], :void
+  sdl_func  :Error, [ SDL::ENUM ], :void
 
 
 
   # SDL_loadso.h
 
-  func  :LoadObject,   "SDL_LoadObject",   [ :string           ], :pointer
-  func  :LoadFunction, "SDL_LoadFunction", [ :pointer, :string ], :pointer
-  func  :UnloadObject, "SDL_UnloadObject", [ :pointer          ], :void
+  sdl_func  :LoadObject,   [ :string           ], :pointer
+  sdl_func  :LoadFunction, [ :pointer, :string ], :pointer
+  sdl_func  :UnloadObject, [ :pointer          ], :void
 
 
 
   # SDL_thread.h
 
-  func  :CreateThread, "SDL_CreateThread",
-        [ callback( :createthread_cb, [:pointer], :int ), :pointer ], :pointer
+  sdl_func  :CreateThread, [ callback([:pointer], :int), :pointer ], :pointer
 
-  func  :ThreadID,     "SDL_ThreadID",    [                    ], :uint32
-  func  :GetThreadID,  "SDL_GetThreadID", [ :pointer           ], :uint32
-  func  :WaitThread,   "SDL_WaitThread",  [ :pointer, :pointer ], :void
-  func  :KillThread,   "SDL_KillThread",  [ :pointer           ], :void
+  sdl_func  :ThreadID,    [                    ], :uint32
+  sdl_func  :GetThreadID, [ :pointer           ], :uint32
+  sdl_func  :WaitThread,  [ :pointer, :pointer ], :void
+  sdl_func  :KillThread,  [ :pointer           ], :void
 
 end

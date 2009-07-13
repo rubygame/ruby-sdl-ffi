@@ -32,27 +32,26 @@ module SDL
 
   MUTEX_TIMEDOUT = 1
 
-  func  :CreateMutex,      "SDL_CreateMutex",      [          ], :pointer
-  func  :mutexP,           "SDL_mutexP",           [ :pointer ], :int
-  func  :mutexV,           "SDL_mutexV",           [ :pointer ], :int
-  func  :DestroyMutex,     "SDL_DestroyMutex",     [ :pointer ], :void
+  sdl_func  :CreateMutex,      [                             ], :pointer
+  sdl_func  :mutexP,           [ :pointer                    ], :int
+  sdl_func  :mutexV,           [ :pointer                    ], :int
+  sdl_func  :DestroyMutex,     [ :pointer                    ], :void
 
-  func  :CreateSemaphore,  "SDL_CreateSemaphore",  [ :uint32  ], :pointer
-  func  :DestroySemaphore, "SDL_DestroySemaphore", [ :pointer ], :void
+  sdl_func  :CreateSemaphore,  [ :uint32                     ], :pointer
+  sdl_func  :DestroySemaphore, [ :pointer                    ], :void
 
-  func  :SemWait,          "SDL_SemWait",          [ :pointer ], :int
-  func  :SemTryWait,       "SDL_SemTryWait",       [ :pointer ], :int
-  func  :SemWaitTimeout,   "SDL_SemWaitTimeout",   [ :pointer, :uint32 ], :int
-  func  :SemPost,          "SDL_SemPost",          [ :pointer ], :int
-  func  :SemValue,         "SDL_SemValue",         [ :pointer ], :uint32
+  sdl_func  :SemWait,          [ :pointer                    ], :int
+  sdl_func  :SemTryWait,       [ :pointer                    ], :int
+  sdl_func  :SemWaitTimeout,   [ :pointer, :uint32           ], :int
+  sdl_func  :SemPost,          [ :pointer                    ], :int
+  sdl_func  :SemValue,         [ :pointer                    ], :uint32
 
-  func  :CreateCond,       "SDL_CreateCond",       [          ], :pointer
-  func  :DestroyCond,      "SDL_DestroyCond",      [ :pointer ], :void
-  func  :CondSignal,       "SDL_CondSignal",       [ :pointer ], :int
-  func  :CondBroadcast,    "SDL_CondBroadcast",    [ :pointer ], :int
-  func  :CondWait,         "SDL_CondWait",         [ :pointer, :pointer ], :int
+  sdl_func  :CreateCond,       [                             ], :pointer
+  sdl_func  :DestroyCond,      [ :pointer                    ], :void
+  sdl_func  :CondSignal,       [ :pointer                    ], :int
+  sdl_func  :CondBroadcast,    [ :pointer                    ], :int
+  sdl_func  :CondWait,         [ :pointer, :pointer          ], :int
 
-  func  :CondWaitTimeout,  "SDL_CondWaitTimeout",
-        [ :pointer, :pointer, :uint32  ], :int
+  sdl_func  :CondWaitTimeout,  [ :pointer, :pointer, :uint32 ], :int
 
 end

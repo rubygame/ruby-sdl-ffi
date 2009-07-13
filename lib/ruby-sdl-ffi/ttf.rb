@@ -38,28 +38,25 @@ module SDL
     load_library "SDL_ttf"
 
 
-    func  :Linked_Version, "TTF_Linked_Version", [  ], :pointer
+    def self.ttf_func( name, args, ret )
+      func name, "TTF_#{name}", args, ret
+    end
+
+
+    ttf_func  :Linked_Version, [  ], :pointer
 
 
     UNICODE_BOM_NATIVE  = 0xFEFF
     UNICODE_BOM_SWAPPED = 0xFFFE
 
-    func  :ByteSwappedUNICODE, "TTF_ByteSwappedUNICODE", [ :int ], :void
+    ttf_func  :ByteSwappedUNICODE, [ :int ], :void
 
+    ttf_func  :Init, [ ], :int
 
-    func  :Init, "TTF_Init", [ ], :int
-
-
-    func  :OpenFont, "TTF_OpenFont", [ :string, :int ], :pointer
-
-    func  :OpenFontIndex,   "TTF_OpenFontIndex",
-          [ :string, :int, :long ], :pointer
-
-    func  :OpenFontRW,      "TTF_OpenFontRW",
-          [ :pointer, :int, :int ], :pointer
-
-    func  :OpenFontIndexRW, "TTF_OpenFontIndexRW",
-          [ :pointer, :int, :int, :long ], :pointer
+    ttf_func  :OpenFont,        [ :string, :int               ], :pointer
+    ttf_func  :OpenFontIndex,   [ :string, :int, :long        ], :pointer
+    ttf_func  :OpenFontRW,      [ :pointer, :int, :int        ], :pointer
+    ttf_func  :OpenFontIndexRW, [ :pointer, :int, :int, :long ], :pointer
 
 
     STYLE_NORMAL    = 0x00
@@ -68,76 +65,76 @@ module SDL
     STYLE_UNDERLINE = 0x04
 
 
-    func  :GetFontStyle, "TTF_GetFontStyle", [ :pointer       ], :int
-    func  :SetFontStyle, "TTF_SetFontStyle", [ :pointer, :int ], :void
-    func  :FontHeight,   "TTF_FontHeight",   [ :pointer       ], :int
-    func  :FontAscent,   "TTF_FontAscent",   [ :pointer       ], :int
-    func  :FontDescent,  "TTF_FontDescent",  [ :pointer       ], :int
-    func  :FontLineSkip, "TTF_FontLineSkip", [ :pointer       ], :int
-    func  :FontFaces,    "TTF_FontFaces",    [ :pointer       ], :long
+    ttf_func  :GetFontStyle, [ :pointer       ], :int
+    ttf_func  :SetFontStyle, [ :pointer, :int ], :void
+    ttf_func  :FontHeight,   [ :pointer       ], :int
+    ttf_func  :FontAscent,   [ :pointer       ], :int
+    ttf_func  :FontDescent,  [ :pointer       ], :int
+    ttf_func  :FontLineSkip, [ :pointer       ], :int
+    ttf_func  :FontFaces,    [ :pointer       ], :long
 
 
-    func  :FontFaceIsFixedWidth, "TTF_FontFaceIsFixedWidth", [ :pointer ], :int
-    func  :FontFaceFamilyName,   "TTF_FontFaceFamilyName", [ :pointer ], :string
-    func  :FontFaceStyleName,    "TTF_FontFaceStyleName",  [ :pointer ], :string
+    ttf_func  :FontFaceIsFixedWidth, [ :pointer ], :int
+    ttf_func  :FontFaceFamilyName,   [ :pointer ], :string
+    ttf_func  :FontFaceStyleName,    [ :pointer ], :string
 
 
-    func  :GlyphMetrics, "TTF_GlyphMetrics", 
+    ttf_func  :GlyphMetrics, 
           [ :pointer, :uint16, :pointer, 
             :pointer, :pointer, :pointer, :pointer ], :int
 
-    func  :SizeText,     "TTF_SizeText",
+    ttf_func  :SizeText,
           [ :pointer, :string, :pointer, :pointer ], :int
 
-    func  :SizeUTF8,     "TTF_SizeUTF8",
+    ttf_func  :SizeUTF8,
           [ :pointer, :string, :pointer, :pointer ], :int
 
-    func  :SizeUNICODE,  "TTF_SizeUNICODE",
+    ttf_func  :SizeUNICODE,
           [ :pointer, :pointer, :pointer, :pointer ], :int
 
 
-    func  :RenderText_Solid,      "TTF_RenderText_Solid",
+    ttf_func  :RenderText_Solid,
           [ :pointer, :string, SDL::Color ], :pointer
 
-    func  :RenderUTF8_Solid,      "TTF_RenderUTF8_Solid",
+    ttf_func  :RenderUTF8_Solid,
           [ :pointer, :string, SDL::Color ], :pointer
 
-    func  :RenderUNICODE_Solid,   "TTF_RenderUNICODE_Solid",
+    ttf_func  :RenderUNICODE_Solid,
           [ :pointer, :pointer, SDL::Color ], :pointer
 
-    func  :RenderGlyph_Solid,     "TTF_RenderGlyph_Solid",
+    ttf_func  :RenderGlyph_Solid,
           [ :pointer, :uint16, SDL::Color ], :pointer
 
 
-    func  :RenderText_Shaded,     "TTF_RenderText_Shaded",
+    ttf_func  :RenderText_Shaded,
           [ :pointer, :string, SDL::Color, SDL::Color ], :pointer
 
-    func  :RenderUTF8_Shaded,     "TTF_RenderUTF8_Shaded",
+    ttf_func  :RenderUTF8_Shaded,
           [ :pointer, :string, SDL::Color, SDL::Color ], :pointer
 
-    func  :RenderUNICODE_Shaded,  "TTF_RenderUNICODE_Shaded",
+    ttf_func  :RenderUNICODE_Shaded,
           [ :pointer, :pointer, SDL::Color, SDL::Color ], :pointer
 
-    func  :RenderGlyph_Shaded,    "TTF_RenderGlyph_Shaded",
+    ttf_func  :RenderGlyph_Shaded,
           [ :pointer, :uint16, SDL::Color, SDL::Color ], :pointer
 
 
-    func  :RenderText_Blended,    "TTF_RenderText_Blended",
+    ttf_func  :RenderText_Blended,
           [ :pointer, :string, SDL::Color ], :pointer
 
-    func  :RenderUTF8_Blended,    "TTF_RenderUTF8_Blended",
+    ttf_func  :RenderUTF8_Blended,
           [ :pointer, :string, SDL::Color ], :pointer
 
-    func  :RenderUNICODE_Blended, "TTF_RenderUNICODE_Blended",
+    ttf_func  :RenderUNICODE_Blended,
           [ :pointer, :pointer, SDL::Color ], :pointer
 
-    func  :RenderGlyph_Blended,   "TTF_RenderGlyph_Blended",
+    ttf_func  :RenderGlyph_Blended,
           [ :pointer, :uint16, SDL::Color ], :pointer
 
 
-    func  :CloseFont, "TTF_CloseFont", [ :pointer ], :void
-    func  :Quit,      "TTF_Quit",      [          ], :void
-    func  :WasInit,   "TTF_WasInit",   [          ], :int
+    ttf_func  :CloseFont, [ :pointer ], :void
+    ttf_func  :Quit,      [          ], :void
+    ttf_func  :WasInit,   [          ], :int
 
   end
 end

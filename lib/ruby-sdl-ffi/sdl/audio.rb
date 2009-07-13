@@ -88,41 +88,36 @@ module SDL
 #     end
 
 
-  func  :AudioInit, "SDL_AudioInit", [ :string ], :int
-  func  :AudioQuit, "SDL_AudioQuit", [ ], :void
-  func  :AudioDriverName, "SDL_AudioDriverName", [ :string, :int ], :string
-  func  :OpenAudio, "SDL_OpenAudio", [ :pointer, :pointer ], :int
+  sdl_func  :AudioInit,       [ :string            ], :int
+  sdl_func  :AudioQuit,       [                    ], :void
+  sdl_func  :AudioDriverName, [ :string, :int      ], :string
+  sdl_func  :OpenAudio,       [ :pointer, :pointer ], :int
 
 
   AUDIO_STOPPED = 0
   AUDIO_PLAYING = 1
   AUDIO_PAUSED  = 2
 
-  func  :GetAudioStatus, "SDL_GetAudioStatus", [ ], SDL::ENUM
-  func  :PauseAudio,     "SDL_PauseAudio",     [ :int ], :void
+  sdl_func  :GetAudioStatus, [      ], SDL::ENUM
+  sdl_func  :PauseAudio,     [ :int ], :void
 
+  sdl_func  :LoadWAV_RW,
+            [ :pointer, :int, :pointer, :pointer, :pointer ], :pointer
 
+  sdl_func  :FreeWAV, [ :pointer ], :void
 
-  func  :LoadWAV_RW, "SDL_LoadWAV_RW",
-       [ :pointer, :int, :pointer, :pointer, :pointer ], :pointer
+  sdl_func  :BuildAudioCVT,
+            [ :pointer, :uint16, :uint8, :int, :uint16, :uint8, :int ], :int
 
-  func  :FreeWAV,    "SDL_FreeWAV", [ :pointer ], :void
-
-
-
-  func  :BuildAudioCVT, "SDL_BuildAudioCVT",
-       [ :pointer, :uint16, :uint8, :int, :uint16, :uint8, :int ], :int
-
-  func  :ConvertAudio, "SDL_ConvertAudio", [ :pointer ], :int
+  sdl_func  :ConvertAudio, [ :pointer ], :int
 
 
   MIX_MAXVOLUME = 128
 
-  func  :MixAudio, "SDL_MixAudio", [ :pointer, :pointer, :uint32, :int ], :void
+  sdl_func  :MixAudio, [ :pointer, :pointer, :uint32, :int ], :void
 
-
-  func  :LockAudio,   "SDL_LockAudio",   [  ], :void
-  func  :UnlockAudio, "SDL_UnlockAudio", [  ], :void
-  func  :CloseAudio,  "SDL_CloseAudio",  [  ], :void
+  sdl_func  :LockAudio,   [  ], :void
+  sdl_func  :UnlockAudio, [  ], :void
+  sdl_func  :CloseAudio,  [  ], :void
 
 end

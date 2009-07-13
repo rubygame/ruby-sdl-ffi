@@ -245,7 +245,7 @@ module SDL
   end
 
 
-  func  :PumpEvents, "SDL_PumpEvents", [  ], :void
+  sdl_func  :PumpEvents, [  ], :void
 
 
   ADDEVENT  = 0
@@ -332,7 +332,7 @@ module SDL
   end
 
 
-  func  :PushEvent, "SDL_PushEvent", [ :pointer ], :int
+  sdl_func  :PushEvent, [ :pointer ], :int
 
 
 
@@ -358,7 +358,7 @@ module SDL
   end
 
 
-  #func  :GetEventFilter, "SDL_GetEventFilter", [ ], :eventfilter_cb
+  #sdl_func  :GetEventFilter, [ ], :eventfilter_cb
 
 
   QUERY   = -1
@@ -366,6 +366,6 @@ module SDL
   DISABLE = 0
   ENABLE  = 1
 
-  func  :EventState, "SDL_EventState", [ :uint8, :int ], :uint8
+  sdl_func  :EventState, [ :uint8, :int ], :uint8
 
 end

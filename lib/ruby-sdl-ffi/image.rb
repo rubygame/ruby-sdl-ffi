@@ -38,73 +38,52 @@ module SDL
     load_library "SDL_image"
 
 
-    func  :Linked_Version, "IMG_Linked_Version", [], SDL::Version.typed_pointer
+    def self.img_func( name, args, ret )
+      func name, "IMG_#{name}", args, ret
+    end
 
 
-    func  :LoadTyped_RW, "IMG_LoadTyped_RW",
-          [ :pointer, :int, :string ], SDL::Surface.typed_pointer
-
-    func  :Load, "IMG_Load", [ :string ], SDL::Surface.typed_pointer
-
-    func  :Load_RW, "IMG_Load_RW", [ :pointer, :int ],
-          SDL::Surface.typed_pointer
+    img_func  :Linked_Version, [], SDL::Version.typed_pointer
 
 
-    func  :InvertAlpha, "IMG_InvertAlpha", [ :int     ], :int
+    img_func  :LoadTyped_RW, [ :pointer, :int, :string ],
+              SDL::Surface.typed_pointer
+
+    img_func  :Load,    [ :string        ], SDL::Surface.typed_pointer
+    img_func  :Load_RW, [ :pointer, :int ], SDL::Surface.typed_pointer
 
 
-    func  :isBMP, "IMG_isBMP", [ :pointer ], :int
-    func  :isGIF, "IMG_isGIF", [ :pointer ], :int
-    func  :isJPG, "IMG_isJPG", [ :pointer ], :int
-    func  :isLBM, "IMG_isLBM", [ :pointer ], :int
-    func  :isPCX, "IMG_isPCX", [ :pointer ], :int
-    func  :isPNG, "IMG_isPNG", [ :pointer ], :int
-    func  :isPNM, "IMG_isPNM", [ :pointer ], :int
-    func  :isTIF, "IMG_isTIF", [ :pointer ], :int
-    func  :isXCF, "IMG_isXCF", [ :pointer ], :int
-    func  :isXPM, "IMG_isXPM", [ :pointer ], :int
-    func  :isXV,  "IMG_isXV",  [ :pointer ], :int
+    img_func  :InvertAlpha, [ :int     ], :int
 
 
-    func  :LoadBMP_RW, "IMG_LoadBMP_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadGIF_RW, "IMG_LoadGIF_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadJPG_RW, "IMG_LoadJPG_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadLBM_RW, "IMG_LoadLBM_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadPCX_RW, "IMG_LoadPCX_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadPNG_RW, "IMG_LoadPNG_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadPNM_RW, "IMG_LoadPNM_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadTGA_RW, "IMG_LoadTGA_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadTIF_RW, "IMG_LoadTIF_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadXCF_RW, "IMG_LoadXCF_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadXPM_RW, "IMG_LoadXPM_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
-
-    func  :LoadXV_RW,  "IMG_LoadXV_RW",
-          [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :isBMP, [ :pointer ], :int
+    img_func  :isGIF, [ :pointer ], :int
+    img_func  :isJPG, [ :pointer ], :int
+    img_func  :isLBM, [ :pointer ], :int
+    img_func  :isPCX, [ :pointer ], :int
+    img_func  :isPNG, [ :pointer ], :int
+    img_func  :isPNM, [ :pointer ], :int
+    img_func  :isTIF, [ :pointer ], :int
+    img_func  :isXCF, [ :pointer ], :int
+    img_func  :isXPM, [ :pointer ], :int
+    img_func  :isXV,  [ :pointer ], :int
 
 
-    func  :ReadXPMFromArray, "IMG_ReadXPMFromArray",
-          [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadBMP_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadGIF_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadJPG_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadLBM_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadPCX_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadPNG_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadPNM_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadTGA_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadTIF_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadXCF_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadXPM_RW, [ :pointer ], SDL::Surface.typed_pointer
+    img_func  :LoadXV_RW,  [ :pointer ], SDL::Surface.typed_pointer
+
+
+    img_func  :ReadXPMFromArray, [ :pointer ], SDL::Surface.typed_pointer
 
   end
 end

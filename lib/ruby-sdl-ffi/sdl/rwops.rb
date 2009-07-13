@@ -112,29 +112,29 @@ module SDL
   end
 
 
-  func  :RWFromFile,     "SDL_RWFromFile",     [ :string, :string ], :pointer
-  func  :RWFromFP,       "SDL_RWFromFP",       [ :pointer, :int   ], :pointer
-  func  :RWFromMem,      "SDL_RWFromMem",      [ :pointer, :int   ], :pointer
-  func  :RWFromConstMem, "SDL_RWFromConstMem", [ :pointer, :int   ], :pointer
+  sdl_func  :RWFromFile,     [ :string, :string ], :pointer
+  sdl_func  :RWFromFP,       [ :pointer, :int   ], :pointer
+  sdl_func  :RWFromMem,      [ :pointer, :int   ], :pointer
+  sdl_func  :RWFromConstMem, [ :pointer, :int   ], :pointer
 
-  func  :AllocRW, "SDL_AllocRW", [          ], :pointer
-  func  :FreeRW,  "SDL_FreeRW",  [ :pointer ], :void
+  sdl_func  :AllocRW, [          ], :pointer
+  sdl_func  :FreeRW,  [ :pointer ], :void
 
   RW_SEEK_SET = 0
   RW_SEEK_CUR = 1
   RW_SEEK_END = 2
 
-  func  :ReadLE16,  "SDL_ReadLE16",  [ :pointer ], :uint16
-  func  :ReadBE16,  "SDL_ReadBE16",  [ :pointer ], :uint16
-  func  :ReadLE32,  "SDL_ReadLE32",  [ :pointer ], :uint32
-  func  :ReadBE32,  "SDL_ReadBE32",  [ :pointer ], :uint32
-  func  :ReadLE64,  "SDL_ReadLE64",  [ :pointer ], :uint64
-  func  :ReadBE64,  "SDL_ReadBE64",  [ :pointer ], :uint64
-  func  :WriteLE16, "SDL_WriteLE16", [ :pointer, :uint16 ], :int
-  func  :WriteBE16, "SDL_WriteBE16", [ :pointer, :uint16 ], :int
-  func  :WriteLE32, "SDL_WriteLE32", [ :pointer, :uint32 ], :int
-  func  :WriteBE32, "SDL_WriteBE32", [ :pointer, :uint32 ], :int
-  func  :WriteLE64, "SDL_WriteLE64", [ :pointer, :uint64 ], :int
-  func  :WriteBE64, "SDL_WriteBE64", [ :pointer, :uint64 ], :int
+  sdl_func  :ReadLE16,  [ :pointer          ], :uint16
+  sdl_func  :ReadBE16,  [ :pointer          ], :uint16
+  sdl_func  :ReadLE32,  [ :pointer          ], :uint32
+  sdl_func  :ReadBE32,  [ :pointer          ], :uint32
+  sdl_func  :ReadLE64,  [ :pointer          ], :uint64
+  sdl_func  :ReadBE64,  [ :pointer          ], :uint64
+  sdl_func  :WriteLE16, [ :pointer, :uint16 ], :int
+  sdl_func  :WriteBE16, [ :pointer, :uint16 ], :int
+  sdl_func  :WriteLE32, [ :pointer, :uint32 ], :int
+  sdl_func  :WriteBE32, [ :pointer, :uint32 ], :int
+  sdl_func  :WriteLE64, [ :pointer, :uint64 ], :int
+  sdl_func  :WriteBE64, [ :pointer, :uint64 ], :int
 
 end

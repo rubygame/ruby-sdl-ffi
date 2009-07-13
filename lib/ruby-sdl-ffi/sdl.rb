@@ -34,6 +34,11 @@ require 'nice-ffi'
 module SDL
   extend NiceFFI::Library
   load_library "SDL"
+
+  def self.sdl_func( name, args, ret )
+    func name, "SDL_#{name}", args, ret
+  end
+
 end
 
 

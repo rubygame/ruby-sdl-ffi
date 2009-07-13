@@ -38,7 +38,13 @@ module SDL
     load_library "SDL_mixer"
 
 
-    func  :Linked_Version, "Mix_Linked_Version", [], SDL::Version.typed_pointer
+    def self.mix_func( name, args, ret )
+      func name, "Mix_#{name}", args, ret
+    end
+
+
+    mix_func  :Linked_Version, [], SDL::Version.typed_pointer
+
 
     CHANNELS          = 8
     DEFAULT_FREQUENCY = 22050
@@ -104,45 +110,32 @@ module SDL
     MUS_MP3_MAD = 7
 
 
-    func  :OpenAudio, "Mix_OpenAudio",
-          [ :int, :uint16, :int, :int ], :int
-
-    func  :AllocateChannels, "Mix_AllocateChannels", [ :int ], :int
-
-    func  :QuerySpec, "Mix_QuerySpec", [ :pointer, :pointer, :pointer ], :int
+    mix_func  :OpenAudio,        [ :int, :uint16, :int, :int    ], :int
+    mix_func  :AllocateChannels, [ :int                         ], :int
+    mix_func  :QuerySpec,        [ :pointer, :pointer, :pointer ], :int
 
 
-    func  :LoadWAV_RW, "Mix_LoadWAV_RW", [:pointer, :int], Chunk.typed_pointer
-    func  :LoadMUS,    "Mix_LoadMUS",    [:string       ], Music.typed_pointer
-    func  :LoadMUS_RW, "Mix_LoadMUS_RW", [:pointer      ], Music.typed_pointer
-
-    func  :QuickLoad_WAV, "Mix_QuickLoad_WAV",
-          [ :pointer ], Chunk.typed_pointer
-
-    func  :QuickLoad_RAW, "Mix_QuickLoad_RAW",
-          [ :pointer, :uint32 ], Chunk.typed_pointer
+    mix_func  :LoadWAV_RW,    [ :pointer, :int    ], Chunk.typed_pointer
+    mix_func  :LoadMUS,       [ :string           ], Music.typed_pointer
+    mix_func  :LoadMUS_RW,    [ :pointer          ], Music.typed_pointer
+    mix_func  :QuickLoad_WAV, [ :pointer          ], Chunk.typed_pointer
+    mix_func  :QuickLoad_RAW, [ :pointer, :uint32 ], Chunk.typed_pointer
 
 
-    func  :FreeChunk, "Mix_FreeChunk", [ :pointer ], :void
-    func  :FreeMusic, "Mix_FreeMusic", [ :pointer ], :void
+    mix_func  :FreeChunk,     [ :pointer ], :void
+    mix_func  :FreeMusic,     [ :pointer ], :void
 
 
-    func  :GetMusicType, "Mix_GetMusicType", [ :pointer ], :int
+    mix_func  :GetMusicType,  [ :pointer ], :int
 
 
-    func  :SetPostMix,        "Mix_SetPostMix",
-          [ callback( [ :pointer, :pointer, :int ], :void), :pointer ], :void
+    callback( :mix_hook_cb, [:pointer, :pointer, :int], :void)
 
-    func  :HookMusic,         "Mix_HookMusic",
-          [ callback( [ :pointer, :pointer, :int ], :void ), :pointer ], :void
-
-    func  :HookMusicFinished, "Mix_HookMusicFinished",
-          [ callback( [ ], :void) ], :void
-
-    func  :GetMusicHookData,  "Mix_GetMusicHookData", [ ], :pointer
-
-    func  :ChannelFinished,   "Mix_ChannelFinished",
-          [ callback( [ :int ], :void) ], :void
+    mix_func  :SetPostMix,        [ :mix_hook_cb, :pointer  ], :void
+    mix_func  :HookMusic,         [ :mix_hook_cb, :pointer  ], :void
+    mix_func  :HookMusicFinished, [ callback([], :void)     ], :void
+    mix_func  :GetMusicHookData,  [                         ], :pointer
+    mix_func  :ChannelFinished,   [ callback([:int], :void) ], :void
 
 
     CHANNEL_POST = -2
@@ -151,89 +144,76 @@ module SDL
     callback(:mix_effectfunc_cb, [ :int, :pointer, :int, :pointer ], :void)
     callback(:mix_effectdone_cb, [ :int, :pointer ], :void)
 
-    func  :RegisterEffect,       "Mix_RegisterEffect",
+    mix_func  :RegisterEffect,
           [ :int, :mix_effectfunc_cb, :mix_effectdone_cb, :pointer ], :int
 
-    func  :UnregisterEffect,     "Mix_UnregisterEffect",
-          [ :int, :mix_effectfunc_cb ], :int
-
-    func  :UnregisterAllEffects, "Mix_UnregisterAllEffects", [ :int ], :int
+    mix_func  :UnregisterEffect,     [ :int, :mix_effectfunc_cb ], :int
+    mix_func  :UnregisterAllEffects, [ :int ], :int
 
 
     EFFECTSMAXSPEED = "MIX_EFFECTSMAXSPEED"
 
 
-    func  :SetPanning,       "Mix_SetPanning",  [ :int, :uint8, :uint8 ], :int
-    func  :SetPosition,      "Mix_SetPosition", [ :int, :int16, :uint8 ], :int
-    func  :SetDistance,      "Mix_SetDistance", [ :int, :uint8         ], :int
-    func  :SetReverseStereo, "Mix_SetReverseStereo", [ :int, :int ], :int
-                
+    mix_func  :SetPanning,         [ :int, :uint8, :uint8 ], :int
+    mix_func  :SetPosition,        [ :int, :int16, :uint8 ], :int
+    mix_func  :SetDistance,        [ :int, :uint8         ], :int
+    mix_func  :SetReverseStereo,   [ :int, :int           ], :int
 
-    func  :ReserveChannels, "Mix_ReserveChannels", [ :int             ], :int
-    func  :GroupChannel,    "Mix_GroupChannel",    [ :int, :int       ], :int
-    func  :GroupChannels,   "Mix_GroupChannels",   [ :int, :int, :int ], :int
-    func  :GroupAvailable,  "Mix_GroupAvailable",  [ :int             ], :int
-    func  :GroupCount,      "Mix_GroupCount",      [ :int             ], :int
-    func  :GroupOldest,     "Mix_GroupOldest",     [ :int             ], :int
-    func  :GroupNewer,      "Mix_GroupNewer",      [ :int             ], :int
-
-
-    func  :PlayChannelTimed, "Mix_PlayChannelTimed",
-          [ :int, :pointer, :int, :int ], :int
-    
-    func  :PlayMusic,   "Mix_PlayMusic",   [ :pointer, :int       ], :int
-    func  :FadeInMusic, "Mix_FadeInMusic", [ :pointer, :int, :int ], :int
-
-    func  :FadeInMusicPos,     "Mix_FadeInMusicPos",
-          [ :pointer, :int, :int, :double ], :int
-
-    func  :FadeInChannelTimed, "Mix_FadeInChannelTimed",
-          [ :int, :pointer, :int, :int, :int ], :int
+               
+    mix_func  :ReserveChannels,    [ :int                 ], :int
+    mix_func  :GroupChannel,       [ :int, :int           ], :int
+    mix_func  :GroupChannels,      [ :int, :int, :int     ], :int
+    mix_func  :GroupAvailable,     [ :int                 ], :int
+    mix_func  :GroupCount,         [ :int                 ], :int
+    mix_func  :GroupOldest,        [ :int                 ], :int
+    mix_func  :GroupNewer,         [ :int                 ], :int
 
 
-    func  :Volume,      "Mix_Volume",      [ :int, :int     ], :int
-    func  :VolumeChunk, "Mix_VolumeChunk", [ :pointer, :int ], :int
-    func  :VolumeMusic, "Mix_VolumeMusic", [ :int           ], :int
+    mix_func  :PlayChannelTimed,   [ :int, :pointer, :int, :int       ], :int
+    mix_func  :PlayMusic,          [ :pointer, :int                   ], :int
+    mix_func  :FadeInMusic,        [ :pointer, :int, :int             ], :int
+    mix_func  :FadeInMusicPos,     [ :pointer, :int, :int, :double    ], :int
+    mix_func  :FadeInChannelTimed, [ :int, :pointer, :int, :int, :int ], :int
 
 
-    func  :HaltChannel,   "Mix_HaltChannel",   [ :int       ], :int
-    func  :HaltGroup,     "Mix_HaltGroup",     [ :int       ], :int
-    func  :HaltMusic,     "Mix_HaltMusic",     [            ], :int
-    func  :ExpireChannel, "Mix_ExpireChannel", [ :int, :int ], :int
+    mix_func  :Volume,             [ :int, :int     ], :int
+    mix_func  :VolumeChunk,        [ :pointer, :int ], :int
+    mix_func  :VolumeMusic,        [ :int           ], :int
 
 
-    func  :FadeOutChannel, "Mix_FadeOutChannel", [ :int, :int ], :int
-    func  :FadeOutGroup,   "Mix_FadeOutGroup",   [ :int, :int ], :int
-    func  :FadeOutMusic,   "Mix_FadeOutMusic",   [ :int       ], :int
-    func  :FadingMusic,    "Mix_FadingMusic",    [            ], :int
-    func  :FadingChannel,  "Mix_FadingChannel",  [ :int       ], :int
+    mix_func  :HaltChannel,        [ :int           ], :int
+    mix_func  :HaltGroup,          [ :int           ], :int
+    mix_func  :HaltMusic,          [                ], :int
+    mix_func  :ExpireChannel,      [ :int, :int     ], :int
 
 
-    func  :Pause,       "Mix_Pause",       [ :int ], :void
-    func  :Resume,      "Mix_Resume",      [ :int ], :void
-    func  :Paused,      "Mix_Paused",      [ :int ], :int
-    func  :PauseMusic,  "Mix_PauseMusic",  [      ], :void
-    func  :ResumeMusic, "Mix_ResumeMusic", [      ], :void
-    func  :RewindMusic, "Mix_RewindMusic", [      ], :void
-    func  :PausedMusic, "Mix_PausedMusic", [      ], :int
-
-    func  :SetMusicPosition, "Mix_SetMusicPosition", [ :double ], :int
-
-    func  :Playing,      "Mix_Playing",      [ :int ], :int
-    func  :PlayingMusic, "Mix_PlayingMusic", [      ], :int
+    mix_func  :FadeOutChannel,     [ :int, :int     ], :int
+    mix_func  :FadeOutGroup,       [ :int, :int     ], :int
+    mix_func  :FadeOutMusic,       [ :int           ], :int
+    mix_func  :FadingMusic,        [                ], :int
+    mix_func  :FadingChannel,      [ :int           ], :int
 
 
-    func  :SetMusicCMD,  "Mix_SetMusicCMD",  [ :string ], :int
+    mix_func  :Pause,              [ :int           ], :void
+    mix_func  :Resume,             [ :int           ], :void
+    mix_func  :Paused,             [ :int           ], :int
+    mix_func  :PauseMusic,         [                ], :void
+    mix_func  :ResumeMusic,        [                ], :void
+    mix_func  :RewindMusic,        [                ], :void
+    mix_func  :PausedMusic,        [                ], :int
 
 
-    func  :SetSynchroValue, "Mix_SetSynchroValue", [ :int ], :int
-    func  :GetSynchroValue, "Mix_GetSynchroValue", [      ], :int
+    mix_func  :SetMusicPosition,   [ :double ], :int
+    mix_func  :Playing,            [ :int    ], :int
+    mix_func  :PlayingMusic,       [         ], :int
+    mix_func  :SetMusicCMD,        [ :string ], :int
 
+    mix_func  :SetSynchroValue,    [ :int    ], :int
+    mix_func  :GetSynchroValue,    [         ], :int
 
-    func  :GetChunk, "Mix_GetChunk", [ :int ], Chunk.typed_pointer
+    mix_func  :GetChunk,           [ :int    ], Chunk.typed_pointer
 
-
-    func  :CloseAudio, "Mix_CloseAudio", [ ], :void
+    mix_func  :CloseAudio,         [         ], :void
 
   end
 end

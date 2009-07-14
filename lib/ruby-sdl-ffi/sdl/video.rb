@@ -216,7 +216,19 @@ module SDL
 
 
 
-  sdl_func  :UpdateRects, [ :pointer, :int, :pointer                   ], :void
+  func  :__UpdateRects, "SDL_UpdateRects", [ :pointer, :int, :pointer ], :void
+
+  def self.UpdateRects( surf, rects )
+    rects_mp = FFI::Buffer.new( Rect, rects.length )
+
+    rects.each_with_index do |rect, i|
+      rects_mp[i].put_bytes( 0, rect.to_bytes )
+    end
+
+    __UpdateRects( surf, rects.length, rects_mp )
+  end
+
+
   sdl_func  :UpdateRect,  [ :pointer, :int32, :int32, :uint32, :uint32 ], :void
   sdl_func  :Flip,        [ :pointer                                   ], :int
 

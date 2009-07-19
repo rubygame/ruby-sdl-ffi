@@ -123,29 +123,67 @@ module SDL
 
   callback(:blit_cb, [ :pointer, :pointer, :pointer, :pointer ], :int)
 
-## Don't know how to implement this.
-#
-#   class VideoInfo < NiceFFI::Struct
-#     layout( :hw_available,  :uint32,  #bitfield: 1
-#             :wm_available,  :uint32,  #bitfield: 1
-#             :UnusedBits1,   :uint32,  #bitfield: 6
-#             :UnusedBits2,   :uint32,  #bitfield: 1
-#             :blit_hw,       :uint32,  #bitfield: 1
-#             :blit_hw_CC,    :uint32,  #bitfield: 1
-#             :blit_hw_A,     :uint32,  #bitfield: 1
-#             :blit_sw,       :uint32,  #bitfield: 1
-#             :blit_sw_CC,    :uint32,  #bitfield: 1
-#             :blit_sw_A,     :uint32,  #bitfield: 1
-#             :blit_fill,     :uint32,  #bitfield: 1
-#             :UnusedBits3,   :uint32,  #bitfield: 16
-#             :video_mem,     :uint32,
-#             :vfmt,          PixelFormat.typed_pointer,
-#             :current_w,     :int,
-#             :current_h,     :int )
-#
-#     hidden( :UnusedBits1, :UnusedBits2, :UnusedBits3 )
-#
-#   end
+
+  class VideoInfo < NiceFFI::Struct
+    layout( :flags,         :uint32,
+
+            ## flags contains:
+            # :hw_available,  :uint32,  #bitfield: 1
+            # :wm_available,  :uint32,  #bitfield: 1
+            # :UnusedBits1,   :uint32,  #bitfield: 6
+            # :UnusedBits2,   :uint32,  #bitfield: 1
+            # :blit_hw,       :uint32,  #bitfield: 1
+            # :blit_hw_CC,    :uint32,  #bitfield: 1
+            # :blit_hw_A,     :uint32,  #bitfield: 1
+            # :blit_sw,       :uint32,  #bitfield: 1
+            # :blit_sw_CC,    :uint32,  #bitfield: 1
+            # :blit_sw_A,     :uint32,  #bitfield: 1
+            # :blit_fill,     :uint32,  #bitfield: 1
+            # :UnusedBits3,   :uint32,  #bitfield: 16
+
+            :video_mem,     :uint32,
+            :vfmt,          PixelFormat.typed_pointer,
+            :current_w,     :int,
+            :current_h,     :int )
+
+    hidden( :flags )
+
+    def hw_available
+      self[:flags][1]
+    end
+
+    def wm_available
+      self[:flags][2]
+    end
+
+    def blit_hw
+      self[:flags][9]
+    end
+
+    def blit_hw_CC
+      self[:flags][10]
+    end
+
+    def blit_hw_A
+      self[:flags][11]
+    end
+
+    def blit_sw
+      self[:flags][12]
+    end
+
+    def blit_sw_CC
+      self[:flags][13]
+    end
+
+    def blit_sw_A
+      self[:flags][14]
+    end
+
+    def blit_fill
+      self[:flags][15]
+    end
+  end
 
 
   YV12_OVERLAY = 0x32315659
@@ -203,8 +241,7 @@ module SDL
 
   sdl_func  :GetVideoSurface, [], SDL::Surface.typed_pointer
 
-  ## Depends on SDL::VideoInfo, which I don't know how to implement.
-  #sdl_func  :GetVideoInfo, [ ], SDL::VideoInfo.typed_pointer
+  sdl_func  :GetVideoInfo, [ ], SDL::VideoInfo.typed_pointer
 
   sdl_func  :VideoModeOK, [ :int, :int, :int, :uint32 ], :int
 

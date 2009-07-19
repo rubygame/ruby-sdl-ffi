@@ -49,10 +49,12 @@ module SDL
 
 
     func  :rotozoomSurface,
-          [ :pointer, :double, :double, :int ], :pointer
+          [ :pointer, :double, :double, :int ],
+          SDL::Surface.typed_pointer
 
     func  :rotozoomSurfaceXY,
-          [ :pointer, :double, :double, :double, :int ], :pointer
+          [ :pointer, :double, :double, :double, :int ],
+          SDL::Surface.typed_pointer
 
     func  :rotozoomSurfaceSize,
           [ :int, :int, :double, :double, :pointer, :pointer ], :void
@@ -61,14 +63,17 @@ module SDL
           [ :int, :int, :double, :double, :double, :pointer, :pointer ], :void
 
 
-    func  :zoomSurface, [ :pointer, :double, :double, :int ], :pointer
+    func  :zoomSurface, [ :pointer, :double, :double, :int ],
+          SDL::Surface.typed_pointer
 
     func  :zoomSurfaceSize,
           [ :int, :int, :double, :double, :pointer, :pointer ], :void
 
-    func  :shrinkSurface, [ :pointer, :int, :int ], :pointer
+    func  :shrinkSurface, [ :pointer, :int, :int ],
+          SDL::Surface.typed_pointer
 
-    func  :rotateSurface90Degrees, [ :pointer, :int ], :pointer
+    func  :rotateSurface90Degrees, [ :pointer, :int ],
+          SDL::Surface.typed_pointer
 
   end
 end

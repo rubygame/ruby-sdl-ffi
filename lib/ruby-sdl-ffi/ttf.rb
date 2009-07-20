@@ -100,14 +100,42 @@ module SDL
               [ :pointer, :uint16, :pointer, 
                 :pointer, :pointer, :pointer, :pointer ], :int
 
-    ttf_func  :SizeText,
-              [ :pointer, :string, :pointer, :pointer  ], :int
 
-    ttf_func  :SizeUTF8,
-              [ :pointer, :string, :pointer, :pointer  ], :int
 
-    ttf_func  :SizeUNICODE,
-              [ :pointer, :pointer, :pointer, :pointer ], :int
+    func  :__SizeText, "TTF_SizeText",
+          [ :pointer, :string, :pointer, :pointer  ], :int
+
+    def self.SizeText( font, text )
+      w = FFI::MemoryPointer.new( :int )
+      h = FFI::MemoryPointer.new( :int )
+      __SizeText( font, text, w, h )
+      return [w,h]
+    end
+
+
+
+    func  :__SizeUTF8, "TTF_SizeUTF8",
+          [ :pointer, :string, :pointer, :pointer  ], :int
+
+    def self.SizeUTF( font, text )
+      w = FFI::MemoryPointer.new( :int )
+      h = FFI::MemoryPointer.new( :int )
+      __SizeUTF( font, text, w, h )
+      return [w,h]
+    end
+
+
+
+    func  :__SizeUNICODE, "TTF_SizeUNICODE",
+          [ :pointer, :pointer, :pointer, :pointer  ], :int
+
+    def self.SizeUNICODE( font, text )
+      w = FFI::MemoryPointer.new( :int )
+      h = FFI::MemoryPointer.new( :int )
+      __SizeUNICODE( font, text, w, h )
+      return [w,h]
+    end
+
 
 
     ttf_func  :RenderText_Solid,

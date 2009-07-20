@@ -61,39 +61,14 @@ module SDL
 
 
 
-    class Music < NiceFFI::Struct
+    class Music < NiceFFI::OpaqueStruct
       #--
       # Mix_Music struct (in C) has a hidden layout, which changes
       # depending on which sound format libraries were available
-      # at compile time. Since we don't know the layout, we have to
-      # jump through some hoops.
+      # at compile time.
       #++
-
-      def initialize( val )
-        case val
-        when FFI::Pointer
-          send(:pointer=, val)
-        when self.class
-          send(:pointer=, val.pointer)
-        else
-          raise TypeError, 
-                "cannot create new #{self.class} from #{val.inspect}"
-        end
-      end
-
-      def []( key )
-        raise ArgumentError, "No such field '#{key}'"
-      end
-
-      def []=( key, value )
-        raise ArgumentError, "No such field '#{key}'"
-      end
-
-      def members
-        []
-      end
-
     end
+
 
 
     NO_FADING   = 0

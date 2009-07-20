@@ -138,55 +138,94 @@ module SDL
 
 
 
-    ttf_func  :RenderText_Solid,
-              [ :pointer, :string, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderUTF8_Solid,
-              [ :pointer, :string, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderUNICODE_Solid,
-              [ :pointer, :pointer, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderGlyph_Solid,
-              [ :pointer, :uint16, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-
-    ttf_func  :RenderText_Shaded,
-              [ :pointer, :string, SDL::Color, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderUTF8_Shaded,
-              [ :pointer, :string, SDL::Color, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderUNICODE_Shaded,
-              [ :pointer, :pointer, SDL::Color, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderGlyph_Shaded,
-              [ :pointer, :uint16, SDL::Color, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-
-    ttf_func  :RenderText_Blended,
-              [ :pointer, :string, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderUTF8_Blended,
-              [ :pointer, :string, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderUNICODE_Blended,
-              [ :pointer, :pointer, SDL::Color ],
-              SDL::Surface.typed_pointer
-
-    ttf_func  :RenderGlyph_Blended,
-              [ :pointer, :uint16, SDL::Color ],
-              SDL::Surface.typed_pointer
+    %w{ Text UTF8 UNICODE Glyph }.each do |text_type|
+      
+      %w{ Solid Blended }.each do |render_mode|
+        
+        name = "Render#{text_type}_#{render_mode}"
+        
+        module_eval <<EOF
+          func  :__#{name}, "TTF_#{name}", [ :pointer, :string, :uint32 ],
+                SDL::Surface.typed_pointer
+          
+          def self.#{name}( font, text, color )
+            color = color.pointer.get_uint32(0)
+            __#{name}( font, text, color )
+          end
+EOF
+      end
+      
+      
+      name = "Render#{text_type}_Shaded"
+      
+      module_eval <<EOF
+        func  :__#{name}, "TTF_#{name}",
+              [ :pointer, :string, :uint32, :uint32 ],
+              SDL::Surface.typed_pointer 
+        
+        def self.#{name}( font, text, color, back )
+          color = color.pointer.get_uint32(0)
+          back = back.pointer.get_uint32(0)
+          __#{name}( font, text, color, back )
+        end
+EOF
+    end
+ 
+ 
+#     ttf_func  :RenderText_Solid,
+#               [ :pointer, :string, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#
+#     ttf_func  :RenderText_Solid,
+#               [ :pointer, :string, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderUTF8_Solid,
+#               [ :pointer, :string, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderUNICODE_Solid,
+#               [ :pointer, :pointer, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderGlyph_Solid,
+#               [ :pointer, :uint16, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#
+#     ttf_func  :RenderText_Shaded,
+#               [ :pointer, :string, SDL::Color, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderUTF8_Shaded,
+#               [ :pointer, :string, SDL::Color, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderUNICODE_Shaded,
+#               [ :pointer, :pointer, SDL::Color, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderGlyph_Shaded,
+#               [ :pointer, :uint16, SDL::Color, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#
+#     ttf_func  :RenderText_Blended,
+#               [ :pointer, :string, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderUTF8_Blended,
+#               [ :pointer, :string, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderUNICODE_Blended,
+#               [ :pointer, :pointer, SDL::Color ],
+#               SDL::Surface.typed_pointer
+#
+#     ttf_func  :RenderGlyph_Blended,
+#               [ :pointer, :uint16, SDL::Color ],
+#               SDL::Surface.typed_pointer
 
 
     ttf_func  :CloseFont, [ :pointer ], :void

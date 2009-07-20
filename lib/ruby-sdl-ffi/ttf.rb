@@ -46,6 +46,15 @@ module SDL
     ttf_func  :Linked_Version, [  ], :pointer
 
 
+
+    class Font < NiceFFI::OpaqueStruct
+      #--
+      # TTF_Font struct (in C) has a hidden layout.
+      #++
+    end
+
+
+
     UNICODE_BOM_NATIVE  = 0xFEFF
     UNICODE_BOM_SWAPPED = 0xFFFE
 
@@ -53,10 +62,18 @@ module SDL
 
     ttf_func  :Init, [ ], :int
 
-    ttf_func  :OpenFont,        [ :string, :int               ], :pointer
-    ttf_func  :OpenFontIndex,   [ :string, :int, :long        ], :pointer
-    ttf_func  :OpenFontRW,      [ :pointer, :int, :int        ], :pointer
-    ttf_func  :OpenFontIndexRW, [ :pointer, :int, :int, :long ], :pointer
+
+    ttf_func  :OpenFont,        [ :string, :int ],
+              Font.typed_pointer
+
+    ttf_func  :OpenFontIndex,   [ :string, :int, :long ],
+              Font.typed_pointer
+
+    ttf_func  :OpenFontRW,      [ :pointer, :int, :int ],
+              Font.typed_pointer
+
+    ttf_func  :OpenFontIndexRW, [ :pointer, :int, :int, :long ],
+              Font.typed_pointer
 
 
     STYLE_NORMAL    = 0x00

@@ -98,6 +98,10 @@ module SDL
     mix_func  :QuerySpec,        [ :pointer, :pointer, :pointer ], :int
 
 
+    def self.LoadWAV( file )
+      LoadWAV_RW( SDL.RWFromFile(file, "rb"), 1 )
+    end
+
     mix_func  :LoadWAV_RW,    [ :pointer, :int    ], Chunk.typed_pointer
     mix_func  :LoadMUS,       [ :string           ], Music.typed_pointer
     mix_func  :LoadMUS_RW,    [ :pointer          ], Music.typed_pointer

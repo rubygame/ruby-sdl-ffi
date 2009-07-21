@@ -90,8 +90,20 @@ module SDL
 
   sdl_func  :AudioInit,       [ :string            ], :int
   sdl_func  :AudioQuit,       [                    ], :void
-  sdl_func  :AudioDriverName, [ :string, :int      ], :string
   sdl_func  :OpenAudio,       [ :pointer, :pointer ], :int
+
+  
+  func  :__AudioDriverName, "SDL_AudioDriverName", [:pointer, :int], :pointer
+
+  def self.AudioDriverName
+    b = FFI::Buffer.new(:char, 1024)
+    result = __AudioDriverName( b, 1024 )
+    if result.null?
+      nil
+    else
+      b.get_string(0,1024)
+    end
+  end
 
 
   AUDIO_STOPPED = 0

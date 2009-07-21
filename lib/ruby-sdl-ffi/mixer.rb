@@ -49,6 +49,14 @@ module SDL
     CHANNELS          = 8
     DEFAULT_FREQUENCY = 22050
     DEFAULT_CHANNELS  = 2
+
+    DEFAULT_FORMAT    = if( FFI::Platform::BYTE_ORDER ==
+                            FFI::Platform::LITTLE_ENDIAN)
+                          AUDIO_S16LSB
+                        else
+                          AUDIO_S16MSB
+                        end
+
     MAX_VOLUME        = 128
 
 

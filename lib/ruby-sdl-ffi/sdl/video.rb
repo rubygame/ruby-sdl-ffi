@@ -390,7 +390,22 @@ module SDL
   sdl_func  :GL_LoadLibrary,    [ :string               ], :int
   sdl_func  :GL_GetProcAddress, [ :string               ], :pointer
   sdl_func  :GL_SetAttribute,   [ SDL::GLATTR, :int     ], :int
-  sdl_func  :GL_GetAttribute,   [ SDL::GLATTR, :pointer ], :int
+
+
+  func  :__GL_GetAttribute, "SDL_GL_GetAttribute",
+        [ SDL::GLATTR, :pointer ], :int
+
+  def self.GL_GetAttribute( attrib )
+    value = FFI::Buffer.new( :int )
+    result = __GL_GetAttribute( attrib, value )
+    if( result == -1 )
+      return nil
+    else
+      return value
+    end
+  end
+
+
   sdl_func  :GL_SwapBuffers,    [                       ], :void
   sdl_func  :GL_UpdateRects,    [ :int, :pointer        ], :void
   sdl_func  :GL_Lock,           [                       ], :void

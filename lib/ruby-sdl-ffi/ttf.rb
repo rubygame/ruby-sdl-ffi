@@ -43,7 +43,7 @@ module SDL
     end
 
 
-    ttf_func  :Linked_Version, [  ], :pointer
+    ttf_func  :Linked_Version, [  ], SDL::Version.typed_pointer
 
 
 

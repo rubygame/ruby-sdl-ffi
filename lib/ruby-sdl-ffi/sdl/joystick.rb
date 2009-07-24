@@ -30,9 +30,16 @@
 
 module SDL
 
+  class Joystick < NiceFFI::OpaqueStruct
+    #--
+    # SDL_Joystick struct (in C) has a hidden layout.
+    #++
+  end
+
+
   sdl_func  :NumJoysticks,       [                ], :int
   sdl_func  :JoystickName,       [ :int           ], :string
-  sdl_func  :JoystickOpen,       [ :int           ], :pointer
+  sdl_func  :JoystickOpen,       [ :int           ], Joystick.typed_pointer
   sdl_func  :JoystickOpened,     [ :int           ], :int
   sdl_func  :JoystickIndex,      [ :pointer       ], :int
 

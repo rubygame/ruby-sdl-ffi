@@ -109,7 +109,7 @@ module SDL
       w = FFI::MemoryPointer.new( :int )
       h = FFI::MemoryPointer.new( :int )
       __SizeText( font, text, w, h )
-      return [w,h]
+      return [w.get_int(0),h.get_int(0)]
     end
 
 
@@ -121,7 +121,7 @@ module SDL
       w = FFI::MemoryPointer.new( :int )
       h = FFI::MemoryPointer.new( :int )
       __SizeUTF( font, text, w, h )
-      return [w,h]
+      return [w.get_int(0),h.get_int(0)]
     end
 
 
@@ -133,7 +133,7 @@ module SDL
       w = FFI::MemoryPointer.new( :int )
       h = FFI::MemoryPointer.new( :int )
       __SizeUNICODE( font, text, w, h )
-      return [w,h]
+      return [w.get_int(0),h.get_int(0)]
     end
 
 

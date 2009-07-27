@@ -163,6 +163,68 @@ module SDL
     spg_func :DirtyClip,    [ :pointer, :pointer ], :void
 
 
+
+    def self.GetRed( format, color )
+      (color & format.Rmask) >> format.Rshift
+    end
+
+    def self.GetGreen( format, color )
+      (color & format.Gmask) >> format.Gshift
+    end
+
+    def self.GetBlue( format, color )
+      (color & format.Bmask) >> format.Bshift
+    end
+
+    def self.GetAlpha( format, color )
+      (color & format.Amask) >> format.Ashift
+    end
+
+
+
+    def self.MixRed( format, color )
+      (color & (~(format.Rmask))) | (red << format.Rshift)
+    end
+
+    def self.MixGreen( format, color )
+      (color & (~(format.Gmask))) | (red << format.Gshift)
+    end
+
+    def self.MixBlue( format, color )
+      (color & (~(format.Bmask))) | (red << format.Bshift)
+    end
+
+    def self.MixAlpha( format, color )
+      (color & (~(format.Amask))) | (red << format.Ashift)
+    end
+
+
+    def self.ConvertColor( srcfmt, srccolor, destfmt )
+      return 0 if( srcfmt.null? or dstfmt.null? )
+      SDL.MapRGB( destfmt, *SDL.GetRGB(srccolor, srcfmt) )
+    end
+
+
+    def self.GetColor( surface, color )
+      # Not quite right. This is a pointer, original func returns struct.
+      r,g,b = SDL.GetRGB( color, surface.format )
+      SDL::Color.new([r,g,b,0])
+    end
+
+
+    def self.MakeColor( r, g, b )
+      # Not quite right. This is a pointer, original func returns struct.
+      SDL::Color.new([r,g,b,0])
+    end
+
+
+    def self.MakeColorAlpha( r, g, b, a )
+      # Not quite right. This is a pointer, original func returns struct.
+      SDL::Color.new([r,g,b,a])
+    end
+
+
+
     spg_func :ColorPalette, [], :pointer
     spg_func :GrayPalette,  [], :pointer
 
@@ -188,9 +250,130 @@ module SDL
     spg_func :CreateSurface8, [ :uint32, :uint16, :uint16 ],
              SDL::Surface.typed_pointer
 
+
+    def self.CreateSurface16( flags, width, height )
+      SDL.CreateRGBSurface( flags, width, height, 16, 31 << 10, 31 << 5, 31, 0 )
+    end
+
+
+    def self.CreateSurface16Alpha( flags, width, height )
+      if( FFI::Platform.BYTE_ORDER == FFI::Platform.BIG_ENDIAN )
+        SDL.CreateRGBSurface( flags, width, height, 16,
+                              0xf000, 0x0f00, 0x00f0, 0x000f )
+      else
+        SDL.CreateRGBSurface( flags, width, height, 16,
+                              0x00f0, 0x000f, 0xf000, 0x0f00 )
+      end
+    end
+
+
+    def self.CreateSurface24( flags, width, height )
+      result =
+        if( FFI::Platform.BYTE_ORDER == FFI::Platform.BIG_ENDIAN )
+          SDL.CreateRGBSurface( flags, width, height, 16,
+                                0xff0000, 0x00ff00, 0x0000ff, 0 ) 
+        else
+          SDL.CreateRGBSurface( flags, width, height, 16,
+                                0x0000ff, 0x00ff00, 0xff0000, 0 )
+        end
+      SDL.SetAlpha( result, 0, SDL::ALPHA_OPAQUE )
+      return result
+    end
+
+
+    def self.CreateSurface32( flags, width, height )
+      result =
+        if( FFI::Platform.BYTE_ORDER == FFI::Platform.BIG_ENDIAN )
+          SDL.CreateRGBSurface( flags, width, height, 32,
+                                0xff000000, 0x00ff0000,
+                                0x0000ff00, 0x000000ff )
+        else
+          SDL.CreateRGBSurface( flags, width, height, 32,
+                                0x000000ff, 0x0000ff00,
+                                0x00ff0000, 0xff000000 )
+        end
+      SDL.SetAlpha( result, SDL::SRCALPHA, SDL::ALPHA_OPAQUE )
+      return result
+    end
+
+    class << self
+      alias :CreateSurface :CreateSurface32
+    end
+
+
+    def self.CreateSurfaceFrom( linearArray, width, height, format )
+      return nil if( linearArray.null? or format.null? )
+
+      result = SDL.CreateRGBSurfaceFrom( linearArray, width, height,
+                                         format.BitsPerPixel,
+                                         width*format.BytesPerPixel,
+                                         format.Rmask, format.Gmask,
+                                         format.Bmask, format.Amask )
+
+      if( format.Amask != 0 )
+        SDL.SetAlpha( result, SDL::SRCALPHA, SDL::ALPHA_OPAQUE )
+      end
+
+      return result 
+    end
+
+
+    def self.CopySurface( src )
+      SDL.ConvertSurface( src, src.format, SDL_SWSURFACE )
+    end
+
+
+    def self.SetSurfaceAlpha( surface, alpha )
+      SDL.SetAlpha( surface, (surface.flags & SDL::SRCALPHA), alpha )
+      return nil
+    end
+
+
+    def self.Clamp( value, min, max )
+      return min if value < min
+      return max if value > max
+      return value
+    end
+
+
+    def self.MakeRect( x, y, w, h )
+      # Not quite right. This is a pointer, original func returns struct.
+      SDL::Rect.new( [x, y, w, h] )
+    end
+
+
+    def self.MakeRectRelative( x, y, x2, y2 )
+      # Not quite right. This is a pointer, original func returns struct.
+      SDL::Rect.new( [x, y, x2 - x, y2 - y] )
+    end
+
+
+
     spg_func :GetPixel, [ :pointer, :int16, :int16 ], :uint32
 
+
     # spg_func :SetClip,  [ :pointer, SDL::Rect ], :void
+
+
+    def self.GetClip( surface )
+      unless surface.null?
+        surface.clip_rect
+      else
+        SDL::Rect.new([0,0,0,0])
+      end
+    end
+
+
+    def self.RestoreClip( surface )
+      unless surface.null?
+        surface.clip_rect.x = 0
+        surface.clip_rect.y = 0
+        surface.clip_rect.w = surface.w
+        surface.clip_rect.h = surface.h
+      end
+      return nil
+    end
+
 
 
     # spg_func :TransformX,
@@ -207,6 +390,15 @@ module SDL
              SDL::Surface.typed_pointer
 
 
+    def self.Scale( src, xscale, yscale )
+      Transform( src, 0x000000, 0, xscale, yscale, 0 )
+    end
+
+    def self.ScaleAA( src, xscale, yscale )
+      Transform( src, 0x000000, 0, xscale, yscale, TAA )
+    end
+
+
     spg_func :ReplaceColor, 
              [ :pointer, :pointer, :pointer, :pointer, :uint32 ],
              SDL::Surface.typed_pointer
@@ -219,6 +411,34 @@ module SDL
     spg_func :SetBlit, [:blit_cb], :void
 
     # spg_func :GetBlit, [], :pointer
+
+
+
+    def self.Draw( source, dest, x, y )
+      SDL.BlitSurface( source, nil, dest, SDL::Rect.new([x,y,0,0]) )
+    end
+
+    def self.DrawCenter( source, dest, x, y )
+      x = x - source.w / 2
+      y = y - source.y / 2
+      SDL.BlitSurface( source, nil, dest, SDL::Rect.new([x,y,0,0]) )
+    end
+
+    def self.DrawBlit( source, dest, x, y )
+      Blit( source, nil, dest, SDL::Rect.new([x,y,0,0]) )
+    end
+
+
+
+    def self.Fill( surface, color )
+      SDL.FillRect( surface, nil, color )
+      return nil
+    end
+
+    def self.FillAlpha( surface, color, alpha )
+      SDL.FillRect( surface, nil, MixAlpha( surface.format, color, alpha ) )
+      return nil
+    end
 
     spg_func :FloodFill, [ :pointer, :int16, :int16, :uint32 ], :void
 
@@ -415,16 +635,38 @@ module SDL
                                   :pointer, :uint8 ], :void
 
 
+
+    def self.MakePoint( x, y )
+      Point.new([x,y])
+    end
+
+
     spg_func :CopyPoints, [ :uint16, :pointer, :pointer ], :void
+
 
     spg_func :RotatePointsXY, [ :uint16, :pointer, 
                                 :float, :float, :float ], :void
 
+    def self.RotatePoints( n, points, angle )
+      RotatePointsXY( n, points, 0, 0, angle )
+    end
+
+
     spg_func :ScalePointsXY, [ :uint16, :pointer,
                                :float, :float, :float, :float ], :void
 
+    def self.ScalePoints( n, points, xscale, yscale )
+      ScalePointsXY( n, points, 0, 0, xscale, yscale )
+    end
+
+
     spg_func :SkewPointsXY, [ :uint16, :pointer,
                               :float, :float, :float, :float ], :void
+
+    def self.SkewPoints( n, points, xskew, yskew )
+      SkewPointsXY( n, points, 0, 0, xskew, yskew )
+    end
+
 
     spg_func :TranslatePoints, [ :uint16, :pointer, :float, :float ], :void
 

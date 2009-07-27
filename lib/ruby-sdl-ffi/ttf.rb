@@ -51,6 +51,10 @@ module SDL
       #--
       # TTF_Font struct (in C) has a hidden layout.
       #++
+
+      def self.release( pointer )
+        SDL::TTF.CloseFont( pointer )
+      end
     end
 
 

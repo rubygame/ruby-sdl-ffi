@@ -44,18 +44,18 @@ module SDL
     end
 
 
-    PI_8  = 0.392699082
-    PI_4  = 0.785398163
-    PI_2  = 1.57079633
-    PI3_4 = 2.35619449
-    PI    = 3.14159265
-    PI5_4 = 3.92699082
-    PI3_2 = 4.71238898
-    PI7_4 = 5.49778714
-    PI2   = 6.28318531
+    PI_8  = Math::PI / 8
+    PI_4  = Math::PI / 4
+    PI_2  = Math::PI / 2
+    PI3_4 = Math::PI * 3 / 4
+    PI    = Math::PI
+    PI5_4 = Math::PI * 5 / 4
+    PI3_2 = Math::PI * 3 / 2
+    PI7_4 = Math::PI * 7 / 4
+    PI2   = Math::PI * 2
 
-    DEGPERRAD = 57.2957795
-    RADPERDEG = 0.0174532925
+    DEGPERRAD = 180 / Math::PI
+    RADPERDEG = Math::PI / 180
 
 
     class Point < NiceFFI::Struct

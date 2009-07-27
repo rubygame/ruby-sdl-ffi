@@ -383,11 +383,23 @@ module SDL
     spg_func :Transform, [ :pointer, :uint32, :float, :float, :float, :uint8 ],
              SDL::Surface.typed_pointer
 
-    spg_func :Rotate,   [ :pointer, :float, :uint32 ],
-             SDL::Surface.typed_pointer
 
-    spg_func :RotateAA, [ :pointer, :float, :uint32 ],
-             SDL::Surface.typed_pointer
+
+    func :__Rotate, "SPG_Rotate",  [ :pointer, :float, :uint32 ],
+         SDL::Surface.typed_pointer
+
+    def self.Rotate( src, angle, color=0 )
+      __Rotate( src, angle, color )
+    end
+
+
+    func :__RotateAA, "SPG_RotateAA",  [ :pointer, :float, :uint32 ],
+         SDL::Surface.typed_pointer
+
+    def self.RotateAA( src, angle, color=0 )
+      __RotateAA( src, angle, color )
+    end
+
 
 
     def self.Scale( src, xscale, yscale )

@@ -65,6 +65,10 @@ module SDL
               :abuf,      :pointer,
               :alen,      :uint32,
               :volume,    :uint8 )
+
+      def self.release( pointer )
+        SDL::Mixer.FreeChunk( pointer )
+      end
     end
 
 
@@ -75,6 +79,10 @@ module SDL
       # depending on which sound format libraries were available
       # at compile time.
       #++
+
+      def self.release( pointer )
+        SDL::Mixer.FreeMusic( pointer )
+      end
     end
 
 

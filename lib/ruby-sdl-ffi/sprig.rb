@@ -455,6 +455,12 @@ module SDL
     spg_func :FloodFill, [ :pointer, :int16, :int16, :uint32 ], :void
 
 
+    # Only available if SPriG was compiled with "extended" functions.
+    begin
+      spg_func :FloodFill8, [ :pointer, :int16, :int16, :uint32 ], :void
+    rescue FFI::NotFoundError
+    end
+
 
     spg_func :Pixel, [ :pointer, :int16, :int16, :uint32 ], :void
     spg_func :PixelBlend, [ :pointer, :int16, :int16, :uint32, :uint8 ], :void

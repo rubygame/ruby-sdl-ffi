@@ -46,7 +46,8 @@ more mature and stable (i.e. version 1.0+).
 == Requirements
 
 * SDL       >= 1.2.13
-* Ruby-FFI  >= 0.3.0 (or compatible)
+* Ruby-FFI  >= 0.4.0 (or compatible)
+* Nice-FFI  >= 0.2.0
 * need      >= 1.1.0
 
 Optional:
@@ -55,6 +56,7 @@ Optional:
 * SDL_gfx   >= 2.0.17
 * SDL_mixer >= 1.2.8
 * SDL_ttf   >= 2.0.9
+* SPriG     >= 1.0.0
 
 Ruby-SDL-FFI may work with older versions, but hasn't been tried on them.
 

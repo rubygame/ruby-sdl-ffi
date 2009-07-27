@@ -212,6 +212,9 @@ module SDL
 
     hidden( :hwfuncs, :hwdata, :UnusedBits )
 
+    def self.release( pointer )
+      SDL.FreeYUVOverlay( pointer )
+    end
   end
 
 

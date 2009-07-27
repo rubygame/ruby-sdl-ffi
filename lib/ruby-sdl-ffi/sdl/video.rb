@@ -100,6 +100,9 @@ module SDL
     hidden( :offset, :hwdata, :unused1,
             :locked, :map, :format_version )
 
+    def self.release( pointer )
+      SDL.FreeSurface( pointer )
+    end
   end
 
 

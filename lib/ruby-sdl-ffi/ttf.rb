@@ -96,9 +96,25 @@ module SDL
     ttf_func  :FontFaceStyleName,    [ :pointer ], :string
 
 
-    ttf_func  :GlyphMetrics, 
-              [ :pointer, :uint16, :pointer, 
-                :pointer, :pointer, :pointer, :pointer ], :int
+
+    func  :__GlyphMetrics, "TTF_GlyphMetrics",
+          [ :pointer, :uint16, :pointer, :pointer,
+            :pointer, :pointer, :pointer ], :int
+
+    # Returns:: [minx, maxx, miny, maxy, advance], or nil on failure.
+    # 
+    def self.GlyphMetrics( font, char )
+      minx, maxx = FFI::MemoryPointer.new(:int), FFI::MemoryPointer.new(:int)
+      miny, maxy = FFI::MemoryPointer.new(:int), FFI::MemoryPointer.new(:int)
+      advance = FFI::MemoryPointer.new(:int)
+      result = __GlyphMetrics( font, char, minx, maxx, miny, maxy, advance )
+      if( result == 0 )
+        return [minx.get_int(0), maxx.get_int(0),
+                miny.get_int(0), maxy.get_int(0), advance.get_int(0)]
+      else
+        nil
+      end
+    end
 
 
 

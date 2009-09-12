@@ -29,10 +29,8 @@
 
 
 require 'rubygems'
-
 require 'need'
-require 'nice-ffi'
-require 'ruby-sdl-ffi/sdl'
+need { "sdl" }
 
 
 module SDL

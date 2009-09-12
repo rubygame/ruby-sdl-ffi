@@ -28,6 +28,8 @@
 #++
 
 
+require 'rubygems'
+require 'need'
 require 'nice-ffi'
 
 

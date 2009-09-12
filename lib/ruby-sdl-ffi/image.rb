@@ -36,7 +36,7 @@ need { "sdl" }
 module SDL
   module Image
     extend NiceFFI::Library
-    load_library "SDL_image"
+    load_library "SDL_image", SDL::LOAD_PATHS
 
 
     def self.img_func( name, args, ret )

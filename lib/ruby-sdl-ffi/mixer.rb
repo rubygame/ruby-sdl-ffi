@@ -36,7 +36,7 @@ need { "sdl" }
 module SDL
   module Mixer
     extend NiceFFI::Library
-    load_library "SDL_mixer"
+    load_library "SDL_mixer", SDL::LOAD_PATHS
 
 
     def self.mix_func( name, args, ret )

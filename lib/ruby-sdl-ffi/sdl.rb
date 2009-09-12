@@ -35,7 +35,18 @@ require 'nice-ffi'
 
 module SDL
   extend NiceFFI::Library
-  load_library "SDL"
+
+  unless defined? SDL::LOAD_PATHS
+    # Check if the application has defined SDL_PATHS with some
+    # paths to check first for SDL libraries.
+    SDL::LOAD_PATHS = if defined? ::SDL_PATHS
+                        NiceFFI::Library::DEFAULT_PATHS.prepend( ::SDL_PATHS )
+                      else
+                        NiceFFI::Library::DEFAULT_PATHS
+                      end
+  end
+
+  load_library "SDL", SDL::LOAD_PATHS
 
   def self.sdl_func( name, args, ret )
     func name, "SDL_#{name}", args, ret

@@ -36,7 +36,7 @@ need { "sdl" }
 module SDL
   module SPriG
     extend NiceFFI::Library
-    load_library "sprig"
+    load_library "sprig", SDL::LOAD_PATHS
 
     def self.spg_func( name, args, ret )
       func name, "SPG_#{name}", args, ret

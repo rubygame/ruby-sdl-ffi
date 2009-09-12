@@ -36,7 +36,7 @@ need { "sdl" }
 module SDL
   module TTF
     extend NiceFFI::Library
-    load_library "SDL_ttf"
+    load_library "SDL_ttf", SDL::LOAD_PATHS
 
 
     def self.ttf_func( name, args, ret )

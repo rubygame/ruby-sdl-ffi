@@ -36,7 +36,7 @@ need { "sdl" }
 module SDL
   module Gfx
     extend NiceFFI::Library
-    load_library "SDL_gfx"
+    load_library "SDL_gfx", SDL::LOAD_PATHS
 
     def self.sdl_func( name, args, ret )
       func name, "SDL_#{name}", args, ret

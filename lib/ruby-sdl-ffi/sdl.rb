@@ -55,8 +55,8 @@ module SDL
 end
 
 
-# NOTE: sdl_keyboard and sdl_video are deliberately loaded early,
-# because sdl_event and sdl_mouse depend on them, respectively.
+# NOTE: keyboard and video are deliberately loaded early,
+# because event and mouse depend on them, respectively.
 
 %w{
   core

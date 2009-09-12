@@ -99,10 +99,13 @@ module SDL
              SDL::Surface.typed_pointer
 
 
-    # Not available in the official SPriG (yet)
+    # SPG_LinkedVersion is not defined in SPriG 1.0.0, so we'll fake it.
     begin 
       spg_func :LinkedVersion, [], SDL::Version.typed_pointer
     rescue FFI::NotFoundError
+      def self.LinkedVersion
+        SDL::Version.new([1,0,0])
+      end
     end
 
 

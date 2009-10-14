@@ -40,9 +40,9 @@ module SDL
     # Check if the application has defined SDL_PATHS with some
     # paths to check first for SDL libraries.
     SDL::LOAD_PATHS = if defined? ::SDL_PATHS
-                        NiceFFI::Library::DEFAULT_PATHS.prepend( ::SDL_PATHS )
+                        NiceFFI::PathSet::DEFAULT.prepend( ::SDL_PATHS )
                       else
-                        NiceFFI::Library::DEFAULT_PATHS
+                        NiceFFI::PathSet::DEFAULT
                       end
   end
 

@@ -38,7 +38,7 @@ end
 $gemspec = Gem::Specification.new do |s|
 
   s.name     = "ruby-sdl-ffi"
-  s.version  = "0.0"
+  s.version  = "0.1"
   s.authors  = ["John Croisant"]
   s.email    = "jacius@gmail.com"
   s.homepage = "http://github.com/jacius/ruby-sdl-ffi/"
@@ -50,20 +50,19 @@ Ruby without the need for a compiled C wrapper. It aims to
 be platform and Ruby implementation independent.
 EOF
 
+  s.rubyforge_project = "nice-ffi"
   s.has_rdoc = false
-  s.files = ["README.rdoc"] + Dir["lib/**/*.rb"]
+  s.files = ["README.rdoc"] + Dir["lib/**/*.rb"] + ["ChangeLog.txt"]
   s.require_paths = ["lib"]
 
   s.required_ruby_version = ">= 1.8"
 
-  s.add_dependency( "nice-ffi", ">=0.0"   )
-  s.add_dependency( "ffi",      ">=0.3.0" )
-  s.add_dependency( "need",     ">=1.1.0" )
+  s.add_dependency( "nice-ffi", ">=0.2"   )
 
   s.requirements = ["SDL       >= 1.2.13",
-                    "SDL_image >= 1.2.7 (optional)",
+                    "SDL_image >= 1.2.7  (optional)",
                     "SDL_gfx   >= 2.0.17 (optional)",
-                    "SDL_mixer >= 1.2.8 (optional)",
-                    "SDL_ttf   >= 2.0.9 (optional)"]
+                    "SDL_mixer >= 1.2.8  (optional)",
+                    "SDL_ttf   >= 2.0.9  (optional)"]
 
 end

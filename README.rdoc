@@ -1,8 +1,8 @@
 
 = Ruby-SDL-FFI
 
-Version::    0.0 (unreleased alpha)
-Date::       2009-06-15
+Version::    0.1
+Date::       2009-10-??
 
 Homepage::   http://github.com/jacius/ffi-sdl/
 Author::     John Croisant <jacius@gmail.com>
@@ -46,9 +46,8 @@ more mature and stable (i.e. version 1.0+).
 == Requirements
 
 * SDL       >= 1.2.13
-* Ruby-FFI  >= 0.4.0 (or compatible)
+* Ruby-FFI  >= 0.4.0 (or compatible FFI implementation)
 * Nice-FFI  >= 0.2.0
-* need      >= 1.1.0
 
 Optional:
 

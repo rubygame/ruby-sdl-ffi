@@ -56,7 +56,6 @@ Optional:
 * SDL_gfx   >= 2.0.17
 * SDL_mixer >= 1.2.8
 * SDL_ttf   >= 2.0.9
-* SPriG     >= 1.0.0
 
 Ruby-SDL-FFI may work with older versions, but hasn't been tried on them.
 

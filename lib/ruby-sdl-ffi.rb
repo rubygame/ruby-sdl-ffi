@@ -44,7 +44,6 @@ need { File.join( 'ruby-sdl-ffi', 'sdl' ) }
   ttf
   mixer
   gfx
-  sprig
 
 }.each do |f|
 

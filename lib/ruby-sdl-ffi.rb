@@ -28,11 +28,11 @@
 #++
 
 
-require 'rubygems'
-require 'need'
+this_dir = File.expand_path( File.dirname(__FILE__) )
+
 
 # sdl.rb is absolutely required. If it fails, don't catch the error.
-need { File.join( 'ruby-sdl-ffi', 'sdl' ) }
+require File.join( this_dir, 'ruby-sdl-ffi', 'sdl' )
 
 
 # The others are "optional", so just give a warning if they fail.
@@ -48,7 +48,7 @@ need { File.join( 'ruby-sdl-ffi', 'sdl' ) }
 }.each do |f|
 
   begin
-    need { File.join( 'ruby-sdl-ffi', f ) }
+    require File.join( this_dir, 'ruby-sdl-ffi', f )
   rescue LoadError => e
     warn "Warning: " + e.message
   end

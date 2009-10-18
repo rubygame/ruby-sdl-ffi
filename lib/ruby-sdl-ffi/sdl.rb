@@ -28,8 +28,6 @@
 #++
 
 
-require 'rubygems'
-require 'need'
 require 'nice-ffi'
 
 
@@ -55,6 +53,8 @@ module SDL
 end
 
 
+this_dir = File.expand_path( File.dirname(__FILE__) )
+
 # NOTE: keyboard and video are deliberately loaded early,
 # because event and mouse depend on them, respectively.
 
@@ -72,5 +72,5 @@ end
   rwops
   timer
 }.each do |f|
-  need { File.join("sdl", f) }
+  require File.join( this_dir, "sdl", f )
 end

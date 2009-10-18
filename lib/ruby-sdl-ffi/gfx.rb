@@ -28,9 +28,10 @@
 #++
 
 
-require 'rubygems'
-require 'need'
-need { "sdl" }
+this_dir = File.expand_path( File.dirname(__FILE__) )
+
+
+require File.join( this_dir, "sdl" )
 
 
 module SDL
@@ -51,5 +52,5 @@ end
   imagefilter
   rotozoom
 }.each do |f|
-  need { File.join("gfx", f) }
+  require File.join( this_dir, "gfx", f )
 end

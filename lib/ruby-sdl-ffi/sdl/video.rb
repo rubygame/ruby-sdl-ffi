@@ -245,7 +245,8 @@ module SDL
 
   sdl_func  :VideoDriverName, [ :string, :int ], :string
 
-  sdl_func  :GetVideoSurface, [], SDL::Surface.typed_pointer
+  sdl_func  :GetVideoSurface, [],
+            SDL::Surface.typed_pointer( :autorelease => false )
 
   sdl_func  :GetVideoInfo, [ ], SDL::VideoInfo.typed_pointer
 
@@ -255,7 +256,7 @@ module SDL
   # sdl_func  :ListModes, [ :pointer, :uint32 ], :pointer
 
   sdl_func  :SetVideoMode, [ :int, :int, :int, :uint32 ],
-        SDL::Surface.typed_pointer
+            SDL::Surface.typed_pointer( :autorelease => false )
 
 
 

@@ -2,7 +2,7 @@
 = Ruby-SDL-FFI
 
 Version::    0.1
-Date::       2009-10-??
+Date::       2009-10-20
 
 Homepage::   http://github.com/jacius/ffi-sdl/
 Author::     John Croisant <jacius@gmail.com>

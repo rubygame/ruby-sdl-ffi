@@ -61,7 +61,7 @@ module SDL
             :numtracks, :int,
             :cur_track, :int,
             :cur_frame, :int,
-            :track,     [SDL::CDtrack,
+            :track,     [:pointer, # CDtrack
                          SDL::MAX_TRACKS+1] )
   end
 

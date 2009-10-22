@@ -55,16 +55,24 @@ module SDL
 
   end
 
-  class CD < NiceFFI::Struct
-    layout( :id,        :int,
-            :status,    SDL::ENUM,
-            :numtracks, :int,
-            :cur_track, :int,
-            :cur_frame, :int,
-            :track,     [:pointer, # CDtrack
-                         SDL::MAX_TRACKS+1] )
-  end
 
+  if RUBY_PLATFORM =~ /java/
+    # 2009-10-21: JRuby FFI does not support pointer arrays in structs.
+    # Attempting it can raise an un-rescuable NotImplementedError! :(
+    puts "Warning: Skipping class SDL::CD due to JRuby limitations."
+  else
+
+    class CD < NiceFFI::Struct
+      layout( :id,        :int,
+              :status,    SDL::ENUM,
+              :numtracks, :int,
+              :cur_track, :int,
+              :cur_frame, :int,
+              :track,     [:pointer, # CDtrack
+                           SDL::MAX_TRACKS+1] )
+    end
+
+  end
 
   CD_FPS = 75
 

@@ -33,16 +33,23 @@ require 'nice-ffi'
 
 module SDL
 
-  class Cursor < NiceFFI::Struct
-    layout( :area,      SDL::Rect,
-            :hot_x,     :int16,
-            :hot_y,     :int16,
-            :data,      :pointer,
-            :mask,      :pointer,
-            :save,      [:pointer, 2],
-            :wm_cursor, :pointer )
-  end
+  if RUBY_PLATFORM =~ /java/
+    # 2009-10-21: JRuby FFI does not support pointer arrays in structs.
+    # Attempting it can raise an un-rescuable NotImplementedError! :(
+    puts "Warning: Skipping class SDL::Cursor due to JRuby limitations."
+  else
 
+    class Cursor < NiceFFI::Struct
+      layout( :area,      SDL::Rect,
+              :hot_x,     :int16,
+              :hot_y,     :int16,
+              :data,      :pointer,
+              :mask,      :pointer,
+              :save,      [:pointer, 2],
+              :wm_cursor, :pointer )
+    end
+
+  end
 
   func  :__SDL_GetMouseState, "SDL_GetMouseState",
         [ :pointer, :pointer ], :uint8

@@ -96,8 +96,9 @@ module SDL
 
 
 
-    func  :arcColor, 
-          [ :pointer, :int16, :int16, :int16, :int16, :int16, :uint32 ], :int
+    optfunc  :arcColor, 
+             [ :pointer, :int16, :int16, :int16,
+               :int16, :int16, :uint32 ], :int
 
     func  :arcRGBA, 
           [ :pointer, :int16, :int16, :int16, :int16, :int16,
@@ -206,20 +207,22 @@ module SDL
           [ :pointer, :pointer, :pointer, :int,
             :uint8, :uint8, :uint8, :uint8 ], :int
 
-    func  :texturedPolygon, 
-          [ :pointer, :pointer, :pointer, :int, :pointer, :int, :int ], :int
+    optfunc  :texturedPolygon, 
+             [ :pointer, :pointer, :pointer,
+               :int, :pointer, :int, :int ], :int
 
-    func  :filledPolygonColorMT, 
-          [ :pointer, :pointer, :pointer, :int,
-            :uint32, :pointer, :pointer ], :int
 
-    func  :filledPolygonRGBAMT, 
-          [ :pointer, :pointer, :pointer, :int, :uint8,
-            :uint8, :uint8, :uint8, :pointer, :pointer ], :int
+    optfunc  :filledPolygonColorMT, 
+             [ :pointer, :pointer, :pointer,
+               :int, :uint32, :pointer, :pointer ], :int
 
-    func  :texturedPolygonMT, 
-          [ :pointer, :pointer, :pointer, :int,
-            :pointer, :int, :int, :pointer, :pointer ], :int
+    optfunc  :filledPolygonRGBAMT, 
+             [ :pointer, :pointer, :pointer, :int, :uint8,
+               :uint8, :uint8, :uint8, :pointer, :pointer ], :int
+
+    optfunc  :texturedPolygonMT, 
+             [ :pointer, :pointer, :pointer, :int,
+               :pointer, :int, :int, :pointer, :pointer ], :int
 
 
 

@@ -53,12 +53,6 @@ module SDL
           [ :pointer, :double, :double, :int ],
           SDL::Surface.typed_pointer
 
-
-    func  :rotozoomSurfaceXY,
-          [ :pointer, :double, :double, :double, :int ],
-          SDL::Surface.typed_pointer
-
-
     func  :__rotozoomSurfaceSize, :rotozoomSurfaceSize,
           [ :int, :int, :double, :double, :pointer, :pointer ], :void
 
@@ -70,16 +64,22 @@ module SDL
     end
 
 
-    func  :__rotozoomSurfaceSizeXY, :rotozoomSurfaceSizeXY,
-          [ :int, :int, :double, :double, :double, :pointer, :pointer ], :void
+    optfunc  :rotozoomSurfaceXY,
+              [ :pointer, :double, :double, :double, :int ],
+              SDL::Surface.typed_pointer
 
-    def self.rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy )
-      w = FFI::MemoryPointer.new( :int )
-      h = FFI::MemoryPointer.new( :int )
-      __rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy, w, h )
-      return [w.get_int(0), h.get_int(0)]
-    end
+    optional {
+      func  :__rotozoomSurfaceSizeXY, :rotozoomSurfaceSizeXY,
+            [ :int, :int, :double, :double, :double,
+              :pointer, :pointer ], :void
 
+      def self.rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy )
+        w = FFI::MemoryPointer.new( :int )
+        h = FFI::MemoryPointer.new( :int )
+        __rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy, w, h )
+        return [w.get_int(0), h.get_int(0)]
+      end
+    }
 
 
     func  :zoomSurface, [ :pointer, :double, :double, :int ],
@@ -98,12 +98,12 @@ module SDL
 
 
 
-    func  :shrinkSurface, [ :pointer, :int, :int ],
-          SDL::Surface.typed_pointer
+    optfunc  :shrinkSurface, [ :pointer, :int, :int ],
+             SDL::Surface.typed_pointer
 
 
-    func  :rotateSurface90Degrees, [ :pointer, :int ],
-          SDL::Surface.typed_pointer
+    optfunc  :rotateSurface90Degrees, [ :pointer, :int ],
+             SDL::Surface.typed_pointer
 
   end
 end

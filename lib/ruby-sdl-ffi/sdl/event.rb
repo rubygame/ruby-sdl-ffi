@@ -218,19 +218,26 @@ module SDL
     # Extracts a specific event class from a generic Event.
     def unwrap
       case self[:type]
-      when ACTIVEEVENT;                    self[:active]
-      when KEYDOWN, KEYUP;                 self[:key]
-      when MOUSEMOTION;                    self[:motion]
-      when MOUSEBUTTONDOWN, MOUSEBUTTONUP; self[:button]
-      when JOYAXISMOTION;                  self[:jaxis]
-      when JOYBALLMOTION;                  self[:jball]
-      when JOYHATMOTION;                   self[:jhat]
-      when JOYBUTTONDOWN, JOYBUTTONUP;     self[:jbutton]
-      when QUIT;                           self[:quit]
-      when SYSWMEVENT;                     self[:syswm]
-      when VIDEORESIZE;                    self[:resize]
-      when VIDEOEXPOSE;                    self[:expose]
-      when USEREVENT;                      self[:user]
+      when ACTIVEEVENT;       ActiveEvent.new(self.pointer)
+      when KEYDOWN, KEYUP;    KeyboardEvent.new(self.pointer)
+      when MOUSEMOTION;       MouseMotionEvent.new(self.pointer)
+
+      when MOUSEBUTTONDOWN, MOUSEBUTTONUP;
+                              MouseButtonEvent.new(self.pointer)
+
+      when JOYAXISMOTION;     JoyAxisEvent.new(self.pointer)
+      when JOYBALLMOTION;     JoyBallEvent.new(self.pointer)
+      when JOYHATMOTION;      JoyHatEvent.new(self.pointer)
+
+      when JOYBUTTONDOWN, JOYBUTTONUP;
+                              JoyButtonEvent.new(self.pointer)
+
+      when QUIT;              QuitEvent.new( self.pointer )
+      when SYSWMEVENT;        SysWMEvent.new( self.pointer )
+      when VIDEORESIZE;       ResizeEvent.new( self.pointer )
+      when VIDEOEXPOSE;       ExposeEvent.new( self.pointer )
+      when USEREVENT;         UserEvent.new( self.pointer )
+
       else; raise TypeError, "Invalid event #{self.inspect}"
       end
     end

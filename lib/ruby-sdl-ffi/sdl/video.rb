@@ -28,9 +28,6 @@
 #++
 
 
-require 'nice-ffi'
-
-
 module SDL
 
   ALPHA_OPAQUE      = 255

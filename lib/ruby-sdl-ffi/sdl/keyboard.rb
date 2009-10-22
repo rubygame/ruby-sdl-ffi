@@ -28,9 +28,6 @@
 #++
 
 
-require 'nice-ffi'
-
-
 module SDL
 
   class Keysym < NiceFFI::Struct

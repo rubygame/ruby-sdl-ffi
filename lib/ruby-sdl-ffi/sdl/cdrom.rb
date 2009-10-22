@@ -54,7 +54,7 @@ module SDL
 
 
   if RUBY_PLATFORM =~ /java/
-    # 2009-10-21: JRuby FFI does not support pointer arrays in structs.
+    # 2009-10-21: JRuby FFI does not support arrays of structs in structs.
     # Attempting it can raise an un-rescuable NotImplementedError! :(
     puts "Warning: Skipping class SDL::CD due to JRuby limitations."
   else
@@ -65,8 +65,7 @@ module SDL
               :numtracks, :int,
               :cur_track, :int,
               :cur_frame, :int,
-              :track,     [:pointer, # CDtrack
-                           SDL::MAX_TRACKS+1] )
+              :track,     [CDtrack.by_value, SDL::MAX_TRACKS+1] )
     end
 
   end

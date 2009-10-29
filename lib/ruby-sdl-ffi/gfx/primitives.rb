@@ -94,18 +94,6 @@ module SDL
           [ :pointer, :int16, :int16, :int16,
             :uint8, :uint8, :uint8, :uint8 ], :int
 
-
-
-    optfunc  :arcColor, 
-             [ :pointer, :int16, :int16, :int16,
-               :int16, :int16, :uint32 ], :int
-
-    optfunc  :arcRGBA, 
-             [ :pointer, :int16, :int16, :int16, :int16, :int16,
-               :uint8, :uint8, :uint8, :uint8 ], :int
-
-
-
     func  :aacircleColor, 
           [ :pointer, :int16, :int16, :int16, :uint32 ], :int
 
@@ -119,6 +107,16 @@ module SDL
     func  :filledCircleRGBA, 
           [ :pointer, :int16, :int16, :int16,
             :uint8, :uint8, :uint8, :uint8 ], :int
+
+
+
+    optfunc  :arcColor, 
+             [ :pointer, :int16, :int16, :int16,
+               :int16, :int16, :uint32 ], :int
+
+    optfunc  :arcRGBA, 
+             [ :pointer, :int16, :int16, :int16, :int16, :int16,
+               :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 

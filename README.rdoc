@@ -4,7 +4,7 @@
 Version::    0.1
 Date::       2009-10-24
 
-Homepage::   http://github.com/jacius/ffi-sdl/
+Homepage::   http://github.com/jacius/ruby-sdl-ffi/
 Author::     John Croisant <jacius@gmail.com>
 Copyright::  2009  John Croisant
 
@@ -12,10 +12,10 @@ Copyright::  2009  John Croisant
 == Description
 
 Ruby-SDL-FFI is a low-level binding to SDL [1] and related
-libraries using Ruby-FFI [2]. It provides very basic access
-to SDL from Ruby [3] without the need for a compiled C
-wrapper. It aims to be platform and Ruby implementation
-independent.
+libraries using Ruby-FFI [2] or compatible FFI APIs, such as
+JRuby's. It provides very basic access to SDL from Ruby [3]
+without the need for a compiled C wrapper. It aims to be
+platform and Ruby implementation independent.
 
 Ruby-SDL-FFI does not attempt to provide any high-level
 functionality, only to mirror the standard SDL interface.
@@ -23,7 +23,7 @@ For higher-level functionality, you should use other
 libraries (Rubygame [4], Gosu [5], etc.).
 
 1. SDL: http://www.libsdl.org/
-2. Ruby-FFI: http://kenai.com/projects/ruby-ffi/
+2. Ruby-FFI: http://github.com/ffi/ffi
 3. Ruby: http://www.ruby-lang.org/en/
 4. Rubygame: http://rubygame.org/
 5. Gosu: http://www.libgosu.org/
@@ -46,22 +46,16 @@ more mature and stable (i.e. version 1.0+).
 == Requirements
 
 * SDL       >= 1.2.13
-* Ruby-FFI  >= 0.4.0 (or compatible FFI implementation)
 * Nice-FFI  >= 0.2.0
 
 Optional:
 
 * SDL_image >= 1.2.7
-* SDL_gfx   >= 2.0.17
+* SDL_gfx   >= 2.0.13
 * SDL_mixer >= 1.2.8
 * SDL_ttf   >= 2.0.9
 
 Ruby-SDL-FFI may work with older versions, but hasn't been tried on them.
-
-So far, Ruby-SDL-FFI has only been tested on 32-bit Linux with
-the standard Ruby implementation (aka MRI) version 1.8.6.
-However, with a few tweaks it should work on any system with
-compatible FFI functionality.
 
 
 == License

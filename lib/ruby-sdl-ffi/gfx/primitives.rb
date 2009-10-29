@@ -100,9 +100,9 @@ module SDL
              [ :pointer, :int16, :int16, :int16,
                :int16, :int16, :uint32 ], :int
 
-    func  :arcRGBA, 
-          [ :pointer, :int16, :int16, :int16, :int16, :int16,
-            :uint8, :uint8, :uint8, :uint8 ], :int
+    optfunc  :arcRGBA, 
+             [ :pointer, :int16, :int16, :int16, :int16, :int16,
+               :uint8, :uint8, :uint8, :uint8 ], :int
 
 
 

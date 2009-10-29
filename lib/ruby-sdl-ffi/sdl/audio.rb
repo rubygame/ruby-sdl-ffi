@@ -64,8 +64,14 @@ module SDL
   AUDIO_S16MSB = 0x9010
   AUDIO_U16    = 0x0010
   AUDIO_S16    = 0x8010
-  AUDIO_U16SYS = 0x0010
-  AUDIO_S16SYS = 0x8010
+
+  if FFI::Platform::BYTE_ORDER == FFI::Platform::LITTLE_ENDIAN
+    AUDIO_U16SYS = AUDIO_U16LSB
+    AUDIO_S16SYS = AUDIO_S16LSB
+  else
+    AUDIO_U16SYS = AUDIO_U16MSB
+    AUDIO_S16SYS = AUDIO_U16MSB
+  end
 
 
 #     callback( :filters_cb, [ :pointer, :uint16 ], :void)

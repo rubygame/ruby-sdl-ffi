@@ -64,22 +64,21 @@ module SDL
     end
 
 
-    optfunc  :rotozoomSurfaceXY,
-              [ :pointer, :double, :double, :double, :int ],
-              SDL::Surface.typed_pointer
+    func  :rotozoomSurfaceXY,
+          [ :pointer, :double, :double, :double, :int ],
+          SDL::Surface.typed_pointer
 
-    optional {
-      func  :__rotozoomSurfaceSizeXY, :rotozoomSurfaceSizeXY,
-            [ :int, :int, :double, :double, :double,
-              :pointer, :pointer ], :void
+    func  :__rotozoomSurfaceSizeXY, :rotozoomSurfaceSizeXY,
+          [ :int, :int, :double, :double, :double,
+            :pointer, :pointer ], :void
 
-      def self.rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy )
-        w = FFI::MemoryPointer.new( :int )
-        h = FFI::MemoryPointer.new( :int )
-        __rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy, w, h )
-        return [w.get_int(0), h.get_int(0)]
-      end
-    }
+    def self.rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy )
+      w = FFI::MemoryPointer.new( :int )
+      h = FFI::MemoryPointer.new( :int )
+      __rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy, w, h )
+      return [w.get_int(0), h.get_int(0)]
+    end
+
 
 
     func  :zoomSurface, [ :pointer, :double, :double, :int ],

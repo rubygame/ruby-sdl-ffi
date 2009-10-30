@@ -1,0 +1,31 @@
+= NEWS
+
+== Ruby-SDL-FFI 0.2
+
+* The values of SDL::AUDIO_U16SYS and SDL::AUDIO_S16SYS are now
+  correct on both big-endian and little-endian systems.
+
+* SDL::Gfx::arcRGBA is now considered optional (as it should have been
+  in version 0.1). Loading will continue even if it is not available,
+  such as when using older versions of SDL_gfx.
+
+* The minimum supported version of SDL_gfx is now 2.0.13. It was
+  2.0.17 before.
+
+* SDL::Gfx::rotozoomSurfaceXY and SDL::Gfx::rotozoomSurfaceSizeXY are
+  no longer considered optional, because they are available in all
+  supported versions of SDL_gfx (2.0.13 and higher).
+
+
+
+
+== Ruby-SDL-FFI 0.1
+
+* Initial release of Ruby-SDL-FFI. Bindings are provided for these
+  libraries (older versions may work, but haven't been tested):
+
+  * SDL       >= 1.2.13
+  * SDL_gfx   >= 2.0.17
+  * SDL_image >= 1.2.7
+  * SDL_mixer >= 1.2.8
+  * SDL_ttf   >= 2.0.9

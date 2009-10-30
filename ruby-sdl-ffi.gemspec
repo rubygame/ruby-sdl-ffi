@@ -38,7 +38,7 @@ end
 $gemspec = Gem::Specification.new do |s|
 
   s.name     = "ruby-sdl-ffi"
-  s.version  = "0.1"
+  s.version  = "0.2"
   s.authors  = ["John Croisant"]
   s.email    = "jacius@gmail.com"
   s.homepage = "http://github.com/jacius/ruby-sdl-ffi/"

@@ -50,9 +50,9 @@ Ruby without the need for a compiled C wrapper. It aims to
 be platform and Ruby implementation independent.
 EOF
 
-  s.rubyforge_project = "nice-ffi"
+  s.rubyforge_project = "ruby-sdl-ffi"
   s.has_rdoc = false
-  s.files = ["README.rdoc"] + Dir["lib/**/*.rb"] + ["ChangeLog.txt"]
+  s.files = Dir["*.rdoc", "lib/**/*.rb"] + ["ChangeLog.txt"]
   s.require_paths = ["lib"]
 
   s.required_ruby_version = ">= 1.8"
@@ -61,7 +61,7 @@ EOF
 
   s.requirements = ["SDL       >= 1.2.13",
                     "SDL_image >= 1.2.7  (optional)",
-                    "SDL_gfx   >= 2.0.17 (optional)",
+                    "SDL_gfx   >= 2.0.13 (optional)",
                     "SDL_mixer >= 1.2.8  (optional)",
                     "SDL_ttf   >= 2.0.9  (optional)"]
 

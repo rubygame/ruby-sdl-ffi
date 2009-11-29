@@ -31,27 +31,48 @@
 this_dir = File.expand_path( File.dirname(__FILE__) )
 
 
-# sdl.rb is absolutely required. If it fails, don't catch the error.
-require File.join( this_dir, 'ruby-sdl-ffi', 'sdl' )
+require File.join( this_dir, "sdl" )
 
 
-# The others are "optional", so just give a warning if they fail.
-# Users who really need them should load them directly, with
-# e.g. 'require "ruby-sdl-ffi/gfx"'.
-%w{
+module SDL
+  module SVG
+    extend NiceFFI::Library
+    load_library "SDL_svg", SDL::LOAD_PATHS
 
-  image
-  ttf
-  mixer
-  gfx
-  svg
+    def self.svg_func( name, args, ret )
+      func name, "SVG_#{name}", args, ret
+    end
 
-}.each do |f|
+    SVG_FLAG_DIRECT = 0
+    SVG_FLAG_COMPOSITE = 1
 
-  begin
-    require File.join( this_dir, 'ruby-sdl-ffi', f )
-  rescue LoadError => e
-    warn "Warning: " + e.message
+    class SVGContext < NiceFFI::OpaqueStruct
+      def self.release( pointer)
+        SVG.Free(pointer)
+      end
+    end
+
+    svg_func :Free, [:pointer], :void
+
+    svg_func :Version, [], :int
+    svg_func :Load, [:string], SVGContext.typed_pointer
+    svg_func :LoadBuffer, [:string, :int], SVGContext.typed_pointer
+
+    svg_func :Width, [:pointer], :float
+    svg_func :Height, [:pointer], :float
+
+    svg_func :SetOffset, [:pointer, :double,:double], :int
+    svg_func :SetClipping, [:pointer, :int,:int,:int,:int], :void
+    svg_func :Set_Flags, [:pointer, :ulong], :void
+
+    svg_func :SetScale, [:pointer, :double,:double], :int
+    svg_func :RenderToSurface, [:pointer, :int,:int, :pointer], :int
+
   end
-
 end
+=begin
+???
+SDL_svg_context *create_SDL_svg_context(void);
+void destroy_SDL_svg_context(SDL_svg_context *c);
+=end
+

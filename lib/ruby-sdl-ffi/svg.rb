@@ -1,10 +1,12 @@
 #--
 #
+# svg.rb - Bindings to SDL_svg.
+# 
+# Copyright (c) 2009 Shawn Anderson
+# 
 # This file is one part of:
 #
 # Ruby-SDL-FFI - Ruby-FFI bindings to SDL
-#
-# Copyright (c) 2009 John Croisant
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -43,10 +45,10 @@ module SDL
       func name, "SVG_#{name}", args, ret
     end
 
-    SVG_FLAG_DIRECT = 0
-    SVG_FLAG_COMPOSITE = 1
+    FLAG_DIRECT = 0
+    FLAG_COMPOSITE = 1
 
-    class SVGContext < NiceFFI::OpaqueStruct
+    class Context < NiceFFI::OpaqueStruct
       def self.release( pointer)
         SVG.Free(pointer)
       end
@@ -55,8 +57,8 @@ module SDL
     svg_func :Free, [:pointer], :void
 
     svg_func :Version, [], :int
-    svg_func :Load, [:string], SVGContext.typed_pointer
-    svg_func :LoadBuffer, [:string, :int], SVGContext.typed_pointer
+    svg_func :Load, [:string], Context.typed_pointer
+    svg_func :LoadBuffer, [:string, :int], Context.typed_pointer
 
     svg_func :Width, [:pointer], :float
     svg_func :Height, [:pointer], :float
@@ -70,9 +72,3 @@ module SDL
 
   end
 end
-=begin
-???
-SDL_svg_context *create_SDL_svg_context(void);
-void destroy_SDL_svg_context(SDL_svg_context *c);
-=end
-

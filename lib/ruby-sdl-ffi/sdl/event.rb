@@ -310,10 +310,10 @@ module SDL
   end
 
 
-  func  :__SDL_PollEvent, "SDL_PollEvent", [ :pointer ], :int
+  func  :__SDL_PollEvent, "SDL_PollEvent", [ :buffer_out ], :int
 
   def self.PollEvent()
-    mp = FFI::MemoryPointer.new( SDL::Event, 1 )
+    mp = FFI::Buffer.new( SDL::Event, 1 )
     n = __SDL_PollEvent( mp )
     if n == 0
       nil
@@ -323,10 +323,10 @@ module SDL
   end
 
 
-  func  :__SDL_WaitEvent, "SDL_WaitEvent", [ :pointer ], :int
+  func  :__SDL_WaitEvent, "SDL_WaitEvent", [ :buffer_out ], :int
 
   def self.WaitEvent()
-    mp = FFI::MemoryPointer.new( SDL::Event, 1 )
+    mp = FFI::Buffer.new( SDL::Event, 1 )
     n = __SDL_WaitEvent( mp )
     if n == 0
       nil
@@ -336,11 +336,11 @@ module SDL
   end
 
 
-  sdl_func  :PushEvent, [ :pointer ], :int
+  sdl_func  :PushEvent, [ :buffer_in ], :int
 
 
 
-  callback(:eventfilter_cb, [ :pointer ], :int)
+  callback(:eventfilter_cb, [ :buffer_out ], :int)
 
   func  :__SDL_SetEventFilter, "SDL_SetEventFilter",
         [ :eventfilter_cb ], :void

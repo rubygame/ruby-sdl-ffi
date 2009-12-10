@@ -50,10 +50,10 @@ module SDL
   sdl_func  :GetKeyRepeat,    [ :pointer, :pointer ], :void
 
 
-  func  :__SDL_GetKeyState, "SDL_GetKeyState", [ :pointer ], :pointer
+  func  :__SDL_GetKeyState, "SDL_GetKeyState", [ :buffer_out ], :pointer
 
   def self.GetKeyState()
-    numkeys = FFI::MemoryPointer.new( :int )
+    numkeys = FFI::Buffer.new( :int )
     keys = __SDL_GetKeyState( numkeys )
     return keys.get_array_of_uint8( 0, numkeys.get_int(0) )
   end

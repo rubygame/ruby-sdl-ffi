@@ -280,7 +280,7 @@ module SDL
 
 
   func  :__SDL_GetGammaRamp, "SDL_GetGammaRamp",
-        [ :pointer, :pointer, :pointer ], :int
+        [ :buffer_out, :buffer_out, :buffer_out ], :int
 
   def self.GetGammaRamp()
     rtable = FFI::Buffer.new( :uint16, 256 )
@@ -306,12 +306,12 @@ module SDL
 
 
   func  :__SDL_GetRGB, "SDL_GetRGB",
-        [ :uint32, :pointer, :pointer, :pointer, :pointer ], :void
+        [ :uint32, :pointer, :buffer_out, :buffer_out, :buffer_out ], :void
 
   def self.GetRGB( uint32, format )
-    r = FFI::MemoryPointer.new( :uint8 )
-    g = FFI::MemoryPointer.new( :uint8 )
-    b = FFI::MemoryPointer.new( :uint8 )
+    r = FFI::Buffer.new( :uint8 )
+    g = FFI::Buffer.new( :uint8 )
+    b = FFI::Buffer.new( :uint8 )
     __SDL_GetRGB( uint32, format, r, g, b )
     return [r.get_uint8(0), g.get_uint8(0), b.get_uint8(0)]
   end
@@ -319,13 +319,14 @@ module SDL
 
 
   func  :__SDL_GetRGBA, "SDL_GetRGBA",
-        [ :uint32, :pointer, :pointer, :pointer, :pointer, :pointer ], :void
+        [ :uint32, :pointer, :buffer_out,
+          :buffer_out, :buffer_out, :buffer_out ], :void
 
   def self.GetRGBA( uint32, format )
-    r = FFI::MemoryPointer.new( :uint8 )
-    g = FFI::MemoryPointer.new( :uint8 )
-    b = FFI::MemoryPointer.new( :uint8 )
-    a = FFI::MemoryPointer.new( :uint8 )
+    r = FFI::Buffer.new( :uint8 )
+    g = FFI::Buffer.new( :uint8 )
+    b = FFI::Buffer.new( :uint8 )
+    a = FFI::Buffer.new( :uint8 )
     __SDL_GetRGBA( uint32, format, r, g, b, a )
     return [r.get_uint8(0), g.get_uint8(0), b.get_uint8(0), a.get_uint8(0)]
   end
@@ -358,10 +359,10 @@ module SDL
 
   sdl_func  :SetClipRect, [ :pointer, :pointer ], SDL::BOOL
 
-  func  :__SDL_GetClipRect, "SDL_GetClipRect", [ :pointer, :pointer ], :void
+  func  :__SDL_GetClipRect, "SDL_GetClipRect", [ :pointer, :buffer_out ], :void
 
   def self.GetClipRect( surface )
-    mp = FFI::MemoryPointer.new( Rect )
+    mp = FFI::Buffer.new( Rect )
     __SDL_GetClipRect( surface, mp )
     return Rect.new( mp )
   end
@@ -397,7 +398,7 @@ module SDL
 
 
   func  :__GL_GetAttribute, "SDL_GL_GetAttribute",
-        [ SDL::GLATTR, :pointer ], :int
+        [ SDL::GLATTR, :buffer_out ], :int
 
   def self.GL_GetAttribute( attrib )
     value = FFI::Buffer.new( :int )
@@ -420,11 +421,11 @@ module SDL
   sdl_func  :WM_SetCaption, [ :string, :string ], :void
 
   func  :__SDL_WM_GetCaption, "SDL_WM_GetCaption",
-        [ :pointer, :pointer ], :void
+        [ :buffer_out, :buffer_out ], :void
 
   def self.WM_GetCaption()
-    title = FFI::MemoryPointer.new( :pointer )
-    icont = FFI::MemoryPointer.new( :pointer )
+    title = FFI::Buffer.new( :pointer )
+    icont = FFI::Buffer.new( :pointer )
     __SDL_WM_GetCaption( title, icont )
     return [ title.get_pointer(0).get_string(0),
              icont.get_pointer(0).get_string(0) ]

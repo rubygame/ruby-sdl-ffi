@@ -103,15 +103,15 @@ module SDL
 
 
     func  :__GlyphMetrics, "TTF_GlyphMetrics",
-          [ :pointer, :uint16, :pointer, :pointer,
-            :pointer, :pointer, :pointer ], :int
+          [ :pointer, :uint16, :buffer_out, :buffer_out,
+            :buffer_out, :buffer_out, :buffer_out ], :int
 
     # Returns:: [minx, maxx, miny, maxy, advance], or nil on failure.
     # 
     def self.GlyphMetrics( font, char )
-      minx, maxx = FFI::MemoryPointer.new(:int), FFI::MemoryPointer.new(:int)
-      miny, maxy = FFI::MemoryPointer.new(:int), FFI::MemoryPointer.new(:int)
-      advance = FFI::MemoryPointer.new(:int)
+      minx, maxx = FFI::Buffer.new(:int), FFI::Buffer.new(:int)
+      miny, maxy = FFI::Buffer.new(:int), FFI::Buffer.new(:int)
+      advance = FFI::Buffer.new(:int)
       result = __GlyphMetrics( font, char, minx, maxx, miny, maxy, advance )
       if( result == 0 )
         return [minx.get_int(0), maxx.get_int(0),
@@ -124,11 +124,11 @@ module SDL
 
 
     func  :__SizeText, "TTF_SizeText",
-          [ :pointer, :string, :pointer, :pointer  ], :int
+          [ :pointer, :string, :buffer_out, :buffer_out  ], :int
 
     def self.SizeText( font, text )
-      w = FFI::MemoryPointer.new( :int )
-      h = FFI::MemoryPointer.new( :int )
+      w = FFI::Buffer.new( :int )
+      h = FFI::Buffer.new( :int )
       __SizeText( font, text, w, h )
       return [w.get_int(0),h.get_int(0)]
     end
@@ -136,11 +136,11 @@ module SDL
 
 
     func  :__SizeUTF8, "TTF_SizeUTF8",
-          [ :pointer, :string, :pointer, :pointer  ], :int
+          [ :pointer, :string, :buffer_out, :buffer_out  ], :int
 
     def self.SizeUTF( font, text )
-      w = FFI::MemoryPointer.new( :int )
-      h = FFI::MemoryPointer.new( :int )
+      w = FFI::Buffer.new( :int )
+      h = FFI::Buffer.new( :int )
       __SizeUTF( font, text, w, h )
       return [w.get_int(0),h.get_int(0)]
     end
@@ -148,11 +148,11 @@ module SDL
 
 
     func  :__SizeUNICODE, "TTF_SizeUNICODE",
-          [ :pointer, :pointer, :pointer, :pointer  ], :int
+          [ :pointer, :pointer, :buffer_out, :buffer_out  ], :int
 
     def self.SizeUNICODE( font, text )
-      w = FFI::MemoryPointer.new( :int )
-      h = FFI::MemoryPointer.new( :int )
+      w = FFI::Buffer.new( :int )
+      h = FFI::Buffer.new( :int )
       __SizeUNICODE( font, text, w, h )
       return [w.get_int(0),h.get_int(0)]
     end

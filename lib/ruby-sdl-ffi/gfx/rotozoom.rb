@@ -54,11 +54,11 @@ module SDL
           SDL::Surface.typed_pointer
 
     func  :__rotozoomSurfaceSize, :rotozoomSurfaceSize,
-          [ :int, :int, :double, :double, :pointer, :pointer ], :void
+          [ :int, :int, :double, :double, :buffer_out, :buffer_out ], :void
 
     def self.rotozoomSurfaceSize( width, height, angle, zoom )
-      w = FFI::MemoryPointer.new( :int )
-      h = FFI::MemoryPointer.new( :int )
+      w = FFI::Buffer.new( :int )
+      h = FFI::Buffer.new( :int )
       __rotozoomSurfaceSize( width, height, angle, zoom, w, h )
       return [w.get_int(0), h.get_int(0)]
     end
@@ -70,11 +70,11 @@ module SDL
 
     func  :__rotozoomSurfaceSizeXY, :rotozoomSurfaceSizeXY,
           [ :int, :int, :double, :double, :double,
-            :pointer, :pointer ], :void
+            :buffer_out, :buffer_out ], :void
 
     def self.rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy )
-      w = FFI::MemoryPointer.new( :int )
-      h = FFI::MemoryPointer.new( :int )
+      w = FFI::Buffer.new( :int )
+      h = FFI::Buffer.new( :int )
       __rotozoomSurfaceSizeXY( width, height, angle, zoomx, zoomy, w, h )
       return [w.get_int(0), h.get_int(0)]
     end
@@ -86,11 +86,11 @@ module SDL
 
 
     func  :__zoomSurfaceSize, :zoomSurfaceSize,
-          [ :int, :int, :double, :double, :pointer, :pointer ], :void
+          [ :int, :int, :double, :double, :buffer_out, :buffer_out ], :void
 
     def self.zoomSurfaceSize( width, height, zoomx, zoomy )
-      w = FFI::MemoryPointer.new( :int )
-      h = FFI::MemoryPointer.new( :int )
+      w = FFI::Buffer.new( :int )
+      h = FFI::Buffer.new( :int )
       __zoomSurfaceSize( width, height, zoomx, zoomy, w, h )
       return [w.get_int(0), h.get_int(0)]
     end

@@ -91,12 +91,13 @@ module SDL
 #     end
 
 
-  sdl_func  :AudioInit,       [ :string            ], :int
-  sdl_func  :AudioQuit,       [                    ], :void
-  sdl_func  :OpenAudio,       [ :pointer, :pointer ], :int
+  sdl_func  :AudioInit,       [ :string                 ], :int
+  sdl_func  :AudioQuit,       [                         ], :void
+  sdl_func  :OpenAudio,       [ :buffer_in, :buffer_out ], :int
 
   
-  func  :__AudioDriverName, "SDL_AudioDriverName", [:pointer, :int], :pointer
+  func  :__AudioDriverName, "SDL_AudioDriverName",
+        [:buffer_out, :int], :pointer
 
   def self.AudioDriverName
     b = FFI::Buffer.new(:char, 1024)

@@ -47,7 +47,17 @@ module SDL
   DEFAULT_REPEAT_INTERVAL = 30
 
   sdl_func  :EnableKeyRepeat, [ :int, :int ], :int
-  sdl_func  :GetKeyRepeat,    [ :pointer, :pointer ], :void
+
+
+  func  :__SDL_GetKeyRepeat, "SDL_GetKeyRepeat",
+        [ :buffer_out, :buffer_out ], :void
+
+  def self.GetKeyRepeat()
+    delay = FFI::Buffer.new( :int )
+    interval = FFI::Buffer.new( :int )
+    __SDL_GetKeyRepeat( delay, interval )
+    return [delay.get_int(0), interval.get_int(0)]
+  end
 
 
   func  :__SDL_GetKeyState, "SDL_GetKeyState", [ :buffer_out ], :pointer

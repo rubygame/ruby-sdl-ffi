@@ -331,7 +331,7 @@ module SDL
     if n == 0
       nil
     else
-      _extract_event( Event.new(mp) )
+      Event.new(mp).unwrap
     end
   end
 

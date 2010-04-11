@@ -50,10 +50,29 @@ module SDL
 
   end
 
+
   class Palette < NiceFFI::Struct
     layout( :ncolors, :int,
             :colors,  :pointer )
+
+    include Enumerable
+
+    # Returns the color at the given index in the palette, as an
+    # SDL::Color instance.
+    def at( index )
+      index = (0...ncolors).to_a.at(index)
+      if index
+        SDL::Color.new( self[:colors] + index * SDL::Color.size )
+      end
+    end
+
+    # Yields an SDL::Color for each color in the palette.
+    def each
+      ncolors.times{ |i|  yield at(i)  }
+    end
+
   end
+
 
   class PixelFormat < NiceFFI::Struct
     layout( :palette,       Palette.typed_pointer,

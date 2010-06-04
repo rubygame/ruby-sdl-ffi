@@ -420,12 +420,12 @@ module SDL
         [ SDL::GLATTR, :buffer_out ], :int
 
   def self.GL_GetAttribute( attrib )
-    value = FFI::Buffer.new( :int )
-    result = __GL_GetAttribute( attrib, value )
+    buffer = FFI::Buffer.new( :int )
+    result = __GL_GetAttribute( attrib, buffer )
     if( result == -1 )
       return nil
     else
-      return value
+      return buffer.get_int(0)
     end
   end
 

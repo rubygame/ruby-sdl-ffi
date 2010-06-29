@@ -4,7 +4,7 @@
 #
 # Ruby-SDL-FFI - Ruby-FFI bindings to SDL
 #
-# Copyright (c) 2009 John Croisant
+# Copyright (c) 2010 John Croisant
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -27,51 +27,22 @@
 #
 #++
 
+# A few bindings to Mac OS X's Cocoa framework to allow Ruby-SDL-FFI
+# to create a window on Mac without a special Ruby interpreter (rsdl).
+#
+# Eternal thanks to erisdiscord for pointing the way!
 
-require 'nice-ffi'
+if FFI::Platform.mac?
+  module SDL::Cocoa
+    extend NiceFFI::Library
+    load_library '/System/Library/Frameworks/Cocoa.framework/Cocoa'
 
+    func :NSApplicationLoad, [], :char
 
-module SDL
-  extend NiceFFI::Library
+    func :NSPushAutoreleasePool, [], :void
+    func :NSPopAutoreleasePool, [], :void
 
-  unless defined? SDL::LOAD_PATHS
-    # Check if the application has defined SDL_PATHS with some
-    # paths to check first for SDL libraries.
-    SDL::LOAD_PATHS = if defined? ::SDL_PATHS
-                        NiceFFI::PathSet::DEFAULT.prepend( ::SDL_PATHS )
-                      else
-                        NiceFFI::PathSet::DEFAULT
-                      end
+    NSApplicationLoad()
+    NSPushAutoreleasePool()
   end
-
-  load_library "SDL", SDL::LOAD_PATHS
-
-  def self.sdl_func( name, args, ret )
-    func name, "SDL_#{name}", args, ret
-  end
-
-end
-
-
-this_dir = File.expand_path( File.dirname(__FILE__) )
-
-# NOTE: keyboard and video are deliberately loaded early,
-# because event and mouse depend on them, respectively.
-
-%w{
-  mac
-  core
-  keyboard
-  video
-  audio
-  cdrom
-  event
-  joystick
-  keysyms
-  mouse
-  mutex
-  rwops
-  timer
-}.each do |f|
-  require File.join( this_dir, "sdl", f )
 end

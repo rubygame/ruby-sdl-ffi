@@ -27,22 +27,49 @@
 #
 #++
 
+#--
 # A few bindings to Mac OS X's Cocoa framework to allow Ruby-SDL-FFI
 # to create a window on Mac without a special Ruby interpreter (rsdl).
 #
-# Eternal thanks to erisdiscord for pointing the way!
+# Eternal thanks to erisdiscord and jlnr for pointing the way!
 
 if FFI::Platform.mac?
-  module SDL::Cocoa
-    extend NiceFFI::Library
-    load_library '/System/Library/Frameworks/Cocoa.framework/Cocoa'
+  module SDL::Mac
+    module Cocoa
+      extend NiceFFI::Library
+      load_library '/System/Library/Frameworks/Cocoa.framework/Cocoa'
 
-    func :NSApplicationLoad, [], :char
+      func :NSApplicationLoad, [], :char
 
-    func :NSPushAutoreleasePool, [], :void
-    func :NSPopAutoreleasePool, [], :void
+      func :NSPushAutoreleasePool, [], :void
+      func :NSPopAutoreleasePool, [], :void
 
-    NSApplicationLoad()
-    NSPushAutoreleasePool()
+      NSApplicationLoad()
+      NSPushAutoreleasePool()
+    end
+
+    module HIServices
+      extend NiceFFI::Library
+      load_library '/System/Library/Frameworks/ApplicationServices.framework/Frameworks/HIServices.framework/HIServices'
+
+      class ProcessSerialNumber < NiceFFI::Struct
+        layout :highLongOfPSN, :ulong, :lowLongOfPSN, :ulong
+      end
+
+      # Some relevant constants (but not part of the same enum)
+      KCurrentProcess = 2
+      KProcessTransformToForegroundApplication = 1
+
+      func :TransformProcessType, [:pointer, :long], :long
+      func :SetFrontProcess, [:pointer], :long
+
+      # Does the magic to make the current process a front process.
+      def self.make_current_front
+        current = ProcessSerialNumber.new( [0, KCurrentProcess] )
+        TransformProcessType(current,KProcessTransformToForegroundApplication)
+        SetFrontProcess( current )
+      end
+    end
+
   end
 end

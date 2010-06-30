@@ -271,8 +271,15 @@ module SDL
   ## Don't know how to implement this one. :-\
   # sdl_func  :ListModes, [ :pointer, :uint32 ], :pointer
 
-  sdl_func  :SetVideoMode, [ :int, :int, :int, :uint32 ],
-            SDL::Surface.typed_pointer( :autorelease => false )
+  func  :__SetVideoMode, "SDL_SetVideoMode", [ :int, :int, :int, :uint32 ],
+        SDL::Surface.typed_pointer( :autorelease => false )
+
+  def self.SetVideoMode( *args )
+    if FFI::Platform.mac?
+      SDL::Mac::HIServices.make_current_front()
+    end
+    result =__SetVideoMode(*args)
+  end
 
 
 

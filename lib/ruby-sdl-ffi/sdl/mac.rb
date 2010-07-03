@@ -28,12 +28,18 @@
 #++
 
 #--
-# A few bindings to Mac OS X's Cocoa framework to allow Ruby-SDL-FFI
+# Some bindings to Mac OS X system framework to allow Ruby-SDL-FFI
 # to create a window on Mac without a special Ruby interpreter (rsdl).
+# These are for internal use only. They are NOT part of the API.
 #
 # Eternal thanks to erisdiscord and jlnr for pointing the way!
 
-if FFI::Platform.mac?
+
+# Only define this stuff if running on a Mac and not using rsdl and
+# the RUBYSDLFFI_NOCOCOA environment variable is not true-ish.
+if FFI::Platform.mac? and ($0 != "rsdl") and \
+  not (/^(1|t|true|y|yes)$/i =~ ENV["RUBYSDLFFI_NOCOCOA"])
+
   module SDL::Mac
     module Cocoa
       extend NiceFFI::Library

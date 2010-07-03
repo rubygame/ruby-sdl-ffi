@@ -275,10 +275,8 @@ module SDL
         SDL::Surface.typed_pointer( :autorelease => false )
 
   def self.SetVideoMode( *args )
-    if FFI::Platform.mac?
-      SDL::Mac::HIServices.make_current_front()
-    end
-    result =__SetVideoMode(*args)
+    SDL::Mac::HIServices.make_current_front() if defined? SDL::Mac
+    __SetVideoMode(*args)
   end
 
 

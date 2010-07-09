@@ -42,21 +42,14 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
 
   module SDL::Mac
 
-    def self.inspect_menu( menu, indent=0 )
-      classname = ObjC.object_getClassName( menu )
-      numitems = ObjC.msgSend_i( menu, "numberOfItems" )
-      title = ObjC.msgSend_s( menu, "title" )
-      puts (" "*indent + "- #{menu}  (#{classname} \"#{title}\", #{numitems} items)")
-
-      numitems.times do |i|
-        ob = ObjC.msgSend( menu, "itemAtIndex:", FFI.find_type(:long), i )
-        classname = ObjC.object_getClassName(ob)
-        if ObjC.msgSend_b(ob, "hasSubmenu")
-          submenu = ObjC.msgSend(ob, "submenu")
-          inspect_menu( submenu, indent+2 )
+    def self.inspect_menu( menu, indent="" )
+      puts "%s-%s  (%s \"%s\", %d items)"%[indent, menu, menu.classname,
+                                           menu.title, menu.length]
+      menu.each do |ob|
+        if ob.hasSubmenu?
+          inspect_menu( ob.submenu, indent+"  " )
         else
-          title = ObjC.msgSend_s( ob, "title" )
-          puts (" "*(indent+2) + "- #{ob}  (#{classname} \"#{title}\")")
+          puts "%s  -%s  (%s \"%s\")"%[indent, ob, ob.classname, ob.title]
         end
       end
     end
@@ -67,77 +60,44 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
 
       nsapp = Cocoa.NSApp
 
-      menubar = ObjC.msgSend( ObjC.getClass("NSMenu"), "alloc" )
-      ObjC.msgSend( menubar, "initWithTitle:",
-                    ptr, ObjC::NSString.new("AMainMenu") )
-      ObjC.msgSend(nsapp, "setMainMenu:", ptr, menubar )
+      menubar = Cocoa::NSMenu.new.initWithTitle("AMainMenu")
+      nsapp.msg( "setMainMenu:", ptr, menubar )
 
 
-      appledummy = ObjC.msgSend( ObjC.getClass("NSMenuItem"), "alloc" )
-      ObjC.msgSend( appledummy, "initWithTitle:action:keyEquivalent:",
-                    ptr, ObjC::NSString.new("Apple"),
-                    ptr, nil,
-                    ptr, ObjC::NSString.new(""))
-      applemenu = ObjC.msgSend( ObjC.getClass("NSMenu"), "alloc" )
-      ObjC.msgSend( applemenu, "initWithTitle:",
-                    ptr, ObjC::NSString.new("Apple") )
-      ObjC.msgSend( appledummy, "setSubmenu:", ptr, applemenu )
-      ObjC.msgSend( menubar, "addItem:", ptr, appledummy)
-      ObjC.msgSend(nsapp, "setAppleMenu:", ptr, applemenu )
+      # "Apple" menu - actually the "ruby" menu, supposedly.
+      appledummy = ObjC::NSMenuItem.new.initWithTitle("Apple")
+      applemenu = Cocoa::NSMenu.new.initWithTitle("Apple")
+      appledummy.submenu = applemenu
+      menubar.addItem(appledummy)
+      nsapp.msg( "setAppleMenu:", ptr, applemenu )
 
-      appledummy2 = ObjC.msgSend( ObjC.getClass("NSMenuItem"), "alloc" )
-      ObjC.msgSend( appledummy2, "initWithTitle:action:keyEquivalent:",
-                    ptr, ObjC::NSString.new("Apple Item"),
-                    ptr, nil,
-                    ptr, ObjC::NSString.new(""))
-      ObjC.msgSend( applemenu, "addItem:", ptr, appledummy2 )
+      appledummy2 = ObjC::NSMenuItem.new.initWithTitle("Apple Item")
+      applemenu.addItem( appledummy2 )
 
 
-      appdummy = ObjC.msgSend( ObjC.getClass("NSMenuItem"), "alloc" )
-      ObjC.msgSend( appdummy, "initWithTitle:action:keyEquivalent:",
-                    ptr, ObjC::NSString.new(new_title),
-                    ptr, nil,
-                    ptr, ObjC::NSString.new(""))
-      appmenu = ObjC.msgSend( ObjC.getClass("NSMenu"), "alloc" )
-      ObjC.msgSend( appmenu, "initWithTitle:",
-                    ptr, ObjC::NSString.new(new_title) )
-      ObjC.msgSend( appdummy, "setSubmenu:", ptr, appmenu )
-      ObjC.msgSend( menubar, "insertItem:atIndex:", ptr, appdummy, FFI.find_type(:int), 0 )
-      ObjC.msgSend( appdummy, "release" )
+      # A new menu with the app's name
+      appdummy = ObjC::NSMenuItem.new.initWithTitle(new_title)
+      appmenu = Cocoa::NSMenu.new.initWithTitle( new_title )
+      appdummy.submenu = appmenu
+      menubar.msg( "insertItem:atIndex:", ptr, appdummy, FFI.find_type(:int), 0 )
+      appdummy.release
 
-      appdummy2 = ObjC.msgSend( ObjC.getClass("NSMenuItem"), "alloc" )
-      ObjC.msgSend( appdummy2, "initWithTitle:action:keyEquivalent:",
-                    ptr, ObjC::NSString.new("App Item"),
-                    ptr, nil,
-                    ptr, ObjC::NSString.new(""))
-      ObjC.msgSend( appmenu, "addItem:", ptr, appdummy2 )
+      appdummy2 = ObjC::NSMenuItem.new.initWithTitle("App Item")
+      appmenu.addItem( appdummy2 )
 
 
-      windowdummy = ObjC.msgSend( ObjC.getClass("NSMenuItem"), "alloc" )
-      ObjC.msgSend( windowdummy, "initWithTitle:action:keyEquivalent:",
-                    ptr, ObjC::NSString.new("Window"),
-                    ptr, nil,
-                    ptr, ObjC::NSString.new(""))
-      windowmenu = ObjC.msgSend( ObjC.getClass("NSMenu"), "alloc" )
-      ObjC.msgSend( windowmenu, "initWithTitle:",
-                    ptr, ObjC::NSString.new("Window") )
-      ObjC.msgSend( windowdummy, "setSubmenu:", ptr, windowmenu )
-      ObjC.msgSend( menubar, "addItem:", ptr, windowdummy )
-      ObjC.msgSend( windowdummy, "release" )
+      # Window menu
+      windowdummy = ObjC::NSMenuItem.new.initWithTitle("Window")
+      windowmenu = Cocoa::NSMenu.new.initWithTitle("Window")
+      windowdummy.submenu = windowmenu
+      menubar.addItem( windowdummy )
+      nsapp.msg( "setWindowsMenu:", ptr, windowmenu )
+      windowdummy.release
 
-      windowdummy2 = ObjC.msgSend( ObjC.getClass("NSMenuItem"), "alloc" )
-      ObjC.msgSend( windowdummy2, "initWithTitle:action:keyEquivalent:",
-                    ptr, ObjC::NSString.new("Window Item"),
-                    ptr, nil,
-                    ptr, ObjC::NSString.new(""))
-      ObjC.msgSend( windowmenu, "addItem:", ptr, windowdummy2 )
-      
-
-      ObjC.msgSend(nsapp, "setWindowsMenu:", ptr, windowmenu )
-
+      windowdummy2 = ObjC::NSMenuItem.new.initWithTitle("Window Item")
+      windowmenu.addItem( windowdummy2 )
 
       inspect_menu( menubar )
-
 
       nil
     end
@@ -152,23 +112,23 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
 
       nsapp = Cocoa.NSApp
 
-      menubar = ObjC.msgSend( nsapp, "mainMenu" )
+      menubar = nsapp.msg( "mainMenu" )
       inspect_menu( menubar )
 
-      appdummy = ObjC.msgSend( menubar, "itemAtIndex:", long, 0 )
-      appmenu = ObjC.msgSend( appdummy, "submenu" )
-      ObjC.msgSend( appmenu, "setTitle:", ptr, ObjC::NSString.new(new_title) )
+      appdummy = menubar[0]
+      appmenu = appdummy.submenu
+      appmenu.title = new_title
       inspect_menu( appmenu )
-      ObjC.msgSend( menubar, "itemChanged:", ptr, appdummy )
+      menubar.msg( "itemChanged:", ptr, appdummy )
 
-      # windowdummy = ObjC.msgSend( menubar, "itemAtIndex:", long, 1 )
-      # windowmenu = ObjC.msgSend( windowdummy, "submenu" )
-      # ObjC.msgSend( windowmenu, "setTitle:", ptr, ObjC::NSString.new(new_title) )
+      # windowdummy = menubar.[1]
+      # windowmenu = windowdummy.submenu
+      # windowmenu.title = new_title
       # inspect_menu( windowmenu )
 
-      ObjC.msgSend( menubar, "update" )
+      menubar.msg( "update" )
 
-      # ObjC.msgSend( menubar, "removeItemAtIndex:", long, 0 )
+      # menubar.msg( "removeItemAtIndex:", long, 0 )
       # inspect_menu( menubar )
       
       nil
@@ -177,43 +137,42 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
 
     def self.load_nib( nibpath = :default )
       ptr = FFI.find_type(:pointer)
-      long = FFI.find_type(:long)
 
       if nibpath == :default
-        nibpath = File.join( File.dirname(__FILE__), "MacMenu.nib" )
-        #nibpath = File.join( File.dirname(__FILE__), "SparseMacMenu.nib" )
-        #nibpath = File.join( File.dirname(__FILE__), "EmptyMacMenu.nib" )
+        dir = File.dirname(__FILE__)
+        nibpath = File.join( dir, "MacMenu.nib" )
+        #nibpath = File.join( dir, "SparseMacMenu.nib" )
+        #nibpath = File.join( dir, "EmptyMacMenu.nib" )
       end
       
       nsapp = Cocoa.NSApp
-      toplevel = ObjC.msgSend( ObjC.getClass("NSMutableArray"), "array" )
+      toplevel = ObjC::NSClass("NSMutableArray").msg("array")
       puts "toplevel = #{toplevel}"
 
-      dict = ObjC.msgSend(ObjC.getClass("NSMutableDictionary"), "dictionary")
-      ObjC.msgSend( dict, "setObject:forKey:",
-                    ptr, nsapp, ptr, Cocoa::NSNibOwner )
-      ObjC.msgSend( dict, "setObject:forKey:",
-                    ptr, toplevel, ptr, Cocoa::NSNibTopLevelObjects )
+      dict = ObjC::NSClass("NSMutableDictionary").msg("dictionary")
+      dict.msg( "setObject:forKey:",
+                ptr, nsapp, ptr, Cocoa::NSNibOwner )
+      dict.msg( "setObject:forKey:",
+                ptr, toplevel, ptr, Cocoa::NSNibTopLevelObjects )
 
-      zone = ObjC.msgSend(nsapp, "zone")
+      zone = nsapp.msg("zone")
 
-      loaded = ObjC.msgSend_b( ObjC.getClass("NSBundle"),
-                               "loadNibFile:externalNameTable:withZone:",
-                               ptr, ObjC::NSString.new(nibpath),
-                               ptr, dict,
-                               ptr, zone )
+      loaded = ObjC::NSClass("NSBundle").\
+        msg_bool( "loadNibFile:externalNameTable:withZone:",
+                  ptr, ObjC::NSString(nibpath),
+                  ptr, dict, ptr, zone )
 
       puts "loaded? = #{loaded}"
-      puts "toplevel = #{ObjC.msgSend_s(toplevel, "description")}"
-
-      count = ObjC.msgSend_i( toplevel, "count" )
+      puts "toplevel = #{toplevel.inspect}"
 
       menubar = nil
       app = nil
+
+      count = toplevel.msg_int("count")
       count.times do |i|
-        ob = ObjC.msgSend( toplevel, "objectAtIndex:", long, i )
-        case ObjC.object_getClassName(ob)
-        when "NSMenu"; menubar = ob
+        ob = toplevel.msg("objectAtIndex:", FFI.find_type(:long), i)
+        case ob.classname
+        when "NSMenu"; menubar = Cocoa::NSMenu(ob.pointer)
         when "NSApplication"; app = ob
         end
       end
@@ -235,57 +194,96 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
       typedef :pointer, :nsclass
       callback :imp, [:id, :sel, :varargs], :id
 
-      class NSString < NiceFFI::OpaqueStruct
+
+      class NSObject < NiceFFI::OpaqueStruct
+        # define msg, msg_ptr, msg_str, msg_int, msg_bool
+        ["", "_ptr", "_str", "_int", "_bool"].each do |suffix|
+          module_eval("
+            def msg#{suffix}( message, *args )
+              ObjC.msgSend#{suffix}( @pointer, message, *args )
+            end")
+        end
+
+        def inspect; msg_str("description").to_s; end
+        def classname; ObjC.object_getClassName(@pointer); end
+        def release; msg("release"); end
+      end
+
+      def self.NSObject( *args )
+        NSObject.new( *args )
+      end
+
+
+      class NSClass < NSObject
         def initialize( str_or_ptr )
           if str_or_ptr.is_a? String
-            super( ObjC.msgSend( ObjC.getClass("NSString"),
-                                 "stringWithUTF8String:",
-                                 FFI.find_type(:string), str_or_ptr ) )
+            super( ObjC.getClass(str_or_ptr) )
+          else
+            super
+          end
+        end
+      end
+
+      def self.NSClass( *args )
+        NSClass.new( *args )
+      end
+
+
+      class NSString < NSObject
+        def initialize( str_or_ptr )
+          if str_or_ptr.is_a? String
+            super( ObjC::NSClass("NSString").\
+                     msg_ptr("stringWithUTF8String:",
+                             FFI.find_type(:string), str_or_ptr) )
           else
             super
           end
         end
 
         def to_s
-          str = ObjC.msgSend( @pointer, "UTF8String" )
+          str = msg_ptr( "UTF8String" )
           (str.null?) ? "(NULL)" : str.read_string()
         end
       end
 
+      def self.NSString( *args )
+        NSString.new( *args )
+      end
+
+
       func :__msgSend, :objc_msgSend, [:id, :sel, :varargs], :id
-      func :__msgSend_i, :objc_msgSend, [:id, :sel, :varargs], :long
+      func :__msgSend_int, :objc_msgSend, [:id, :sel, :varargs], :long
 
       def self.msgSend( id, selector, *args )
         selector = self.sel(selector) if selector.is_a? String
+        NSObject.new( __msgSend( id, selector, *args ) )
+      end
+      def self.msgSend_ptr( id, selector, *args )
+        selector = self.sel(selector) if selector.is_a? String
         __msgSend( id, selector, *args )
       end
-
-      def self.msgSend_s( id, selector, *args )
+      def self.msgSend_str( id, selector, *args )
         selector = self.sel(selector) if selector.is_a? String
         NSString.new( __msgSend( id, selector, *args ) )
       end
-
-      def self.msgSend_i( id, selector, *args )
+      def self.msgSend_int( id, selector, *args )
         selector = self.sel(selector) if selector.is_a? String
-        __msgSend_i( id, selector, *args )
+        __msgSend_int( id, selector, *args )
       end
-
-      def self.msgSend_b( id, selector, *args )
+      def self.msgSend_bool( id, selector, *args )
         selector = self.sel(selector) if selector.is_a? String
-        ( __msgSend_i( id, selector, *args ) == 0 ) ? false : true
+        ( __msgSend_int( id, selector, *args ) == 0 ) ? false : true
       end
 
       func :getClass, :objc_getClass, [:string], :id
-
       func :class_replaceMethod, [:nsclass, :sel, :imp, :string], :imp
 
       func :object_getClassName, [:id], :string
-
       func :object_getInstanceVariable, [:id, :string, :pointer], :ivar
       func :object_setInstanceVariable, [:id, :string, :pointer], :ivar
 
       func :sel_registerName, [:string], :sel
-      func :sel_getName, [:sel], NSString.typed_pointer
+      func :sel_getName, [:sel], :string
 
       def self.sel( name )
         sel_registerName( name.to_s )
@@ -307,16 +305,107 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
       NSPushAutoreleasePool()
 
       def self.NSApp
-        @nsapp ||= ObjC.msgSend(ObjC.getClass("NSApplication"), "sharedApplication")
+        @nsapp ||= ObjC::NSClass("NSApplication").msg("sharedApplication")
       end
+
+      class NSMenu < ObjC::NSObject
+        include Enumerable
+
+        def initialize( *args )
+          if args.empty?
+            super( ObjC::NSClass("NSMenu").msg_ptr("alloc") )
+          else
+            super( args[0] )
+          end
+        end
+
+        def initWithTitle( title )
+          msg( "initWithTitle:", FFI.find_type(:pointer), ObjC::NSString(title) )
+          self
+        end
+
+        def title
+          msg_str("title")
+        end
+
+        def title=( t )
+          msg("setTitle:", FFI.find_type(:pointer), ObjC::NSString(t))
+        end
+
+        def addItem( item )
+          msg("addItem:", FFI.find_type(:pointer), item)
+          self
+        end
+
+        def length
+          msg_int( "numberOfItems" )
+        end
+
+        def [](index)
+          Cocoa::NSMenuItem( msg_ptr("itemAtIndex:", FFI.find_type(:long), index) )
+        end
+
+        def each
+          length.times{ |i| yield self[i] }
+        end
+      end
+
+      def self.NSMenu( *args )
+        NSMenu.new( *args )
+      end
+
+
+      class NSMenuItem < ObjC::NSObject
+        def initialize( *args )
+          if args.empty?
+            super( ObjC::NSClass("NSMenuItem").msg_ptr("alloc") )
+          else
+            super( args[0] )
+          end
+        end
+
+        def initWithTitle( title, action=nil, keyEquivalent="" )
+          ptr = FFI.find_type(:pointer)
+          msg( "initWithTitle:action:keyEquivalent:",
+               ptr, ObjC::NSString(title),
+               ptr, action,
+               ptr, ObjC::NSString(keyEquivalent))
+          self
+        end
+
+        def title
+          msg_str("title")
+        end
+
+        def title=( t )
+          msg("setTitle:", FFI.find_type(:pointer), ObjC::NSString(t))
+        end
+
+        def hasSubmenu?
+          msg_bool("hasSubmenu")
+        end
+
+        def submenu
+          Cocoa::NSMenu( msg_ptr("submenu") ) if hasSubmenu?
+        end
+
+        def submenu=( menu )
+          msg("setSubmenu:", FFI.find_type(:pointer), menu)
+        end
+      end
+
+      def self.NSMenuItem( *args )
+        NSMenuItem.new( *args )
+      end
+
 
       attach_variable "vNSNibOwner", "NSNibOwner", :pointer
       NSNibOwner =
-        ObjC::NSString.new( ObjC::NSString.new(self.vNSNibOwner).to_s )
+        ObjC::NSString( ObjC::NSString(self.vNSNibOwner).to_s )
 
       attach_variable "vNSNibTopLevelObjects", "NSNibTopLevelObjects", :pointer
       NSNibTopLevelObjects =
-        ObjC::NSString.new( ObjC::NSString.new(self.vNSNibTopLevelObjects).to_s )
+        ObjC::NSString( ObjC::NSString(self.vNSNibTopLevelObjects).to_s )
 
     end
 
@@ -352,7 +441,7 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
     #     p *args
     #   }
     #
-    #   old = ObjC.class_replaceMethod( ObjC.getClass("NSApplication"),
+    #   old = ObjC.class_replaceMethod( ObjC::NSClass("NSApplication"),
     #                                   "terminate:", imp, "v@:@" )
     # end
 

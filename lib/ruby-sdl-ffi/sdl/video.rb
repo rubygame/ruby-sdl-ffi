@@ -277,10 +277,10 @@ module SDL
   def self.SetVideoMode( *args )
     result = __SetVideoMode(*args)
     if defined? SDL::Mac
-      SDL::Mac::HIServices.make_current_front() 
-      SDL::Mac.load_nib
-      # SDL::Mac.make_menus("My App")
-      # SDL::Mac.set_app_title("My App")
+      #SDL::Mac::ObjC.msgSend(SDL::Mac::Cocoa.NSApp, "finishLaunching")
+      SDL::Mac::HIServices.make_current_front
+      # SDL::Mac.load_nib
+      SDL::Mac.make_menus("Rubygame Demo")
     end
     return result
   end

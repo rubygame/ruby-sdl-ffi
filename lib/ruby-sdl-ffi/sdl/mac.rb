@@ -42,96 +42,89 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
 
   module SDL::Mac
 
-    def self.inspect_menu( menu, indent="" )
-      puts "%s-%s  (%s \"%s\", %d items)"%[indent, menu, menu.classname,
-                                           menu.title, menu.length]
-      menu.each do |ob|
-        if ob.hasSubmenu?
-          inspect_menu( ob.submenu, indent+"  " )
-        else
-          puts "%s  -%s  (%s \"%s\")"%[indent, ob, ob.classname, ob.title]
+    class << self
+      
+      def make_menus( app_name )
+        ptr = FFI.find_type(:pointer)
+        
+        nsapp = Cocoa.NSApp
+        menubar = Cocoa::NSMenu.new.initWithTitle("AMainMenu")
+        nsapp.msg( "setMainMenu:", ptr, menubar )
+        
+        remove_bold_menu( nsapp, menubar )
+        make_app_menu( menubar, app_name )
+        make_window_menu( nsapp, menubar )
+
+        nil
+      end
+      
+      private
+      
+      # Hack to remove the bold "ruby" menu (aka the "Apple" menu).
+      # It's a ghost menu, it haunts us but can't be modified.
+      def remove_bold_menu( nsapp, menubar )
+        item = Cocoa::NSMenuItem.new.initWithTitle("AppleMenu")
+        menu = Cocoa::NSMenu.new.initWithTitle("AppleMenu")
+        item.submenu = menu
+        
+        nsapp.msg("setAppleMenu:", FFI.find_type(:pointer), menu)
+        menubar.addItem(item)
+        menubar.removeItem(item)
+        
+        item.release
+        menu.release
+      end
+      
+      
+      # Create the main menu with the app's name (Hide, Quit, etc.)
+      def make_app_menu( menubar, app_name )
+        item = Cocoa::NSMenuItem.new.initWithTitle( app_name )
+        menu = Cocoa::NSMenu.new.initWithTitle( app_name )
+        item.submenu = menu
+        menubar.addItem(item)
+        
+        menu.addItemWithTitle("Hide #{app_name}", "hide:")
+        menu.addItemWithTitle("Hide Others", "hideOtherApplications:")
+        menu.addItemWithTitle("Show All", "unhideAllApplications:")
+
+        # Can't get the Quit menu item to work right yet.
+        #menu.addItem( Cocoa::NSMenuItem.separatorItem )
+        #menu.addItemWithTitle("Quit #{app_name}", "terminate:")
+        
+        item.release
+        menu.release
+      end
+      
+      
+      # Create the "Window" menu (Minimize, etc.)
+      def make_window_menu( nsapp, menubar )
+        ptr = FFI.find_type(:pointer)
+        
+        item = Cocoa::NSMenuItem.new.initWithTitle("Window")
+        menu = Cocoa::NSMenu.new.initWithTitle("Window")
+        item.submenu = menu
+        menubar.addItem(item)
+        nsapp.msg("setWindowsMenu:", ptr, menu)
+        
+        menu.addItemWithTitle("Minimize", "performMiniaturize:")
+        
+        item.release
+        menu.release
+      end
+
+
+      def inspect_menu( menu, indent="" )
+        puts "%s-%s  (%s \"%s\", %d items)"%[indent, menu, menu.classname,
+                                             menu.title, menu.length]
+        menu.each do |ob|
+          if ob.hasSubmenu?
+            inspect_menu( ob.submenu, indent+"  " )
+          else
+            puts "%s  -%s  (%s \"%s\")"%[indent, ob, ob.classname, ob.title]
+          end
         end
       end
-    end
 
-
-    def self.make_menus( new_title )
-      ptr = FFI.find_type(:pointer)
-
-      nsapp = Cocoa.NSApp
-
-      menubar = Cocoa::NSMenu.new.initWithTitle("AMainMenu")
-      nsapp.msg( "setMainMenu:", ptr, menubar )
-
-
-      # "Apple" menu - actually the "ruby" menu, supposedly.
-      appledummy = ObjC::NSMenuItem.new.initWithTitle("Apple")
-      applemenu = Cocoa::NSMenu.new.initWithTitle("Apple")
-      appledummy.submenu = applemenu
-      menubar.addItem(appledummy)
-      nsapp.msg( "setAppleMenu:", ptr, applemenu )
-
-      appledummy2 = ObjC::NSMenuItem.new.initWithTitle("Apple Item")
-      applemenu.addItem( appledummy2 )
-
-
-      # A new menu with the app's name
-      appdummy = ObjC::NSMenuItem.new.initWithTitle(new_title)
-      appmenu = Cocoa::NSMenu.new.initWithTitle( new_title )
-      appdummy.submenu = appmenu
-      menubar.msg( "insertItem:atIndex:", ptr, appdummy, FFI.find_type(:int), 0 )
-      appdummy.release
-
-      appdummy2 = ObjC::NSMenuItem.new.initWithTitle("App Item")
-      appmenu.addItem( appdummy2 )
-
-
-      # Window menu
-      windowdummy = ObjC::NSMenuItem.new.initWithTitle("Window")
-      windowmenu = Cocoa::NSMenu.new.initWithTitle("Window")
-      windowdummy.submenu = windowmenu
-      menubar.addItem( windowdummy )
-      nsapp.msg( "setWindowsMenu:", ptr, windowmenu )
-      windowdummy.release
-
-      windowdummy2 = ObjC::NSMenuItem.new.initWithTitle("Window Item")
-      windowmenu.addItem( windowdummy2 )
-
-      inspect_menu( menubar )
-
-      nil
-    end
-
-
-    # Sets the application menu title on Mac OS X, i.e. the bold word
-    # in the application menu at the top of the screen.
-    # 
-    def self.set_app_title( new_title )
-      ptr = FFI.find_type(:pointer)
-      long = FFI.find_type(:long)
-
-      nsapp = Cocoa.NSApp
-
-      menubar = nsapp.msg( "mainMenu" )
-      inspect_menu( menubar )
-
-      appdummy = menubar[0]
-      appmenu = appdummy.submenu
-      appmenu.title = new_title
-      inspect_menu( appmenu )
-      menubar.msg( "itemChanged:", ptr, appdummy )
-
-      # windowdummy = menubar.[1]
-      # windowmenu = windowdummy.submenu
-      # windowmenu.title = new_title
-      # inspect_menu( windowmenu )
-
-      menubar.msg( "update" )
-
-      # menubar.msg( "removeItemAtIndex:", long, 0 )
-      # inspect_menu( menubar )
-      
-      nil
     end
 
 
@@ -171,7 +164,7 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
       count = toplevel.msg_int("count")
       count.times do |i|
         ob = toplevel.msg("objectAtIndex:", FFI.find_type(:long), i)
-        case ob.classname
+        case ob.nsclassname
         when "NSMenu"; menubar = Cocoa::NSMenu(ob.pointer)
         when "NSApplication"; app = ob
         end
@@ -196,16 +189,23 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
 
 
       class NSObject < NiceFFI::OpaqueStruct
-        # define msg, msg_ptr, msg_str, msg_int, msg_bool
+        def self.nsclassname; name.split("::")[-1]; end
+
+        # define msg, msg_ptr, msg_str, msg_int, msg_bool (and class methods)
         ["", "_ptr", "_str", "_int", "_bool"].each do |suffix|
           module_eval("
             def msg#{suffix}( message, *args )
               ObjC.msgSend#{suffix}( @pointer, message, *args )
+            end
+
+            def self.msg#{suffix}( message, *args )
+              ObjC.msgSend#{suffix}( ObjC.NSClass(self.nsclassname),
+                                                  message, *args )
             end")
         end
 
         def inspect; msg_str("description").to_s; end
-        def classname; ObjC.object_getClassName(@pointer); end
+        def nsclassname; ObjC.object_getClassName(@pointer); end
         def release; msg("release"); end
       end
 
@@ -337,6 +337,26 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
           self
         end
 
+        def addItemWithTitle( title, action=nil, keyEquivalent="" )
+          ptr = FFI.find_type(:pointer)
+          action = ObjC.sel(action) if action.is_a? String
+          item = msg_ptr( "addItemWithTitle:action:keyEquivalent:",
+                      ptr, ObjC::NSString(title),
+                      ptr, action,
+                      ptr, ObjC::NSString(keyEquivalent))
+          NSMenuItem.new(item)
+        end
+
+        def removeItem( item )
+          msg("removeItem:", FFI.find_type(:pointer), item)
+          self
+        end
+
+        def removeItemAtIndex( index )
+          msg("removeItemAtIndex:", FFI.find_type(:long), index)
+          self
+        end
+
         def length
           msg_int( "numberOfItems" )
         end
@@ -356,6 +376,10 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
 
 
       class NSMenuItem < ObjC::NSObject
+        def self.separatorItem
+          new( msg_ptr("separatorItem") )
+        end
+
         def initialize( *args )
           if args.empty?
             super( ObjC::NSClass("NSMenuItem").msg_ptr("alloc") )
@@ -366,6 +390,7 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
 
         def initWithTitle( title, action=nil, keyEquivalent="" )
           ptr = FFI.find_type(:pointer)
+          action = ObjC.sel(action) if action.is_a? String
           msg( "initWithTitle:action:keyEquivalent:",
                ptr, ObjC::NSString(title),
                ptr, action,
@@ -407,6 +432,14 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
       NSNibTopLevelObjects =
         ObjC::NSString( ObjC::NSString(self.vNSNibTopLevelObjects).to_s )
 
+      NSAlphaShiftKeyMask = 1 << 16
+      NSShiftKeyMask      = 1 << 17
+      NSControlKeyMask    = 1 << 18
+      NSAlternateKeyMask  = 1 << 19
+      NSCommandKeyMask    = 1 << 20
+      NSNumericPadKeyMask = 1 << 21
+      NSHelpKeyMask       = 1 << 22
+      NSFunctionKeyMask   = 1 << 23
     end
 
 

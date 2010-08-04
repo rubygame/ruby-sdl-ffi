@@ -37,7 +37,15 @@ module SDL
   unless defined? SDL::LOAD_PATHS
     # Check if the application has defined SDL_PATHS with some
     # paths to check first for SDL libraries.
-    SDL::LOAD_PATHS = if defined? ::SDL_PATHS
+
+    rubysdlffi_path = ENV["RUBYSDLFFI_PATH"]
+    if rubysdlffi_path and not rubysdlffi_path.empty?
+      rubysdlffi_path = rubysdlffi_path.split( File::PATH_SEPARATOR ).compact
+    end
+
+    SDL::LOAD_PATHS = if rubysdlffi_path
+                        NiceFFI::PathSet::DEFAULT.prepend( rubysdlffi_path )
+                      elsif defined? ::SDL_PATHS
                         NiceFFI::PathSet::DEFAULT.prepend( ::SDL_PATHS )
                       else
                         NiceFFI::PathSet::DEFAULT

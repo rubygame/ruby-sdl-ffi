@@ -271,16 +271,15 @@ module SDL
   ## Don't know how to implement this one. :-\
   # sdl_func  :ListModes, [ :pointer, :uint32 ], :pointer
 
+
   func  :__SetVideoMode, "SDL_SetVideoMode", [ :int, :int, :int, :uint32 ],
         SDL::Surface.typed_pointer( :autorelease => false )
 
   def self.SetVideoMode( *args )
     result = __SetVideoMode(*args)
     if defined? SDL::Mac
-      #SDL::Mac::ObjC.msgSend(SDL::Mac::Cocoa.NSApp, "finishLaunching")
       SDL::Mac::HIServices.make_current_front
-      # SDL::Mac.load_nib
-      SDL::Mac.make_menus("Rubygame Demo")
+      SDL::Mac.make_menus("ruby")
     end
     return result
   end

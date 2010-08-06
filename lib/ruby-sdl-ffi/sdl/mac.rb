@@ -128,55 +128,6 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
     end
 
 
-    def self.load_nib( nibpath = :default )
-      ptr = FFI.find_type(:pointer)
-
-      if nibpath == :default
-        dir = File.dirname(__FILE__)
-        nibpath = File.join( dir, "MacMenu.nib" )
-        #nibpath = File.join( dir, "SparseMacMenu.nib" )
-        #nibpath = File.join( dir, "EmptyMacMenu.nib" )
-      end
-      
-      nsapp = Cocoa.NSApp
-      toplevel = ObjC::NSClass("NSMutableArray").msg("array")
-      puts "toplevel = #{toplevel}"
-
-      dict = ObjC::NSClass("NSMutableDictionary").msg("dictionary")
-      dict.msg( "setObject:forKey:",
-                ptr, nsapp, ptr, Cocoa::NSNibOwner )
-      dict.msg( "setObject:forKey:",
-                ptr, toplevel, ptr, Cocoa::NSNibTopLevelObjects )
-
-      zone = nsapp.msg("zone")
-
-      loaded = ObjC::NSClass("NSBundle").\
-        msg_bool( "loadNibFile:externalNameTable:withZone:",
-                  ptr, ObjC::NSString(nibpath),
-                  ptr, dict, ptr, zone )
-
-      puts "loaded? = #{loaded}"
-      puts "toplevel = #{toplevel.inspect}"
-
-      menubar = nil
-      app = nil
-
-      count = toplevel.msg_int("count")
-      count.times do |i|
-        ob = toplevel.msg("objectAtIndex:", FFI.find_type(:long), i)
-        case ob.nsclassname
-        when "NSMenu"; menubar = Cocoa::NSMenu(ob.pointer)
-        when "NSApplication"; app = ob
-        end
-      end
-
-      puts "Loaded menubar:"
-      inspect_menu( menubar )
-
-      nil
-    end
-
-
     module ObjC
       extend NiceFFI::Library
       load_library 'objc'
@@ -465,20 +416,6 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
         SetFrontProcess( current )
       end
     end
-
-
-    # def self.set_terminate_handler()
-    #   imp = proc{ |id, sel, *args|
-    #     p id
-    #     p sel
-    #     p *args
-    #   }
-    #
-    #   old = ObjC.class_replaceMethod( ObjC::NSClass("NSApplication"),
-    #                                   "terminate:", imp, "v@:@" )
-    # end
-
-    # set_terminate_handler()
 
   end
 end

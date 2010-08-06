@@ -285,6 +285,27 @@ module SDL
   end
 
 
+  # Sets the application name, if the platform supports it. This
+  # method is safe to call even on platforms which do not support it
+  # (but does nothing). Currently this method only has an effect on
+  # Mac OS X.
+  # 
+  # The effect of this method depends on the platform. On Mac OS X, it
+  # sets the text used in the main application menu.
+  # 
+  # (Note: this method does not correspond to any part of the SDL API.
+  # It communicates with the platform directly.)
+  # 
+  # Example:
+  #   SDL.set_app_name("SpaceQuest 4000")
+  # 
+  def self.set_app_name( app_name )
+    if defined? SDL::Mac
+      SDL::Mac.set_app_name( app_name )
+    end
+    nil
+  end
+
 
   func  :__UpdateRects, "SDL_UpdateRects", [ :pointer, :int, :pointer ], :void
 

@@ -58,6 +58,22 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
         nil
       end
       
+      
+      def set_app_name( app_name )
+        ptr = FFI.find_type(:pointer)
+        
+        if @appmenuitem
+          @appmenuitem.title = app_name
+          @hideitem.title = "Hide #{app_name}" if @hideitem
+          @quititem.title = "Quit #{app_name}" if @quititem
+        else
+          make_menus( app_name )
+        end
+        
+        nil
+      end
+      
+      
       private
       
       # Hack to remove the bold "ruby" menu (aka the "Apple" menu).
@@ -83,15 +99,15 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
         item.submenu = menu
         menubar.addItem(item)
         
-        menu.addItemWithTitle("Hide #{app_name}", "hide:")
+        @hideitem = menu.addItemWithTitle("Hide #{app_name}", "hide:")
         menu.addItemWithTitle("Hide Others", "hideOtherApplications:")
         menu.addItemWithTitle("Show All", "unhideAllApplications:")
 
         # Can't get the Quit menu item to work right yet.
-        #menu.addItem( Cocoa::NSMenuItem.separatorItem )
-        #menu.addItemWithTitle("Quit #{app_name}", "terminate:")
+        # menu.addItem( Cocoa::NSMenuItem.separatorItem )
+        # @quititem = menu.addItemWithTitle("Quit #{app_name}", "terminate:")
         
-        item.release
+        @appmenuitem = item
         menu.release
       end
       

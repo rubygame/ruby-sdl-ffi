@@ -4,7 +4,7 @@
 #
 # Ruby-SDL-FFI - Ruby-FFI bindings to SDL
 #
-# Copyright (c) 2009 John Croisant
+# Copyright (c) 2009, 2010  John Croisant
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -38,7 +38,7 @@ end
 $gemspec = Gem::Specification.new do |s|
 
   s.name     = "ruby-sdl-ffi"
-  s.version  = "0.2"
+  s.version  = "0.3"
   s.authors  = ["John Croisant"]
   s.email    = "jacius@gmail.com"
   s.homepage = "http://github.com/jacius/ruby-sdl-ffi/"

@@ -1,5 +1,42 @@
 = NEWS
 
+
+== Ruby-SDL-FFI 0.3
+
+* Ruby-SDL-FFI can now work on Mac OS X without the need for a special
+  interpreter (i.e. rsdl). If this causes issues for you, you can
+  disable it by setting the RUBYSDLFFI_NOCOCOA environment variable to
+  "true".
+
+* Added the SDL::set_app_name() method. This sets the application name
+  in a platform-appropriate way, or does nothing if the platform is
+  not supported. On Mac OS X, it changes the text in the menu bar.
+  Support for other platforms may be added in the future.
+
+* Ruby-SDL-FFI now reads the RUBYSDLFFI_PATH environment variable for
+  additional library load paths. It should be a colon-separated
+  (Linux/Mac) or semicolon-separated (Windows) list of directories to
+  search for libraries.
+
+* The SDL::Palette class is now Enumerable. You can iterate over it
+  with #each, #collect, etc. You can also read a specific index using
+  #at (but not #[], which is reserved for struct access).
+
+* SDL.GL_GetAttribute() now returns an integer, like it should.
+  Before, it would return an FFI::Buffer.
+
+* SDL.GetKeyRepeat() is now easier to use. It returns an Array of two
+  integers: [delay, interval]. Before, you had to pass two output
+  buffers, then extract the integers afterwards.
+
+* Fixed a NoMethodError in SDL.WaitEvent().
+
+* Ruby-SDL-FFI now uses FFI::Buffer instead of FFI::MemoryPointer in
+  many places. This should give a slight performance boost on JRuby,
+  and potentially other platforms.
+
+
+
 == Ruby-SDL-FFI 0.2
 
 * The values of SDL::AUDIO_U16SYS and SDL::AUDIO_S16SYS are now
@@ -15,7 +52,6 @@
 * SDL::Gfx::rotozoomSurfaceXY and SDL::Gfx::rotozoomSurfaceSizeXY are
   no longer considered optional, because they are available in all
   supported versions of SDL_gfx (2.0.13 and higher).
-
 
 
 

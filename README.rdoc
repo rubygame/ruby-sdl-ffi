@@ -1,8 +1,8 @@
 
 = Ruby-SDL-FFI
 
-Version::    0.2
-Date::       2009-10-30
+Version::    0.3
+Date::       2010-08-08
 
 Homepage::   http://github.com/jacius/ruby-sdl-ffi/
 Author::     John Croisant <jacius@gmail.com>
@@ -31,7 +31,7 @@ libraries (Rubygame [4], Gosu [5], etc.).
 
 == Caveats
 
-Ruby-SDL-FFI is still in VERY EARLY DEVELOPMENT STAGES. That means:
+Ruby-SDL-FFI is still in EARLY DEVELOPMENT STAGES. That means:
 
 * It may not work correctly (or at all).
 * It may not be complete.

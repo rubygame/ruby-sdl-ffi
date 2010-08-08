@@ -1,4 +1,4 @@
-#!/bin/env ruby
+#!/usr/bin/env ruby
 
 require "ruby-sdl-ffi"
 
@@ -31,7 +31,7 @@ at_exit { SDL::Mixer::CloseAudio() }
 
 # Load music
 music = SDL::Mixer::LoadMUS( path )
-if( music.to_ptr.kind_of? FFI::NullPointer )
+if( music.to_ptr.null? )
   puts "ERROR: Could not load music: #{SDL::GetError()}"
   exit 1
 end

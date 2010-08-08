@@ -1,4 +1,4 @@
-#!/bin/env ruby
+#!/usr/bin/env ruby
 
 # 
 # A simple example script using Ruby-SDL-FFI to load and display

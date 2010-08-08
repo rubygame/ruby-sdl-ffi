@@ -6,7 +6,7 @@ Date::       2010-08-08
 
 Homepage::   http://github.com/jacius/ruby-sdl-ffi/
 Author::     John Croisant <jacius@gmail.com>
-Copyright::  2009  John Croisant
+Copyright::  2009, 2010  John Croisant
 
 
 == Description
@@ -62,7 +62,7 @@ Ruby-SDL-FFI may work with older versions, but hasn't been tried on them.
 
 Ruby-SDL-FFI is licensed under the following terms (the "MIT License"):
 
-Copyright (c) 2009 John Croisant
+Copyright (c) 2009, 2010  John Croisant
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

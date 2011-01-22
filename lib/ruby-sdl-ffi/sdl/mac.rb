@@ -418,16 +418,16 @@ if FFI::Platform.mac? and ($0 != "rsdl") and \
         layout :highLongOfPSN, :ulong, :lowLongOfPSN, :ulong
       end
 
-      # Some relevant constants (but not part of the same enum)
-      KCurrentProcess = 2
       KProcessTransformToForegroundApplication = 1
 
+      func :GetCurrentProcess, [:pointer], :long
       func :TransformProcessType, [:pointer, :long], :long
       func :SetFrontProcess, [:pointer], :long
 
       # Does the magic to make the current process a front process.
       def self.make_current_front
-        current = ProcessSerialNumber.new( [0, KCurrentProcess] )
+        current = ProcessSerialNumber.new( [0, 0] )
+        GetCurrentProcess( current )
         TransformProcessType(current,KProcessTransformToForegroundApplication)
         SetFrontProcess( current )
       end

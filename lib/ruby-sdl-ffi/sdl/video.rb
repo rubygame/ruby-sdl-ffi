@@ -402,6 +402,15 @@ module SDL
   sdl_func  :SaveBMP_RW, [ :pointer, :pointer, :int   ], :int
 
 
+  def self.LoadBMP( file )
+    return LoadBMP_RW( RWFromFile( file, "rb" ), 1 )
+  end
+
+  def self.SaveBMP( surface, file )
+    return SaveBMP_RW( surface, RWFromFile( file, "wb" ), 1 )
+  end
+
+
   sdl_func  :SetColorKey, [ :pointer, :uint32, :uint32 ], :int
   sdl_func  :SetAlpha,    [ :pointer, :uint32, :uint8  ], :int
 

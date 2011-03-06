@@ -4,7 +4,7 @@
 Version::    0.3
 Date::       2010-08-08
 
-Homepage::   http://github.com/jacius/ruby-sdl-ffi/
+Homepage::   http://github.com/rubygame/ruby-sdl-ffi/
 Author::     John Croisant <jacius@gmail.com>
 Copyright::  2009, 2010  John Croisant
 

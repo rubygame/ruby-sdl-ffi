@@ -41,7 +41,7 @@ $gemspec = Gem::Specification.new do |s|
   s.version  = "0.3"
   s.authors  = ["John Croisant"]
   s.email    = "jacius@gmail.com"
-  s.homepage = "http://github.com/jacius/ruby-sdl-ffi/"
+  s.homepage = "http://github.com/rubygame/ruby-sdl-ffi/"
   s.summary  = "Ruby-FFI bindings to SDL"
   s.description = <<EOF
 Ruby-SDL-FFI is a low-level binding to SDL and related libraries

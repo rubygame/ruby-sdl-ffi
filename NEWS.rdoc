@@ -1,5 +1,15 @@
 = NEWS
 
+== Ruby-SDL-FFI 0.4
+
+* Fixed the display window not gaining focus on Mac OS X 10.6.
+  Thanks to Bart Leusink for fixing this.
+
+* Added SDL::SaveBMP and SDL::LoadBMP methods. These were convenience
+  macros defined in the SDL headers. They have been reimplemented as
+  Ruby methods by Bart Leusink.
+
+
 
 == Ruby-SDL-FFI 0.3
 

@@ -25,6 +25,12 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
+#
+# Contributions:
+#
+#  - Bart Leusink, 2011-01-22:
+#    Fixed the display window not gaining focus on Mac OS X 10.6.
+#
 #++
 
 #--

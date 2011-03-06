@@ -25,6 +25,12 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
+#
+# Contributions:
+#
+#  - Bart Leusink, 2011-01-31:
+#    Implemented SDL::SaveBMP and SDL::LoadBMP
+#
 #++
 
 
